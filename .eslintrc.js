@@ -1,4 +1,4 @@
-module.exports = {
+/*module.exports = {
   root: true,
   parser: 'babel-eslint',
   parserOptions: {
@@ -19,4 +19,19 @@ module.exports = {
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0
   }
+}*/
+module.exports = {
+    root: true,
+    parser: 'babel-eslint',
+    parserOptions: {
+       "ecmaVersion": 6,
+       "sourceType": "module"
+    },
+    // https://github.com/feross/standard/blob/master/RULES.md#javascript-standard-style
+    // required to lint *.vue files
+    plugins: [
+      'html'
+    ],
+    "rules": {
+    }
 }
