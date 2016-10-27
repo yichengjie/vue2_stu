@@ -3,13 +3,25 @@ var path = require('path')
 function onProxyReq(proxyReq, req, res) {
     // add custom header to request 
     proxyReq.setHeader('x-added', 'foobar');
+    console.info('------------------------------------') ;
     console.info(req.headers) ;
+    console.info('------------------------------------') ;
     // or log the req 
 }
 
 function onProxyRes(proxyRes, req, res){
    //console.info(req.headers) ;
-   console.info(res) ;
+   console.info('*****************************') ;
+   console.info(req.headers) ;
+   console.info('*****************************') ;
+}
+
+function onProxyReqWs(proxyReq, req, socket, options, head) {
+    // add custom header 
+    proxyReq.setHeader('X-Special-Proxy-Header', 'foobar');
+    console.info('*****************************') ;
+    console.info(req.headers) ;
+    console.info('*****************************') ;
 }
 
 module.exports = {
@@ -29,18 +41,19 @@ module.exports = {
   },
   dev: {
     env: require('./dev.env'),
-    port: 3000,
+    port: 3001,
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
       '/api': {
         target: 'http://localhost:8080/ocgui/',
-        changeOrigin: true,
+        changeOrigin: false,
         pathRewrite: {
           '^/api': ''
         },
-        //onProxyReq:onProxyReq,
-        onProxyRes:onProxyRes
+        onProxyReq:onProxyReq,
+       // onProxyRes:onProxyRes
+       //onProxyReqWs:onProxyReqWs
       }
     },
     // CSS Sourcemaps off by default because relative paths are "buggy"

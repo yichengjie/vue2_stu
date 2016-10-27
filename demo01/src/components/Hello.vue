@@ -21,17 +21,19 @@
 </template>
 
 <script>
-export default {
-  name: 'hello',
-  data () {
-    return {
-      msg: 'Welcome to Your Vue.js App'
+  let profixStr = "http://localhost:8080/ocgui" ;
+  export default {
+    name: 'hello',
+    data () {
+      return {
+        msg: 'Welcome to Your Vue.js App'
+      }
+    },
+    mounted () {
+      //fetch(profixStr+"/mileage/query.action")
+      fetch("/api/mileage/query.action")
     }
-  },
-  mounted () {
-    fetch("/api/mileage/query.action")
   }
-}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
