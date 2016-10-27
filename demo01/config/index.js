@@ -41,17 +41,17 @@ module.exports = {
   },
   dev: {
     env: require('./dev.env'),
-    port: 3001,
+    port: 3000,
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/api': {
-        target: 'http://localhost:8080/ocgui/',
-        changeOrigin: false,
-        pathRewrite: {
-          '^/api': ''
-        },
-        onProxyReq:onProxyReq,
+      // '/api': {
+      //   target: 'http://localhost:8080/ocgui/',
+      //   changeOrigin: false,
+      //   pathRewrite: {
+      //     '^/api': ''
+      //   },
+      //   onProxyReq:onProxyReq,
        // onProxyRes:onProxyRes
        //onProxyReqWs:onProxyReqWs
       }
