@@ -1,29 +1,5 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
 var path = require('path')
-function onProxyReq(proxyReq, req, res) {
-    // add custom header to request 
-    proxyReq.setHeader('x-added', 'foobar');
-    console.info('------------------------------------') ;
-    console.info(req.headers) ;
-    console.info('------------------------------------') ;
-    // or log the req 
-}
-
-function onProxyRes(proxyRes, req, res){
-   //console.info(req.headers) ;
-   console.info('*****************************') ;
-   console.info(req.headers) ;
-   console.info('*****************************') ;
-}
-
-function onProxyReqWs(proxyReq, req, socket, options, head) {
-    // add custom header 
-    proxyReq.setHeader('X-Special-Proxy-Header', 'foobar');
-    console.info('*****************************') ;
-    console.info(req.headers) ;
-    console.info('*****************************') ;
-}
-
 module.exports = {
   build: {
     env: require('./prod.env'),
@@ -45,16 +21,6 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      // '/api': {
-      //   target: 'http://localhost:8080/ocgui/',
-      //   changeOrigin: false,
-      //   pathRewrite: {
-      //     '^/api': ''
-      //   },
-      //   onProxyReq:onProxyReq,
-       // onProxyRes:onProxyRes
-       //onProxyReqWs:onProxyReqWs
-      }
     },
     // CSS Sourcemaps off by default because relative paths are "buggy"
     // with this option, according to the CSS-Loader README

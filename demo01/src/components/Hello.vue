@@ -21,7 +21,6 @@
 </template>
 
 <script>
-  let profixStr = "http://localhost:8080/ocgui" ;
   export default {
     name: 'hello',
     data () {
@@ -30,8 +29,7 @@
       }
     },
     mounted () {
-      //fetch(profixStr+"/mileage/query.action")
-      fetch("/api/mileage/query.action")
+      //fetch("/api/mileage/query.action")
     }
   }
 </script>
