@@ -8,8 +8,9 @@
 <body style="margin:50px auto;">
     
     <div class="container" id ="app">
-        <p>{{ message }}</p>
-        <p>{{ message2 }}</p>
+        <p>Message :{{ message }}</p>
+        <p>Message2 :{{ message2 }}</p>
+        <p>Subcode: {{ subcode }}</p>
         <my-input
             label="Message"
             v-bind:value="message" v-on:input="message = arguments[0]"
@@ -17,8 +18,14 @@
         
         <my-input
             label="Message2"
-            v-bind:value="message2" v-on:input="message2 = arguments[0]"
+            v-model ="message2"
         ></my-input>
+
+        <my-upper
+            label="Subcode"
+            v-model="subcode"
+        >
+        </my-upper>
     </div>
     <script type="text/javascript" src="../bower_components/jquery/dist/jquery.js"> </script>
     <script type="text/javascript" src="../bower_components/bootstrap/dist/js/bootstrap.js"> </script>
