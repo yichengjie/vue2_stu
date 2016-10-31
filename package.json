@@ -17,7 +17,8 @@
   },
   "homepage": "https://github.com/yichengjie/vue2_stu#readme",
   "dependencies": {
-    "vue": "^2.0.1"
+    "vue": "^2.0.1",
+    "vuex": "^2.0.0"
   },
   "devDependencies": {
     "autoprefixer": "^6.4.0",
@@ -78,5 +79,4 @@
     "webpack-hot-middleware": "^2.12.2",
     "webpack-merge": "^0.14.1"
   }
-  
 }
