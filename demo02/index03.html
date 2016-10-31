@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>日期控件的使用</title>
+    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../lib/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css">
+</head>
+<body style="padding:50px auto;">
+
+    <div class="container" id ="app">
+       <p>message : {{message}}</p>
+       <p>startDate : {{startDate}}</p>
+       <datetimepicker v-model ="startDate" />
+    </div>
+    <script type="text/javascript" src="../bower_components/jquery/dist/jquery.js"> </script>
+    <script type="text/javascript" src="../bower_components/moment/moment.js"></script>
+    <script type="text/javascript" src="../bower_components/bootstrap/dist/js/bootstrap.js"> </script>
+    <script type="text/javascript" src="../lib/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+    <script type="text/javascript" src="../node_modules/vue/dist/vue.js"></script>
+    <script type="text/javascript" src="./index03.js"></script>
+</body>
+</html>
