@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表单类型组件的自定义事件</title>
+    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css">
+</head>
+<body style="margin:50px auto;">
+    
+    <div class="container" id ="app">
+        <p>{{ message }}</p>
+        <p>{{ message2 }}</p>
+        <my-input
+            label="Message"
+            v-bind:value="message" v-on:input="message = arguments[0]"
+        ></my-input>
+        
+        <my-input
+            label="Message2"
+            v-bind:value="message2" v-on:input="message2 = arguments[0]"
+        ></my-input>
+    </div>
+    <script type="text/javascript" src="../bower_components/jquery/dist/jquery.js"> </script>
+    <script type="text/javascript" src="../bower_components/bootstrap/dist/js/bootstrap.js"> </script>
+    <script type="text/javascript" src="../node_modules/vue/dist/vue.js"></script>
+    <script type="text/javascript" src="./index02.js"></script>
+</body>
+</html>
