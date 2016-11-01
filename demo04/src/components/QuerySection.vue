@@ -23,8 +23,8 @@
                     class="btn btn-sm btn-primary" v-on:click="handleClickQuery">查询</button>
         </span>
     </div>
-
-    <div  v-show ="value" transition="expand">
+    <transition name="fade">
+    <div  v-show ="value" >
         <div class="query_row">
             <span class="query_title">服务等级&nbsp;|&nbsp;日期</span>
             <input id ="serviceType01" value="F" name="serviceTypeArr"  v-model ="formData.serviceTypeArr" type="checkbox"><label for="serviceType01">F-航班服务</label>
@@ -80,6 +80,7 @@
         </div>
 
     </div>
+    </transition>
   </div>
 </div>
 </template>
@@ -117,21 +118,20 @@
             },
             switchGeoLocValue(){
                 console.info('你点击了切换区域') ;
+                // 触发组件 A 中的事件
+                bus.$emit('id-selected', 1)
             }
         }
     }
 </script>
 <style>
-    .hasMoreQuerySection{
-        transition: height .3s ease;
-        height:194px;
+    .fade-enter-active {
+       transition: height .3s ease ;
+       height: 90px;
     }
-    .expand-transition {
-        transition: height .3s ease ,opacity 0.3s ease;
-        height: 90px;
-    }
-    .expand-enter, .expand-leave {
+
+    .fade-leave-active {
         height: 0;
-        opacity: 0;
-    } 
+    }
+    
 </style>

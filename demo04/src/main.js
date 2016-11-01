@@ -6,6 +6,8 @@ require('assets/css/jquery_ui.datepicker-modify.css') ;
 require('assets/css/jquery-ui-timepicker-addon.css') ;
 require('assets/css/oc_query.css') ;
 require('assets/iconfont/iconfont.css') ;
+var bus = new Vue() ;
+window.bus = bus ;
 
 Vue.use(Vuex) ;
 new Vue({
