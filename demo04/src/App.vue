@@ -1,31 +1,27 @@
 <template>
-    <div>
-        <p>{{message}}</p>
-        <Hello/>
+    <div class="header-container" v-bind:class="{ 'hasMoreQuerySection':showMoreQuerySectionFlag }">
+        <div class="navbar-fixed-top" id = "myheader">
+            <Navbar v-bind:active-name = "activeName"/>
+            
+        </div>
     </div>
 </template>
 <script>
-    import Hello from './components/Hello.vue' ;
+    import Navbar from './components/Navbar.vue' ;
     export default{
         name:'app',
         data (){
             return {
-                message:'component from App.vue'
+                message:'component from App.vue',
+                showMoreQuerySectionFlag:false,
+                activeName:'附加服务'
             };
         },
         components:{
-            Hello
+            Navbar
         }
     }
 </script>
 <style>
-    body{
-        font-family: 'Avenir', Helvetica, Arial, sans-serif;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        text-align: center;
-        color: #2c3e50;
-        margin-top: 60px; 
-        font-size:18px;
-    }
+   
 </style>

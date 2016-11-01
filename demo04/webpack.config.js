@@ -1,4 +1,6 @@
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var path = require('path') ;
+var ASSETS_PATH = path.resolve('./src/assets');
 
 module.exports = {
   entry: './src/main.js',
@@ -17,9 +19,10 @@ module.exports = {
     ]
   },
   resolve: {
-        alias: {
-            'vue': 'vue/dist/vue.js'
-        }
+      alias: {
+        'vue': 'vue/dist/vue.js',
+        'assets': ASSETS_PATH
+      }
   },
   plugins: [
     new ExtractTextPlugin("[name].css"),
