@@ -1,20 +1,18 @@
-// mutations are operations that actually mutates the state.
-// each mutation handler gets the entire state tree as the
-// first argument, followed by additional payload arguments.
-// mutations must be synchronous and can be recorded by plugins
-// for debugging purposes.
 import {UPDATE_INPUT_PAGEBAR,QUERYLIST_FOR_PAGE} from './mutation-types.js' ;
 const mutations = {
   [UPDATE_INPUT_PAGEBAR] (state,pageBar ) {
       Object.assign(state.pageBar,pageBar) ;
   },
   [QUERYLIST_FOR_PAGE](state,pageBean){
-
-     console.info('pageBean : ' ,pageBean) ;
-     Object.assign(state.pageBar,pageBean) ;
-     //state.records7List.splice(0,state.records7List.length) ;
-     state.records7List = pageBean.recordList;
-     //arr.splice(1,2)  /
+      let vmPageBar = state.pageBar ;
+      vmPageBar.curPage = pageBean.curPage ;
+      vmPageBar.pageSize= pageBean.pageSize;
+      vmPageBar.pageCount = pageBean.pageCount;
+      vmPageBar.recordCount = pageBean.recordCount ;
+      vmPageBar.pgArr = pageBean.pageNumList ;
+      vmPageBar.isQueryDB = true ;
+      let list = pageBean.recordList ;
+      state.records7List = list;
   }
 }
 export default mutations ;

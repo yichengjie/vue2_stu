@@ -168,7 +168,6 @@
     const topHight = 140 ;
     import { mapGetters, mapActions } from 'vuex' ;
     export default {
-        props:['isQueryDB'],
         data(){
             return {
                 tableTitleOrder:{"subcode":defaultOrderFlag,"serviceType":defaultOrderFlag,"sequenceNumber":defaultOrderFlag,"statusDes":defaultOrderFlag,"saleStartDate":defaultOrderFlag,
@@ -198,7 +197,10 @@
                     this.tableTitleOrder[key] = defaultOrderFlag ;
                 }
                 this.tableTitleOrder[titleName] = !oldFlag ;
-                console.info('records7List : ' ,this.records7List ) ;
+
+
+
+                //console.info('records7List : ' ,this.records7List ) ;
             },
             checkRecords7Item(){
 

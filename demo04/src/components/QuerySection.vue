@@ -120,14 +120,15 @@
         methods:{
             handleClickQuery(){
                 //只要是点击查询都是查询第一页
-                console.info('你点击了查询按钮',JSON.stringify(this.formData)) ;
+                //console.info('你点击了查询按钮',JSON.stringify(this.formData)) ;
                 //进行查询操作
                 let toPageNum = 1 ;
                 let pageSize = this.pageBar.pageSize ;
                 let orderName = "lastUpdateDate" ;
                 let isAsc = true ;
                 let qureyParam = {toPageNum,pageSize,orderName,isAsc} ;
-                this.queryList4Page(qureyParam) ;
+
+                this.queryList4Page({...qureyParam,...this.formData}) ;
             },
             switchGeoLocValue(){
                 console.info('你点击了切换区域') ;

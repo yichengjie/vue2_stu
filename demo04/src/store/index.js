@@ -19,8 +19,9 @@ const state = {
     "pgArr":[],
     "pageCount":0,
     "recordCount":0,
-    "isQueryDB":true
+    "isQueryDB":false
   },
+
 }
 
 // A Vuex instance is created by combining the state, mutations, actions,

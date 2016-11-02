@@ -2,6 +2,8 @@
 import {orderListData,random} from '../common/index.js' ;
 
 export function queryDbApi (queryParam){
+    console.info('查询参数 : ' ,queryParam) ;
+
     let {toPageNum,pageSize,orderName,isAsc} = queryParam ;
     let records7List = [] ;
     //生成0-5的随机数
