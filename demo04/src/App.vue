@@ -8,8 +8,8 @@
                 <label for="queryDBFlag">共查询出<span class="red">{{pageBar.recordCount}}</span>条记录，针对全部记录排序?</label>
             </div>
             <Operbar />
-            <TableList v-bind:is-query-dB = "pageBar.isQueryDB" v-bind:records7-list ="records7List" />
-            <Pagebar v-bind:page-bar ="pageBar" v-bind:records7-list ="records7List"/>
+            <TableList v-bind:is-query-dB = "pageBar.isQueryDB"  />
+            <Pagebar v-bind:page-bar ="pageBar"/>
         </div>
     </div>
     
@@ -21,6 +21,7 @@
     import Operbar from './components/Operbar.vue' ;
     import TableList from './components/TableList.vue' ;
     import Pagebar from './components/Pagebar.vue' ;
+    import { mapGetters, mapActions } from 'vuex' ;
     export default{
         name:'app',
         data (){
@@ -36,8 +37,7 @@
                     "pageCount":0,
                     "recordCount":0,
                     "isQueryDB":false
-               },
-               records7List:[]
+               }
             };
         },
         components:{
@@ -49,11 +49,10 @@
         },
         mounted(){
             // 在组件 B 创建的钩子中监听事件
-            bus.$on('id-selected', function (id) {
-                console.info('id : ' + id) ;
-            })
-        }
-        
+            //bus.$on('id-selected', function (id) {
+            //    console.info('id : ' + id) ;
+            //}) ;
+        },       
     }
 </script>
 <style>

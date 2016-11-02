@@ -1,6 +1,6 @@
 <template>
 <div class="clearfix">
-    <nav class ="pull-right" v-if="records7List.length>0">
+    <nav class ="pull-right">
         <ul class="pagination">
             <li>  <a href="javascript:void(0)" v-on:click ="toPage(1)">首页</a></li>
             <li>
@@ -37,13 +37,23 @@
 </div>
 </template>
 <script>
+    import { mapGetters, mapActions } from 'vuex'
     export default{
-        props:['pageBar','records7List'],
+        props:['pageBar'],
+        computed: mapGetters([
+            'listCount'
+        ]),
         methods:{
             toPage(){
-
+                
             },
             pageConfirm(){
+                console.info(this.recourds7List) ;
+            },
+            toPerviousPage(){
+
+            },
+            toNextPage(){
 
             }
         }

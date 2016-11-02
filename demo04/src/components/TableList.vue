@@ -1,5 +1,5 @@
 <template>
-    <div class="table-responsive" v-show ='isQueryDB'>
+    <div class="table-responsive" >
         <table class="table table-bordered table_records7">
             <thead>
                 <tr>
@@ -166,9 +166,9 @@
 <script>
     const defaultOrderFlag = true ;
     const topHight = 140 ;
-
+    import { mapGetters, mapActions } from 'vuex' ;
     export default {
-        props:['isQueryDB','records7List'],
+        props:['isQueryDB'],
         data(){
             return {
                 tableTitleOrder:{"subcode":defaultOrderFlag,"serviceType":defaultOrderFlag,"sequenceNumber":defaultOrderFlag,"statusDes":defaultOrderFlag,"saleStartDate":defaultOrderFlag,
@@ -183,7 +183,7 @@
             checkAllRecords7(){
 
             },
-            clickTableTitle:function(titleName){
+            clickTableTitle(titleName){
                 //判断是不是再同一个标题上点击
                 let oldFlag = !defaultOrderFlag ;
                 if(this.orderTitleName!=null&&this.orderTitleName===titleName){
@@ -198,9 +198,15 @@
                     this.tableTitleOrder[key] = defaultOrderFlag ;
                 }
                 this.tableTitleOrder[titleName] = !oldFlag ;
+                console.info('records7List : ' ,this.records7List ) ;
+            },
+            checkRecords7Item(){
+
             }
-            
-        }
+        },
+        computed: mapGetters([
+            'records7List'
+        ])
     }
 </script>
 <style>

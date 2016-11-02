@@ -115,11 +115,14 @@
             },
             handleClickQuery(){
                 console.info('你点击了查询按钮',JSON.stringify(this.formData)) ;
+                //进行查询操作
+                
+                
             },
             switchGeoLocValue(){
                 console.info('你点击了切换区域') ;
                 // 触发组件 A 中的事件
-                bus.$emit('id-selected', 1)
+                //bus.$emit('id-selected', 1)
             }
         }
     }
