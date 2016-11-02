@@ -1,32 +1,26 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-Vue.use(Vuex)
+Vue.use(Vuex);
+import actions from './actions.js' ;
+import mutations from './mutations.js' ;
+import getters from './getters.js' ;
+
+const debug = process.env.NODE_ENV !== 'production' ;
+//const debug = false ;
+const defaultPageSize = 15 ;
 
 // root state object.
 // each Vuex instance is just a single state tree.
 const state = {
-  records7List:[{id:'001'}]
-}
-
-// mutations are operations that actually mutates the state.
-// each mutation handler gets the entire state tree as the
-// first argument, followed by additional payload arguments.
-// mutations must be synchronous and can be recorded by plugins
-// for debugging purposes.
-const mutations = {
-  
-}
-
-// actions are functions that causes side effects and can involve
-// asynchronous operations.
-const actions = {
-  
-}
-
-// getters are functions
-const getters = {
-  listCount:state => state.records7List.length ,
-  records7List:state => state.records7List 
+  records7List:[],
+  pageBar:{
+    "curPage":0,
+    "pageSize":defaultPageSize,
+    "pgArr":[],
+    "pageCount":0,
+    "recordCount":0,
+    "isQueryDB":true
+  },
 }
 
 // A Vuex instance is created by combining the state, mutations, actions,
@@ -35,5 +29,6 @@ export default new Vuex.Store({
   state,
   getters,
   actions,
-  mutations
+  mutations,
+  strict: debug
 })

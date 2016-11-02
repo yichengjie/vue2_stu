@@ -18,10 +18,10 @@
         <div class="page-desc">
             <span class="marginRight10">共<span class ="marginRL2">{{pageBar.pageCount}}</span>页</span>
             <span class ="">当前第</span>
-            <input type="text" v-bind:value ="pageBar.curPage" id ="pageOkInput" class ="common_input"  style="width: 30px"   >
+            <input type="text" v-bind:value ="pageBar.curPage" ref= "pageBarInputCurrentPage" class ="common_input"  style="width: 30px"   >
             <span class="marginRight5 ">页</span>
             <span>显示
-                <select class="pagesize" v-model ="pageBar.pageSize">
+                <select class="pagesize" v-bind:value ="pageBar.pageSize" v-on:change ="changePageSize">
                     <option value="10">10条</option>
                     <option value="15">15条</option>
                     <option value="20">20条</option>
@@ -37,26 +37,49 @@
 </div>
 </template>
 <script>
-    import { mapGetters, mapActions } from 'vuex'
+    import { mapGetters, mapActions } from 'vuex' ;
     export default{
-        props:['pageBar'],
         computed: mapGetters([
-            'listCount'
+            'listCount',
+            'pageBar'
         ]),
+        data (){
+            return {
+                randomId:'input-' + Math.random() 
+            };
+        },
         methods:{
             toPage(){
                 
             },
             pageConfirm(){
-                console.info(this.recourds7List) ;
+                let value = this.$refs.pageBarInputCurrentPage.value ;
+                if(!isNaN(value)){//如果是数字
+                    let pageOkInputNum = value *1 ;
+                    if(pageOkInputNum>0&&pageOkInputNum<=this.pageBar.pageCount*1){
+                        //this.queryDB(toPageNum) ;
+                        this.updatePageBar({curPage:pageOkInputNum}) ;
+                    }else{
+                       this.$refs.pageBarInputCurrentPage.value =  this.pageBar.curPage ;
+                    }
+                }else{
+                    this.$refs.pageBarInputCurrentPage.value =  this.pageBar.curPage ;
+                }
+            },
+            changePageSize(event){
+                this.updatePageBar({pageSize:event.target.value}) ;
             },
             toPerviousPage(){
 
             },
             toNextPage(){
 
-            }
+            },
+            ...mapActions([
+                'updatePageBar'
+            ])
         }
+        
     }
 </script>
 <style>

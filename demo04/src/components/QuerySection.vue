@@ -2,29 +2,33 @@
 <div class ="query_section">
     <div class="query_row">
         <span class="query_title">基础信息</span>
-        <input id ="releaseStatus01" name ="statusArr" type="checkbox" value ="1" v-model ="formData.statusArr" />
-        <label for="releaseStatus01">未发布</label>
-        <input id ="releaseStatus02" name ="statusArr" type="checkbox" value ="2" v-model ="formData.status" />
-        <label for="releaseStatus02">已发布</label>
-        <input  id ="effectStatus01" name="effStatusArr" type="checkbox" value ="1" v-model ="formData.effStatusArr" /><label for="effectStatus01"> 未生效</label>
-        <input  id ="effectStatus02" name="effStatusArr" type="checkbox" value ="2" v-model ="formData.effStatusArr" /> <label for="effectStatus02">已生效</label>
-        <input  id ="effectStatus03" name="effStatusArr" type="checkbox" value ="3" v-model ="formData.effStatusArr" /> <label for="effectStatus03">已过期</label>
+        <input id ="releaseStatus01" name ="statusArr" type="checkbox" value ="1" 
+            v-model ="formData.statusArr" /><label for="releaseStatus01">未发布</label>
+        <input id ="releaseStatus02" name ="statusArr" type="checkbox" value ="2" 
+            v-model ="formData.status" /><label for="releaseStatus02">已发布</label>
+        <input  id ="effectStatus01" name="effStatusArr" type="checkbox" value ="1" 
+            v-model ="formData.effStatusArr" /><label for="effectStatus01"> 未生效</label>
+        <input  id ="effectStatus02" name="effStatusArr" type="checkbox" value ="2" 
+            v-model ="formData.effStatusArr" /> <label for="effectStatus02">已生效</label>
+        <input  id ="effectStatus03" name="effStatusArr" type="checkbox" value ="3" 
+            v-model ="formData.effStatusArr" /> <label for="effectStatus03">已过期</label>
+
         <label  class="marginR5 title">SUBCODE</label>
-        <input type="text" class="common_input" v-model ="formData.subcode" mode="upper" style="width:150px;" placeholder="多个用/分割"/>
-        <label  class="marginR5 title">优先级序号</label>
+        <input type="text" class="common_input" v-model ="formData.subcode" mode="upper" style="width:150px;" 
+            placeholder="多个用/分割"/><label  class="marginR5 title">优先级序号</label>
         <input type="text" class="common_input" v-model ="formData.startSequenceNumber" style="width:80px;" />
         <span class="marginRL2">—</span>
         <input type="text" class="common_input" v-model ="formData.endSequenceNumber" style="width:80px;" />
             
         <span class="pull-right marginR15">
-            <input  id ="moreInputBtn" type="checkbox" v-bind:checked ="value" v-on:click="onInput" /> 
+            <input  id ="moreInputBtn" type="checkbox" v-model="showMoreQuerySectionFlag" /> 
             <label for="moreInputBtn">更多条件</label>
             <button type="button" id="s7QueryBtn" url="${pageContext.request.contextPath}/s7/s7Query.action"
                     class="btn btn-sm btn-primary" v-on:click="handleClickQuery">查询</button>
         </span>
     </div>
     <transition name="fade">
-    <div  v-show ="value" >
+    <div  v-show ="showMoreQuerySectionFlag" >
         <div class="query_row">
             <span class="query_title">服务等级&nbsp;|&nbsp;日期</span>
             <input id ="serviceType01" value="F" name="serviceTypeArr"  v-model ="formData.serviceTypeArr" type="checkbox"><label for="serviceType01">F-航班服务</label>
@@ -89,7 +93,8 @@
         props:['value'],
         data:function(){
             return {
-                formData:{
+                showMoreQuerySectionFlag:false,
+                 formData:{
                     statusArr:[],/**发布状态 */
                     effStatusArr:[],/**生效状态 */
                     subcode:"",
@@ -110,21 +115,16 @@
             };
         },
         methods:{
-            onInput(event){
-                this.$emit('input',event.target.checked) ;
-            },
             handleClickQuery(){
                 console.info('你点击了查询按钮',JSON.stringify(this.formData)) ;
                 //进行查询操作
-                
-                
             },
             switchGeoLocValue(){
                 console.info('你点击了切换区域') ;
                 // 触发组件 A 中的事件
                 //bus.$emit('id-selected', 1)
             }
-        }
+        },
     }
 </script>
 <style>

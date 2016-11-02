@@ -1,0 +1,2 @@
+
+export const UPDATE_INPUT_PAGEBAR = "UPDATE_INPUT_PAGEBAR" ;
