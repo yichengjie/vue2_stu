@@ -5,7 +5,7 @@
         <div class="container-fluid main_content" id="main_content" style="margin-top:10px;" >
             
             <div class="allInfo_descr pull-left" v-show ="pageBar.isQueryDB">
-                <input type="checkbox" id ="queryDBFlag" v-model="queryDBFlag" />
+                <input type="checkbox" v-bind:checked="queryDBFlag"  v-on:click ="clickQueryDBFlag"/>
                 <label for="queryDBFlag">共查询出<span class="red">{{pageBar.recordCount}}</span>条记录，针对全部记录排序?</label>
             </div>
             
@@ -40,8 +40,19 @@
             TableList,
             Pagebar
         },
+        methods:{
+            clickQueryDBFlag(event){
+                let queryDBFlag = event.target.checked ;
+                //console.info('queryDBFlag : ' + queryDBFlag) ;
+                this.updateSimpleState({queryDBFlag}) ;
+            },
+            ...mapActions([
+                'updateSimpleState'
+            ])
+        },
         computed: mapGetters([
-          'pageBar'
+          'pageBar',
+          'queryDBFlag'
         ]),    
     }
 </script>

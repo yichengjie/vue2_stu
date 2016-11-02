@@ -197,17 +197,37 @@
                     this.tableTitleOrder[key] = defaultOrderFlag ;
                 }
                 this.tableTitleOrder[titleName] = !oldFlag ;
-
-
-
+                //2.执行排序操作
+                //let queryDBFlag = $("")
+                if(this.queryDBFlag){//查询数据库
+                    //let toPageNum = this.pageBar.curPage*1 ;
+                    let toPageNum = 1 ;
+                    this.queryDB(toPageNum) ;
+                }else{
+                    let list = this.records7List ;
+                    let ascFlag = !oldFlag ;
+                    this.updateSimpleState({dealPageOrderFlag:true}) ;
+                    let param = {titleName,ascFlag} ;
+                    this.orderListData(param) ;
+                }
                 //console.info('records7List : ' ,this.records7List ) ;
+            },
+            queryDB:function(toPageNum){
+                //let queryParam = {toPageNum,pageSize,orderName,isAsc } ;
             },
             checkRecords7Item(){
 
-            }
+            },
+            ...mapActions([
+                'queryList4Page',
+                'updateSimpleState',
+                'orderListData'
+            ])
         },
         computed: mapGetters([
-            'records7List'
+            'records7List',
+            'queryDBFlag',
+            'dealPageOrderFlag'
         ])
     }
 </script>

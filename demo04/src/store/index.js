@@ -21,7 +21,8 @@ const state = {
     "recordCount":0,
     "isQueryDB":false
   },
-
+  queryDBFlag:false,/**是否针对所有记录进行排序 */
+  dealPageOrderFlag:false,/**是否进行过页面静态排序 */
 }
 
 // A Vuex instance is created by combining the state, mutations, actions,

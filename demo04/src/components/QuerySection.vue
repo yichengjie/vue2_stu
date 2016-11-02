@@ -97,7 +97,7 @@
         data:function(){
             return {
                 showMoreQuerySectionFlag:false,
-                 formData:{
+                formData:{
                     statusArr:[],/**发布状态 */
                     effStatusArr:[],/**生效状态 */
                     subcode:"",
