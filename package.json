@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/yichengjie/vue2_stu#readme",
   "dependencies": {
+    "lodash": "^4.16.6",
     "vue": "^2.0.1",
     "vuex": "^2.0.0"
   },

@@ -1,7 +1,7 @@
 <template>
 <div class="clearfix">
     <nav class ="pull-right">
-        <ul class="pagination">
+        <ul class="pagination" style="margin:0;">
             <li>  <a href="javascript:void(0)" v-on:click ="toPage(1)">首页</a></li>
             <li>
                 <a href="javascript:void(0)" aria-label="Previous" v-on:click ="toPerviousPage">上一页</a>
@@ -15,7 +15,7 @@
             </li>
             <li> <a href="javascript:void(0)" v-on:click ="toPage(pageBar.pageCount)">末页</a></li>
         </ul>
-        <div class="page-desc">
+        <div class="page-desc" style="padding-top: 0px;padding-bottom:0px">
             <span class="marginRight10">共<span class ="marginRL2">{{pageBar.pageCount}}</span>页</span>
             <span class ="">当前第</span>
             <input type="text" v-bind:value ="pageBar.curPage" ref= "pageBarInputCurrentPage" class ="common_input"  style="width: 30px"   >
@@ -83,5 +83,4 @@
     }
 </script>
 <style>
-
 </style>

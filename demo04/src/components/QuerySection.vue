@@ -89,8 +89,11 @@
 </div>
 </template>
 <script>
+    import { mapGetters, mapActions } from 'vuex' ;
     export default {
-        props:['value'],
+        computed: mapGetters([
+            'pageBar'
+        ]),
         data:function(){
             return {
                 showMoreQuerySectionFlag:false,
@@ -116,14 +119,24 @@
         },
         methods:{
             handleClickQuery(){
+                //只要是点击查询都是查询第一页
                 console.info('你点击了查询按钮',JSON.stringify(this.formData)) ;
                 //进行查询操作
+                let toPageNum = 1 ;
+                let pageSize = this.pageBar.pageSize ;
+                let orderName = "lastUpdateDate" ;
+                let isAsc = true ;
+                let qureyParam = {toPageNum,pageSize,orderName,isAsc} ;
+                this.queryList4Page(qureyParam) ;
             },
             switchGeoLocValue(){
                 console.info('你点击了切换区域') ;
                 // 触发组件 A 中的事件
                 //bus.$emit('id-selected', 1)
-            }
+            },
+            ...mapActions([
+                'queryList4Page'
+            ])
         },
     }
 </script>
