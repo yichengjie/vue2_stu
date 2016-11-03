@@ -4,7 +4,7 @@
             <thead>
                 <tr>
                     <th width="4%">
-                        <input type="checkbox" id ="checkAllRecords7" v-on:click="checkAllRecords7($event)">
+                        <input type="checkbox" v-model ="checkAllRecords7Flag" v-on:click="clickRecords7CheckAll">
                         <label class="tbtitle" for="checkAllRecords7">全选 </label>
                     </th>
                     <th width="5%" class="relative" 
@@ -122,7 +122,10 @@
             </thead>
             <tbody>
                  <tr v-for="item in records7List">
-                    <td><input type="checkbox" name="records7_checkbox" v-on:click="checkRecords7Item" v-bind:value="item.id" /></td>
+                    <td>
+                        <input type="checkbox" name="records7_checkbox" v-on:click="clickCheckRecords7Item" 
+                            v-bind:value="item.id" />
+                    </td>
                     <td>
                    	  <span class="myhand" data-toggle="tooltip" data-placement="top" v-bind:title="item.s5DescrbeInfo">
                    	 	{{item.subcode}}<i class =" glyphicon glyphicon-info-sign s5descr"></i> 
@@ -139,7 +142,7 @@
                     <td>{{item.loc2}}</td>
                     <td>{{item.flyerStatus}}</td>
                     <td>
-                    	<span class ="ttt" style ="width:70px;" v-bind:title ="item.money+ item.moneyUnit" >
+                    	<span class ="ttt" style ="width:70px;"  v-bind:title ="item.money+ item.moneyUnit" >
                     		{{item.money + item.moneyUnit}}
                     	</span>
                     </td>
@@ -176,11 +179,22 @@
                     "lastUpdateDate":defaultOrderFlag
                 },/**所有列的排序状态 */
                 orderTitleName:"",/**当前排序的列名称 */
+                checkAllRecords7Flag:false
             } ;
         },
         methods:{
-            checkAllRecords7(){
-
+            clickRecords7CheckAll(){
+                //console.info('checkAllRecords7Flag : ' + this.checkAllRecords7Flag) ;
+                $(":checkbox[name='records7_checkbox']").prop('checked',!this.checkAllRecords7Flag) ;
+            },
+            clickCheckRecords7Item(event){
+                let len1 = $(":checkbox[name='records7_checkbox']:checked").length ;
+                let len2 =  $(":checkbox[name='records7_checkbox']").length ;
+                if(len1<len2){
+                    this.checkAllRecords7Flag = false;
+                }else{
+                    this.checkAllRecords7Flag = true;
+                }
             },
             clickTableTitle(titleName){
                 //判断是不是再同一个标题上点击
@@ -206,17 +220,26 @@
                 }else{
                     let list = this.records7List ;
                     let ascFlag = !oldFlag ;
-                    this.updateSimpleState({dealPageOrderFlag:true}) ;
+                    this.updateSimpleState({"dealPageOrderFlag":true}) ;
                     let param = {titleName,ascFlag} ;
                     this.orderListData(param) ;
                 }
                 //console.info('records7List : ' ,this.records7List ) ;
             },
-            queryDB:function(toPageNum){
-                //let queryParam = {toPageNum,pageSize,orderName,isAsc } ;
+             _clearOrderStatusOnPage(){/**清楚页面上排序状态 */
+                let keys = Object.keys(this.tableTitleOrder) ;
+                keys.forEach(key=>{
+                    this.tableTitleOrder[key] = defaultOrderFlag ;
+                }) ;
+                this.orderTitleName = "" ;
             },
-            checkRecords7Item(){
-
+            queryDB:function(toPageNum){
+                let pageSize = this.pageBar.pageSize ;
+                let orderName =  this.orderTitleName ;
+                let isAsc = this.tableTitleOrder[this.orderTitleName] ;
+                let queryParam = {toPageNum,pageSize,orderName,isAsc } ;
+                //查询数据库
+                this.queryList4Page(queryParam) ;
             },
             ...mapActions([
                 'queryList4Page',
@@ -227,7 +250,8 @@
         computed: mapGetters([
             'records7List',
             'queryDBFlag',
-            'dealPageOrderFlag'
+            'dealPageOrderFlag',
+            'pageBar'
         ])
     }
 </script>

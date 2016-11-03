@@ -70,7 +70,7 @@
                 this.updatePageBar({pageSize:event.target.value}) ;
             },
             toPerviousPage(){
-
+                
             },
             toNextPage(){
 

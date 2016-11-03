@@ -14,6 +14,7 @@ const mutations = {
       vmPageBar.isQueryDB = true ;
       let list = pageBean.recordList ;
       state.records7List = list;
+      state.dealPageOrderFlag = false;//是否进行过页面排序
   },
   [UPDATE_SIMPLE_STATE](state,payload){
       Object.assign(state,payload) ;
