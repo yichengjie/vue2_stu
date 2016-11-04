@@ -127,7 +127,7 @@
                 let orderName = "lastUpdateDate" ;
                 let isAsc = true ;
                 let qureyParam = {toPageNum,pageSize,orderName,isAsc} ;
-
+                this.clearTableTitleOrderInfo() ;
                 this.queryList4Page({...qureyParam,...this.formData}) ;
             },
             switchGeoLocValue(){
@@ -136,7 +136,8 @@
                 //bus.$emit('id-selected', 1)
             },
             ...mapActions([
-                'queryList4Page'
+                'queryList4Page',
+                'clearTableTitleOrderInfo'
             ])
         },
     }

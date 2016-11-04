@@ -1,4 +1,5 @@
-import {UPDATE_INPUT_PAGEBAR,QUERYLIST_FOR_PAGE,UPDATE_SIMPLE_STATE,ORDER_LISTDATA} from './mutation-types.js' ;
+import {UPDATE_INPUT_PAGEBAR,QUERYLIST_FOR_PAGE,UPDATE_SIMPLE_STATE,
+    ORDER_LISTDATA,UPDATE_TABLETITLE_ORDER,CLEAR_TABLETITLE_ORDERINFO,defaultOrderFlag} from './mutation-types.js' ;
 import {orderListData} from '../common/index.js' ;
 const mutations = {
   [UPDATE_INPUT_PAGEBAR] (state,pageBar ) {
@@ -23,6 +24,20 @@ const mutations = {
       let list = state.records7List ;
       let {titleName,ascFlag} = payload ;
       orderListData(list,titleName,ascFlag) ;
+  },
+  [UPDATE_TABLETITLE_ORDER](state,payload){
+      let keys = Object.keys(state.tableTitleOrder) ;
+      for(let key of keys){
+          state.tableTitleOrder[key] = defaultOrderFlag ;
+      }
+      Object.assign(state.tableTitleOrder,payload) ;
+  },
+  [CLEAR_TABLETITLE_ORDERINFO](state){
+      state.orderTitleName = '' ;
+      let keys = Object.keys(state.tableTitleOrder) ;
+      for(let key of keys){
+          state.tableTitleOrder[key] = defaultOrderFlag ;
+      }
   }
 }
 export default mutations ;

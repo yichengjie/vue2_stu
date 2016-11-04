@@ -18,7 +18,8 @@
         <div class="page-desc" style="padding-top: 0px;padding-bottom:0px">
             <span class="marginRight10">共<span class ="marginRL2">{{pageBar.pageCount}}</span>页</span>
             <span class ="">当前第</span>
-            <input type="text" v-bind:value ="pageBar.curPage" ref= "pageBarInputCurrentPage" class ="common_input"  style="width: 30px"   >
+            <input type="text" v-bind:value ="pageBar.curPage" ref= "pageBarInputCurrentPage" 
+                class ="common_input"  style="width: 30px"   >
             <span class="marginRight5 ">页</span>
             <span>显示
                 <select class="pagesize" v-bind:value ="pageBar.pageSize" v-on:change ="changePageSize">
@@ -39,25 +40,18 @@
 <script>
     import { mapGetters, mapActions } from 'vuex' ;
     export default{
-        computed: mapGetters([
-            'listCount',
-            'pageBar'
-        ]),
         data (){
             return {
                 randomId:'input-' + Math.random() 
             };
         },
         methods:{
-            toPage(){
-                
-            },
             pageConfirm(){
                 let value = this.$refs.pageBarInputCurrentPage.value ;
                 if(!isNaN(value)){//如果是数字
                     let pageOkInputNum = value *1 ;
                     if(pageOkInputNum>0&&pageOkInputNum<=this.pageBar.pageCount*1){
-                        //this.queryDB(toPageNum) ;
+                        this.queryDB(pageOkInputNum) ;
                         this.updatePageBar({curPage:pageOkInputNum}) ;
                     }else{
                        this.$refs.pageBarInputCurrentPage.value =  this.pageBar.curPage ;
@@ -66,20 +60,52 @@
                     this.$refs.pageBarInputCurrentPage.value =  this.pageBar.curPage ;
                 }
             },
+            
             changePageSize(event){
                 this.updatePageBar({pageSize:event.target.value}) ;
             },
+            toPage(pnum){
+                if(pnum!=this.pageBar.curPage){
+                    let toPageNum = pnum ;
+                    this.queryDB(toPageNum) ;
+                }
+            },
             toPerviousPage(){
-                
+                if(this.pageBar.curPage*1>1){//触发查询操作
+                    let toPageNum = this.pageBar.curPage*1 -1 ;
+                    this.queryDB(toPageNum) ;
+                }
             },
             toNextPage(){
-
+                if(this.pageBar.curPage*1<this.pageBar.pageCount*1){//触发查询操作
+                    let toPageNum = this.pageBar.curPage*1 +1;
+                    this.queryDB(toPageNum) ;
+                }
+            },
+            queryDB (toPageNum){
+                if(!this.queryDBFlag){//没有勾选查询全部时，清除排序状态
+                    this.clearTableTitleOrderInfo() ;
+                }              
+                let pageSize = this.pageBar.pageSize ;
+                let orderName =  this.orderTitleName ;
+                let isAsc = this.tableTitleOrder[this.orderTitleName] ;
+                let queryParam = {toPageNum,pageSize,orderName,isAsc } ;
+                //查询数据库
+                this.queryList4Page(queryParam) ;
             },
             ...mapActions([
-                'updatePageBar'
+                'updatePageBar',
+                'queryList4Page',
+                'clearTableTitleOrderInfo'
             ])
-        }
-        
+        },
+        computed: mapGetters([
+            'listCount',
+            'pageBar',
+            'orderTitleName',
+            'tableTitleOrder',
+            'queryDBFlag'
+        ])
     }
 </script>
 <style>

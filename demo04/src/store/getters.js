@@ -4,7 +4,10 @@ const getters = {
    records7List:state => state.records7List ,
    pageBar:state => state.pageBar ,
    queryDBFlag:state => state.queryDBFlag,
-   dealPageOrderFlag:state => state.dealPageOrderFlag
+   dealPageOrderFlag:state => state.dealPageOrderFlag,
+   orderTitleName:state => state.orderTitleName ,
+   checkAllRecords7Flag: state => state.checkAllRecords7Flag,
+   tableTitleOrder: state => state.tableTitleOrder  
 }
 
 export default getters ;

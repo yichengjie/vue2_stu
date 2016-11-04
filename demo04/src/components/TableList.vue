@@ -4,7 +4,7 @@
             <thead>
                 <tr>
                     <th width="4%">
-                        <input type="checkbox" v-model ="checkAllRecords7Flag" v-on:click="clickRecords7CheckAll">
+                        <input type="checkbox" v-bind:checked ="checkAllRecords7Flag" v-on:click="clickRecords7CheckAll">
                         <label class="tbtitle" for="checkAllRecords7">全选 </label>
                     </th>
                     <th width="5%" class="relative" 
@@ -121,7 +121,7 @@
                 </tr>
             </thead>
             <tbody>
-                 <tr v-for="item in records7List">
+                 <tr v-for="item in records7List" v-bind:key="item.id">
                     <td>
                         <input type="checkbox" name="records7_checkbox" v-on:click="clickCheckRecords7Item" 
                             v-bind:value="item.id" />
@@ -167,33 +167,30 @@
     </div>
 </template>
 <script>
-    const defaultOrderFlag = true ;
+    //const defaultOrderFlag = true ;
+    import {defaultOrderFlag} from '../store/mutation-types.js' ;
     const topHight = 140 ;
     import { mapGetters, mapActions } from 'vuex' ;
     export default {
         data(){
             return {
-                tableTitleOrder:{"subcode":defaultOrderFlag,"serviceType":defaultOrderFlag,"sequenceNumber":defaultOrderFlag,"statusDes":defaultOrderFlag,"saleStartDate":defaultOrderFlag,
-                    "saleEndDate":defaultOrderFlag,"travelStartDate":defaultOrderFlag,"travelEndDate":defaultOrderFlag,"loc1":defaultOrderFlag,
-                    "loc2":defaultOrderFlag,"flyerStatus":defaultOrderFlag,"money":defaultOrderFlag,"descr":defaultOrderFlag,"lastUpdateUser":defaultOrderFlag,
-                    "lastUpdateDate":defaultOrderFlag
-                },/**所有列的排序状态 */
-                orderTitleName:"",/**当前排序的列名称 */
-                checkAllRecords7Flag:false
+               
             } ;
         },
         methods:{
-            clickRecords7CheckAll(){
+            clickRecords7CheckAll(e){
                 //console.info('checkAllRecords7Flag : ' + this.checkAllRecords7Flag) ;
-                $(":checkbox[name='records7_checkbox']").prop('checked',!this.checkAllRecords7Flag) ;
+                let flag = e.target.checked ;
+                this.updateSimpleState({"checkAllRecords7Flag":flag}) ;
+                $(":checkbox[name='records7_checkbox']").prop('checked',flag) ;
             },
             clickCheckRecords7Item(event){
                 let len1 = $(":checkbox[name='records7_checkbox']:checked").length ;
                 let len2 =  $(":checkbox[name='records7_checkbox']").length ;
                 if(len1<len2){
-                    this.checkAllRecords7Flag = false;
+                    this.updateSimpleState({"checkAllRecords7Flag":false}) ;
                 }else{
-                    this.checkAllRecords7Flag = true;
+                    this.updateSimpleState({"checkAllRecords7Flag":true}) ;
                 }
             },
             clickTableTitle(titleName){
@@ -203,14 +200,10 @@
                     oldFlag = this.tableTitleOrder[titleName] ;
                 }	
                 //1.更新当前排序呢的列名称
-                this.orderTitleName = titleName ;
+                this.updateSimpleState({"orderTitleName":titleName}) ;
                 //2.更新当前排序的状态(升序/倒序)
                 //console.info('oldFlag : ' + oldFlag) ;
-                let keys = Object.keys(this.tableTitleOrder) ;
-                for(let key of keys){
-                    this.tableTitleOrder[key] = defaultOrderFlag ;
-                }
-                this.tableTitleOrder[titleName] = !oldFlag ;
+                this.updateTableTitleOrder({[titleName]:!oldFlag }) ;
                 //2.执行排序操作
                 //let queryDBFlag = $("")
                 if(this.queryDBFlag){//查询数据库
@@ -225,15 +218,11 @@
                     this.orderListData(param) ;
                 }
                 //console.info('records7List : ' ,this.records7List ) ;
-            },
-             _clearOrderStatusOnPage(){/**清楚页面上排序状态 */
-                let keys = Object.keys(this.tableTitleOrder) ;
-                keys.forEach(key=>{
-                    this.tableTitleOrder[key] = defaultOrderFlag ;
-                }) ;
-                this.orderTitleName = "" ;
+                //_clearOrderStatusOnPage
             },
             queryDB:function(toPageNum){
+                
+                this.dealPageOrderFlag = false;
                 let pageSize = this.pageBar.pageSize ;
                 let orderName =  this.orderTitleName ;
                 let isAsc = this.tableTitleOrder[this.orderTitleName] ;
@@ -244,14 +233,19 @@
             ...mapActions([
                 'queryList4Page',
                 'updateSimpleState',
-                'orderListData'
+                'orderListData',
+                'updateTableTitleOrder',
+                'clearTableTitleOrderInfo'
             ])
         },
         computed: mapGetters([
             'records7List',
             'queryDBFlag',
             'dealPageOrderFlag',
-            'pageBar'
+            'pageBar',
+            'orderTitleName',
+            'checkAllRecords7Flag',
+            'tableTitleOrder'
         ])
     }
 </script>

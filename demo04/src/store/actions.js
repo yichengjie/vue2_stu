@@ -1,6 +1,7 @@
 // actions are functions that causes side effects and can involve
 // asynchronous operations.
-import {UPDATE_INPUT_PAGEBAR,QUERYLIST_FOR_PAGE,UPDATE_SIMPLE_STATE,ORDER_LISTDATA} from './mutation-types.js' ;
+import {UPDATE_INPUT_PAGEBAR,QUERYLIST_FOR_PAGE,UPDATE_SIMPLE_STATE,
+    ORDER_LISTDATA,UPDATE_TABLETITLE_ORDER,CLEAR_TABLETITLE_ORDERINFO} from './mutation-types.js' ;
 import {queryDbApi} from '../api/index.js' ;
 const actions = {
    updatePageBar({commit},payload){
@@ -19,6 +20,12 @@ const actions = {
    },
    orderListData({commit},payload){
        commit(ORDER_LISTDATA,payload) ;
+   },
+   updateTableTitleOrder({commit},payload){
+       commit(UPDATE_TABLETITLE_ORDER,payload) ;
+   },
+   clearTableTitleOrderInfo({commit}){
+       commit(CLEAR_TABLETITLE_ORDERINFO) ;
    }
 }
 
