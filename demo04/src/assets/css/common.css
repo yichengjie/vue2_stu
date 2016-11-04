@@ -41,8 +41,8 @@ body{
 }
 .query_row{
     display: block;
-    height: 28px;
-    line-height: 28px;
+    height: 30px;
+    line-height: 30px;
     vertical-align: middle;
     overflow: hidden;
     box-sizing: border-box;
@@ -52,9 +52,9 @@ body{
     display: table;
     content: '';
 }
-.query_row:not(:last-child){
+/*.query_row:not(:last-child){
     margin-bottom: 3px;
-}
+}*/
 .query_row input[type=text],.query_row select{
     margin-top: 0px;
     vertical-align: middle;
