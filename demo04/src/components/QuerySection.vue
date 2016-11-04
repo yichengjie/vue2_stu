@@ -44,21 +44,22 @@
                 type="checkbox" v-on:click="changeStateArray" /> <label for="serviceType04">P-预付费行李</label>
             <span class="marginR15"></span>
             <label class="marginR5 title">销售日期</label>
-            <input type="text" id="effectMinDate" name ="effectMinDate" v-bind:value ="formData.effectMinDate" 
-                class="common_input datepicker" style="width: 110px" />
+
+            <Datepicker v-bind:value ="formData.effectMinDate" name ="effectMinDate" 
+                v-on:input="changeDateInput('effectMinDate',arguments[0])" />
             <label for="effectMinDate" class="glyphicon glyphicon-calendar iconfont_box"></label>
             <span style="margin-right:4px;">—</span>
-            <input type="text" id="effectMaxDate" name ="effectMaxDate" v-bind:value ="formData.effectMaxDate" 
-                class="common_input datepicker"  style="width: 110px" />
+            <Datepicker v-bind:value ="formData.effectMaxDate" name ="effectMaxDate" 
+                v-on:input="changeDateInput('effectMaxDate',arguments[0])" />
             <label for="effectMaxDate" class="glyphicon glyphicon-calendar iconfont_box"></label>
             <span class="marginR15"></span>
             <label class="marginR5 title">旅行日期</label>
-            <input type="text" id="travelStartDate" name ="travelStartDate"  v-bind:value ="formData.travelStartDate" 
-                class="common_input datepicker" style="width: 110px" />
+            <Datepicker v-bind:value ="formData.travelStartDate" name ="travelStartDate" 
+                v-on:input="changeDateInput('travelStartDate',arguments[0])" />
             <label for="travelStartDate" class="glyphicon glyphicon-calendar iconfont_box"></label>
             <span style="margin-right:4px;">—</span>
-            <input type="text" id="travelEndDate" name ="travelEndDate"  v-bind:value ="formData.travelEndDate" 
-                class="common_input datepicker" style="width: 110px" />
+            <Datepicker v-bind:value ="formData.travelEndDate" name ="travelEndDate" 
+                v-on:input="changeDateInput('travelEndDate',arguments[0])" />
             <label for="travelEndDate" class="glyphicon glyphicon-calendar iconfont_box"></label>
         </div>
 
@@ -91,12 +92,12 @@
             <input  type="text" name ="updateUser" v-bind:value ="formData.updateUser" class="common_input" style="width:100px"
                 v-on:input ="changeStateSimple" />
             <label class="marginR5 title">最后时间</label>
-            <input type="text" id="updateStartDate" name ="updateStartDate" v-bind:value ="formData.updateStartDate" 
-                class="common_input datepicker" style="width: 110px" />
+            <Datepicker v-bind:value ="formData.updateStartDate" name ="updateStartDate" 
+                v-on:input="changeDateInput('updateStartDate',arguments[0])" />
             <label for="updateStartDate" class="glyphicon glyphicon-calendar iconfont_box"></label>
             <span style="margin-right:4px;">—</span>
-            <input type="text" id="updateEndDate" name ="updateEndDate" v-bind:value ="formData.updateEndDate" 
-                class="common_input datepicker" style="width: 110px">
+             <Datepicker v-bind:value ="formData.updateEndDate" name ="updateEndDate" 
+                v-on:input="changeDateInput('updateEndDate',arguments[0])" />
             <label for="updateEndDate" class="glyphicon glyphicon-calendar iconfont_box"></label>
         </div>
 
@@ -107,6 +108,7 @@
 </template>
 <script>
     import { mapGetters, mapActions } from 'vuex' ;
+    import Datepicker from './Datepicker.vue' ;
     export default {
         data:function(){
             return {
@@ -116,7 +118,7 @@
         methods:{
             handleClickQuery(){
                 //只要是点击查询都是查询第一页
-                //console.info('你点击了查询按钮',JSON.stringify(this.formData)) ;
+                console.info('你点击了查询按钮',JSON.stringify(this.formData)) ;
                 //进行查询操作
                 let toPageNum = 1 ;
                 let pageSize = this.pageBar.pageSize ;
@@ -148,6 +150,11 @@
                 }
                 this.updateFormDataSimple({[fieldName]:fieldValue}) ;
             },
+            changeDateInput(fieldName,fieldValue){
+                //console.info('fieldName : ' , fieldName) ;
+                //console.info('fieldValue : ' , fieldValue) ;
+                this.updateFormDataSimple({[fieldName]:fieldValue}) ;
+            },
             ...mapActions([
                 'queryList4Page',
                 'clearTableTitleOrderInfo',
@@ -159,6 +166,9 @@
             'pageBar',
             'formData'
         ]),
+        components:{
+            Datepicker
+        }
     }
 </script>
 <style>

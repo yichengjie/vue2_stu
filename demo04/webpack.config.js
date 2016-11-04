@@ -1,6 +1,7 @@
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var path = require('path') ;
 var ASSETS_PATH = path.resolve('./src/assets');
+var LIB_PATH = path.resolve('./src/lib');
 
 module.exports = {
   entry: './src/main.js',
@@ -21,7 +22,12 @@ module.exports = {
   resolve: {
       alias: {
         'vue': 'vue/dist/vue.js',
-        'assets': ASSETS_PATH
+        'assets': ASSETS_PATH,
+        'tui_core_lib':LIB_PATH+"/tui-core/index.js",
+        'tui_dialog_lib':LIB_PATH+"/tui-dialog/index.js",
+        'tui_drag_lib':LIB_PATH+"/tui-drag/index.js",
+        'jq_datepicker_lib': LIB_PATH+"/jq-datepicker/index.js",
+	      'jq_timepicker_lib':LIB_PATH+"/jq-timepicker/index.js",
       }
   },
   plugins: [
