@@ -3,22 +3,25 @@
     <div class="query_row">
         <span class="query_title">基础信息</span>
         <input id ="releaseStatus01" name ="statusArr" type="checkbox" value ="1" 
-            v-model ="formData.statusArr" /><label for="releaseStatus01">未发布</label>
+             v-model ="formData.statusArr" v-on:click="changeStateArray"/><label for="releaseStatus01">未发布</label>
         <input id ="releaseStatus02" name ="statusArr" type="checkbox" value ="2" 
-            v-model ="formData.status" /><label for="releaseStatus02">已发布</label>
+             v-model ="formData.statusArr" v-on:click="changeStateArray"/><label for="releaseStatus02">已发布</label>
         <input  id ="effectStatus01" name="effStatusArr" type="checkbox" value ="1" 
-            v-model ="formData.effStatusArr" /><label for="effectStatus01"> 未生效</label>
+            v-model ="formData.effStatusArr" v-on:click="changeStateArray" /><label for="effectStatus01"> 未生效</label>
         <input  id ="effectStatus02" name="effStatusArr" type="checkbox" value ="2" 
-            v-model ="formData.effStatusArr" /> <label for="effectStatus02">已生效</label>
+            v-model ="formData.effStatusArr" v-on:click="changeStateArray" /> <label for="effectStatus02">已生效</label>
         <input  id ="effectStatus03" name="effStatusArr" type="checkbox" value ="3" 
-            v-model ="formData.effStatusArr" /> <label for="effectStatus03">已过期</label>
+            v-model ="formData.effStatusArr" v-on:click="changeStateArray" /> <label for="effectStatus03">已过期</label>
 
         <label  class="marginR5 title">SUBCODE</label>
-        <input type="text" class="common_input" v-model ="formData.subcode" mode="upper" style="width:150px;" 
-            placeholder="多个用/分割"/><label  class="marginR5 title">优先级序号</label>
-        <input type="text" class="common_input" v-model ="formData.startSequenceNumber" style="width:80px;" />
+        <input type="text" name="subcode" class="common_input" v-bind:value ="formData.subcode" style="width:150px;" 
+            placeholder="多个用/分割" v-on:input="changeStateSimple" />
+        <label  class="marginR5 title">优先级序号</label>
+        <input type="text" name ="startSequenceNumber" class="common_input" v-bind:value  ="formData.startSequenceNumber" style="width:80px;"
+            v-on:input="changeStateSimple" />
         <span class="marginRL2">—</span>
-        <input type="text" class="common_input" v-model ="formData.endSequenceNumber" style="width:80px;" />
+        <input type="text" name ="endSequenceNumber" class="common_input" v-bind:value ="formData.endSequenceNumber" style="width:80px;" 
+            v-on:input="changeStateSimple" />
             
         <span class="pull-right marginR15">
             <input  id ="moreInputBtn" type="checkbox" v-model="showMoreQuerySectionFlag" /> 
@@ -31,55 +34,69 @@
     <div  v-show ="showMoreQuerySectionFlag" >
         <div class="query_row">
             <span class="query_title">服务等级&nbsp;|&nbsp;日期</span>
-            <input id ="serviceType01" value="F" name="serviceTypeArr"  v-model ="formData.serviceTypeArr" type="checkbox"><label for="serviceType01">F-航班服务</label>
-            <input id ="serviceType02" value="A" name="serviceTypeArr"  v-model ="formData.serviceTypeArr" type="checkbox"><label for="serviceType02">A-免费行李</label>
-            <input  id ="serviceType03" value="C" name="serviceTypeArr" v-model ="formData.serviceTypeArr" type="checkbox"><label for="serviceType03">C-逾重行李</label>
-            <input  id ="serviceType04" value="P" name="serviceTypeArr" v-model ="formData.serviceTypeArr" type="checkbox"> <label for="serviceType04">P-预付费行李</label>
+            <input id ="serviceType01" value="F" name="serviceTypeArr"  v-model ="formData.serviceTypeArr" 
+                type="checkbox" v-on:click="changeStateArray" /><label for="serviceType01">F-航班服务</label>
+            <input id ="serviceType02" value="A" name="serviceTypeArr"  v-model ="formData.serviceTypeArr" 
+                type="checkbox" v-on:click="changeStateArray" /><label for="serviceType02">A-免费行李</label>
+            <input  id ="serviceType03" value="C" name="serviceTypeArr" v-model ="formData.serviceTypeArr" 
+                type="checkbox" v-on:click="changeStateArray" /><label for="serviceType03">C-逾重行李</label>
+            <input  id ="serviceType04" value="P" name="serviceTypeArr" v-model ="formData.serviceTypeArr" 
+                type="checkbox" v-on:click="changeStateArray" /> <label for="serviceType04">P-预付费行李</label>
             <span class="marginR15"></span>
             <label class="marginR5 title">销售日期</label>
-            <input type="text" id="effectMinDate" v-model ="formData.effectMinDate" class="common_input datepicker" style="width: 110px" />
+            <input type="text" id="effectMinDate" name ="effectMinDate" v-bind:value ="formData.effectMinDate" 
+                class="common_input datepicker" style="width: 110px" />
             <label for="effectMinDate" class="glyphicon glyphicon-calendar iconfont_box"></label>
             <span style="margin-right:4px;">—</span>
-            <input type="text" id="effectMaxDate"  v-model ="formData.effectMaxDate" class="common_input datepicker" style="width: 110px">
+            <input type="text" id="effectMaxDate" name ="effectMaxDate" v-bind:value ="formData.effectMaxDate" 
+                class="common_input datepicker"  style="width: 110px" />
             <label for="effectMaxDate" class="glyphicon glyphicon-calendar iconfont_box"></label>
             <span class="marginR15"></span>
             <label class="marginR5 title">旅行日期</label>
-            <input type="text" id="travelStartDate"  v-model ="formData.travelStartDate" class="common_input datepicker" style="width: 110px" />
+            <input type="text" id="travelStartDate" name ="travelStartDate"  v-bind:value ="formData.travelStartDate" 
+                class="common_input datepicker" style="width: 110px" />
             <label for="travelStartDate" class="glyphicon glyphicon-calendar iconfont_box"></label>
             <span style="margin-right:4px;">—</span>
-            <input type="text" id="travelEndDate"  v-model ="formData.travelEndDate" class="common_input datepicker" style="width: 110px">
+            <input type="text" id="travelEndDate" name ="travelEndDate"  v-bind:value ="formData.travelEndDate" 
+                class="common_input datepicker" style="width: 110px" />
             <label for="travelEndDate" class="glyphicon glyphicon-calendar iconfont_box"></label>
         </div>
 
         <div class="query_row">
             <span class="query_title">常客等级|区域</span>
             <input id ="passengerTypeCode01" value="1" name="passengerTypeCodeArr"  v-model ="formData.passengerTypeCodeArr" 
-                type="checkbox"><label for="serviceType01">白金卡</label>
+                type="checkbox" v-on:click="changeStateArray" /><label for="serviceType01">白金卡</label>
             <input id ="passengerTypeCode02" value="2" name="passengerTypeCodeArr"  v-model ="formData.passengerTypeCodeArr" 
-                type="checkbox"><label for="serviceType02">金卡</label>
+                type="checkbox" v-on:click="changeStateArray" /><label for="serviceType02">金卡</label>
             <input  id ="passengerTypeCode03" value="3" name="passengerTypeCodeArr" v-model ="formData.passengerTypeCodeArr" 
-                type="checkbox"><label for="serviceType03">银卡</label>
+                type="checkbox" v-on:click="changeStateArray" /><label for="serviceType03">银卡</label>
             <input  id ="passengerTypeCode04" value="4" name="passengerTypeCodeArr" v-model ="formData.passengerTypeCodeArr" 
-                type="checkbox"> <label for="serviceType04">普卡</label>
+                type="checkbox" v-on:click="changeStateArray" /> <label for="serviceType04">普卡</label>
             <input  id ="passengerTypeCode05" value="5" name="passengerTypeCodeArr" v-model ="formData.passengerTypeCodeArr" 
-                type="checkbox"><label for="passengerTypeCode05">非会员</label>
+                type="checkbox" v-on:click="changeStateArray" /><label for="passengerTypeCode05">非会员</label>
             <input  id ="passengerTypeCode06" value="6" name="passengerTypeCodeArr" v-model ="formData.passengerTypeCodeArr" 
-                type="checkbox"> <label for="passengerTypeCode06">飞行卡</label>
+                type="checkbox" v-on:click="changeStateArray" /> <label for="passengerTypeCode06">飞行卡</label>
             <label class="marginR5 title">区域</label>
-            <input type="text" id="geoSpecLoc1" v-model ="formData.geoSpecLoc1" mode="upper" maxlength="3"  class="common_input" style="width: 100px">
-            <span class="marginLR5"> <i class="glyphicon glyphicon-sort ts90 myhand text-success" title="切换区域" v-on:click="switchGeoLocValue"></i> </span>
-            <input type="text" id="geoSpecLoc2" v-model ="formData.geoSpecLoc2" mode="upper" maxlength="3"  class="common_input" style="width: 100px">
+            <input type="text" id="geoSpecLoc1" name ="geoSpecLoc1" v-bind:value ="formData.geoSpecLoc1" mode="upper" maxlength="3"  
+                class="common_input" style="width: 100px" v-on:input="changeStateSimple" />
+            <span class="marginLR5"> <i class="glyphicon glyphicon-sort ts90 myhand text-success" 
+                title="切换区域" v-on:click="switchGeoLocValue"></i> </span>
+            <input type="text" id="geoSpecLoc2" name ="geoSpecLoc2" v-bind:value ="formData.geoSpecLoc2" mode="upper" maxlength="3"  
+                class="common_input" style="width: 100px" v-on:input="changeStateSimple" />
         </div>
 
         <div class="query_row">
             <span class="query_title">更新人|更新日期</span>
             <label class="title">最后更新人</label>
-            <input  type="text" v-model ="formData.updateUser" class="common_input" style="width:100px" />
+            <input  type="text" name ="updateUser" v-bind:value ="formData.updateUser" class="common_input" style="width:100px"
+                v-on:input ="changeStateSimple" />
             <label class="marginR5 title">最后时间</label>
-            <input type="text" id="updateStartDate"  v-model ="formData.updateStartDate" class="common_input datepicker" style="width: 110px" />
+            <input type="text" id="updateStartDate" name ="updateStartDate" v-bind:value ="formData.updateStartDate" 
+                class="common_input datepicker" style="width: 110px" />
             <label for="updateStartDate" class="glyphicon glyphicon-calendar iconfont_box"></label>
             <span style="margin-right:4px;">—</span>
-            <input type="text" id="updateEndDate"  v-model ="formData.updateEndDate" class="common_input datepicker" style="width: 110px">
+            <input type="text" id="updateEndDate" name ="updateEndDate" v-bind:value ="formData.updateEndDate" 
+                class="common_input datepicker" style="width: 110px">
             <label for="updateEndDate" class="glyphicon glyphicon-calendar iconfont_box"></label>
         </div>
 
@@ -91,30 +108,9 @@
 <script>
     import { mapGetters, mapActions } from 'vuex' ;
     export default {
-        computed: mapGetters([
-            'pageBar'
-        ]),
         data:function(){
             return {
                 showMoreQuerySectionFlag:false,
-                formData:{
-                    statusArr:[],/**发布状态 */
-                    effStatusArr:[],/**生效状态 */
-                    subcode:"",
-                    startSequenceNumber:"", 
-                    endSequenceNumber:"",
-                    serviceTypeArr:[],/**服务等级(服务类型) */
-                    effectMinDate:"",
-                    effectMaxDate:"",
-                    travelStartDate:"",
-                    travelEndDate:"",
-                    passengerTypeCodeArr:[],/**常旅客等级 */
-                    geoSpecLoc1:"",
-                    geoSpecLoc2:"",
-                    updateUser:"",
-                    updateStartDate:"",
-                    updateEndDate:"" 
-                }
             };
         },
         methods:{
@@ -131,15 +127,38 @@
                 this.queryList4Page({...qureyParam,...this.formData}) ;
             },
             switchGeoLocValue(){
-                console.info('你点击了切换区域') ;
+                //console.info('你点击了切换区域') ;
                 // 触发组件 A 中的事件
                 //bus.$emit('id-selected', 1)
+                let geoSpecLoc1 = this.formData.geoSpecLoc2 ;
+                let geoSpecLoc2 = this.formData.geoSpecLoc1 ;
+                this.updateFormDataSimple({geoSpecLoc1,geoSpecLoc2}) ;
+            },
+            changeStateArray(event){
+               let checkedFlag = event.target.checked ;
+               let fieldName = event.target.name ;
+               let fieldValue = event.target.value ;
+               this.updateFormDataArray({fieldName,fieldValue,checkedFlag}) ;
+            },
+            changeStateSimple(event){
+                let fieldName = event.target.name ;
+                let fieldValue = event.target.value  ;
+                if('subcode'==fieldName){
+                    fieldValue = fieldValue.toUpperCase() ;
+                }
+                this.updateFormDataSimple({[fieldName]:fieldValue}) ;
             },
             ...mapActions([
                 'queryList4Page',
-                'clearTableTitleOrderInfo'
+                'clearTableTitleOrderInfo',
+                'updateFormDataArray',
+                'updateFormDataSimple'
             ])
         },
+         computed: mapGetters([
+            'pageBar',
+            'formData'
+        ]),
     }
 </script>
 <style>

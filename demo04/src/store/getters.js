@@ -7,7 +7,8 @@ const getters = {
    dealPageOrderFlag:state => state.dealPageOrderFlag,
    orderTitleName:state => state.orderTitleName ,
    checkAllRecords7Flag: state => state.checkAllRecords7Flag,
-   tableTitleOrder: state => state.tableTitleOrder  
+   tableTitleOrder: state => state.tableTitleOrder ,
+   formData: state => state.formData
 }
 
 export default getters ;

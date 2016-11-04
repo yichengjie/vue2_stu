@@ -29,7 +29,25 @@ const state = {
       "lastUpdateDate":defaultOrderFlag
   },/**所有列的排序状态 */
   orderTitleName:"",/**当前排序的列名称 */
-  checkAllRecords7Flag:false
+  checkAllRecords7Flag:false,
+  formData:{
+      statusArr:['2'],/**发布状态 */
+      effStatusArr:[],/**生效状态 */
+      subcode:"",
+      startSequenceNumber:"", 
+      endSequenceNumber:"",
+      serviceTypeArr:[],/**服务等级(服务类型) */
+      effectMinDate:"",
+      effectMaxDate:"",
+      travelStartDate:"",
+      travelEndDate:"",
+      passengerTypeCodeArr:[],/**常旅客等级 */
+      geoSpecLoc1:"",
+      geoSpecLoc2:"",
+      updateUser:"",
+      updateStartDate:"",
+      updateEndDate:"" 
+  }
 }
 
 // A Vuex instance is created by combining the state, mutations, actions,

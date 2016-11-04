@@ -1,5 +1,6 @@
 import {UPDATE_INPUT_PAGEBAR,QUERYLIST_FOR_PAGE,UPDATE_SIMPLE_STATE,
-    ORDER_LISTDATA,UPDATE_TABLETITLE_ORDER,CLEAR_TABLETITLE_ORDERINFO,defaultOrderFlag} from './mutation-types.js' ;
+    ORDER_LISTDATA,UPDATE_TABLETITLE_ORDER,CLEAR_TABLETITLE_ORDERINFO,
+    defaultOrderFlag,UPDATE_FORMDATA_ARRAY,UPDATE_FORMDATA_SIMPLE} from './mutation-types.js' ;
 import {orderListData} from '../common/index.js' ;
 const mutations = {
   [UPDATE_INPUT_PAGEBAR] (state,pageBar ) {
@@ -38,6 +39,21 @@ const mutations = {
       for(let key of keys){
           state.tableTitleOrder[key] = defaultOrderFlag ;
       }
+  },
+  [UPDATE_FORMDATA_ARRAY](state,payload){
+      let {checkedFlag,fieldName,fieldValue} = payload ;
+      if(checkedFlag){
+          state.formData[fieldName].push(fieldValue) ;
+      }else{
+          let index =  state.formData[fieldName].findIndex(function(value) {
+            return value == fieldValue;
+          }) ;
+          //console.info('index : ' + index) ;
+          state.formData[fieldName].splice(index,1) ;
+      }
+  },
+  [UPDATE_FORMDATA_SIMPLE](state,payload){
+       Object.assign(state.formData,payload) ;
   }
 }
 export default mutations ;
