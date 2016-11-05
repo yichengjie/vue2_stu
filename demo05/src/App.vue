@@ -1,17 +1,20 @@
 <template>
     <div>
-        <Navbar v-bind:active-name = "activeName"/>
+        <Navbar active-name = "附加服务"/>
         <QuerySection/>
         <div class="container-fluid main_content" id="main_content" style="margin-top:10px;" >
             
             <div class="allInfo_descr pull-left" v-show ="pageBar.isQueryDB">
-                <input type="checkbox" v-bind:checked="queryDBFlag"  v-on:click ="clickQueryDBFlag"/>
-                <label for="queryDBFlag">共查询出<span class="red">{{pageBar.recordCount}}</span>条记录，针对全部记录排序?</label>
+                <input type="checkbox" id ="queryDBFlagCheckbox" v-bind:checked="queryDBFlag"  
+                    v-on:click ="clickQueryDBFlag"/>
+                <label for="queryDBFlagCheckbox">共查询出<span class="red">{{pageBar.recordCount}}</span>条记录，针对全部记录排序?</label>
             </div>
-            
+
             <Operbar />
-            <TableList v-bind:is-query-dB = "pageBar.isQueryDB"  />
-            <Pagebar v-bind:page-bar ="pageBar"/>
+
+            <TableList />
+
+            <Pagebar/>
         </div>
     </div>
     
@@ -28,9 +31,7 @@
         name:'app',
         data (){
             return {
-                message:'component from App.vue',
-                activeName:'附加服务',
-                queryDBFlag:false,/**是否针对所有记录进行排序 */
+                message:'component from App.vue'
             };
         },
         components:{

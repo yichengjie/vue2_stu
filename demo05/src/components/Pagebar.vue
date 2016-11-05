@@ -1,6 +1,6 @@
 <template>
-<div class="clearfix">
-    <nav class ="pull-right">
+<div class="clearfix" >
+    <nav class ="pull-right" v-show ="pageBar.isQueryDB">
         <ul class="pagination" style="margin:0;">
             <li>  <a href="javascript:void(0)" v-on:click ="toPage(1)">首页</a></li>
             <li>

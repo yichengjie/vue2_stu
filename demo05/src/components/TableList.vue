@@ -1,5 +1,5 @@
 <template>
-    <div class="table-responsive" >
+    <div class="table-responsive" v-show ="pageBar.isQueryDB">
         <table class="table table-bordered table_records7">
             <thead>
                 <tr>
