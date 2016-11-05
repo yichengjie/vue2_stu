@@ -7,7 +7,7 @@ import {queryDbApi} from '../api/index.js' ;
 let _initTooltip = function(){
 	setTimeout(function(){
        $("[data-toggle='tooltip']").tooltip();
-	},500) ;
+	},300) ;
 	return true ;
 } ;
 
@@ -19,7 +19,7 @@ const actions = {
        let promise = queryDbApi(payload) ;
        promise.then(function(retData){
            commit(QUERYLIST_FOR_PAGE,retData.pageBean) ;
-           //_initTooltip() ;//v-bind:title占用了bootstrap的tooltip插件使用原生title的功能，所以无法正常显示
+           _initTooltip() ;
        },function(err){
            console.info('查询出错!') ;
        }) ;

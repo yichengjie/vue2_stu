@@ -111,7 +111,7 @@
                     </td>
                     <td>
                    	  <span class="myhand" data-toggle="tooltip" data-placement="top" 
-                         v-bind:title="item.s5DescrbeInfo">
+                         v-bind:title="item.s5DescrbeInfo" >
                    	 	{{item.subcode}}<i class =" glyphicon glyphicon-info-sign s5descr"></i> 
                    	  </span>
                     </td>
