@@ -129,8 +129,8 @@ table.table_records7 .relative{
 }
 table.table_records7 .tb_order{
     position: absolute;
-    right: 2px;
-    top: 26%; 
+    right: -5px;
+    top: 17%; 
     /* top: 16%; */
     color:#84A3BD;
 }
@@ -166,18 +166,16 @@ table.table_records7 tbody tr:hover{
         top: 16%;
     }
 } */
-table.table_records7 tr th i{
-   /*  display: none; */
+/*table.table_records7 tr th i{
     color:#333;
 }
 table.table_records7 tr th:hover i{
     display: block;
 }
 table.table_records7 tr th i.active{
-	/* color: #a94442;  */
 	color: #F00;
     display: block;
-}
+}*/
 
 table.table_records7 tr label{
     margin: 0;

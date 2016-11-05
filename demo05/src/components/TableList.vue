@@ -10,112 +10,95 @@
                     <th width="5%" class="relative" 
                         v-on:click="clickTableTitle('subcode')">
                         sub<br/>code
-                           <i v-bind:class="{ 
-                                'iconfont tb_order': true, 
-                                'icon-paixu1': !tableTitleOrder.subcode,
-                                'icon-paixu2': tableTitleOrder.subcode,
-                                'active':orderTitleName=='subcode'
-                             }" 
-                            ></i>
+                        <svg class="icon tb_order" aria-hidden="true" >
+                            <use xlink:href="#icon-sort-small" v-if ="orderTitleName != 'subcode'"></use>
+                            <use xlink:href="#icon-sort-small1" v-if ="orderTitleName == 'subcode' && tableTitleOrder.subcode"></use>
+                            <use xlink:href="#icon-sort-small-copy" v-if ="orderTitleName == 'subcode'  && !tableTitleOrder.subcode"></use>
+                        </svg>
                     </th>
                     <th width="4%" class="relative" v-on:click="clickTableTitle('serviceType')">
-                        	服务<br/>类型 
-                            <i v-bind:class="{ 
-                            'iconfont tb_order': true, 
-                            'icon-paixu1': !tableTitleOrder.serviceType,
-                            'icon-paixu2': tableTitleOrder.serviceType ,
-                            'active':orderTitleName=='serviceType'}" 
-                        ></i>
+                        服务<br/>类型 
+                        <svg class="icon tb_order" aria-hidden="true" >
+                            <use xlink:href="#icon-sort-small" v-if ="orderTitleName != 'serviceType'"></use>
+                            <use xlink:href="#icon-sort-small1" v-if ="orderTitleName == 'serviceType' && tableTitleOrder.serviceType"></use>
+                            <use xlink:href="#icon-sort-small-copy" v-if ="orderTitleName == 'serviceType'  && !tableTitleOrder.serviceType"></use>
+                        </svg>
                     </th>
                     <th width="5%" class="relative" v-on:click="clickTableTitle('sequenceNumber')">
                         优先级<br/>序号
-                        <i v-bind:class="{ 
-                            'iconfont tb_order': true, 
-                            'icon-paixu1': !tableTitleOrder.sequenceNumber,
-                            'icon-paixu2': tableTitleOrder.sequenceNumber ,
-                            'active':orderTitleName=='sequenceNumber'}" >
-                        </i>
+                        <svg class="icon tb_order" aria-hidden="true" >
+                            <use xlink:href="#icon-sort-small" v-if ="orderTitleName != 'sequenceNumber'"></use>
+                            <use xlink:href="#icon-sort-small1" v-if ="orderTitleName == 'sequenceNumber' && tableTitleOrder.sequenceNumber"></use>
+                            <use xlink:href="#icon-sort-small-copy" v-if ="orderTitleName == 'sequenceNumber'  && !tableTitleOrder.sequenceNumber"></use>
+                        </svg>
                     </th>
                     <th width="4%" class="relative" v-on:click="clickTableTitle('statusDes')">
-                        	状态  
-                        	<i v-bind:class="{ 
-                            'iconfont tb_order': true, 
-                            'icon-paixu1': !tableTitleOrder.statusDes,
-                            'icon-paixu2': tableTitleOrder.statusDes ,
-                            'active':orderTitleName=='statusDes'
-                            }" 
-                            ></i>
+                        状态  
+                        <svg class="icon tb_order" aria-hidden="true" >
+                            <use xlink:href="#icon-sort-small" v-if ="orderTitleName != 'statusDes'"></use>
+                            <use xlink:href="#icon-sort-small1" v-if ="orderTitleName == 'statusDes' && tableTitleOrder.statusDes"></use>
+                            <use xlink:href="#icon-sort-small-copy" v-if ="orderTitleName == 'statusDes'  && !tableTitleOrder.statusDes"></use>
+                        </svg>
                     </th>
                     <th width="9%" class="relative" v-on:click="clickTableTitle('saleStartDate')">
                       	 销售起始日期
-                       <i v-bind:class="{ 
-                            'iconfont tb_order': true, 
-                            'icon-paixu1': !tableTitleOrder.saleStartDate,
-                            'icon-paixu2': tableTitleOrder.saleStartDate ,
-                            'active':orderTitleName=='saleStartDate'
-                            }" 
-                            ></i>
+                        <svg class="icon tb_order" aria-hidden="true" >
+                            <use xlink:href="#icon-sort-small" v-if ="orderTitleName != 'saleStartDate'"></use>
+                            <use xlink:href="#icon-sort-small1" v-if ="orderTitleName == 'saleStartDate' && tableTitleOrder.saleStartDate"></use>
+                            <use xlink:href="#icon-sort-small-copy" v-if ="orderTitleName == 'saleStartDate'  && !tableTitleOrder.saleStartDate"></use>
+                        </svg>
                     </th>
                     <th width="9%" class="relative" v-on:click="clickTableTitle('saleEndDate')">
                         销售截止日期
-                         <i v-bind:class="{ 
-                            'iconfont tb_order': true, 
-                            'icon-paixu1': !tableTitleOrder.saleEndDate,
-                            'icon-paixu2': tableTitleOrder.saleEndDate ,
-                            'active':orderTitleName=='saleEndDate'
-                            }" 
-                            ></i>
+                        <svg class="icon tb_order" aria-hidden="true" >
+                            <use xlink:href="#icon-sort-small" v-if ="orderTitleName != 'saleEndDate'"></use>
+                            <use xlink:href="#icon-sort-small1" v-if ="orderTitleName == 'saleEndDate' && tableTitleOrder.saleEndDate"></use>
+                            <use xlink:href="#icon-sort-small-copy" v-if ="orderTitleName == 'saleEndDate'  && !tableTitleOrder.saleEndDate"></use>
+                        </svg>
                     </th>
                     <th width="7%" class="relative" v-on:click="clickTableTitle('travelStartDate')">
                         旅行开始日期
-                         <i v-bind:class="{ 
-                            'iconfont tb_order': true, 
-                            'icon-paixu1': !tableTitleOrder.travelStartDate,
-                            'icon-paixu2': tableTitleOrder.travelStartDate,
-                            'active':orderTitleName=='travelStartDate'
-                             }" 
-                            ></i>
+                        <svg class="icon tb_order" aria-hidden="true" >
+                            <use xlink:href="#icon-sort-small" v-if ="orderTitleName != 'travelStartDate'"></use>
+                            <use xlink:href="#icon-sort-small1" v-if ="orderTitleName == 'travelStartDate' && tableTitleOrder.travelStartDate"></use>
+                            <use xlink:href="#icon-sort-small-copy" v-if ="orderTitleName == 'travelStartDate'  && !tableTitleOrder.travelStartDate"></use>
+                        </svg>
                     </th>
                     <th width="7%" class="relative" v-on:click="clickTableTitle('travelEndDate')">
                         旅行结束日期
-                         <i v-bind:class="{ 
-                            'iconfont tb_order': true, 
-                            'icon-paixu1': !tableTitleOrder.travelEndDate,
-                            'icon-paixu2': tableTitleOrder.travelEndDate ,
-                            'active':orderTitleName=='travelEndDate'
-                            }" 
-                            ></i>
+                        <svg class="icon tb_order" aria-hidden="true" >
+                            <use xlink:href="#icon-sort-small" v-if ="orderTitleName != 'travelEndDate'"></use>
+                            <use xlink:href="#icon-sort-small1" v-if ="orderTitleName == 'travelEndDate' && tableTitleOrder.travelEndDate"></use>
+                            <use xlink:href="#icon-sort-small-copy" v-if ="orderTitleName == 'travelEndDate'  && !tableTitleOrder.travelEndDate"></use>
+                        </svg>
                     </th>
                     <th width="5%">区域1 </th>
                     <th width="5%"> 区域2 </th>
                     <th width="4%" class="relative" v-on:click="clickTableTitle('flyerStatus')">
-                        	常客<br>等级 
-                        <i v-bind:class="{ 
-                            'iconfont tb_order': true, 
-                            'icon-paixu1': !tableTitleOrder.flyerStatus,
-                            'icon-paixu2': tableTitleOrder.flyerStatus ,
-                            'active':orderTitleName=='flyerStatus'}" 
-                            ></i>
+                        常客<br>等级 
+                        <svg class="icon tb_order" aria-hidden="true" >
+                            <use xlink:href="#icon-sort-small" v-if ="orderTitleName != 'flyerStatus'"></use>
+                            <use xlink:href="#icon-sort-small1" v-if ="orderTitleName == 'flyerStatus' && tableTitleOrder.flyerStatus"></use>
+                            <use xlink:href="#icon-sort-small-copy" v-if ="orderTitleName == 'flyerStatus'  && !tableTitleOrder.flyerStatus"></use>
+                        </svg>
                     </th>
                     <th width="6%" >金额</th>  
                     <th width="8%">描述  </th>
                     <th width="6%" class="relative" v-on:click="clickTableTitle('lastUpdateUser')">
-                        最后<br/>更新人 
-                        <i v-bind:class="{ 
-                            'iconfont tb_order': true, 
-                            'icon-paixu1': !tableTitleOrder.lastUpdateUser,
-                            'icon-paixu2': tableTitleOrder.lastUpdateUser ,
-                            'active':orderTitleName=='lastUpdateUser'}" 
-                            ></i>
+                        最后<br/>更新人
+                        <svg class="icon tb_order" aria-hidden="true" >
+                            <use xlink:href="#icon-sort-small" v-if ="orderTitleName != 'lastUpdateUser'"></use>
+                            <use xlink:href="#icon-sort-small1" v-if ="orderTitleName == 'lastUpdateUser' && tableTitleOrder.lastUpdateUser"></use>
+                            <use xlink:href="#icon-sort-small-copy" v-if ="orderTitleName == 'lastUpdateUser'  && !tableTitleOrder.lastUpdateUser"></use>
+                        </svg> 
                     </th>
                     <th width="9%" class="relative" v-on:click="clickTableTitle('lastUpdateDate')">
-                        	最后更新日期  
-                        	<i v-bind:class="{ 
-                            'iconfont tb_order': true, 
-                            'icon-paixu1': !tableTitleOrder.lastUpdateDate,
-                            'icon-paixu2': tableTitleOrder.lastUpdateDate,
-                            'active':orderTitleName=='lastUpdateDate' }" 
-                            ></i>
+                        最后更新日期 
+                        <svg class="icon tb_order" aria-hidden="true" >
+                            <use xlink:href="#icon-sort-small" v-if ="orderTitleName != 'lastUpdateDate'"></use>
+                            <use xlink:href="#icon-sort-small1" v-if ="orderTitleName == 'lastUpdateDate' && tableTitleOrder.lastUpdateDate"></use>
+                            <use xlink:href="#icon-sort-small-copy" v-if ="orderTitleName == 'lastUpdateDate'  && !tableTitleOrder.lastUpdateDate"></use>
+                        </svg>  
                     </th>
                     <th width="3%">操作</th>
                 </tr>
@@ -249,6 +232,11 @@
         ])
     }
 </script>
-<style>
-
+<style scoped>
+.icon {
+    width: 2.5em; height: 2.5em;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
+}
 </style>

@@ -27,7 +27,7 @@ module.exports = {
         'tui_dialog_lib':LIB_PATH+"/tui-dialog/index.js",
         'tui_drag_lib':LIB_PATH+"/tui-drag/index.js",
         'jq_datepicker_lib': LIB_PATH+"/jq-datepicker/index.js",
-	      'jq_timepicker_lib':LIB_PATH+"/jq-timepicker/index.js",
+	      'jq_timepicker_lib':LIB_PATH+"/jq-timepicker/index.js"
       }
   },
   plugins: [

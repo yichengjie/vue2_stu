@@ -8,7 +8,7 @@ require('assets/iconfont/iconfont.css') ;
 require('tui_core_lib');
 require('tui_drag_lib') ;
 require('jq_datepicker_lib');
-require("jq_timepicker_lib") ;
+require('jq_timepicker_lib') ;
 import store from './store/index.js'; // import 我们刚刚创建的 store
 //var bus = new Vue() ;
 //window.bus = bus ;
