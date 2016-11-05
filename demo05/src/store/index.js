@@ -47,7 +47,8 @@ const state = {
       updateUser:"",
       updateStartDate:"",
       updateEndDate:"" 
-  }
+  },
+  checkedIdArr:[]/**选中的id数组 */
 }
 
 // A Vuex instance is created by combining the state, mutations, actions,

@@ -4,7 +4,7 @@
             <thead>
                 <tr>
                     <th width="4%">
-                        <input type="checkbox" v-bind:checked ="checkAllRecords7Flag" v-on:click="clickRecords7CheckAll">
+                        <input type="checkbox" id="checkAllRecords7" v-bind:checked ="checkAllRecords7Flag" v-on:click="clickRecords7CheckAll">
                         <label class="tbtitle" for="checkAllRecords7">全选 </label>
                     </th>
                     <th width="5%" class="relative" 
@@ -107,7 +107,7 @@
                  <tr v-for="item in records7List" v-bind:key="item.id">
                     <td>
                         <input type="checkbox" name="records7_checkbox" v-on:click="clickCheckRecords7Item" 
-                            v-bind:value="item.id" />
+                           v-model ="checkedIdArr" v-bind:value="item.id" />
                     </td>
                     <td>
                    	  <span class="myhand" data-toggle="tooltip" data-placement="top" 
@@ -158,20 +158,31 @@
     export default {
         data(){
             return {
-               
+               checkedIds:[]
             } ;
         },
         methods:{
             clickRecords7CheckAll(e){
                 //console.info('checkAllRecords7Flag : ' + this.checkAllRecords7Flag) ;
-                let flag = e.target.checked ;
-                this.updateSimpleState({"checkAllRecords7Flag":flag}) ;
-                $(":checkbox[name='records7_checkbox']").prop('checked',flag) ;
+                let checkedFlag = e.target.checked ;
+                this.updateSimpleState({"checkAllRecords7Flag":checkedFlag}) ;
+                //$(":checkbox[name='records7_checkbox']").prop('checked',flag) ;
+                this.updateAllCheckedArr(checkedFlag) ;
             },
             clickCheckRecords7Item(event){
-                let len1 = $(":checkbox[name='records7_checkbox']:checked").length ;
-                let len2 =  $(":checkbox[name='records7_checkbox']").length ;
-                if(len1<len2){
+                // let len1 = $(":checkbox[name='records7_checkbox']:checked").length ;
+                // let len2 =  $(":checkbox[name='records7_checkbox']").length ;
+                // if(len1<len2){
+                //     this.updateSimpleState({"checkAllRecords7Flag":false}) ;
+                // }else{
+                //     this.updateSimpleState({"checkAllRecords7Flag":true}) ;
+                // }
+                let checkedFlag = event.target.checked ;
+                let id = event.target.value ;
+                this.updateSingleCheckedArr({checkedFlag,id}) ;
+                let lenAll = this.records7List.length ;
+                let lenChecked = this.checkedIdArr.length ;
+                if(lenChecked<lenAll){
                     this.updateSimpleState({"checkAllRecords7Flag":false}) ;
                 }else{
                     this.updateSimpleState({"checkAllRecords7Flag":true}) ;
@@ -218,7 +229,9 @@
                 'updateSimpleState',
                 'orderListData',
                 'updateTableTitleOrder',
-                'clearTableTitleOrderInfo'
+                'clearTableTitleOrderInfo',
+                'updateSingleCheckedArr',
+                'updateAllCheckedArr'
             ])
         },
         computed: mapGetters([
@@ -228,7 +241,8 @@
             'pageBar',
             'orderTitleName',
             'checkAllRecords7Flag',
-            'tableTitleOrder'
+            'tableTitleOrder',
+            'checkedIdArr'
         ])
     }
 </script>

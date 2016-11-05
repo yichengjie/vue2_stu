@@ -1,6 +1,7 @@
 import {UPDATE_INPUT_PAGEBAR,QUERYLIST_FOR_PAGE,UPDATE_SIMPLE_STATE,
     ORDER_LISTDATA,UPDATE_TABLETITLE_ORDER,CLEAR_TABLETITLE_ORDERINFO,
-    defaultOrderFlag,UPDATE_FORMDATA_ARRAY,UPDATE_FORMDATA_SIMPLE} from './mutation-types.js' ;
+    defaultOrderFlag,UPDATE_FORMDATA_ARRAY,UPDATE_FORMDATA_SIMPLE,
+    UPDATE_SINGLE_CHECKEDIDARR,UPDATE_ALL_CHECKEDIDARR,BATCH_DELETE_RECORDS7} from './mutation-types.js' ;
 import {orderListData} from '../common/index.js' ;
 
 function _formatSpecialDateStr(dataStr){
@@ -84,6 +85,36 @@ const mutations = {
   },
   [UPDATE_FORMDATA_SIMPLE](state,payload){
        Object.assign(state.formData,payload) ;
+  },
+  [UPDATE_SINGLE_CHECKEDIDARR](state,payload){
+       let {checkedFlag,id} = payload ;
+       if(checkedFlag){
+           state.checkedIdArr.push(id) ;
+       }else{
+           let index =  state.checkedIdArr.findIndex(function(value) {
+            return value == id;
+           }) ;
+           state.checkedIdArr.splice(index,1) ;
+       }
+  },
+  [UPDATE_ALL_CHECKEDIDARR](state,checkedFlag){
+       state.checkedIdArr.splice(0,state.checkedIdArr.length) ;
+       if(checkedFlag){
+           for(let item of state.records7List){
+               state.checkedIdArr.push(item.id) ;
+           }
+       }
+  },
+  [BATCH_DELETE_RECORDS7](state){
+    for(let id of state.checkedIdArr){
+        let index =  state.records7List.findIndex(function(item) {
+            return item.id == id;
+        }) ;
+        if(index!=-1){
+          state.records7List.splice(index,1) ;  
+        }
+    }
+    state.checkedIdArr.splice(0,state.checkedIdArr.length) ;
   }
 }
 export default mutations ;

@@ -2,7 +2,8 @@
 // asynchronous operations.
 import {UPDATE_INPUT_PAGEBAR,QUERYLIST_FOR_PAGE,UPDATE_SIMPLE_STATE,
     ORDER_LISTDATA,UPDATE_TABLETITLE_ORDER,CLEAR_TABLETITLE_ORDERINFO,
-    UPDATE_FORMDATA_ARRAY,UPDATE_FORMDATA_SIMPLE} from './mutation-types.js' ;
+    UPDATE_FORMDATA_ARRAY,UPDATE_FORMDATA_SIMPLE,UPDATE_SINGLE_CHECKEDIDARR,
+    UPDATE_ALL_CHECKEDIDARR,BATCH_DELETE_RECORDS7} from './mutation-types.js' ;
 import {queryDbApi} from '../api/index.js' ;
 let _initTooltip = function(){
 	setTimeout(function(){
@@ -44,6 +45,15 @@ const actions = {
    },
    updateFormDataSimple({commit},payload){
        commit(UPDATE_FORMDATA_SIMPLE,payload) ;
+   },
+   updateSingleCheckedArr ({commit},payload){
+       commit(UPDATE_SINGLE_CHECKEDIDARR,payload)
+   },
+   updateAllCheckedArr ({commit},checkedFlag){
+       commit(UPDATE_ALL_CHECKEDIDARR,checkedFlag)
+   },
+   batchDeleteRecords7({commit}){
+       commit(BATCH_DELETE_RECORDS7) ;
    }
 }
 

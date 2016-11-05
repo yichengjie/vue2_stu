@@ -93,6 +93,7 @@
     </div>
 </template>
 <script>
+    import { mapGetters, mapActions } from 'vuex' ;
     export default {
         name:'operbar',
         methods:{
@@ -100,7 +101,8 @@
                 console.info('准备跳转到新增页面上去!') ;
             },
             doDeleteOper(){
-                console.info('准备批量删除操作...') ;
+                //console.info('准备批量删除操作...') ;
+                this.batchDeleteRecords7() ;
             },
             doPublishOper(){
                 console.info('准备发布操作...') ;
@@ -110,7 +112,10 @@
             },
             handleAbortConfirm(){
                 console.info('显示截止模态框...') ;
-            }
+            },
+            ...mapActions([
+                'batchDeleteRecords7'
+            ])
         },
         mounted(){
            initPagePlugin() ;
