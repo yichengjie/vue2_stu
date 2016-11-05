@@ -110,7 +110,8 @@
                             v-bind:value="item.id" />
                     </td>
                     <td>
-                   	  <span class="myhand" data-toggle="tooltip" data-placement="top" v-bind:title="item.s5DescrbeInfo">
+                   	  <span class="myhand" data-toggle="tooltip" data-placement="top" 
+                         v-bind:title="item.s5DescrbeInfo">
                    	 	{{item.subcode}}<i class =" glyphicon glyphicon-info-sign s5descr"></i> 
                    	  </span>
                     </td>
@@ -204,7 +205,6 @@
                 //_clearOrderStatusOnPage
             },
             queryDB:function(toPageNum){
-                
                 this.dealPageOrderFlag = false;
                 let pageSize = this.pageBar.pageSize ;
                 let orderName =  this.orderTitleName ;

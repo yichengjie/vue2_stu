@@ -22,6 +22,7 @@ function _getStatusShow (statusDes) {
     return result;
 }
 
+
 const mutations = {
   [UPDATE_INPUT_PAGEBAR] (state,pageBar ) {
       Object.assign(state.pageBar,pageBar) ;
