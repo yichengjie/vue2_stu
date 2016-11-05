@@ -66,13 +66,13 @@
         <div class="query_row">
             <span class="query_title">常客等级|区域</span>
             <input id ="passengerTypeCode01" value="1" name="passengerTypeCodeArr"  v-model ="formData.passengerTypeCodeArr" 
-                type="checkbox" v-on:click="changeStateArray" /><label for="serviceType01">白金卡</label>
+                type="checkbox" v-on:click="changeStateArray" /><label for="passengerTypeCode01">白金卡</label>
             <input id ="passengerTypeCode02" value="2" name="passengerTypeCodeArr"  v-model ="formData.passengerTypeCodeArr" 
-                type="checkbox" v-on:click="changeStateArray" /><label for="serviceType02">金卡</label>
+                type="checkbox" v-on:click="changeStateArray" /><label for="passengerTypeCode02">金卡</label>
             <input  id ="passengerTypeCode03" value="3" name="passengerTypeCodeArr" v-model ="formData.passengerTypeCodeArr" 
-                type="checkbox" v-on:click="changeStateArray" /><label for="serviceType03">银卡</label>
+                type="checkbox" v-on:click="changeStateArray" /><label for="passengerTypeCode03">银卡</label>
             <input  id ="passengerTypeCode04" value="4" name="passengerTypeCodeArr" v-model ="formData.passengerTypeCodeArr" 
-                type="checkbox" v-on:click="changeStateArray" /> <label for="serviceType04">普卡</label>
+                type="checkbox" v-on:click="changeStateArray" /> <label for="passengerTypeCode04">普卡</label>
             <input  id ="passengerTypeCode05" value="5" name="passengerTypeCodeArr" v-model ="formData.passengerTypeCodeArr" 
                 type="checkbox" v-on:click="changeStateArray" /><label for="passengerTypeCode05">非会员</label>
             <input  id ="passengerTypeCode06" value="6" name="passengerTypeCodeArr" v-model ="formData.passengerTypeCodeArr" 

@@ -2,6 +2,26 @@ import {UPDATE_INPUT_PAGEBAR,QUERYLIST_FOR_PAGE,UPDATE_SIMPLE_STATE,
     ORDER_LISTDATA,UPDATE_TABLETITLE_ORDER,CLEAR_TABLETITLE_ORDERINFO,
     defaultOrderFlag,UPDATE_FORMDATA_ARRAY,UPDATE_FORMDATA_SIMPLE} from './mutation-types.js' ;
 import {orderListData} from '../common/index.js' ;
+
+function _formatSpecialDateStr(dataStr){
+    return _.replace(dataStr, /-/g, '/') ;
+}
+function _getStatusShow (statusDes) {
+    var result = '';
+    if (statusDes === '1') {
+        result = '未发布';
+    } else if (statusDes === '2') {
+        result = '未生效';
+    } else if (statusDes === '3') {
+        result = '已生效';
+    }else if (statusDes === '4') {
+        result = '已过期';
+    }else if (statusDes === '5') {
+        result = '已取消';
+    }
+    return result;
+}
+
 const mutations = {
   [UPDATE_INPUT_PAGEBAR] (state,pageBar ) {
       Object.assign(state.pageBar,pageBar) ;
@@ -14,9 +34,18 @@ const mutations = {
       vmPageBar.recordCount = pageBean.recordCount ;
       vmPageBar.pgArr = pageBean.pageNumList ;
       vmPageBar.isQueryDB = true ;
-      let list = pageBean.recordList ;
-      state.records7List = list;
       state.dealPageOrderFlag = false;//是否进行过页面排序
+      state.records7List.splice(0,state.records7List.length) ;
+      let list = pageBean.recordList ;
+      list.forEach(function(item){
+          let saleStartDateShow = _formatSpecialDateStr(item.saleStartDate) ;
+          let saleEndDateShow = _formatSpecialDateStr(item.saleEndDate) ;
+          let statusShow = _getStatusShow(item.statusDes) ;
+          let sequenceNumber = item.sequenceNumber*1 ;
+          let obj = {saleStartDateShow,saleEndDateShow,statusShow,sequenceNumber} ;
+          let newObj = Object.assign({},item,obj) ;
+          state.records7List.push(newObj) ;
+      }) ;
   },
   [UPDATE_SIMPLE_STATE](state,payload){
       Object.assign(state,payload) ;
