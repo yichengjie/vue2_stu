@@ -23,7 +23,7 @@
                     <div class ="row">
                         <div class ="col-sm-10 col-sm-offset-1">
                             <ul id ="batchImportTipInfo">
-                                <li v-for="item in tipMagArr">
+                                <li v-for="item in tipMsgArr">
                                     <span v-bind:class="{'text-success': tipSuccessFlag,'text-danger': !tipSuccessFlag }">
                                         {{item}}
                                     </span>
@@ -33,8 +33,10 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" v-on:click ="closeModal" class="btn btn-default" data-dismiss="modal">取消</button>
-                    <button type="button" v-on:click ="confirmImport" class="btn btn-primary" id ="submitBatchImportFormBtn">导入</button>
+                    <button type="button" v-on:click ="closeModal" class="btn btn-default"
+                         data-dismiss="modal">关闭</button>
+                    <button type="button" v-show ="canOperFlag" v-on:click ="confirmImport" 
+                        class="btn btn-primary" id ="submitBatchImportFormBtn">导入</button>
                 </div>
             </div>
         </div>
@@ -58,34 +60,42 @@
            },
            confirmImport(){
                console.info('导入的文件名称为 : ' + this.fileName) ;
+               //不能再次点击确定按钮
+               this.canOperFlag = false ;
                //下面是处理导入的业务逻辑
+               this.clearTipInfo() ;
+               this.tipSuccessFlag = true ;
+               this.tipMsgArr.push('数据正在导入中，请耐心等待……') ;
                batchImportApi().then((retData) =>{
                    this.clearTipInfo() ;
                    let {flag,msg} = retData ;
                    this.tipSuccessFlag = flag ;
-                   this.tipMagArr = msg;
-                   let _self = this ;
+                   this.tipMsgArr = msg;
+                   this.canOperFlag = true;
                    if(flag){
-                       setTimeout(function(){
-                           _self.fileName = '' ; 
+                       setTimeout(() => {
                            $("#batchImportModal").modal('hide') ;
+                            this.fileName = '' ; 
+                           this.clearTipInfo() ;
                        },1000) ;
                    }
                },(err) =>{
                    this.clearTipInfo() ;
                    this.tipSuccessFlag = false ;
-                   this.tipMagArr.push('网络请求出错!');
+                   this.canOperFlag = true;
+                   this.tipMsgArr.push('网络请求出错!');
                }) ;
            },
            clearTipInfo(){
-               this.tipMagArr.splice(0,this.tipMagArr.length) ;
+               this.tipMsgArr.splice(0,this.tipMsgArr.length) ;
            }
        },
        data(){
            return {
               fileName:'',
               tipSuccessFlag:false,
-              tipMagArr:['test hello']
+              tipMsgArr:[],
+              canOperFlag:true
            }
        }
     }

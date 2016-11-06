@@ -40,7 +40,12 @@
             },
             showAbortUI(){
                // console.info('显示截止模态框...') ;
-                $("#abortModal").modal('show') ;
+                let flag = this.checkedIdArr.length > 0 ;
+                if(flag){
+                    $("#abortModal").modal('show') ;
+                }else{
+                    console.info('请选择需要【截止】的记录!') ;
+                }
             },
             showBatchImportUI(event){
                 var forId =  $(event.target).attr("for") ;
@@ -51,6 +56,9 @@
                 'batchDeleteRecords7'
             ])
         },
+        computed:mapGetters([
+            'checkedIdArr'
+        ]),
         mounted(){
            initPagePlugin() ;
         },

@@ -47,12 +47,35 @@ export function queryDbApi (queryParam){
 
 export function batchImportApi(){
      return new Promise(function(resolve,reject){
-        let waitTimeNum = 300 ;
-        let retData = {flag:true,"msg":["导入成功,1秒后将关闭窗口..."]} ;
+        let waitTimeNum = 2000 ;
+        let retSuccessData = {flag:true,"msg":["导入成功,1秒后将关闭窗口..."]} ;
+        let retErrorData = {
+            flag:false,
+            msg:[ '错误提示信息 : ',
+                 '- 错误信息1',
+                 '- 错误信息2',
+                 '- 错误信息3',
+                 '- 错误信息4',
+                 '- 错误信息5',
+                 '- 错误信息6']
+        } ;
         setTimeout(function(){
             //hiding() ;
-            resolve(retData) ;
+            resolve(retSuccessData) ;
+            //resolve(retErrorData) ;
         },waitTimeNum) ;
+    }) ;
+}
+//批量截止api
+export function batchAbortApi(){
+    return new Promise(function(resolve,reject){
+         let waitTimeNum = 2000 ;
+         let retSuccessData = {flag:true,msg:['导入成功1秒后关闭窗口!']} ;
+         let retErrorData = {flag:false,msg:['错误提示信息 :',"- 错误提示1","- 错误提示2"]} ;
+         setTimeout(()=>{
+             //resolve(retSuccessData) ;
+             resolve(retErrorData) ;
+         },waitTimeNum) ;
     }) ;
 }
 
