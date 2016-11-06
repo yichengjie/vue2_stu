@@ -45,4 +45,14 @@ export function queryDbApi (queryParam){
     }) ;
 }
 
+export function batchImportApi(){
+     return new Promise(function(resolve,reject){
+        let waitTimeNum = 300 ;
+        let retData = {flag:true,"msg":["导入成功,1秒后将关闭窗口..."]} ;
+        setTimeout(function(){
+            //hiding() ;
+            resolve(retData) ;
+        },waitTimeNum) ;
+    }) ;
+}
 

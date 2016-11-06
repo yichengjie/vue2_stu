@@ -15,20 +15,19 @@
                 </div>
                 <div class="modal-body">
                     <div class ="row">
-                        <div class ="col-sm-1">
-                        </div>
-                        <div class ="col-sm-10">
+                        <div class ="col-sm-10 col-sm-offset-1">
                             <p>文件&nbsp;:&nbsp;<span id ="batchImportFileName">{{fileName}}</span></p>
                         </div>
                     </div>
                     <br/>
                     <div class ="row">
-                        <div class ="col-sm-1">
-
-                        </div>
-                        <div class ="col-sm-10">
+                        <div class ="col-sm-10 col-sm-offset-1">
                             <ul id ="batchImportTipInfo">
-                            
+                                <li v-for="item in tipMagArr">
+                                    <span v-bind:class="{'text-success': tipSuccessFlag,'text-danger': !tipSuccessFlag }">
+                                        {{item}}
+                                    </span>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -42,6 +41,7 @@
     </div>
 </template>
 <script>
+    import {batchImportApi} from '../api/index.js' ; 
     export default {
        methods:{
            showBatchImportUI2(event){
@@ -49,25 +49,63 @@
               let newFileName = event.target.value ;
               this.fileName = newFileName ;
               if(newFileName&&newFileName.length>0){
-                $("#batchImportModal").modal('show') ;
+                 $("#batchImportModal").modal('show') ;
               }
            },
            closeModal(){
                this.fileName = '' ; 
+               this.clearTipInfo() ;
            },
            confirmImport(){
                console.info('导入的文件名称为 : ' + this.fileName) ;
-               this.fileName = '' ; 
-               $("#batchImportModal").modal('hide') ;
                //下面是处理导入的业务逻辑
-               //...
+               batchImportApi().then((retData) =>{
+                   this.clearTipInfo() ;
+                   let {flag,msg} = retData ;
+                   this.tipSuccessFlag = flag ;
+                   this.tipMagArr = msg;
+                   let _self = this ;
+                   if(flag){
+                       setTimeout(function(){
+                           _self.fileName = '' ; 
+                           $("#batchImportModal").modal('hide') ;
+                       },1000) ;
+                   }
+               },(err) =>{
+                   this.clearTipInfo() ;
+                   this.tipSuccessFlag = false ;
+                   this.tipMagArr.push('网络请求出错!');
+               }) ;
+           },
+           clearTipInfo(){
+               this.tipMagArr.splice(0,this.tipMagArr.length) ;
            }
        },
        data(){
            return {
-              fileName:''
+              fileName:'',
+              tipSuccessFlag:false,
+              tipMagArr:['test hello']
            }
        }
+    }
+
+    class s7BatchImport{
+       
+
+
+
+
+        cleanTipInfo (){
+            modalHelper.cleanTipInfo() ;
+        } 
+        addErrorTip(errMsg){
+            modalHelper.addErrorTip(errMsg) ;
+        } 
+        addSuccessTip(sucMsg){
+            cleanTipInfo() ;
+            modalHelper.addSuccessTip(sucMsg) ;
+        } 
     }
 </script>
 <style>
