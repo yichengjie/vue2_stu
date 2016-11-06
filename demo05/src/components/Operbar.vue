@@ -1,6 +1,6 @@
 <template>
     <div>
-          <div class="pull-right clearfix" style="margin-bottom: 8px">
+        <div class="pull-right clearfix" style="margin-bottom: 8px">
             <button class="btn btn-success btn-sm" v-on:click="toAddUI">新建</button>
             <button class="btn btn-default btn-sm" v-on:click ="doDeleteOper">删除</button>
             <button class="btn btn-default btn-sm" v-on:click ="doPublishOper">发布</button>

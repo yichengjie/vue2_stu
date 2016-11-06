@@ -1,5 +1,5 @@
 {
    "scripts": {
-    "build": "webpack --config webpack.config.js --progress --profile --colors"
+    "dev": "webpack --config webpack.config.js --progress --profile --colors"
   }  
 }

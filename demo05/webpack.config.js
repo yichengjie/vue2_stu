@@ -13,7 +13,7 @@ module.exports = {
   module: {
     loaders: [
       {test: /\.vue$/,loader: 'vue'},
-      {test: /\.js$/,loader: 'babel',exclude: /node_modules/},
+      {test: /\.js$/,loader: 'babel',exclude: /node_modules|lib/},
       {test: /\.css$/, loader: ExtractTextPlugin.extract("style-loader", "css-loader") },
       {test: /\.(jpg|png|gif)$/, loader: "url?limit=8192&name=./images/[name].[hash:8].[ext]"},
       {test: /\.(eot|woff|ttf|svg)$/, loader: "file-loader?name=./file/[name].[hash:8].[ext]" }

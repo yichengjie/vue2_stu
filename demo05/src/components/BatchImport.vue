@@ -35,7 +35,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" v-on:click ="closeModal" class="btn btn-default" data-dismiss="modal">取消</button>
-                    <button type="button" class="btn btn-primary" id ="submitBatchImportFormBtn">导入</button>
+                    <button type="button" v-on:click ="confirmImport" class="btn btn-primary" id ="submitBatchImportFormBtn">导入</button>
                 </div>
             </div>
         </div>
@@ -54,6 +54,13 @@
            },
            closeModal(){
                this.fileName = '' ; 
+           },
+           confirmImport(){
+               console.info('导入的文件名称为 : ' + this.fileName) ;
+               this.fileName = '' ; 
+               $("#batchImportModal").modal('hide') ;
+               //下面是处理导入的业务逻辑
+               //...
            }
        },
        data(){
