@@ -12,13 +12,16 @@ export function queryDbApi (queryParam){
     let r2 = random(min ,min +pageSize) ;
     let r3 = random(1,2)  ;
     let r4 = random(1,5)  ;
+    let r5 = random(100,99999)  ;
+    
     for(let i = 0 ; i < pageSize ; i ++){
         let xxStatus = r3()+"" ;
         let xxStatusDes = r4()+"" ;
+        let xxSequenceNumber = r5() +"" ;
         //let cur = _.random(0, 5);
         let id = _.uniqueId("s7Id-") ;
         let s5DescrbeInfo = "test tooltip ["+i+"]" ;
-        let obj = {"id":id,"subcode":"OB"+ r(),"serviceType":"F"+ r(),"sequenceNumber":"999"+i,"status": xxStatus,"statusDes":xxStatusDes, "saleStartDate":"2016/01/0"+ r(),
+        let obj = {"id":id,"subcode":"OB"+ r(),"serviceType":"F"+ r(),"sequenceNumber":xxSequenceNumber,"status": xxStatus,"statusDes":xxStatusDes, "saleStartDate":"2016/01/0"+ r(),
                 "saleEndDate":"2016/12/2"+ r(),"travelStartDate":"2016/01/0"+ r(),"travelEndDate":"2016/12/2"+ r(),
                 "loc1":"11"+ r(),"loc2":"1234567"+ r(),"flyerStatus":""+ r(),"money":"99"+ r(),"moneyUnit":"CNY","descr":"描述" + r(),
                 "lastUpdateUser":"yicj"+ r(),"lastUpdateDate":"2016/01/01 14:0"+ r(),"s5DescrbeInfo":s5DescrbeInfo
