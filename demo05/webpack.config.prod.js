@@ -2,6 +2,7 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var path = require('path') ;
 var ASSETS_PATH = path.resolve('./src/assets');
 var LIB_PATH = path.resolve('./src/lib');
+var webpack = require('webpack') ;
 
 module.exports = {
   entry: './src/main.js',
@@ -34,6 +35,11 @@ module.exports = {
   },
   plugins: [
     new ExtractTextPlugin("[name].css"),
+     new webpack.optimize.UglifyJsPlugin({
+        compress: {
+            warnings: false
+        }
+      })
   ],
   vue: {
     loaders: {
