@@ -1,6 +1,5 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-Vue.use(Vuex);
+//import Vue from 'vue' ;
+import Vuex from 'vuex' ;
 import actions from './actions.js' ;
 import mutations from './mutations.js' ;
 import getters from './getters.js' ;
@@ -8,6 +7,7 @@ import {defaultOrderFlag} from './mutation-types.js' ;
 const debug = process.env.NODE_ENV !== 'production' ;
 //const debug = false ;
 const defaultPageSize = 15 ;
+//Vue.use(Vuex);
 
 // root state object.
 // each Vuex instance is just a single state tree.

@@ -1,4 +1,4 @@
-import Vue from 'vue' ;
+//import Vue from 'vue' ;
 import App from './App.vue' ;
 require('assets/css/common.css') ;
 require('assets/css/jquery_ui.datepicker-modify.css') ;
