@@ -7,98 +7,53 @@
                         <input type="checkbox" id="checkAllRecords7" v-bind:checked ="checkAllRecords7Flag" v-on:click="clickRecords7CheckAll">
                         <label class="tbtitle" for="checkAllRecords7">全选 </label>
                     </th>
-                    <th width="5%" class="relative" 
-                        v-on:click="clickTableTitle('subcode')">
+                    <th width="5%" class="relative" v-on:click="clickTableTitle('subcode')">
                         sub<br/>code
-                        <svg class="icon tb_order" aria-hidden="true" >
-                            <use xlink:href="#icon-sort-small" v-if ="orderTitleName != 'subcode'"></use>
-                            <use xlink:href="#icon-sort-small1" v-if ="orderTitleName == 'subcode' && tableTitleOrder.subcode"></use>
-                            <use xlink:href="#icon-sort-small-copy" v-if ="orderTitleName == 'subcode'  && !tableTitleOrder.subcode"></use>
-                        </svg>
+                        <OrderIcon prop-name ="subcode"/>
                     </th>
                     <th width="4%" class="relative" v-on:click="clickTableTitle('serviceType')">
                         服务<br/>类型 
-                        <svg class="icon tb_order" aria-hidden="true" >
-                            <use xlink:href="#icon-sort-small" v-if ="orderTitleName != 'serviceType'"></use>
-                            <use xlink:href="#icon-sort-small1" v-if ="orderTitleName == 'serviceType' && tableTitleOrder.serviceType"></use>
-                            <use xlink:href="#icon-sort-small-copy" v-if ="orderTitleName == 'serviceType'  && !tableTitleOrder.serviceType"></use>
-                        </svg>
+                        <OrderIcon prop-name ="serviceType"/>
                     </th>
                     <th width="5%" class="relative" v-on:click="clickTableTitle('sequenceNumber')">
                         优先级<br/>序号
-                        <svg class="icon tb_order" aria-hidden="true" >
-                            <use xlink:href="#icon-sort-small" v-if ="orderTitleName != 'sequenceNumber'"></use>
-                            <use xlink:href="#icon-sort-small1" v-if ="orderTitleName == 'sequenceNumber' && tableTitleOrder.sequenceNumber"></use>
-                            <use xlink:href="#icon-sort-small-copy" v-if ="orderTitleName == 'sequenceNumber'  && !tableTitleOrder.sequenceNumber"></use>
-                        </svg>
+                        <OrderIcon prop-name ="sequenceNumber"/>
                     </th>
                     <th width="4%" class="relative" v-on:click="clickTableTitle('statusDes')">
-                        状态  
-                        <svg class="icon tb_order" aria-hidden="true" >
-                            <use xlink:href="#icon-sort-small" v-if ="orderTitleName != 'statusDes'"></use>
-                            <use xlink:href="#icon-sort-small1" v-if ="orderTitleName == 'statusDes' && tableTitleOrder.statusDes"></use>
-                            <use xlink:href="#icon-sort-small-copy" v-if ="orderTitleName == 'statusDes'  && !tableTitleOrder.statusDes"></use>
-                        </svg>
+                        状态 
+                        <OrderIcon prop-name ="statusDes"/> 
                     </th>
                     <th width="9%" class="relative" v-on:click="clickTableTitle('saleStartDate')">
                       	 销售起始日期
-                        <svg class="icon tb_order" aria-hidden="true" >
-                            <use xlink:href="#icon-sort-small" v-if ="orderTitleName != 'saleStartDate'"></use>
-                            <use xlink:href="#icon-sort-small1" v-if ="orderTitleName == 'saleStartDate' && tableTitleOrder.saleStartDate"></use>
-                            <use xlink:href="#icon-sort-small-copy" v-if ="orderTitleName == 'saleStartDate'  && !tableTitleOrder.saleStartDate"></use>
-                        </svg>
+                        <OrderIcon prop-name ="saleStartDate"/> 
                     </th>
                     <th width="9%" class="relative" v-on:click="clickTableTitle('saleEndDate')">
                         销售截止日期
-                        <svg class="icon tb_order" aria-hidden="true" >
-                            <use xlink:href="#icon-sort-small" v-if ="orderTitleName != 'saleEndDate'"></use>
-                            <use xlink:href="#icon-sort-small1" v-if ="orderTitleName == 'saleEndDate' && tableTitleOrder.saleEndDate"></use>
-                            <use xlink:href="#icon-sort-small-copy" v-if ="orderTitleName == 'saleEndDate'  && !tableTitleOrder.saleEndDate"></use>
-                        </svg>
+                        <OrderIcon prop-name ="saleEndDate"/> 
                     </th>
                     <th width="7%" class="relative" v-on:click="clickTableTitle('travelStartDate')">
                         旅行开始日期
-                        <svg class="icon tb_order" aria-hidden="true" >
-                            <use xlink:href="#icon-sort-small" v-if ="orderTitleName != 'travelStartDate'"></use>
-                            <use xlink:href="#icon-sort-small1" v-if ="orderTitleName == 'travelStartDate' && tableTitleOrder.travelStartDate"></use>
-                            <use xlink:href="#icon-sort-small-copy" v-if ="orderTitleName == 'travelStartDate'  && !tableTitleOrder.travelStartDate"></use>
-                        </svg>
+                        <OrderIcon prop-name ="travelStartDate"/>
                     </th>
                     <th width="7%" class="relative" v-on:click="clickTableTitle('travelEndDate')">
                         旅行结束日期
-                        <svg class="icon tb_order" aria-hidden="true" >
-                            <use xlink:href="#icon-sort-small" v-if ="orderTitleName != 'travelEndDate'"></use>
-                            <use xlink:href="#icon-sort-small1" v-if ="orderTitleName == 'travelEndDate' && tableTitleOrder.travelEndDate"></use>
-                            <use xlink:href="#icon-sort-small-copy" v-if ="orderTitleName == 'travelEndDate'  && !tableTitleOrder.travelEndDate"></use>
-                        </svg>
+                        <OrderIcon prop-name ="travelEndDate"/>
                     </th>
                     <th width="5%">区域1 </th>
                     <th width="5%"> 区域2 </th>
                     <th width="4%" class="relative" v-on:click="clickTableTitle('flyerStatus')">
-                        常客<br>等级 
-                        <svg class="icon tb_order" aria-hidden="true" >
-                            <use xlink:href="#icon-sort-small" v-if ="orderTitleName != 'flyerStatus'"></use>
-                            <use xlink:href="#icon-sort-small1" v-if ="orderTitleName == 'flyerStatus' && tableTitleOrder.flyerStatus"></use>
-                            <use xlink:href="#icon-sort-small-copy" v-if ="orderTitleName == 'flyerStatus'  && !tableTitleOrder.flyerStatus"></use>
-                        </svg>
+                        常客<br>等级
+                        <OrderIcon prop-name ="flyerStatus"/> 
                     </th>
                     <th width="6%" >金额</th>  
                     <th width="8%">描述  </th>
                     <th width="6%" class="relative" v-on:click="clickTableTitle('lastUpdateUser')">
                         最后<br/>更新人
-                        <svg class="icon tb_order" aria-hidden="true" >
-                            <use xlink:href="#icon-sort-small" v-if ="orderTitleName != 'lastUpdateUser'"></use>
-                            <use xlink:href="#icon-sort-small1" v-if ="orderTitleName == 'lastUpdateUser' && tableTitleOrder.lastUpdateUser"></use>
-                            <use xlink:href="#icon-sort-small-copy" v-if ="orderTitleName == 'lastUpdateUser'  && !tableTitleOrder.lastUpdateUser"></use>
-                        </svg> 
+                        <OrderIcon prop-name ="lastUpdateUser"/> 
                     </th>
                     <th width="9%" class="relative" v-on:click="clickTableTitle('lastUpdateDate')">
                         最后更新日期 
-                        <svg class="icon tb_order" aria-hidden="true" >
-                            <use xlink:href="#icon-sort-small" v-if ="orderTitleName != 'lastUpdateDate'"></use>
-                            <use xlink:href="#icon-sort-small1" v-if ="orderTitleName == 'lastUpdateDate' && tableTitleOrder.lastUpdateDate"></use>
-                            <use xlink:href="#icon-sort-small-copy" v-if ="orderTitleName == 'lastUpdateDate'  && !tableTitleOrder.lastUpdateDate"></use>
-                        </svg>  
+                        <OrderIcon prop-name ="lastUpdateDate"/> 
                     </th>
                     <th width="3%">操作</th>
                 </tr>
@@ -155,6 +110,7 @@
     import {defaultOrderFlag} from '../store/mutation-types.js' ;
     const topHight = 140 ;
     import { mapGetters, mapActions } from 'vuex' ;
+    import OrderIcon from './OrderIcon.vue' ;
     export default {
         data(){
             return {
@@ -243,7 +199,10 @@
             'checkAllRecords7Flag',
             'tableTitleOrder',
             'checkedIdArr'
-        ])
+        ]),
+        components:{
+            OrderIcon
+        }
     }
 </script>
 <style scoped>
