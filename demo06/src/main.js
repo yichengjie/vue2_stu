@@ -1,11 +1,11 @@
 import Vue from 'vue' ;
 import App from './App.vue' ;
-let profixStr ="assets/css/" ;
-require(profixStr+'common.css') ;
-require(profixStr+'jquery_ui.datepicker-modify.css') ;
-require(profixStr+'jquery-ui-timepicker-addon.css') ;
-require(profixStr+'oc_query.css') ;
-require(profixStr+'jquery.growl.css') ;
+//let profixStr ="assets/css/" ;
+require('assets/css/common.css') ;
+require('assets/css/jquery_ui.datepicker-modify.css') ;
+require('assets/css/jquery-ui-timepicker-addon.css') ;
+require('assets/css/oc_query.css') ;
+require('assets/css/jquery.growl.css') ;
 require('assets/iconfont/iconfont.css') ;
 require('tui_core_lib');
 require('tui_drag_lib') ;

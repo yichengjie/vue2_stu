@@ -11,7 +11,7 @@ let api = {
         let records7List = [] ;
         //生成0-5的随机数
         let r = random(1,9) ;
-        let min = toPageNum *10 ;
+        let min = curPage *10 ;//toPageNum
         let r2 = random(min ,min +pageSize) ;
         let r3 = random(1,2)  ;
         let r4 = random(1,5)  ;
