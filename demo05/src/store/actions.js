@@ -4,7 +4,7 @@ import {UPDATE_INPUT_PAGEBAR,QUERYLIST_FOR_PAGE,UPDATE_SIMPLE_STATE,
     ORDER_LISTDATA,UPDATE_TABLETITLE_ORDER,CLEAR_TABLETITLE_ORDERINFO,
     UPDATE_FORMDATA_ARRAY,UPDATE_FORMDATA_SIMPLE,UPDATE_SINGLE_CHECKEDIDARR,
     UPDATE_ALL_CHECKEDIDARR,BATCH_DELETE_RECORDS7} from './mutation-types.js' ;
-import {queryDbApi} from '../api/index.js' ;
+import api from '../api/index.js' ;
 let _initTooltip = function(){
 	setTimeout(function(){
        $("[data-toggle='tooltip']").tooltip();
@@ -17,7 +17,7 @@ const actions = {
       commit(UPDATE_INPUT_PAGEBAR,payload) ;
    },
    queryList4Page({commit},payload){
-       let promise = queryDbApi(payload) ;
+       let promise = api.queryDbApi(payload) ;
        promise.then(function(retData){
            commit(QUERYLIST_FOR_PAGE,retData.pageBean) ;
            _initTooltip() ;
@@ -47,14 +47,14 @@ const actions = {
        commit(UPDATE_FORMDATA_SIMPLE,payload) ;
    },
    updateSingleCheckedArr ({commit},payload){
-       commit(UPDATE_SINGLE_CHECKEDIDARR,payload)
+       commit(UPDATE_SINGLE_CHECKEDIDARR,payload) ;
    },
    updateAllCheckedArr ({commit},checkedFlag){
-       commit(UPDATE_ALL_CHECKEDIDARR,checkedFlag)
+       commit(UPDATE_ALL_CHECKEDIDARR,checkedFlag) ;
    },
    batchDeleteRecords7({commit}){
        commit(BATCH_DELETE_RECORDS7) ;
    }
-}
+};
 
 export default actions ;

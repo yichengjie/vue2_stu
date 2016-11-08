@@ -37,7 +37,7 @@
 </template>
 <script>
     import DateTimepicker from './DateTimepicker.vue' ;
-    import {batchAbortApi} from '../api/index.js' ;
+    import api from '../api/index.js' ;
     export default {
         data(){
             return {
@@ -56,7 +56,7 @@
                 this.tipSuccessFlag = true ;
                 this.canOperFlag = false;
                 this.tipMsgArr.push('操作中请稍后...') ;
-                batchAbortApi().then(({flag,msg}) => {
+                api.batchAbortApi().then(({flag,msg}) => {
                     this.canOperFlag = true;
                     this.clearTipInfo() ;
                     this.tipSuccessFlag = flag ;

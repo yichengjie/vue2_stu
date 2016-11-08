@@ -10,6 +10,6 @@ const getters = {
    tableTitleOrder: state => state.tableTitleOrder ,
    formData: state => state.formData ,
    checkedIdArr: state => state.checkedIdArr
-}
+};
 
 export default getters ;

@@ -43,7 +43,7 @@
     </div>
 </template>
 <script>
-    import {batchImportApi} from '../api/index.js' ; 
+    import api from '../api/index.js' ; 
     export default {
        methods:{
            showBatchImportUI2(event){
@@ -66,7 +66,7 @@
                this.clearTipInfo() ;
                this.tipSuccessFlag = true ;
                this.tipMsgArr.push('数据正在导入中，请耐心等待……') ;
-               batchImportApi().then((retData) =>{
+               api.batchImportApi().then((retData) =>{
                    this.clearTipInfo() ;
                    let {flag,msg} = retData ;
                    this.tipSuccessFlag = flag ;
@@ -99,24 +99,7 @@
            }
        }
     }
-
-    class s7BatchImport{
-       
-
-
-
-
-        cleanTipInfo (){
-            modalHelper.cleanTipInfo() ;
-        } 
-        addErrorTip(errMsg){
-            modalHelper.addErrorTip(errMsg) ;
-        } 
-        addSuccessTip(sucMsg){
-            cleanTipInfo() ;
-            modalHelper.addSuccessTip(sucMsg) ;
-        } 
-    }
+    
 </script>
 <style>
 

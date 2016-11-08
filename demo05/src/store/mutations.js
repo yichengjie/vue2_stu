@@ -116,5 +116,5 @@ const mutations = {
     }
     state.checkedIdArr.splice(0,state.checkedIdArr.length) ;
   }
-}
+};
 export default mutations ;

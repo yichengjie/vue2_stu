@@ -15,5 +15,5 @@ export function orderListData(list,titleName,ascFlag){
 export function random (min,max){
     return function(){
         return _.random(min,max);
-    }
+    };
 }
