@@ -51,12 +51,14 @@
                      let idArr = this.checkedIdArr ;
                      let flag2 = new S7DeleteClass().doValidate(idArr,records7List) ;
                      if(flag2){
-                         api.batchDeleteApi(idArr).then(retData =>{
-                            if(retData.flag){
-                                //删除vuex中的数据
-                                this.batchDeleteRecords7() ;
-                            }
-                        }) ;
+                        $.showTuiConfirmDialog('确认删除?', () => {
+							api.batchDeleteApi(idArr).then(retData =>{
+	                            if(retData.flag){
+	                                //删除vuex中的数据
+	                                this.batchDeleteRecords7() ;
+	                            }
+	                        }) ;
+						}) ;
                      }else{
                         toastDanger('包含【已发布】的记录，不能删除!') ;
                      }
