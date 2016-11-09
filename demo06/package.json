@@ -7,8 +7,5 @@
     "dev": "webpack --watch --config webpack.config.js --progress --profile --colors",
     "build": "webpack --config webpack.config.js --progress --profile --colors",
     "prod": "webpack --config webpack.config.prod.js --progress --profile --colors"
-  },
-  "dependencies": {
-    "vuex": "^2.0.0"
   }
 }

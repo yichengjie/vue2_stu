@@ -1,7 +1,8 @@
 {
   "name": "my-project",
   "description": "A Vue.js and Element project",
-  "private": true,
+  "version": "1.0.0",
+  "main": "index.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.config.js  --inline --hot --port 3000",
     "build": "cross-env NODE_ENV=production webpack --config build/webpack.config.js --progress --hide-modules"
