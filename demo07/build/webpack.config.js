@@ -1,15 +1,17 @@
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var path = require('path') ;
-var ASSETS_PATH = path.resolve('./src/assets');
-var LIB_PATH = path.resolve('./src/lib');
+var webpack = require('webpack') ;
+var SRC_PATH =  path.resolve(__dirname,'../src');
+var ASSETS_PATH = path.resolve(__dirname,'../src/assets');
+var LIB_PATH = path.resolve(__dirname,'../src/lib');
+var DIST_PATH = path.resolve(__dirname,'../dist') ;
 
 module.exports = {
-  entry: './src/main.js',
+  entry: SRC_PATH+'/main.js',
   output: {
-    path: __dirname+"/dist/",
+    path: DIST_PATH,
     filename: '[name].js'
   },
-  devtool: 'source-map',
   module: {
     loaders: [
       {test: /\.vue$/,loader: 'vue'},
@@ -46,5 +48,22 @@ module.exports = {
     loaders: {
         css: ExtractTextPlugin.extract("css")
     }
-  }
+  },
+   //devtool: '#eval-source-map'
+}
+
+if (process.env.NODE_ENV === 'production') {
+    //module.exports.devtool = '#source-map' ;
+    module.exports.plugins = (module.exports.plugins || []).concat([
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: '"production"'
+      }
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false
+      }
+    })
+  ])
 }
