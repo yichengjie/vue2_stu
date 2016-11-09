@@ -17,7 +17,6 @@
   },
   "homepage": "https://github.com/yichengjie/vue2_stu#readme",
   "dependencies": {
-    "element-ui": "^1.0.0-rc.9",
     "lodash": "^4.16.6",
     "moment": "^2.15.2",
     "vue": "^2.0.1",
