@@ -9,14 +9,13 @@ module.exports = {
      publicPath: '/dist/',
      filename: 'build.js'
   },
-  devtool: '#eval-source-map',
   module: {
     loaders: [
-      {test: /\.vue$/,loader: 'vue'},
-      {test: /\.js$/,loader: 'babel',exclude: /node_modules|lib/},
-      {test: /\.css$/, loader: ExtractTextPlugin.extract("style-loader", "css-loader") },
-      {test: /\.(jpg|png|gif)$/, loader: "url?limit=8192&name=./images/[name].[hash:8].[ext]"},
-      {test: /\.(eot|woff|ttf|svg)$/, loader: "file-loader?name=./file/[name].[hash:8].[ext]" }
+        {test: /\.vue$/,loader: 'vue'},
+        {test: /\.js$/,loader: 'babel',exclude: /node_modules|lib/},
+        {test: /\.css$/,loader: 'style!css'},
+        {test: /\.(eot|svg|ttf|woff|woff2)$/,loader: 'file'},
+        {test: /\.(png|jpg|gif|svg)$/,loader: 'file',query: {name: '[name].[ext]?[hash]'}}
     ]
   },
   resolve: {
@@ -27,7 +26,8 @@ module.exports = {
   devServer: {
      historyApiFallback: true,
      noInfo: true
-  }
+  },
+  devtool: '#eval-source-map'
 }
 
 if (process.env.NODE_ENV === 'production') {
@@ -38,10 +38,10 @@ if (process.env.NODE_ENV === 'production') {
         NODE_ENV: '"production"'
       }
     }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      }
-    })
+    // new webpack.optimize.UglifyJsPlugin({
+    //   compress: {
+    //     warnings: false
+    //   }
+    // })
   ])
 }
