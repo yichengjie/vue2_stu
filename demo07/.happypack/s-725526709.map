@@ -1,1 +1,0 @@
-{"version":3,"sources":["src\\api\\index.js"],"names":[],"mappings":";;;;;;AAAA","file":"index.js","sourceRoot":"E:/code/webstorm/vue2_stu/demo07","sourcesContent":["import api from './api_test.js' ;\r\n//import api from './api_prod.js' ;\r\nexport default api ;\r\n"]}
