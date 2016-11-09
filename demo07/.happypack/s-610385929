@@ -1,0 +1,10 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var QUERYDB_API = exports.QUERYDB_API = "queryDbApi";
+var BATCHIMPORT_API = exports.BATCHIMPORT_API = "batchImportApi";
+var BATCHABORT_API = exports.BATCHABORT_API = "batchAbortApi";
+var BATCHPUBLISH_API = exports.BATCHPUBLISH_API = "batchPublishApi";
+var BATCHDELETE_API = exports.BATCHDELETE_API = "batchDeleteApi";

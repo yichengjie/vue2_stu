@@ -5,6 +5,10 @@ var SRC_PATH =  path.resolve(__dirname,'../src');
 var ASSETS_PATH = path.resolve(__dirname,'../src/assets');
 var LIB_PATH = path.resolve(__dirname,'../src/lib');
 var DIST_PATH = path.resolve(__dirname,'../dist') ;
+// var HappyPack = require('happypack');
+// var happyThreadPool = HappyPack.ThreadPool({
+//   size: 8
+// }); 
 
 module.exports = {
   entry: SRC_PATH+'/main.js',
@@ -15,8 +19,17 @@ module.exports = {
   },
   module: {
     loaders: [
-      {test: /\.vue$/,loader: 'vue'},
-      {test: /\.js$/,loader: 'babel',exclude: /node_modules|lib/},
+      {
+        test: /\.vue$/,
+        loader: 'vue'
+    },
+      {
+        test: /\.js$/,loader: 'babel',
+        exclude: /node_modules|lib/,
+        // happy: {
+        //   id: 'js'
+        // } 
+      },
       {test: /\.css$/, loader: ExtractTextPlugin.extract("style-loader", "css-loader") },
       {test: /\.(jpg|png|gif)$/, loader: "url?limit=8192&name=./images/[name].[hash:8].[ext]"},
       {test: /\.(eot|woff|ttf|svg)$/, loader: "file-loader?name=./file/[name].[hash:8].[ext]" }
@@ -44,6 +57,10 @@ module.exports = {
   },
   plugins: [
     new ExtractTextPlugin("[name].css"),
+    // new HappyPack({
+    //   id: 'js',
+    //   threadPool: happyThreadPool
+    // })
   ],
   vue: {
     loaders: {

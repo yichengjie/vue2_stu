@@ -1,0 +1,13 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+   value: true
+});
+
+var getters = {
+   records7List: function records7List(state) {
+      return state.records7List;
+   }
+};
+
+exports.default = getters;

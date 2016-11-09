@@ -1,0 +1,118 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _defineProperty2 = require('babel-runtime/helpers/defineProperty');
+
+var _defineProperty3 = _interopRequireDefault(_defineProperty2);
+
+var _promise = require('babel-runtime/core-js/promise');
+
+var _promise2 = _interopRequireDefault(_promise);
+
+var _api;
+
+var _index = require('../common/index.js');
+
+var _lodash_lib = require('lodash_lib');
+
+var _lodash_lib2 = _interopRequireDefault(_lodash_lib);
+
+var _apiName = require('./api-name.js');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var util = require('util_lib');
+var api = (_api = {}, (0, _defineProperty3.default)(_api, _apiName.QUERYDB_API, function (queryParam) {
+    util.showLoading();
+    var curPage = queryParam.curPage,
+        pageSize = queryParam.pageSize,
+        orderName = queryParam.orderName,
+        isAsc = queryParam.isAsc;
+
+    var records7List = [];
+
+    var r = (0, _index.random)(1, 9);
+    var min = curPage * 10;
+    var r2 = (0, _index.random)(min, min + pageSize);
+    var r3 = (0, _index.random)(1, 2);
+    var r4 = (0, _index.random)(1, 5);
+    var r5 = (0, _index.random)(100, 99999);
+
+    for (var i = 0; i < pageSize; i++) {
+        var xxStatus = r3() + "";
+        var xxStatusDes = r4() + "";
+        var xxSequenceNumber = r5() + "";
+
+        var id = _lodash_lib2.default.uniqueId("s7Id-");
+        var s5DescrbeInfo = "test tooltip [" + i + "]";
+        var obj = { "id": id, "subcode": "OB" + r(), "serviceType": "F" + r(), "sequenceNumber": xxSequenceNumber, "status": xxStatus, "statusDes": xxStatusDes, "saleStartDate": "2016/01/0" + r(),
+            "saleEndDate": "2016/12/2" + r(), "travelStartDate": "2016/01/0" + r(), "travelEndDate": "2016/12/2" + r(),
+            "loc1": "11" + r(), "loc2": "1234567" + r(), "flyerStatus": "" + r(), "money": "99" + r(), "moneyUnit": "CNY", "descr": "描述" + r(),
+            "lastUpdateUser": "yicj" + r(), "lastUpdateDate": "2016/01/01 14:0" + r(), "s5DescrbeInfo": s5DescrbeInfo
+        };
+        records7List.push(obj);
+    }
+
+    (0, _index.orderListData)(records7List, orderName, isAsc);
+    var pageBean = {
+        curPage: curPage,
+        pageSize: pageSize,
+        pageNumList: [1, 2, 3, 4, 5],
+        pageCount: 5,
+        recordList: records7List,
+        recordCount: 100
+    };
+
+    return new _promise2.default(function (resolve, reject) {
+        var waitTimeNum = 2000;
+        setTimeout(function () {
+            util.hideLoading();
+
+            resolve({ pageBean: pageBean, flag: true });
+        }, waitTimeNum);
+    });
+}), (0, _defineProperty3.default)(_api, _apiName.BATCHIMPORT_API, function () {
+    return new _promise2.default(function (resolve, reject) {
+        var waitTimeNum = 2000;
+        var retSuccessData = { flag: true, "msg": ["导入成功,1秒后将关闭窗口..."] };
+        var retErrorData = {
+            flag: false,
+            msg: ['错误提示信息 : ', '- 错误信息1', '- 错误信息2', '- 错误信息3', '- 错误信息4', '- 错误信息5', '- 错误信息6']
+        };
+        setTimeout(function () {
+            resolve(retSuccessData);
+        }, waitTimeNum);
+    });
+}), (0, _defineProperty3.default)(_api, _apiName.BATCHABORT_API, function () {
+    return new _promise2.default(function (resolve, reject) {
+        var waitTimeNum = 2000;
+        var retSuccessData = { flag: true, msg: ['导入成功1秒后关闭窗口!'] };
+        var retErrorData = { flag: false, msg: ['错误提示信息 :', "- 错误提示1", "- 错误提示2"] };
+        setTimeout(function () {
+            resolve(retErrorData);
+        }, waitTimeNum);
+    });
+}), (0, _defineProperty3.default)(_api, _apiName.BATCHPUBLISH_API, function () {
+    return new _promise2.default(function (resolve, reject) {
+        var waitTimeNum = 2000;
+        var retSuccessData = { flag: true };
+        var retErrorData = { flag: false };
+        setTimeout(function () {
+            resolve(retErrorData);
+        }, waitTimeNum);
+    });
+}), (0, _defineProperty3.default)(_api, _apiName.BATCHDELETE_API, function () {
+    return new _promise2.default(function (resolve, reject) {
+        var waitTimeNum = 2000;
+        var retSuccessData = { flag: true };
+        var retErrorData = { flag: false };
+        setTimeout(function () {
+            resolve(retErrorData);
+        }, waitTimeNum);
+    });
+}), _api);
+
+exports.default = api;
