@@ -1,7 +1,7 @@
 <template>
     <el-form :model="dynamicForm" :rules="dynamicRule" ref="dynamicForm" label-width="100px" class="demo-dynamic">
         <el-form-item prop="email" label="邮箱">
-            <el-input v-model="dynamicForm.email"></el-input>
+            <el-input v-model="dynamicForm.email" v-on:input="changeEmailValue"></el-input>
         </el-form-item>
         <el-form-item
             v-for="(domain, index) in dynamicForm.domains"
@@ -65,6 +65,10 @@
           key: this.dynamicForm.domains.length,
           value: ''
         });
+      },
+      changeEmailValue(value){
+        this.dynamicForm.email = value.toUpperCase()  ; 
+        //console.info('------' + this.dynamicForm.email) ;
       }
     }
   }
