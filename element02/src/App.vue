@@ -1,13 +1,14 @@
 <template>
     <div class="container">
-       <Form001/>
+       <Form002/>
     </div>
 </template>
 <script>
-    import Form001 from './components/Form001.vue' ;
+    //import Form001 from './components/Form001.vue' ;
+    import Form002 from './components/Form002.vue' ;
     export default {
         components:{
-            Form001
+            Form002
         }
     }
 </script>
