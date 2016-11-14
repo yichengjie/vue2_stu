@@ -1,8 +1,5 @@
 <template>
-  <form class="el-form" :class="[
-    labelPosition ? 'el-form--label-' + labelPosition : '',
-    { 'el-form--inline': inline }
-  ]">
+ <form class="form-horizontal" role="form">
     <slot></slot>
   </form>
 </template>
