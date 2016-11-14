@@ -7,15 +7,16 @@
     <label class="el-form-item__label" v-bind:style="labelStyle" v-if="label">
       {{label + form.labelSuffix}}
     </label>
+    
     <el-col :span="6">
       <div class="el-form-item__content2" v-bind:style="contentStyle">
         <slot></slot>
       </div>
     </el-col>
     <el-col :span="6">
-       <transition name="md-fade-bottom">
-          <div class="el-form-item__error2" v-if="error !== ''">{{error}}</div>
-       </transition>
+      <transition name="md-fade-bottom">
+        <div class="el-form-item__error2" v-if="error !== ''">{{error}}</div>
+      </transition>
     </el-col>
   </div>
 </template>
@@ -214,8 +215,7 @@
     display: inline-block ;
     line-height:36px;
     font-size:14px;
-    /*width:30%;*/
-    margin-left: 10px !important;
+    margin-left: 10px;
 }
 
 .el-form-item .el-form-item__error2{
@@ -224,6 +224,5 @@
     font-size:12px;
     line-height:1;
     padding-top:4px;
-    /*width:30%;*/
 }
 </style>

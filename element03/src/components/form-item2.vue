@@ -1,33 +1,31 @@
 <template>
   <div class="el-form-item" :class="{
-    'is-error': error !== '',
-    'is-validating': validating,
-    'is-required': isRequired || required
-  }">
+      'is-error': error !== '',
+      'is-validating': validating,
+      'is-required': isRequired || required
+    }">
     <label class="el-form-item__label" v-bind:style="labelStyle" v-if="label">
       {{label + form.labelSuffix}}
     </label>
-    <el-col :span="6">
-      <div class="el-form-item__content2" v-bind:style="contentStyle">
-        <slot></slot>
-      </div>
-    </el-col>
-    <el-col :span="6">
-       <transition name="md-fade-bottom">
-          <div class="el-form-item__error2" v-if="error !== ''">{{error}}</div>
-       </transition>
-    </el-col>
+    <div class="el-form-item__content2" v-bind:style="contentStyle">
+      <slot name="range1"></slot>
+    </div>
+    <div class="el-form-item__content2" v-bind:style="contentStyle">
+      <slot name="range2"></slot>
+    </div>
+    <transition name="md-fade-bottom">
+        <div class="el-form-item__error2" v-if="error !== ''">{{error}}</div>
+    </transition>
   </div>
 </template>
+
 <script>
   import AsyncValidator from 'async-validator';
   import emitter from './emitter.js';
 
   export default {
     name: 'ElFormItem',
-
     componentName: 'form-item',
-
     mixins: [emitter],
 
     props: {
@@ -188,7 +186,7 @@
   };
 </script>
 <style scoped>
-  .el-form-item.is-error .el-input__inner,
+   .el-form-item.is-error .el-input__inner,
 .el-form-item.is-error .el-textarea__inner{
     border-color:#ff4949
 }

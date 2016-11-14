@@ -1,14 +1,14 @@
 Arguments: 
-  E:\install\nodejs\node.exe C:\Users\yicj\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add webpack@2.1.0-beta.25
+  E:\install\nodejs\node.exe C:\Users\yicj\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js install
 
 PATH: 
-  E:\资料\zip\小工具\cmder\cmder_mini\bin;E:\资料\zip\小工具\cmder\cmder_mini\vendor\msysgit\bin;E:\资料\zip\小工具\cmder\cmder_mini\vendor\msysgit\mingw\bin;E:\资料\zip\小工具\cmder\cmder_mini\vendor\msysgit\cmd;E:\资料\zip\小工具\cmder\cmder_mini\vendor\msysgit\share\vim\vim74;E:\资料\zip\小工具\cmder\cmder_mini;E:\资料\zip\小工具\cmder\cmder_mini\vendor\conemu-maximus5\ConEmu;E:\资料\zip\小工具\cmder\cmder_mini\vendor\conemu-maximus5;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;D:\Program Files\TortoiseGit\bin;E:\install\Java\jdk1.7.0_79\bin;E:\install\Java\jdk1.7.0_79\jre\bin;E:\install\Python33;E:\install\apache-maven-3.3.9\bin;E:\install\MySQL\MySQL Server 5.1\bin;E:\install\MongoDB\Server\3.0\bin;E:\install\Git\cmd;E:\install\nvm;E:\install\nodejs;E:\install\nodejs\;E:\install\Ruby21\bin;C:\Users\yicj\AppData\Local\atom\bin;E:\install\Microsoft VS Code\bin;E:\install\nvm;E:\install\nodejs;C:\Users\yicj\AppData\Roaming\npm
+  E:\资料\zip\小工具\cmder\cmder_mini\bin;E:\资料\zip\小工具\cmder\cmder_mini\vendor\msysgit\bin;E:\资料\zip\小工具\cmder\cmder_mini\vendor\msysgit\mingw\bin;E:\资料\zip\小工具\cmder\cmder_mini\vendor\msysgit\cmd;E:\资料\zip\小工具\cmder\cmder_mini\vendor\msysgit\share\vim\vim74;E:\资料\zip\小工具\cmder\cmder_mini;E:\资料\zip\小工具\cmder\cmder_mini\vendor\conemu-maximus5\ConEmu;E:\资料\zip\小工具\cmder\cmder_mini\vendor\conemu-maximus5;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;D:\Program Files\TortoiseGit\bin;E:\install\Java\jdk1.7.0_79\bin;E:\install\Java\jdk1.7.0_79\jre\bin;E:\install\Python33;E:\install\apache-maven-3.3.9\bin;E:\install\MySQL\MySQL Server 5.1\bin;E:\install\MongoDB\Server\3.0\bin;E:\install\Git\cmd;%NVM_HOME%;%NVM_SYMLINK%;E:\install\nodejs\;E:\install\Ruby21\bin;C:\Users\yicj\AppData\Local\atom\bin;E:\install\Microsoft VS Code\bin;E:\install\nvm;E:\install\nodejs;C:\Users\yicj\AppData\Roaming\npm
 
 Yarn version: 
   0.16.1
 
 Node version: 
-  5.9.1
+  7.1.0
 
 Platform: 
   win32 x64
@@ -35,6 +35,7 @@ npm manifest:
     "dependencies": {
       "element-ui": "^1.0.0",
       "lodash": "^4.16.6",
+      "mockjs": "^1.0.1-beta3",
       "moment": "^2.15.2",
       "vue": "^2.0.1",
       "vuex": "^2.0.0"
@@ -95,7 +96,9 @@ npm manifest:
       "url-loader": "^0.5.7",
       "vue-loader": "^9.4.0",
       "vue-style-loader": "^1.0.0",
+      "webpack": "^1.13.3",
       "webpack-dev-middleware": "^1.8.3",
+      "webpack-dev-server": "^1.16.2",
       "webpack-hot-middleware": "^2.12.2",
       "webpack-merge": "^0.14.1"
     }
@@ -125,7 +128,8 @@ bower manifest:
       "bootstrap": "^3.3.7",
       "moment": "^2.15.2",
       "vue": "^2.0.5",
-      "vuex": "^2.0.0"
+      "vuex": "^2.0.0",
+      "mockjs": "^1.0.0"
     }
   }
 
@@ -133,7 +137,7 @@ Lockfile:
   No lockfile
 
 Trace: 
-  Error: connect ETIMEDOUT 104.16.62.173:443
-      at Object.exports._errnoException (util.js:890:11)
-      at exports._exceptionWithHostPort (util.js:913:20)
-      at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1061:14)
+  Error: connect ETIMEDOUT 104.16.63.173:443
+      at Object.exports._errnoException (util.js:1022:11)
+      at exports._exceptionWithHostPort (util.js:1045:20)
+      at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)

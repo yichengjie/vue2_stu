@@ -9,10 +9,14 @@
             <el-option label="区域二" value="beijing"></el-option>
             </el-select>
         </ELFormItem>
-        <ELFormItem2 label="活动时间" prop="date2">
-            <el-date-picker slot="range1" type="date" placeholder="选择日期" v-model="ruleForm.date1" style="width: 100%;"></el-date-picker>
-            <el-time-picker slot="range2" type="fixed-time" placeholder="选择时间" v-model="ruleForm.date2" style="width: 100%;"></el-time-picker>
-        </ELFormItem2>
+        <!--<ELFormItem label="活动时间" prop="date2">
+            <el-col :span="6">
+              <el-date-picker slot="range1" type="date" placeholder="选择日期" v-model="ruleForm.date1" style="width: 100%;"></el-date-picker>
+            </el-col>
+            <el-col :span="6">
+              <el-time-picker slot="range2" type="fixed-time" placeholder="选择时间" v-model="ruleForm.date2" style="width: 100%;"></el-time-picker>
+            </el-col>
+        </ELFormItem>-->
         <ELFormItem label="即时配送">
             <el-switch on-text="" off-text="" v-model="ruleForm.delivery"></el-switch>
         </ELFormItem>
@@ -40,8 +44,7 @@
     </el-form>
 </template>
 <script>
-  import ELFormItem from './form-item.vue' ;
-  import ELFormItem2 from './form-item2.vue' ;
+  import ELFormItem from './form-item3.vue' ;
   export default {
     data() {
       return {
@@ -98,7 +101,6 @@
     },
     components:{
        ELFormItem,
-       ELFormItem2
     }
   }
 </script>
