@@ -6,9 +6,15 @@
         <el-form-item label="确认密码" prop="checkPass">
             <el-input type="text" v-model="ruleForm2.checkPass" auto-complete="off"></el-input>
         </el-form-item>
-        <el-form-item label="年龄" prop="age">
-            <el-input v-model="ruleForm2.age"></el-input>
+
+        <el-form-item label="年龄1" prop="age1">
+            <el-input v-model="ruleForm2.age1"></el-input>
         </el-form-item>
+
+        <el-form-item label="年龄" prop="age2">
+             <el-input v-model="ruleForm2.age2"></el-input>
+        </el-form-item>
+
         <el-form-item>
             <el-button type="primary" @click="handleSubmit2">提交</el-button>
             <el-button @click="handleReset2">重置</el-button>
@@ -31,7 +37,7 @@
                     callback();
                     }
                 }
-                }, 1000);
+                }, 1);
             };
             var validatePass = (rule, value, callback) => {
                 if (value === '') {
@@ -56,7 +62,8 @@
             ruleForm2: {
                 pass: '',
                 checkPass: '',
-                age: ''
+                age1: '1',
+                age2: '2'
             },
             rules2: {
                 pass: [
@@ -67,9 +74,13 @@
                     { required: true, message: '请再次输入密码', trigger: 'blur' },
                     { validator: validatePass2 }
                 ],
-                age: [
+                age1: [
                     { required: true, message: '请填写年龄', trigger: 'blur' },
-                    { validator: checkAge, trigger: 'change' }
+                    { validator: checkAge, trigger: 'blur' }
+                ],
+                age2: [
+                    { required: true, message: '请填写年龄', trigger: 'blur' },
+                    { validator: checkAge, trigger: 'blur' }
                 ]
             }
         };
@@ -97,3 +108,8 @@
     }
   }
 </script>
+<style>
+    /*.el-form-item__error{
+        float: left;
+    }*/
+</style>
