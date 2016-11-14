@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-       <Dialog002/>
+       <MessageBox002/>
     </div>
 </template>
 <script>
@@ -24,10 +24,19 @@
     //import Input003 from './components/Input003.vue' ;
     //import Input004 from './components/Input004.vue' ;
     //import Dialog001 from './components/Dialog001.vue' ;
-    import Dialog002 from './components/Dialog002.vue' ;
+    //import Dialog002 from './components/Dialog002.vue' ;
+    //import Timepicker001 from './components/Timepicker001.vue' ;
+    //import Timepicker002 from './components/Timepicker002.vue' ;
+    //import Timepicker003 from './components/Timepicker003.vue' ;
+    //import Timepicker004 from './components/Timepicker004.vue' ;
+    //import Datepicker001 from './components/Datepicker001.vue' ;
+    //import Datepicker002 from './components/Datepicker002.vue' ;
+    //import DateTimepicker001 from './components/DateTimepicker001.vue' ;
+    //import MessageBox001 from './components/MessageBox001.vue' ;
+    import MessageBox002 from './components/MessageBox002.vue' ;
     export default {
         components:{
-            Dialog002
+            MessageBox002
         }
     }
 </script>
