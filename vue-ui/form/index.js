@@ -1,8 +1,10 @@
+import ElFormItem from './src/form-item';
 import ElForm from './src/form';
 
 /* istanbul ignore next */
-ElForm.install = function(Vue) {
+export default function(Vue) {
   Vue.component(ElForm.name, ElForm);
+  Vue.component(ElFormItem.name, ElFormItem);
 };
 
-export default ElForm;
+export { ElForm, ElFormItem };

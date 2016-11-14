@@ -7,7 +7,7 @@
     "vue",
     "component"
   ],
-  "main": "./lib/index.js",
+  "main": "./index.js",
   "repository": "https://github.com/ElemeFE/element/tree/master/packages/form",
   "author": "haiping.zeng<haiping.zeng@ele.me>",
   "license": "MIT",
