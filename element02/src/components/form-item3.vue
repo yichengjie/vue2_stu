@@ -4,8 +4,11 @@
       'is-required': isRequired || required
     }">
     <label class="col-sm-2 control-label"> <span v-if ="label">{{label + form.labelSuffix}}</span></label>
-    <div class="col-sm-6">
-      <slot></slot>
+    <div class="col-sm-3">
+      <slot name="range1"></slot>
+    </div>
+    <div class="col-sm-3">
+      <slot name="range2"></slot>
     </div>
     <div class="col-sm-3">
        <transition name="md-fade-bottom">
@@ -23,7 +26,6 @@
     name: 'ElFormItem',
     componentName: 'form-item',
     mixins: [emitter],
-
     props: {
       label: String,
       labelWidth: String,
@@ -60,12 +62,15 @@
         get() {
           var model = this.form.model;
           if (!model || !this.prop) { return; }
-
-          var temp = this.prop.split(':');
-
-          return temp.length > 1
-            ? model[temp[0]][temp[1]]
-            : model[this.prop];
+          var temp = this.prop.split('_');
+          
+          if(temp.length > 1){
+            var name1 = temp[0] ;
+            var name2 = temp[1] ;
+            return {[name1]:model[temp[0]],[name2]:model[temp[1]]} ;
+          }else{
+            return {[temp[0]]:model[temp[0]]} ;
+          }
         }
       }
     },
@@ -88,15 +93,18 @@
           return true;
         }
         this.validating = true;
-        var descriptor = {};
-        descriptor[this.prop] = rules;
+        var descriptor = {[this.prop]:rules};
+        //descriptor[this.prop] = rules;
+        //console.info('rules -----------> : ' ,rules) ;
         var validator = new AsyncValidator(descriptor);
-        var model = {};
-        model[this.prop] = this.fieldValue;
-        //console.info('model : ' ,model) ;
+        var model = {[this.prop]:this.fieldValue};
+        //model[this.prop] = this.fieldValue;
+        //console.info('fieldValue :' +this.fieldValue) ;
         validator.validate(model, { firstFields: true }, (errors, fields) => {
+          //console.info('errors : ' ,errors) ;
           this.valid = !errors;
           this.error = errors ? errors[0].message : '';
+
           cb && cb(errors);
           this.validating = false;
         });
@@ -104,35 +112,41 @@
       resetField() {
         this.valid = true;
         this.error = '';
+        var temp = this.prop.split('_');
 
         let model = this.form.model;
-        let value = this.fieldValue;
 
-        if (Array.isArray(value) && value.length > 0) {
-          this.validateDisabled = true;
-          model[this.prop] = [];
-        } else if (value) {
-          this.validateDisabled = true;
-          model[this.prop] = this.initialValue;
-        }
+        let name1 = temp[0] ;
+        let name2 = temp[1] ;
+        let value1 = this.initialValue[name1];
+        let value2 = this.initialValue[name2];
+        
+        this.validateDisabled = true;
+        model[name1] = value1 ;
+        model[name2] = value2 ;
+       // model
+        // if (Array.isArray(value) && value.length > 0) {
+        //   this.validateDisabled = true;
+        //   model[this.prop] = [];
+        // } else if (value) {
+        //   this.validateDisabled = true;
+        //   model[this.prop] = this.initialValue;
+        // }
       },
       getRules() {
         var formRules = this.form.rules;
         var selfRuels = this.rules;
-
         formRules = formRules ? formRules[this.prop] : [];
         //console.info('formRules ---- : ' ,formRules) ;
         //console.info('selfRuels ---- : ' ,selfRuels) ;
-
-
         return [].concat(selfRuels || formRules || []);
       },
       getFilteredRule(trigger) {
         var rules = this.getRules();
-
-        return rules.filter(rule => {
+        var tmp = rules.filter(rule => {
           return !rule.trigger || rule.trigger.indexOf(trigger) !== -1;
         });
+        return tmp ;
       },
       onFieldBlur() {
         this.validate('blur');
@@ -142,16 +156,25 @@
           this.validateDisabled = false;
           return;
         }
-
         this.validate('change');
       },
       getInitialValue() {
-        var value = this.form.model[this.prop];
-        if (value === undefined) {
-          return value;
-        } else {
-          return JSON.parse(JSON.stringify(value));
-        }
+
+        var temp = this.prop.split('_');
+        var value1 = this.form.model[temp[0]] ;
+        var value2 = this.form.model[temp[1]] ;
+        
+
+        //var name1 = temp[0] ;
+        //var name2 = 
+
+        return {[temp[0]]:value1,[temp[1]]:value2} ;
+       // var value = this.form.model[this.prop];
+        // if (value === undefined) {
+        //   return value;
+        // } else {
+        //   return JSON.parse(JSON.stringify(value));
+        // }
       }
     },
     mounted() {

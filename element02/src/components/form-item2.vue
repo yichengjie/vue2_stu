@@ -26,7 +26,6 @@
     name: 'ElFormItem',
     componentName: 'form-item',
     mixins: [emitter],
-
     props: {
       label: String,
       labelWidth: String,
@@ -90,17 +89,14 @@
           cb && cb();
           return true;
         }
-
         this.validating = true;
-
         var descriptor = {};
         descriptor[this.prop] = rules;
-
+        //console.info('rules -----------> : ' ,rules) ;
         var validator = new AsyncValidator(descriptor);
         var model = {};
-
         model[this.prop] = this.fieldValue;
-
+        //console.info('fieldValue :' +this.fieldValue) ;
         validator.validate(model, { firstFields: true }, (errors, fields) => {
           this.valid = !errors;
           this.error = errors ? errors[0].message : '';
@@ -127,17 +123,17 @@
       getRules() {
         var formRules = this.form.rules;
         var selfRuels = this.rules;
-
         formRules = formRules ? formRules[this.prop] : [];
-
+        //console.info('formRules ---- : ' ,formRules) ;
+        //console.info('selfRuels ---- : ' ,selfRuels) ;
         return [].concat(selfRuels || formRules || []);
       },
       getFilteredRule(trigger) {
         var rules = this.getRules();
-
-        return rules.filter(rule => {
+        var tmp = rules.filter(rule => {
           return !rule.trigger || rule.trigger.indexOf(trigger) !== -1;
         });
+        return tmp ;
       },
       onFieldBlur() {
         this.validate('blur');
