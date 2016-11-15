@@ -13,6 +13,8 @@
             <button class="btn btn-default" type="button" @click="handleSubmit">立即创建</button>
             <button class="btn btn-primary" type="button" @click="handleReset">重置</button>
         </ELFormItem>
+
+        <h1>{{ruleForm.name}}</h1>
     </ElForm>
 </template>
 <script>
@@ -92,3 +94,8 @@
     }
   }
 </script>
+<style>
+  body{
+    margin: 50px;
+  }
+</style>
