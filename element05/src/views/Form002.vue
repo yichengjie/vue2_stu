@@ -140,6 +140,7 @@
         this.$refs.ruleForm.resetFields();
       },
       handleSubmit(ev) {
+        console.info('formData : ' + JSON.stringify(this.ruleForm)) ;
         this.$refs.ruleForm.validate((valid) => {
           if (valid) {
             alert('submit!');

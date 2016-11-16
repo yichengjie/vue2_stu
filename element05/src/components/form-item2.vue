@@ -82,7 +82,7 @@
         validating: false,
         validator: {},
         isRequired: false,
-        initialValue: null
+        initialValueArr: null
       };
     },
     methods: {
@@ -176,7 +176,7 @@
         var names = this.fieldNameArr ;
          var values = [] ;
         for(let name of names){
-           var value = this.form.model[names] || '';
+           var value = this.form.model[name] || '';
            values.push(value) ;
         }
         return values ;
@@ -186,6 +186,7 @@
       if (this.prop) {
         this.dispatch('form', 'el.form.addField', [this]);
         this.initialValueArr = this.getInitialValueArr();
+        //console.info(' this.initialValueArr : ' ,this.initialValueArr) ;
         //----------------------------
         if(this.getRuleObj()){
             var validator = this.getRuleObj().validator;
