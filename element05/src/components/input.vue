@@ -6,9 +6,7 @@
         :disabled="readonly"
         :placeholder="placeholder"
         :maxlength="maxlength"
-        :minlength="minlength"
         :value="value"
-        ref="input"
         @input="handleInput"
         @focus="handleFocus"
         @blur="handleBlur"
@@ -26,7 +24,6 @@
       autofocus: Boolean,
       name: String,
       maxlength: Number,
-      minlength: Number,
       readonly:Boolean
     },
     methods: {
