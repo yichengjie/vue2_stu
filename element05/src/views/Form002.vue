@@ -1,18 +1,18 @@
 <template>
     <ElForm :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
         <ELFormItem label="活动名称" prop="name">
-            <ElInput type="text" v-model="ruleForm.name"/>
+            <ElInput type="text" v-model="ruleForm.name" :readonly="readonly"/>
         </ELFormItem>
 
         <ELFormItem2 label="年龄" prop="age">
-             <ElInput type="text" slot="range1" v-model="ruleForm.age1" />
-             <ElInput type="text" slot="range2" v-model="ruleForm.age2" />
+             <ElInput type="text" slot="range1" v-model="ruleForm.age1"  :readonly="readonly"/>
+             <ElInput type="text" slot="range2" v-model="ruleForm.age2"  :readonly="readonly"/>
         </ELFormItem2>
         <ELFormItem2 label="发布对象" prop ="pub" >
             <ELSelect  slot="range1"  :readonly="readonly"
                 :options = "selectOption.pubOptions" 
                 v-model="ruleForm.pubType" />
-            <ElInput type="text" slot="range2" v-model="ruleForm.pubValue" />
+            <ElInput type="text" slot="range2" v-model="ruleForm.pubValue" :readonly="readonly" />
         </ELFormItem2>
 
         <ELFormItem label =" ">
@@ -56,8 +56,7 @@
       };
 
       var pub = (rule, value, callback) =>{
-
-         console.info('pub **************') ;
+         //console.info('pub **************') ;
          var pubType = this.ruleForm.pubType ;
          var pubValue = this.ruleForm.pubValue ;
 

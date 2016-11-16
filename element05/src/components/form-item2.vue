@@ -87,6 +87,7 @@
     },
     methods: {
       validate(trigger, cb) {
+        //console.info('validate .......') ;
         var rules = this.getFilteredRule(trigger);
         if (!rules || rules.length === 0) {
           cb && cb();
@@ -95,13 +96,13 @@
         this.validating = true;
         var descriptor = {};
         descriptor[this.prop] = rules;
-        console.info('descriptor , ' , JSON.stringify(descriptor) ) ;
+        //console.info('descriptor , ' , JSON.stringify(descriptor) ) ;
         var validator = new AsyncValidator(descriptor);
         var names = this.fieldNameArr ;
         var values = this.fieldValueArr ;
         var model = {};
         model[this.prop] = {[names[0]]:values[0],[names[1]]:values[1]};
-        console.info('model : ' ,JSON.stringify(model)) ;
+        //console.info('model : ' ,JSON.stringify(model)) ;
         validator.validate(model, { firstFields: true }, (errors, fields) => {
           this.valid = !errors;
           this.error = errors ? errors[0].message : '';
@@ -138,7 +139,10 @@
                  let field = fields[i] ;
                  let name = names[i] ;
                  var fieldTrigger = field['trigger'] || '' ;
-                 if(fieldTrigger === trigger){
+                 //!rule.trigger || rule.trigger.indexOf(trigger) !== -1
+                 console.info('fieldTrigger ['+fieldTrigger+']') ;
+                 console.info('trigger ['+trigger+']') ;
+                 if(!fieldTrigger|| fieldTrigger.indexOf(trigger)!==-1 ){
                     tmp['fields'][name] = field ;
                     emptyFlag = false ;
                  }
@@ -148,8 +152,11 @@
               }
            }
            var validator = ruleObj['validator'] ;
-           if(validator&&validator['trigger']===trigger){
-              retRules.push(ruleObj['validator']) ;
+           if(validator){
+               var validatorTrigger = validator.trigger ;
+               if(!validatorTrigger|| validatorTrigger.indexOf(trigger)!==-1 ){
+                  retRules.push(ruleObj['validator']) ;
+               }
            }
         }
         return retRules ;
