@@ -15,6 +15,12 @@
             <ElInput type="text" slot="range2" v-model="ruleForm.pubValue" :readonly="readonly" />
         </ELFormItem2>
 
+        <ELFormItem label="星期" prop="dayOfWeak">
+           <ELCheckbox name ="dayOfWeak" 
+              :options="selectOption.dayOfWeakOption" 
+              v-model ="ruleForm.dayOfWeak" />
+        </ELFormItem>
+
         <ELFormItem label =" ">
             <button class="btn btn-default" type="button" @click="handleSubmit">立即创建</button>
             <button class="btn btn-primary" type="button" @click="handleReset">重置</button>
@@ -27,6 +33,7 @@
   import ELFormItem2 from '../components/form-item2.vue' ;
   import ElInput from '../components/input.vue' ;
   import ELSelect from '../components/select.vue' ;
+  import ELCheckbox from '../components/checkbox.vue' ;
 
   //基本表单验证
   export default {
@@ -35,7 +42,7 @@
          var age1 = this.ruleForm.age1 ;
          var age2 = this.ruleForm.age2 ;
          if (age1 === '' && age2==='') {
-            callback(new Error('必填'));
+            callback(new Error('age1与age2至少填写一个!'));
             return ;
          }
          if(isNaN(age1)){
@@ -105,6 +112,12 @@
             {name:"类型1",value:"1"},
             {name:"类型2",value:"2"},
             {name:"类型3",value:"3"}
+          ],
+          dayOfWeakOption:[
+            {name:"星期1",value:'1'},
+            {name:"星期2",value:"2"},
+            {name:"星期3",value:"3"},
+            {name:"星期4",value:"4"}
           ]
         },
         ruleForm: {
@@ -112,7 +125,8 @@
           age1:'',
           age2:'',
           pubType:'2',
-          pubValue:''
+          pubValue:'',
+          dayOfWeak:['1','3']
         },
         rules: {
           name: [
@@ -157,7 +171,8 @@
        ELFormItem,
        ELFormItem2,
        ElInput,
-       ELSelect
+       ELSelect,
+       ELCheckbox
     }
   }
 </script>
