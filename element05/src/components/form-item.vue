@@ -124,8 +124,9 @@
       onFieldBlur() {
         this.validate('blur');
       },
-      onFieldChange() {
-        if (this.validateDisabled) {
+      onFieldChange() {//当字段变化的时候，如果需要校验，则进行校验，否则不校验
+        //主要原因在于，点击‘重置按钮’的时，表单数据的change事件不能进行校验，否则又将显示出校验错误信息
+        if (this.validateDisabled) {//如果之前不能校验，则直接返回，并将状态改为能校验
           this.validateDisabled = false;
           return;
         }
