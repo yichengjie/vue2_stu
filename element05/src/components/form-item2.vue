@@ -152,9 +152,6 @@
               retRules.push(ruleObj['validator']) ;
            }
         }
-
-      
-
         return retRules ;
       },
       onFieldBlur() {
@@ -183,11 +180,13 @@
         this.dispatch('form', 'el.form.addField', [this]);
         this.initialValueArr = this.getInitialValueArr();
         //----------------------------
-        var validator = this.getRuleObj().validator || '';
-        var names = this.fieldNameArr ;
-        if (names.length>0 || validator) {
-          this.$on('el.form.blur', this.onFieldBlur);
-          this.$on('el.form.change', this.onFieldChange);
+        if(this.getRuleObj()){
+            var validator = this.getRuleObj().validator;
+            var names = this.fieldNameArr ;
+            if (names.length>0 || validator) {
+              this.$on('el.form.blur', this.onFieldBlur);
+              this.$on('el.form.change', this.onFieldChange);
+            }
         }
       }
     },

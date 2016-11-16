@@ -8,6 +8,12 @@
              <ElInput type="text" slot="range1" v-model="ruleForm.age1" />
              <ElInput type="text" slot="range2" v-model="ruleForm.age2" />
         </ELFormItem2>
+        <ELFormItem2 label="发布对象" prop ="pub" >
+            <ELSelect  slot="range1"  :readonly="readonly"
+                :options = "selectOption.pubOptions" 
+                v-model="ruleForm.pubType" />
+            <ElInput type="text" slot="range2" v-model="ruleForm.pubValue" />
+        </ELFormItem2>
 
         <ELFormItem label =" ">
             <button class="btn btn-default" type="button" @click="handleSubmit">立即创建</button>
@@ -20,6 +26,7 @@
   import ELFormItem from '../components/form-item.vue' ;
   import ELFormItem2 from '../components/form-item2.vue' ;
   import ElInput from '../components/input.vue' ;
+  import ELSelect from '../components/select.vue' ;
 
   //基本表单验证
   export default {
@@ -48,11 +55,65 @@
          }
       };
 
+      var pub = (rule, value, callback) =>{
+
+         console.info('pub **************') ;
+         var pubType = this.ruleForm.pubType ;
+         var pubValue = this.ruleForm.pubValue ;
+
+         if(pubType==='' && pubValue === ''){
+             callback();
+             return ;
+         }
+         if (pubType !== '' && pubValue==='') {
+            callback(new Error('发布对象代码必填'));
+            return ;
+         }
+         if (pubValue !== '' && pubType==='') {
+            callback(new Error('发布对象类型必填'));
+            return ;
+         }
+
+         if(pubType==='1'){
+            if(pubValue!=='1'){
+               callback(new Error('类型1时value必须为1'));
+               return ;
+            }
+         }
+
+         if(pubType==='2'){
+            if(pubValue!=='2'){
+               callback(new Error('类型2时value必须为2'));
+               return ;
+            }
+         }
+
+         if(pubType==='3'){
+            if(pubValue!=='3'){
+               callback(new Error('类型2时value必须为3'));
+               return ;
+            }
+         }
+         callback();
+         return ;
+      }
+
       return {
+        readonly:true,
+        selectOption:{
+          pubOptions:[
+            {name:"选择",value:''},
+            {name:"类型1",value:"1"},
+            {name:"类型2",value:"2"},
+            {name:"类型3",value:"3"}
+          ]
+        },
         ruleForm: {
           name: '',
           age1:'',
-          age2:''
+          age2:'',
+          pubType:'2',
+          pubValue:''
         },
         rules: {
           name: [
@@ -67,7 +128,11 @@
             // ],
             validator:{ validator: age ,trigger: 'blur' },
             required:true
-          } 
+          },
+          pub:{
+            names:['pubType','pubValue'],
+            validator:{ validator: pub ,trigger: 'change'},
+          }
         }
       };
     },
@@ -91,7 +156,8 @@
        ElForm,
        ELFormItem,
        ELFormItem2,
-       ElInput
+       ElInput,
+       ELSelect
     }
   }
 </script>
