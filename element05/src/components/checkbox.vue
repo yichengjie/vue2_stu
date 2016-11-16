@@ -13,19 +13,22 @@
 </template>
 <script>
     import emitter from './emitter';
-    import _ from 'lodash' ;
     export default {
         name: 'ElCheckbox',
         mixins: [emitter],
-        props:['value','options','name'],
+        // props:['value','options','name'],
+        props:{
+            value:Array,
+            name:String,
+            options:Array,
+            readonly:Boolean
+        },
         data(){
             return {} ;
         },
         methods:{
             isChecked(val){
-                //item.value in value
-               var index =  _.indexOf(this.value,val );
-               return index != -1 ;
+               return this.value.includes(val) ;
             },
             onChange(event){
                 var flag = event.target.checked ;
@@ -34,13 +37,13 @@
                 if(flag){
                     newArr = [...this.value,tmp] ;
                 }else{
-                   newArr = _.filter(this.value,function(item){
-                        return item != tmp ;
-                    }) ;
+                   newArr = this.value.filter(function(item){
+                      return item != tmp ;
+                   }) ;
                 }
                 this.$emit('input', newArr);
                 this.$emit('change', newArr);
-                this.dispatch('form-item', 'el.form.change', [...newArr]);
+                this.dispatch('form-item', 'el.form.change', newArr);
             }
         }
     } ;

@@ -85,6 +85,7 @@
       },
       handleSubmit(ev) {
         console.info('formData : ' + JSON.stringify(this.ruleForm)) ;
+        //校验整个表单
         this.$refs.ruleForm.validate((valid) => {
           if (valid) {
             alert('submit!');
@@ -93,6 +94,16 @@
             return false;
           }
         });
+        //检验部分字段
+        // this.$refs.ruleForm.validateField('name',(errors)=>{
+        //     console.info('valid ' ,errors) ;
+        //     if (errors.length==0) {
+        //       alert('submit!');
+        //     } else {
+        //       console.log('error submit!!');
+        //       return false;
+        //     }
+        // }) ;
       }
       
     },

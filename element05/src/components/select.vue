@@ -1,20 +1,16 @@
 <template>
-    <span>
-        <select  
-            v-if ="readonly"
-            :value="value" 
-            class="form-control input-sm"  
-            @change="onChange">
-            <option 
-                v-for="item in options" 
-                :value="item.value"
-                >
-                {{item.name}}
-            </option>
-        </select>
-        <span class="readonly-input" v-else>{{showTextInfo}}</span>
-    </span>
-    
+    <select  
+        :value="value" 
+        class="form-control input-sm"  
+        @change="onChange"
+        :disabled="readonly">
+        <option 
+            v-for="item in options" 
+            :value="item.value"
+            >
+            {{item.name}}
+        </option>
+    </select>
 </template>
 <script>
     import emitter from './emitter';

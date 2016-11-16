@@ -1,10 +1,9 @@
 <template>
-   <span>
       <input
-        v-if ="readonly"
         class="form-control input-sm"
         type="text"
         :name="name"
+        :disabled="readonly"
         :placeholder="placeholder"
         :maxlength="maxlength"
         :minlength="minlength"
@@ -13,9 +12,7 @@
         @input="handleInput"
         @focus="handleFocus"
         @blur="handleBlur"
-      >
-      <span class="readonly-input" v-else>{{value || '空'}}</span>
-    </span>
+      />
 </template>
 <script>
   import emitter from './emitter';
@@ -32,7 +29,6 @@
       minlength: Number,
       readonly:Boolean
     },
-
     methods: {
       handleBlur(event) {
         this.$emit('blur', event);
