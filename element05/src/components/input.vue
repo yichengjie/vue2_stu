@@ -1,5 +1,5 @@
 <template>
-   <div class="col-sm-6">
+   <span>
       <input
         v-if="type !== 'textarea'"
         class="form-control input-sm"
@@ -39,7 +39,7 @@
         @focus="handleFocus"
         @blur="handleBlur">
       </textarea>
-    </div>
+    </span>
 </template>
 <script>
   import emitter from './emitter';

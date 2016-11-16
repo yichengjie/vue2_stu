@@ -3,8 +3,11 @@
     <label class="control-label" v-bind:style="labelStyle" v-if ="label"> 
       <span>{{label}}</span>
     </label>
-    <div class="col-sm-6">
-      <slot></slot>
+    <div class="col-sm-3">
+      <slot name ="range1"></slot>
+    </div>
+    <div class="col-sm-3">
+      <slot name ="range2"></slot>
     </div>
     <div class="error-tip" v-show="error !== ''">
        {{error}}
@@ -52,15 +55,22 @@
         }
         return parent;
       },
-      fieldValue: {
+      fieldNameArr(){//获取字段名称数组
+          var formRules = this.form.rules;//[this.prop]
+          var fieldRules = formRules ? formRules[this.prop] : undefined ;
+          if(fieldRules && fieldRules['names']){
+            return fieldRules['names'] ;
+          }else{
+            return [] ;
+          }
+      },
+      fieldValueArr: {
         cache: false,
         get() {
           var model = this.form.model;
           if (!model || !this.prop) { return; }
-          var temp = this.prop.split(':');
-          return temp.length > 1
-            ? model[temp[0]][temp[1]]
-            : model[this.prop];
+          var names = this.fieldNameArr ;
+          return [model[names[0]],model[names[1]]] 
         }
       }
     },
@@ -85,10 +95,13 @@
         this.validating = true;
         var descriptor = {};
         descriptor[this.prop] = rules;
+        console.info('descriptor , ' , JSON.stringify(descriptor) ) ;
         var validator = new AsyncValidator(descriptor);
+        var names = this.fieldNameArr ;
+        var values = this.fieldValueArr ;
         var model = {};
-        model[this.prop] = this.fieldValue;
-        //console.info('model : ' ,model) ;
+        model[this.prop] = {[names[0]]:values[0],[names[1]]:values[1]};
+        console.info('model : ' ,JSON.stringify(model)) ;
         validator.validate(model, { firstFields: true }, (errors, fields) => {
           this.valid = !errors;
           this.error = errors ? errors[0].message : '';
@@ -99,29 +112,50 @@
       resetField() {
         this.valid = true;
         this.error = '';
-
         let model = this.form.model;
-        let value = this.fieldValue;
-
-        if (Array.isArray(value) && value.length > 0) {
-          this.validateDisabled = true;
-          model[this.prop] = [];
-        } else if (value) {
-          this.validateDisabled = true;
-          model[this.prop] = this.initialValue;
+        var names = this.fieldNameArr ;
+        var initialValues = this.initialValueArr ;
+        this.validateDisabled = true;
+        for(let i = 0 ; i < names.length; i++){
+           model[names[i]] = initialValues[i];
         }
       },
-      getRules() {
+      getRuleObj() {
         var formRules = this.form.rules;
-        var selfRuels = this.rules;
-        formRules = formRules ? formRules[this.prop] : [];
-        return [].concat(selfRuels || formRules || []);
+        var ruleObj = formRules ? formRules[this.prop] : undefined;
+        return ruleObj;
       },
       getFilteredRule(trigger) {
-        var rules = this.getRules();
-        return rules.filter(rule => {
-          return !rule.trigger || rule.trigger.indexOf(trigger) !== -1;
-        });
+        var ruleObj = this.getRuleObj();
+        var names = this.fieldNameArr ;
+        var retRules = [] ;
+        if(ruleObj){
+           let fields = ruleObj['fields'] ;
+           if(fields&&fields.length>0){
+              var emptyFlag = true ;
+              var tmp = {type: 'object', fields: {}}  ;
+              for(let i = 0 ; i < fields.length; i ++ ){
+                 let field = fields[i] ;
+                 let name = names[i] ;
+                 var fieldTrigger = field['trigger'] || '' ;
+                 if(fieldTrigger === trigger){
+                    tmp['fields'][name] = field ;
+                    emptyFlag = false ;
+                 }
+              }
+              if(!emptyFlag){
+                retRules.push(tmp) ;
+              }
+           }
+           var validator = ruleObj['validator'] ;
+           if(validator&&validator['trigger']===trigger){
+              retRules.push(ruleObj['validator']) ;
+           }
+        }
+
+      
+
+        return retRules ;
       },
       onFieldBlur() {
         this.validate('blur');
@@ -134,27 +168,24 @@
         }
         this.validate('change');
       },
-      getInitialValue() {
-        var value = this.form.model[this.prop];
-        if (value === undefined) {
-          return value;
-        } else {
-          return JSON.parse(JSON.stringify(value));
+      getInitialValueArr() {
+        var names = this.fieldNameArr ;
+         var values = [] ;
+        for(let name of names){
+           var value = this.form.model[names] || '';
+           values.push(value) ;
         }
+        return values ;
       }
     },
     mounted() {
       if (this.prop) {
         this.dispatch('form', 'el.form.addField', [this]);
-        this.initialValue = this.getInitialValue();
-        let rules = this.getRules();
-        if (rules.length) {
-          rules.every(rule => {
-            if (rule.required) {
-              this.isRequired = true;
-              return false;
-            }
-          });
+        this.initialValueArr = this.getInitialValueArr();
+        //----------------------------
+        var validator = this.getRuleObj().validator || '';
+        var names = this.fieldNameArr ;
+        if (names.length>0 || validator) {
           this.$on('el.form.blur', this.onFieldBlur);
           this.$on('el.form.change', this.onFieldChange);
         }

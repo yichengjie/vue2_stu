@@ -9,10 +9,10 @@ function handleErrors(errors, fields){
 
 function demo001(){
     var descriptor = {
-        name: {type: "string", required: true}
+        name: {type: "string", required: true,blur:true}
     }
     var validator = new AsyncValidator(descriptor);
-    validator.validate({name: ""}, (errors, fields) => {
+    validator.validate({name: "ste"}, (errors, fields) => {
         if(errors) {
             // validation failed, errors is an array of all errors
             // fields is an object keyed by field name with an array of
