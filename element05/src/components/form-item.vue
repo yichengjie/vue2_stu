@@ -165,6 +165,3 @@
     }
   };
 </script>
-<style scoped>
-
-</style>

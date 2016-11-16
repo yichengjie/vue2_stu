@@ -1,6 +1,10 @@
 <template>
-    <input v-bind:id ="randomId" v-bind:value="value" v-on:input ="onInput"  
-        type ="text" class ="common_input datepicker" style="width: 110px"/>
+    <input v-bind:id ="randomId" 
+        v-bind:value="value" 
+        v-on:input ="onInput"  
+        type ="text" 
+        class ="common_input datepicker" 
+        style="width: 110px"/>
 </template>
 <script>
     import moment from 'moment' ;

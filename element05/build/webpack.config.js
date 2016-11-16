@@ -4,7 +4,8 @@ var path = require('path') ;
 var projectRoot = path.resolve(__dirname, '../') ;
 var distPath = projectRoot + "/dist" ;
 var srcPath = projectRoot +"/src" ;
-var libPath = projectRoot +"/src/lib"
+var libPath = projectRoot +"/src/lib" ;
+var assetsPath = projectRoot +"/src/assets" ;
 
 module.exports = {
   entry: srcPath+"/main.js",
@@ -17,7 +18,7 @@ module.exports = {
     loaders: [
         {test: /\.vue$/,loader: 'vue'},
         {test: /\.js$/,loader: 'babel',exclude: /node_modules/},
-        {test: /\.css$/,loader: 'style!css'},
+        {test: /\.css$/, loader: ExtractTextPlugin.extract("style-loader", "css-loader") },
         {test: /\.(eot|svg|ttf|woff|woff2)$/,loader: 'file'},
         {test: /\.(png|jpg|gif|svg)$/,loader: 'file',query: {name: '[name].[ext]?[hash]'}}
     ]
@@ -25,14 +26,23 @@ module.exports = {
   resolve: {
       alias: {
         'vue': 'vue/dist/vue.js',
-        'lib':libPath
+        'lib':libPath,
+        'tui_core_lib':libPath+"/tui-core/index.js",
+        'tui_dialog_lib':libPath+"/tui-dialog/index.js",
+        'tui_drag_lib':libPath+"/tui-drag/index.js",
+        'jq_datepicker_lib': libPath+"/jq-datepicker/index.js",
+	      'jq_timepicker_lib':libPath+"/jq-timepicker/index.js",
+        'assetsPath':assetsPath
       }
   },
   devServer: {
      historyApiFallback: true,
      noInfo: true
   },
-  devtool: '#eval-source-map'
+  devtool: '#eval-source-map',
+  plugins: [
+    new ExtractTextPlugin("[name].css"),
+  ],
 }
 
 if (process.env.NODE_ENV === 'production') {

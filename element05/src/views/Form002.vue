@@ -21,12 +21,22 @@
               :options="selectOption.dayOfWeakOption" 
               v-model ="ruleForm.dayOfWeak" />
         </ELFormItem>
-         <ELFormItem label="是否收费" prop="freeOrNot">
+
+        <ELFormItem label="是否收费" prop="freeOrNot">
            <ElRadio name ="freeOrNot" 
               :options="selectOption.freeOrNotOption" 
               v-model ="ruleForm.freeOrNot" />
         </ELFormItem>
         
+        <ELFormItem label="生效日期" prop="startDate">
+           <ELDatepicker
+              v-model ="ruleForm.startDate" />
+        </ELFormItem>
+
+        <ELFormItem label="截止日期" prop="endDate">
+           <ELDatepicker
+              v-model ="ruleForm.endDate" />
+        </ELFormItem>
 
         <ELFormItem label =" ">
             <button class="btn btn-default" type="button" @click="handleSubmit">立即创建</button>
@@ -42,16 +52,23 @@
   import ELSelect from '../components/select.vue' ;
   import ELCheckbox from '../components/checkbox.vue' ;
   import ElRadio from '../components/radio.vue' ;
-  import {validateAge,validatePub,selectOption} from './Form002.js' ;
+  import ELDatepicker from '../components/datepicker.vue' ;
+  import {validateAge,validatePub,selectOption,validateStartDate,validateEndDate} from './Form002.js' ;
 
   //基本表单验证
   export default {
     data() {
       var age = (rule, value, callback) => {
-         validateAge(callback,this) ;
+         validateAge(value,callback,this) ;
       };
       var pub = (rule, value, callback) =>{
-         validatePub(callback,this) ;
+         validatePub(value,callback,this) ;
+      }
+      var startDate = (rule, value, callback)=>{
+          validateStartDate(value,callback,this) ;
+      }
+      var endDate = (rule, value, callback)=>{
+          validateEndDate(value,callback,this) ;
       }
       return {
         readonly:false,
@@ -65,7 +82,9 @@
           pubType:'2',
           pubValue:'',
           dayOfWeak:['1'],
-          freeOrNot:'1'
+          freeOrNot:'1',
+          startDate:'',
+          endDate:''
         },
         rules: {
           name: [
@@ -84,7 +103,15 @@
           pub:{
             names:['pubType','pubValue'],
             validator:{ validator: pub ,trigger: 'change'},
-          }
+          },
+          startDate:[
+            { required: true, message: '生效日期必填', trigger: 'change' },
+            { validator: startDate ,trigger: 'change' },
+          ],
+          endDate:[
+            { required: true, message: '截止日期必填', trigger: 'change' },
+            { validator: endDate ,trigger: 'change' },
+          ]
         }
       };
     },
@@ -123,7 +150,8 @@
        ElInput,
        ELSelect,
        ELCheckbox,
-       ElRadio
+       ElRadio,
+       ELDatepicker
     }
   }
 </script>

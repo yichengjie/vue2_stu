@@ -1,4 +1,4 @@
-export function validateAge(callback,vm){
+export function validateAge(value,callback,vm){
     var age1 = vm.ruleForm.age1 ;
     var age2 = vm.ruleForm.age2 ;
     if (age1 === '' && age2==='') {
@@ -22,7 +22,7 @@ export function validateAge(callback,vm){
     }
 }
 
-export function validatePub(callback,vm){
+export function validatePub(value,callback,vm){
     var pubType = vm.ruleForm.pubType ;
     var pubValue = vm.ruleForm.pubValue ;
 
@@ -60,6 +60,13 @@ export function validatePub(callback,vm){
         }
     }
     callback();
+}
+export function validateStartDate(value,callback,vm){
+     callback('生效日期必须大于当前日期');
+}
+
+export function validateEndDate(value,callback,vm){
+    callback('截止日期必须大于当前日期');
 }
 
 export let selectOption= {
