@@ -74,5 +74,9 @@ export let selectOption= {
         {name:"星期2",value:"2"},
         {name:"星期3",value:"3"},
         {name:"星期4",value:"4"}
+    ],
+    freeOrNotOption:[
+        {name:"免费",value:""},
+        {name:"收费",value:'1'},
     ]
 };

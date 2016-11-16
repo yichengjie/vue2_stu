@@ -17,9 +17,16 @@
 
         <ELFormItem label="星期" prop="dayOfWeak">
            <ELCheckbox name ="dayOfWeak" 
+              :readonly="readonly"
               :options="selectOption.dayOfWeakOption" 
               v-model ="ruleForm.dayOfWeak" />
         </ELFormItem>
+         <ELFormItem label="是否收费" prop="freeOrNot">
+           <ElRadio name ="freeOrNot" 
+              :options="selectOption.freeOrNotOption" 
+              v-model ="ruleForm.freeOrNot" />
+        </ELFormItem>
+        
 
         <ELFormItem label =" ">
             <button class="btn btn-default" type="button" @click="handleSubmit">立即创建</button>
@@ -34,6 +41,7 @@
   import ElInput from '../components/input.vue' ;
   import ELSelect from '../components/select.vue' ;
   import ELCheckbox from '../components/checkbox.vue' ;
+  import ElRadio from '../components/radio.vue' ;
   import {validateAge,validatePub,selectOption} from './Form002.js' ;
 
   //基本表单验证
@@ -46,7 +54,7 @@
          validatePub(callback,this) ;
       }
       return {
-        readonly:true,
+        readonly:false,
         selectOption:{
           ...selectOption
         },
@@ -56,7 +64,8 @@
           age2:'',
           pubType:'2',
           pubValue:'',
-          dayOfWeak:['1']
+          dayOfWeak:['1'],
+          freeOrNot:'1'
         },
         rules: {
           name: [
@@ -113,7 +122,8 @@
        ELFormItem2,
        ElInput,
        ELSelect,
-       ELCheckbox
+       ELCheckbox,
+       ElRadio
     }
   }
 </script>

@@ -69,3 +69,21 @@
     }
   };
 </script>
+<style>
+  .control-label{
+    float: left ;
+    font-size: 12px;
+  }
+  .form-group{
+    margin-bottom: 12px;
+  }
+  .form-group .error-tip{
+      color: red ;
+      margin-top: 7px;
+      margin-left: 0px;
+      padding-left: 0px;
+      font-size: 12px ;
+      float: left ;
+      width: 150px;
+  }
+</style>

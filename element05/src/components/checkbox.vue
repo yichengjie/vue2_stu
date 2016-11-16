@@ -1,14 +1,14 @@
 <template>
     <div>
-        <span class="checkbox-inline" v-for="item in options"> 
+        <label class="checkbox-inline" v-for="item in options">
             <input type="checkbox"
                 :name = "name"  
                 :value = "item.value"
                 :checked="isChecked(item.value)"
                 @click="onChange"
-                />
-            <label>{{item.name}}</label>
-        </span>
+                :disabled="readonly"
+                /> {{item.name}}
+        </label>
     </div>
 </template>
 <script>
@@ -49,8 +49,7 @@
     } ;
 </script>
 <style>
-    .checkbox-inline label{
-        font-weight: 100 ;
+    .checkbox-inline{
         font-size: 12px;
     }
 </style>
