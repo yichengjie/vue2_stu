@@ -5,7 +5,7 @@
 </template>
 <script>
   export default {
-    name: 'yj-form',
+    name: 'oc-form',
     componentName: 'form',
     props: {
       model: Object,

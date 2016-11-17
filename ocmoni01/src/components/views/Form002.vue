@@ -1,52 +1,52 @@
 <template>
-    <yj-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-        <yj-form-item label="活动名称" prop="name">
-            <yj-input type="text" v-model="ruleForm.name" :readonly="readonly"/>
-        </yj-form-item>
+    <oc-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+        <oc-form-item1 label="活动名称" prop="name">
+            <oc-input type="text" v-model="ruleForm.name" :readonly="readonly"/>
+        </oc-form-item1>
 
-        <yj-form-item2 label="年龄" prop="age">
-             <yj-input type="text" slot="range1" v-model="ruleForm.age1"  :readonly="readonly"/>
-             <yj-input type="text" slot="range2" v-model="ruleForm.age2"  :readonly="readonly"/>
-        </yj-form-item2>
-        <yj-form-item2 label="发布对象" prop ="pub" >
-            <yj-select  slot="range1"  :readonly="readonly"
+        <oc-form-item2 label="年龄" prop="age">
+             <oc-input type="text" slot="range1" v-model="ruleForm.age1"  :readonly="readonly"/>
+             <oc-input type="text" slot="range2" v-model="ruleForm.age2"  :readonly="readonly"/>
+        </oc-form-item2>
+        <oc-form-item2 label="发布对象" prop ="pub" >
+            <oc-select  slot="range1"  :readonly="readonly"
                 :options = "selectOption.pubOptions" 
                 v-model="ruleForm.pubType" />
-            <yj-input type="text" slot="range2" v-model="ruleForm.pubValue" :readonly="readonly" />
-        </yj-form-item2>
+            <oc-input type="text" slot="range2" v-model="ruleForm.pubValue" :readonly="readonly" />
+        </oc-form-item2>
 
-        <yj-form-item label="星期" prop="dayOfWeak">
-           <yj-checkbox name ="dayOfWeak" 
+        <oc-form-item1 label="星期" prop="dayOfWeak">
+           <oc-checkbox name ="dayOfWeak" 
               :readonly="readonly"
               :options="selectOption.dayOfWeakOption" 
               v-model ="ruleForm.dayOfWeak" />
-        </yj-form-item>
+        </oc-form-item1>
 
-        <yj-form-item label="是否收费" prop="freeOrNot">
-           <yj-radio name ="freeOrNot" 
+        <oc-form-item1 label="是否收费" prop="freeOrNot">
+           <oc-radio name ="freeOrNot" 
               :options="selectOption.freeOrNotOption" 
               v-model ="ruleForm.freeOrNot" />
-        </yj-form-item>
+        </oc-form-item1>
         
-        <yj-form-item label="生效日期" prop="startDate">
-           <yj-datepicker
+        <oc-form-item1 label="生效日期" prop="startDate">
+           <oc-datepicker
               v-model ="ruleForm.startDate" />
-        </yj-form-item>
+        </oc-form-item1>
 
-        <yj-form-item label="截止日期" prop="endDate">
-           <yj-datepicker
+        <oc-form-item1 label="截止日期" prop="endDate">
+           <oc-datepicker
               v-model ="ruleForm.endDate" />
-        </yj-form-item>
+        </oc-form-item1>
 
-        <yj-form-item label="描述信息" prop="descr" :span="6">
-           <yj-textarea v-model ="ruleForm.descr"  />
-        </yj-form-item>
+        <oc-form-item1 label="描述信息" prop="descr" :span="6">
+           <oc-textarea v-model ="ruleForm.descr"  />
+        </oc-form-item1>
 
-        <yj-form-item label =" ">
+        <oc-form-item1 label =" ">
             <button class="btn btn-default" type="button" @click="handleSubmit">立即创建</button>
             <button class="btn btn-primary" type="button" @click="handleReset">重置</button>
-        </yj-form-item>
-    </yj-form>
+        </oc-form-item1>
+    </oc-form>
 </template>
 <script>
   import {validateAge,validatePub,selectOption,validateStartDate,validateEndDate} from './Form002.js' ;

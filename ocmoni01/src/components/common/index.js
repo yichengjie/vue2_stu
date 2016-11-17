@@ -1,5 +1,5 @@
 import YJForm from "./form.vue" ;
-import YJFormItem from './form-item.vue' ;
+import YJFormItem1 from './form-item1.vue' ;
 import YJFormItem2 from './form-item2.vue' ;
 import YJInput from './input.vue' ;
 import YJSelect from './select.vue' ;
@@ -11,7 +11,7 @@ function install (Vue,options){
     console.info('inside installed MyPlugin  .........') ;
     if (install.installed) return;
     Vue.component(YJForm.name, YJForm);
-    Vue.component(YJFormItem.name, YJFormItem);
+    Vue.component(YJFormItem1.name, YJFormItem1);
     Vue.component(YJFormItem2.name, YJFormItem2);
     Vue.component(YJInput.name, YJInput);
     Vue.component(YJSelect.name, YJSelect);

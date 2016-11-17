@@ -15,7 +15,7 @@
 <script>
     import emitter from './emitter';
     export default {
-        name: 'yj-select',
+        name: 'oc-select',
         mixins: [emitter],
         props:{
            options:Array,

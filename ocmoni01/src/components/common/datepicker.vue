@@ -14,7 +14,7 @@
 <script>
     import emitter from './emitter';
     export default {
-         name:'yj-datepicker',
+         name:'oc-datepicker',
          //props:['value'],
          mixins: [emitter],
          props:{

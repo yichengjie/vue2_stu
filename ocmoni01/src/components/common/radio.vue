@@ -13,7 +13,7 @@
 <script>
     import emitter from './emitter';
     export default {
-        name: 'yj-radio',
+        name: 'oc-radio',
         mixins: [emitter],
         props:{
            name:String,

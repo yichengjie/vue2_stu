@@ -15,7 +15,7 @@
 <script>
   import emitter from './emitter';
   export default {
-    name: 'yj-textarea',
+    name: 'oc-textarea',
     mixins: [emitter],
     props: {
       value: [String, Number],

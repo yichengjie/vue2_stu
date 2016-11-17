@@ -20,7 +20,7 @@
   import emitter from './emitter.js';
 
   export default {
-    name: 'yj-form-item2',
+    name: 'oc-form-item2',
     componentName: 'form-item',
     mixins: [emitter],
 
