@@ -3,7 +3,7 @@
     <label class="control-label" v-bind:style="labelStyle" v-if ="label"> 
       <span>{{label}}</span>
     </label>
-    <div class="col-sm-6">
+    <div :class="contentClass">
       <slot></slot>
     </div>
     <div class="error-tip" v-show="error !== ''">
@@ -20,13 +20,16 @@
     name: 'yj-form-item',
     componentName: 'form-item',
     mixins: [emitter],
-
     props: {
       label: String,
       labelWidth: String,
       prop: String,
       required: Boolean,
-      rules: [Object, Array]
+      rules: [Object, Array],
+      span:{
+        type:Number,
+        default:6
+      }
     },
     computed: {
       labelStyle() {
@@ -44,6 +47,9 @@
           ret.marginLeft = labelWidth;
         }
         return ret;
+      },
+      contentClass() {
+        return 'col-sm-' + this.span ;
       },
       form() {
         var parent = this.$parent;

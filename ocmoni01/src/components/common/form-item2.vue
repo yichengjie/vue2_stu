@@ -3,10 +3,10 @@
     <label class="control-label" v-bind:style="labelStyle" v-if ="label"> 
       <span>{{label}}</span>
     </label>
-    <div class="col-sm-3">
+    <div :class="contentClass">
       <slot name ="range1"></slot>
     </div>
-    <div class="col-sm-3">
+    <div :class="contentClass">
       <slot name ="range2"></slot>
     </div>
     <div class="error-tip" v-show="error !== ''">
@@ -29,7 +29,11 @@
       labelWidth: String,
       prop: String,
       required: Boolean,
-      rules: [Object, Array]
+      rules: [Object, Array],
+      span:{
+        type:Number,
+        default:3
+      }
     },
     computed: {
       labelStyle() {
@@ -40,13 +44,8 @@
         }
         return ret;
       },
-      contentStyle() {
-        var ret = {};
-        var labelWidth = this.labelWidth || this.form.labelWidth;
-        if (labelWidth) {
-          ret.marginLeft = labelWidth;
-        }
-        return ret;
+      contentClass() {
+        return 'col-sm-' + this.span ;
       },
       form() {
         var parent = this.$parent;

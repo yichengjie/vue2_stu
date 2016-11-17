@@ -6,6 +6,7 @@ import YJSelect from './select.vue' ;
 import YJCheckbox from './checkbox.vue' ;
 import YJRadio from './radio.vue' ;
 import YJDatepicker from './datepicker.vue' ;
+import YJTextarea from './textarea.vue' ;
 function install (Vue,options){
     console.info('inside installed MyPlugin  .........') ;
     if (install.installed) return;
@@ -17,6 +18,7 @@ function install (Vue,options){
     Vue.component(YJCheckbox.name, YJCheckbox);
     Vue.component(YJRadio.name, YJRadio);
     Vue.component(YJDatepicker.name, YJDatepicker);
+    Vue.component(YJTextarea.name, YJTextarea);
     install.installed = true ;
 }
 if (typeof window !== 'undefined' && window.Vue) {

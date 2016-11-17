@@ -38,6 +38,10 @@
               v-model ="ruleForm.endDate" />
         </yj-form-item>
 
+        <yj-form-item label="描述信息" prop="descr" :span="6">
+           <yj-textarea v-model ="ruleForm.descr"  />
+        </yj-form-item>
+
         <yj-form-item label =" ">
             <button class="btn btn-default" type="button" @click="handleSubmit">立即创建</button>
             <button class="btn btn-primary" type="button" @click="handleReset">重置</button>
@@ -76,7 +80,8 @@
           dayOfWeak:['1'],
           freeOrNot:'1',
           startDate:'',
-          endDate:''
+          endDate:'',
+          descr:''
         },
         rules: {
           name: [

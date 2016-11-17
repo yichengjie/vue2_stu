@@ -1,12 +1,15 @@
 <template>
-    <input type ="text"   
-        :id ="randomId"
-        :value="value" 
-        @input ="onInput" 
-        @blur ="onBlur" 
-        class ="form-control input-sm"
-        :disabled="readonly"
-    />
+    <span class="yj-datepicker-container">
+        <input type ="text"   
+            :id ="randomId"
+            :value="value" 
+            @input ="onInput" 
+            @blur ="onBlur" 
+            class ="form-control input-sm"
+            :disabled="readonly"
+        />
+        <label  class="glyphicon glyphicon-calendar yj-datepicker-icon"></label>
+    </span>
 </template>
 <script>
     import emitter from './emitter';
@@ -53,5 +56,14 @@
     }
 </script>
 <style>
-
+    .yj-datepicker-container{
+        display: block;
+        position: relative ;
+    }
+    .yj-datepicker-icon{
+        display: inline-block;
+        position: absolute ;
+        right: 10px;
+        top: 9px;
+    }
 </style>
