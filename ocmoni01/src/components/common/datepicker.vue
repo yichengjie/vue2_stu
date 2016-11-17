@@ -11,7 +11,7 @@
 <script>
     import emitter from './emitter';
     export default {
-         name:'ELDatepicker',
+         name:'yj-datepicker',
          //props:['value'],
          mixins: [emitter],
          props:{

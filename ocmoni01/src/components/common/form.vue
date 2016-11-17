@@ -5,7 +5,7 @@
 </template>
 <script>
   export default {
-    name: 'ElForm',
+    name: 'yj-form',
     componentName: 'form',
     props: {
       model: Object,

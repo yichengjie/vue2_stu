@@ -14,7 +14,7 @@
 <script>
     import emitter from './emitter';
     export default {
-        name: 'ElCheckbox',
+        name: 'yj-checkbox',
         mixins: [emitter],
         // props:['value','options','name'],
         props:{

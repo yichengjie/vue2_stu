@@ -12,6 +12,12 @@ require('assetsPath/css/common.css') ;
 require('assetsPath/css/tui_dialog.css') ;
 require('assetsPath/css/jquery_ui.datepicker-modify.css') ;
 require('assetsPath/css/jquery-ui-timepicker-addon.css') ;
+import MyPlugin from './components/common/index.js' ;
+
+//调用插件
+Vue.use(MyPlugin) ;
+
+
 import App from './App.vue' ;
 new Vue({
   el: '#app',

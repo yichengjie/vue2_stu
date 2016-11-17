@@ -16,7 +16,7 @@
   import emitter from './emitter';
   //import calcTextareaHeight from './calcTextareaHeight';
   export default {
-    name: 'ElInput',
+    name: 'yj-input',
     mixins: [emitter],
     props: {
       value: [String, Number],

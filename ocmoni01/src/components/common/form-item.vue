@@ -17,7 +17,7 @@
   import emitter from './emitter.js';
 
   export default {
-    name: 'ElFormItem',
+    name: 'yj-form-item',
     componentName: 'form-item',
     mixins: [emitter],
 

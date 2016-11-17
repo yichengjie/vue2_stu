@@ -1,58 +1,50 @@
 <template>
-    <ElForm :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-        <ELFormItem label="活动名称" prop="name">
-            <ElInput type="text" v-model="ruleForm.name" :readonly="readonly"/>
-        </ELFormItem>
+    <yj-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+        <yj-form-item label="活动名称" prop="name">
+            <yj-input type="text" v-model="ruleForm.name" :readonly="readonly"/>
+        </yj-form-item>
 
-        <ELFormItem2 label="年龄" prop="age">
-             <ElInput type="text" slot="range1" v-model="ruleForm.age1"  :readonly="readonly"/>
-             <ElInput type="text" slot="range2" v-model="ruleForm.age2"  :readonly="readonly"/>
-        </ELFormItem2>
-        <ELFormItem2 label="发布对象" prop ="pub" >
-            <ELSelect  slot="range1"  :readonly="readonly"
+        <yj-form-item2 label="年龄" prop="age">
+             <yj-input type="text" slot="range1" v-model="ruleForm.age1"  :readonly="readonly"/>
+             <yj-input type="text" slot="range2" v-model="ruleForm.age2"  :readonly="readonly"/>
+        </yj-form-item2>
+        <yj-form-item2 label="发布对象" prop ="pub" >
+            <yj-select  slot="range1"  :readonly="readonly"
                 :options = "selectOption.pubOptions" 
                 v-model="ruleForm.pubType" />
-            <ElInput type="text" slot="range2" v-model="ruleForm.pubValue" :readonly="readonly" />
-        </ELFormItem2>
+            <yj-input type="text" slot="range2" v-model="ruleForm.pubValue" :readonly="readonly" />
+        </yj-form-item2>
 
-        <ELFormItem label="星期" prop="dayOfWeak">
-           <ELCheckbox name ="dayOfWeak" 
+        <yj-form-item label="星期" prop="dayOfWeak">
+           <yj-checkbox name ="dayOfWeak" 
               :readonly="readonly"
               :options="selectOption.dayOfWeakOption" 
               v-model ="ruleForm.dayOfWeak" />
-        </ELFormItem>
+        </yj-form-item>
 
-        <ELFormItem label="是否收费" prop="freeOrNot">
-           <ElRadio name ="freeOrNot" 
+        <yj-form-item label="是否收费" prop="freeOrNot">
+           <yj-radio name ="freeOrNot" 
               :options="selectOption.freeOrNotOption" 
               v-model ="ruleForm.freeOrNot" />
-        </ELFormItem>
+        </yj-form-item>
         
-        <ELFormItem label="生效日期" prop="startDate">
-           <ELDatepicker
+        <yj-form-item label="生效日期" prop="startDate">
+           <yj-datepicker
               v-model ="ruleForm.startDate" />
-        </ELFormItem>
+        </yj-form-item>
 
-        <ELFormItem label="截止日期" prop="endDate">
-           <ELDatepicker
+        <yj-form-item label="截止日期" prop="endDate">
+           <yj-datepicker
               v-model ="ruleForm.endDate" />
-        </ELFormItem>
+        </yj-form-item>
 
-        <ELFormItem label =" ">
+        <yj-form-item label =" ">
             <button class="btn btn-default" type="button" @click="handleSubmit">立即创建</button>
             <button class="btn btn-primary" type="button" @click="handleReset">重置</button>
-        </ELFormItem>
-    </ElForm>
+        </yj-form-item>
+    </yj-form>
 </template>
 <script>
-  import ElForm from "../components/form.vue" ;
-  import ELFormItem from '../components/form-item.vue' ;
-  import ELFormItem2 from '../components/form-item2.vue' ;
-  import ElInput from '../components/input.vue' ;
-  import ELSelect from '../components/select.vue' ;
-  import ELCheckbox from '../components/checkbox.vue' ;
-  import ElRadio from '../components/radio.vue' ;
-  import ELDatepicker from '../components/datepicker.vue' ;
   import {validateAge,validatePub,selectOption,validateStartDate,validateEndDate} from './Form002.js' ;
 
   //基本表单验证
@@ -144,14 +136,6 @@
       
     },
     components:{
-       ElForm,
-       ELFormItem,
-       ELFormItem2,
-       ElInput,
-       ELSelect,
-       ELCheckbox,
-       ElRadio,
-       ELDatepicker
     }
   }
 </script>

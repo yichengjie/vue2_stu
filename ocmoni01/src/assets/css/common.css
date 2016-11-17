@@ -339,7 +339,7 @@ td input[type=text],td select{
 }
 
 .form-horizontal .form-group{
-    margin-bottom: 5px;
+    margin-bottom: 10px;
 }
 .form-horizontal .control_right_content{
     padding-top: 7px;
