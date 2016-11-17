@@ -8,8 +8,10 @@ require('tui_core_lib') ;
 require('tui_dialog_lib') ;
 require('tui_drag_lib') ;
 require('jq_datepicker_lib') ;
+require('assetsPath/css/common.css') ;
+require('assetsPath/css/tui_dialog.css') ;
 require('assetsPath/css/jquery_ui.datepicker-modify.css') ;
-
+require('assetsPath/css/jquery-ui-timepicker-addon.css') ;
 import App from './App.vue' ;
 new Vue({
   el: '#app',
