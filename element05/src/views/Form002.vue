@@ -25,16 +25,17 @@
         <ELFormItem label="是否收费" prop="freeOrNot">
            <ElRadio name ="freeOrNot" 
               :options="selectOption.freeOrNotOption" 
-              v-model ="ruleForm.freeOrNot" />
+              v-model ="ruleForm.freeOrNot"
+              :readonly="readonly" />
         </ELFormItem>
         
         <ELFormItem label="生效日期" prop="startDate">
-           <ELDatepicker
+           <ELDatepicker :readonly="readonly"
               v-model ="ruleForm.startDate" />
         </ELFormItem>
 
         <ELFormItem label="截止日期" prop="endDate">
-           <ELDatepicker
+           <ELDatepicker :readonly="readonly"
               v-model ="ruleForm.endDate" />
         </ELFormItem>
 
@@ -87,22 +88,18 @@
           endDate:''
         },
         rules: {
-          name: [
+          name: [//form-item1只能支持这种数组类型的验证
             { required: true, message: '请输入活动名称', trigger: 'blur' },
             { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
           ],
-          age:{
+          age:{//form-item2只能支持这种对象类型的验证//而且names键必填
             names:['age1','age2'],
-            // fields:[
-            //   {required: true,message: 'age1必填',trigger: 'blur'},
-            //   {required: true,message: 'age2必填',trigger: 'blur'}
-            // ],
-            validator:{ validator: age ,trigger: 'blur' },
-            required:true
+            age1:[{required:true,trigger:'blur',message: 'age1必填'}],
+            age2:[{ validator: age ,trigger: 'blur'}]
           },
           pub:{
             names:['pubType','pubValue'],
-            validator:{ validator: pub ,trigger: 'change'},
+            pubType:[{ validator: pub ,trigger: 'change'}],
           },
           startDate:[
             { required: true, message: '生效日期必填', trigger: 'change' },

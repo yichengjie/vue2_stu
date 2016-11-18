@@ -55,7 +55,7 @@ export function validatePub(value,callback,vm){
 
     if(pubType==='3'){
         if(pubValue!=='3'){
-            callback(new Error('类型2时value必须为3'));
+            callback(new Error('类型3时value必须为3'));
             return ;
         }
     }
