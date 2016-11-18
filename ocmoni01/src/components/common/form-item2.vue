@@ -3,10 +3,10 @@
     <label class="control-label" v-bind:style="labelStyle" v-if ="label"> 
       <span>{{label}}</span>
     </label>
-    <div :class="contentClass">
+    <div class="col-sm-3">
       <slot name ="range1"></slot>
     </div>
-    <div :class="contentClass">
+    <div class="col-sm-3">
       <slot name ="range2"></slot>
     </div>
     <div class="error-tip" v-show="error !== ''">
@@ -29,11 +29,7 @@
       labelWidth: String,
       prop: String,
       required: Boolean,
-      rules: [Object, Array],
-      span:{
-        type:Number,
-        default:3
-      }
+      rules: [Object, Array]
     },
     computed: {
       labelStyle() {
@@ -44,8 +40,13 @@
         }
         return ret;
       },
-      contentClass() {
-        return 'col-sm-' + this.span ;
+      contentStyle() {
+        var ret = {};
+        var labelWidth = this.labelWidth || this.form.labelWidth;
+        if (labelWidth) {
+          ret.marginLeft = labelWidth;
+        }
+        return ret;
       },
       form() {
         var parent = this.$parent;
@@ -69,7 +70,11 @@
           var model = this.form.model;
           if (!model || !this.prop) { return; }
           var names = this.fieldNameArr ;
-          return [model[names[0]],model[names[1]]] 
+          var values = [] ;
+          for(let name of names){
+            values.push(model[name]) ;
+          }
+          return values ; 
         }
       }
     },
@@ -88,20 +93,21 @@
       validate(trigger, cb) {
         //console.info('validate .......') ;
         var rules = this.getFilteredRule(trigger);
-        if (!rules || rules.length === 0) {
+        if (rules==null) {
           cb && cb();
           return true;
         }
         this.validating = true;
-        var descriptor = {};
-        descriptor[this.prop] = rules;
-        //console.info('descriptor , ' , JSON.stringify(descriptor) ) ;
+        var descriptor = rules;
+        console.info('descriptor , ' , JSON.stringify(descriptor) ) ;
         var validator = new AsyncValidator(descriptor);
         var names = this.fieldNameArr ;
         var values = this.fieldValueArr ;
         var model = {};
-        model[this.prop] = {[names[0]]:values[0],[names[1]]:values[1]};
-        //console.info('model : ' ,JSON.stringify(model)) ;
+        for(let i = 0 ; i < names.length ;i ++){
+          model[names[i]] = values[i];
+        }
+        console.info('model : ' ,JSON.stringify(model)) ;
         validator.validate(model, { firstFields: true }, (errors, fields) => {
           this.valid = !errors;
           this.error = errors ? errors[0].message : '';
@@ -128,37 +134,23 @@
       getFilteredRule(trigger) {
         var ruleObj = this.getRuleObj();
         var names = this.fieldNameArr ;
-        var retRules = [] ;
-        if(ruleObj){
-           let fields = ruleObj['fields'] ;
-           if(fields&&fields.length>0){
-              var emptyFlag = true ;
-              var tmp = {type: 'object', fields: {}}  ;
-              for(let i = 0 ; i < fields.length; i ++ ){
-                 let field = fields[i] ;
-                 let name = names[i] ;
-                 var fieldTrigger = field['trigger'] || '' ;
-                 //!rule.trigger || rule.trigger.indexOf(trigger) !== -1
-                 console.info('fieldTrigger ['+fieldTrigger+']') ;
-                 console.info('trigger ['+trigger+']') ;
-                 if(!fieldTrigger|| fieldTrigger.indexOf(trigger)!==-1 ){
-                    tmp['fields'][name] = field ;
-                    emptyFlag = false ;
-                 }
-              }
-              if(!emptyFlag){
-                retRules.push(tmp) ;
-              }
-           }
-           var validator = ruleObj['validator'] ;
-           if(validator){
-               var validatorTrigger = validator.trigger ;
-               if(!validatorTrigger|| validatorTrigger.indexOf(trigger)!==-1 ){
-                  retRules.push(ruleObj['validator']) ;
-               }
+        let retRuleObj = {} ;
+        if(!ruleObj||names.length==0){//如果为空直接返回
+          return null ;
+        }
+        let isEmptyFlag = true;
+        for(let name of names){
+           let tmpArr = ruleObj[name] || [];
+           let retTmpArr = tmpArr.filter(function(item){
+             return filterRuleTrigger(trigger,item) ;
+           }) ;
+           if(retTmpArr.length>0){
+             retRuleObj[name] = retTmpArr ;
+             isEmptyFlag = false ;
            }
         }
-        return retRules ;
+        
+        return (isEmptyFlag ? null : retRuleObj) ;
       },
       onFieldBlur() {
         this.validate('blur');
@@ -201,4 +193,16 @@
       this.dispatch('form', 'el.form.removeField', [this]);
     }
   };
+  //过滤校验的规则
+  function filterRuleTrigger(trigger,item) {
+      if(!item){
+          return false;
+      }
+      let fieldTrigger = item.trigger ;
+      if(!fieldTrigger|| fieldTrigger.indexOf(trigger)!==-1 ){
+          return true ;
+      }else{
+         return false;
+      }
+  }
 </script>

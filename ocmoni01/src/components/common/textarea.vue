@@ -43,7 +43,7 @@
       }
     },
     mounted(){
-        console.info('rows : ' + this.rows) ;
+        //console.info('rows : ' + this.rows) ;
     }
   };
 </script>

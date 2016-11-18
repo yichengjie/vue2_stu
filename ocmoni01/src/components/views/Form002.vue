@@ -29,17 +29,17 @@
         </oc-form-item1>
         
         <oc-form-item1 label="生效日期" prop="startDate">
-           <oc-datepicker
+           <oc-datepicker  :readonly="readonly"
               v-model ="ruleForm.startDate" />
         </oc-form-item1>
 
         <oc-form-item1 label="截止日期" prop="endDate">
-           <oc-datepicker
+           <oc-datepicker  :readonly="readonly"
               v-model ="ruleForm.endDate" />
         </oc-form-item1>
 
         <oc-form-item1 label="描述信息" prop="descr" :span="6">
-           <oc-textarea v-model ="ruleForm.descr"  />
+           <oc-textarea v-model ="ruleForm.descr"  :readonly="readonly" />
         </oc-form-item1>
 
         <oc-form-item1 label =" ">
@@ -88,18 +88,14 @@
             { required: true, message: '请输入活动名称', trigger: 'blur' },
             { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
           ],
-          age:{
+          age:{//form-item2只能支持这种对象类型的验证//而且names键必填
             names:['age1','age2'],
-            // fields:[
-            //   {required: true,message: 'age1必填',trigger: 'blur'},
-            //   {required: true,message: 'age2必填',trigger: 'blur'}
-            // ],
-            validator:{ validator: age ,trigger: 'blur' },
-            required:true
+            age1:[{required:true,trigger:'blur',message: 'age1必填'}],
+            age2:[{ validator: age ,trigger: 'blur'}]
           },
           pub:{
             names:['pubType','pubValue'],
-            validator:{ validator: pub ,trigger: 'change'},
+            pubType:[{ validator: pub ,trigger: 'change'}],
           },
           startDate:[
             { required: true, message: '生效日期必填', trigger: 'change' },
