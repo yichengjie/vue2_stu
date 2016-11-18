@@ -99,7 +99,7 @@
         }
         this.validating = true;
         var descriptor = rules;
-        console.info('descriptor , ' , JSON.stringify(descriptor) ) ;
+        //console.info('descriptor , ' , JSON.stringify(descriptor) ) ;
         var validator = new AsyncValidator(descriptor);
         var names = this.fieldNameArr ;
         var values = this.fieldValueArr ;
