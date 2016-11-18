@@ -9,6 +9,7 @@ import Radio from './radio.vue' ;
 import Datepicker from './datepicker.vue' ;
 import Textarea from './textarea.vue' ;
 import InputSelct from './input-select.vue' ;
+import Icon from './icon.vue' ;
 function install (Vue,options){
     console.info('inside installed MyPlugin  .........') ;
     if (install.installed) return;
@@ -23,6 +24,7 @@ function install (Vue,options){
     Vue.component(Datepicker.name, Datepicker);
     Vue.component(Textarea.name, Textarea);
     Vue.component(InputSelct.name, InputSelct);
+    Vue.component(Icon.name, Icon);
     install.installed = true ;
 }
 if (typeof window !== 'undefined' && window.Vue) {

@@ -1,19 +1,19 @@
 <template>
     <span class="oc-input-select-container" 
         v-clickoutside="handleClose"
-        :style ="inputStyle" >
+        :style="inputStyle"
+        >
         <input type="text"
             ref ="inputselect" 
-            class="common_input" 
+            class="form-control input-sm" 
             :name="name" 
             :disabled ="readyonly" 
             :placeholder="placeholder"
             :value="value"
-            @focus="onFocus"
             @input="onInput"
-            @click="onClick"
+            @click="onClickInput"
          />
-        <i class="glyphicon glyphicon-search gray oc-input-select-icon"></i>
+        <i class="el-icon-caret-bottom oc-input-select__icon" @click ="onClickIcon"></i>
         <div class="oc-input-select-dropdown" v-show="visiable">
             <ul class="oc-input-select-dropdown__list" v-show="!isEmptyFlag">
                 <li class="oc-input-select-dropdown__item" 
@@ -54,7 +54,7 @@
                 return ret;
             },
             filterList(){
-                //this.firstFocus
+                //console.info(this.value) ;
                 if((!this.firstFocus)&&this.value&&this.value.trim().length>0){
                     let tmp = this.value.trim() ;
                     return this.options.filter(item=>{
@@ -80,16 +80,18 @@
                 this.firstFocus = false ;
                 this.$emit('input',val) ;
             },
-            onFocus(){
-               
-            },
-            onClick(){
-                this.visiable = !this.visiable ;
+            onClickInput(){
+                //如果以前
+                this.visiable = !this.visiable ; 
                 this.firstFocus = true ;
             },
             handleClose(){
                 this.visiable = false;
             },
+            onClickIcon(){
+                this.firstFocus = true ;
+                this.visiable = !this.visiable ; 
+            }
         },
         data(){
             return{
@@ -104,6 +106,7 @@
 </script>
 <style>
     .oc-input-select-container{
+        width: 100%;
         position: relative;
         display: inline-block;
     }
@@ -111,11 +114,7 @@
         display: block;
         width: 100% ;
     }*/
-    .oc-input-select-icon{
-        position: absolute;
-        right: 10px;
-        top: 7px;
-    }
+ 
     .oc-input-select-dropdown{
         position:absolute;
         z-index:1001;
@@ -174,4 +173,31 @@
      .oc-input-select-dropdown__item:hover {
         background-color: #e5e9f2
      }
+
+     /*.oc-input-select-icon{
+        position: absolute;
+        
+     }*/
+     .oc-input-select__icon{
+        position: absolute;
+        right: 0px;
+        top: 0px;
+        width: 35px;
+        height: 100%;
+        text-align: center;
+        color: #C0CCDA;
+        cursor: pointer ;
+     }
+
+     .oc-input-select__icon:after {
+        content: '';
+        height: 100%;
+        width: 0;
+        display: inline-block;
+        vertical-align: middle
+     }
+
+     /*.oc-input-select__icon+.el-input__inner {
+        padding-right: 35px
+     }*/
 </style>

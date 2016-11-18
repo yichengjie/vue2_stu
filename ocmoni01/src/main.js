@@ -15,6 +15,7 @@ require('assetsPath/css/jquery_ui.datepicker-modify.css') ;
 require('assetsPath/css/jquery-ui-timepicker-addon.css') ;
 //css_path/jquery.autocomplete.css
 require('assetsPath/css/jquery.autocomplete.css') ;
+require('assetsPath/icon/icon.css') ;
 import MyPlugin from './components/common/index.js' ;
 
 //调用插件

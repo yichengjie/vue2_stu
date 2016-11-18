@@ -38,11 +38,9 @@
               v-model ="ruleForm.endDate" />
         </oc-form-item1>
 
-
         <oc-form-item1 label="自动填充"  :span="6">
-           <oc-input-select  
+           <oc-input-select 
               :options="selectOption.inputSelectOption"
-              width="120px" 
               :readonly="readonly"
               v-model ="ruleForm.dept" />
         </oc-form-item1>
