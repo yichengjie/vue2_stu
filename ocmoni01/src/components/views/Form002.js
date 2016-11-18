@@ -85,5 +85,15 @@ export let selectOption= {
     freeOrNotOption:[
         {name:"免费",value:""},
         {name:"收费",value:'1'},
+    ],
+    inputSelectOption:[
+        {name:"10011",value:'10011'},
+        {name:"10012",value:"10012"},
+        {name:"10013",value:"10013"},
+        {name:"10014",value:"10014"},
+        {name:"10021",value:'10021'},
+        {name:"10032",value:"10032"},
+        {name:"10043",value:"10043"},
+        {name:"10054",value:"10054"},
     ]
 };

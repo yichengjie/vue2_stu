@@ -38,9 +38,38 @@
               v-model ="ruleForm.endDate" />
         </oc-form-item1>
 
+
+        <oc-form-item1 label="自动填充"  :span="6">
+           <oc-input-select  
+              :options="selectOption.inputSelectOption"
+              width="120px" 
+              :readonly="readonly"
+              v-model ="ruleForm.dept" />
+        </oc-form-item1>
+
         <oc-form-item1 label="描述信息" prop="descr" :span="6">
            <oc-textarea v-model ="ruleForm.descr"  :readonly="readonly" />
         </oc-form-item1>
+
+        <oc-form-item0 label="金额" :span="6">
+            <table class="table table-bordered table-hover">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Username</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>3</td>
+                  <td colspan="2">Larry the Bird</td>
+                  <td>@twitter</td>
+                </tr>
+              </tbody>
+           </table>
+        </oc-form-item0>
 
         <oc-form-item1 label =" ">
             <button class="btn btn-default" type="button" @click="handleSubmit">立即创建</button>
@@ -81,7 +110,8 @@
           freeOrNot:'1',
           startDate:'',
           endDate:'',
-          descr:''
+          descr:'',
+          dept:''
         },
         rules: {
           name: [

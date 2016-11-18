@@ -1,5 +1,5 @@
 <template>
-    <span class="yj-datepicker-container">
+    <span class="oc-datepicker-container">
         <input type ="text"   
             :id ="randomId"
             :value="value" 
@@ -8,7 +8,7 @@
             class ="form-control input-sm"
             :disabled="readonly"
         />
-        <label  class="glyphicon glyphicon-calendar yj-datepicker-icon"></label>
+        <label  class="glyphicon glyphicon-calendar oc-datepicker-icon"></label>
     </span>
 </template>
 <script>
@@ -56,11 +56,11 @@
     }
 </script>
 <style>
-    .yj-datepicker-container{
+    .oc-datepicker-container{
         display: block;
         position: relative ;
     }
-    .yj-datepicker-icon{
+    .oc-datepicker-icon{
         display: inline-block;
         position: absolute ;
         right: 10px;
