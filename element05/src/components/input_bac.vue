@@ -42,7 +42,7 @@
     </span>
 </template>
 <script>
-  import emitter from './emitter';
+  import emitter from './util/emitter';
   //import calcTextareaHeight from './calcTextareaHeight';
 
   export default {

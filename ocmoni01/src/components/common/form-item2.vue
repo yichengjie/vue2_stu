@@ -17,7 +17,7 @@
 
 <script>
   import AsyncValidator from 'async-validator';
-  import emitter from './emitter.js';
+  import emitter from './util/emitter';
 
   export default {
     name: 'oc-form-item2',

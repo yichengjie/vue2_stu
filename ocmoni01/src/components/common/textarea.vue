@@ -13,7 +13,7 @@
     </textarea>
 </template>
 <script>
-  import emitter from './emitter';
+  import emitter from './util/emitter';
   export default {
     name: 'oc-textarea',
     mixins: [emitter],

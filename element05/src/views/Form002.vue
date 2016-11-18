@@ -130,6 +130,8 @@
             return false;
           }
         });
+        //this.$emit('test',['hello world'])  ;
+        //this.$emit.apply(this,['test','hello world']) ;
         //检验部分字段
         // this.$refs.ruleForm.validateField('name',(errors)=>{
         //     console.info('valid ' ,errors) ;
@@ -141,7 +143,11 @@
         //     }
         // }) ;
       }
-      
+    },
+    mounted(){
+      // this.$on('test', function (...arg) {
+      //   console.log('我接受到事件 : ' ,arg)
+      // })
     },
     components:{
        ElForm,
