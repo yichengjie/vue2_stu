@@ -1,5 +1,6 @@
 <template>
-    <input type ="text"   
+    <input type ="text"  
+        v-clickoutside="handleClose" 
         :id ="randomId"
         :value="value" 
         @input ="onInput" 
@@ -10,10 +11,12 @@
 </template>
 <script>
     import emitter from './util/emitter';
+    import Clickoutside from './util/clickoutside';
     export default {
          name:'ELDatepicker',
          //props:['value'],
          mixins: [emitter],
+         directives: { Clickoutside },
          props:{
              value:{
                  type:String,
@@ -38,6 +41,11 @@
                 this.$emit('input',val) ;
                 //this.$emit('change', val);
                 this.dispatch('form-item', 'el.form.blur', val);
+            },
+            handleClose(){
+                setTimeout(()=>{
+                    console.info('I am closed : ' + this.$options.name) ;
+                },100) ;
             }
          },
          mounted:function(el){
