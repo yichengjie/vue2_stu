@@ -39,7 +39,7 @@
         props: {
             name:String,
             label: String,
-            width:String,
+            width:Number,
             readyonly:Boolean,
             placeholder:String,
             url:String,
@@ -53,9 +53,11 @@
         directives: { Clickoutside },
         computed:{
             inputStyle(){
-                var inputWidth = this.width || "120px";
-                var ret = {width:inputWidth};
-                return ret;
+                var inputWidth = this.width || '';
+                if(inputWidth){
+                    return {width:inputWidth+"px"};
+                }
+                return {} ;
             },
             filterList(){
                 if((!this.firstFocus)&&this.filterKey&&this.filterKey.trim().length>0){

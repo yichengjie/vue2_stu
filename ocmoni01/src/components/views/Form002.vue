@@ -42,6 +42,7 @@
            <oc-input-select 
               :options="selectOption.inputSelectOption"
               :readonly="readonly"
+              :width="160"
               v-model ="ruleForm.dept"
               :strict="true" />
         </oc-form-item1>
