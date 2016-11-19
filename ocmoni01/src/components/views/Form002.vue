@@ -38,11 +38,20 @@
               v-model ="ruleForm.endDate" />
         </oc-form-item1>
 
-        <oc-form-item1 label="自动填充"  :span="6">
+        <oc-form-item1 label="可输入可选"  :span="6">
            <oc-input-select 
               :options="selectOption.inputSelectOption"
               :readonly="readonly"
-              v-model ="ruleForm.dept" />
+              v-model ="ruleForm.dept"
+              :strict="true" />
+        </oc-form-item1>
+
+        <oc-form-item1 label="可输入可选2"  :span="6">
+           <oc-input-select 
+              :options="selectOption.inputSelectOption"
+              :readonly="readonly"
+              v-model ="ruleForm.dept2"
+              />
         </oc-form-item1>
 
         <oc-form-item1 label="描述信息" prop="descr" :span="6">
@@ -109,7 +118,8 @@
           startDate:'',
           endDate:'',
           descr:'',
-          dept:''
+          dept:'10021',
+          dept2:''
         },
         rules: {
           name: [

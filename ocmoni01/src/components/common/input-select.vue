@@ -9,7 +9,7 @@
             :name="name" 
             :disabled ="readyonly" 
             :placeholder="placeholder"
-            :value="value"
+            v-model ="filterKey"
             @input="onInput"
             @click="onClickInput"
          />
@@ -44,7 +44,11 @@
             placeholder:String,
             url:String,
             value:[String,Number],
-            options:Array
+            options:Array,
+            strict:{
+                type:Boolean,
+                default:false
+            }
         },
         directives: { Clickoutside },
         computed:{
@@ -54,9 +58,8 @@
                 return ret;
             },
             filterList(){
-                //console.info(this.value) ;
-                if((!this.firstFocus)&&this.value&&this.value.trim().length>0){
-                    let tmp = this.value.trim() ;
+                if((!this.firstFocus)&&this.filterKey&&this.filterKey.trim().length>0){
+                    let tmp = this.filterKey.trim() ;
                     return this.options.filter(item=>{
                         if(item.name.indexOf(tmp)!=-1){
                             return true ;
@@ -78,7 +81,9 @@
             onInput(event){
                 let val = event.target.value ;
                 this.firstFocus = false ;
-                this.$emit('input',val) ;
+                if(!this.strict){
+                    this.$emit('input',val) ;
+                }
             },
             onClickInput(){
                 //如果以前
@@ -87,6 +92,7 @@
             },
             handleClose(){
                 this.visiable = false;
+                this.filterKey = this.value ;
             },
             onClickIcon(){
                 this.firstFocus = true ;
@@ -96,10 +102,17 @@
         data(){
             return{
                 visiable:false,
-                firstFocus:false
+                firstFocus:false,
+                filterKey:this.value
             } ;
         },
+        watch:{
+            value(val, oldVal){
+                this.filterKey = val ;
+            }
+        },
         mounted(){
+            //this.filterKey = this.value ;
             //elem.find('span[name="customeEdit"]').bind('click',function  (event) {
         }
     }
