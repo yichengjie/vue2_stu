@@ -1,5 +1,5 @@
 <template>
-    <span class="oc-input-select-container" 
+    <span class="oc-select-container" 
         v-clickoutside="handleClose"
         :style="inputStyle"
         >
@@ -13,10 +13,10 @@
             @input="onInput"
             @click="onClickInput"
          />
-        <i class="el-icon-caret-bottom oc-input-select__icon" @click ="onClickIcon"></i>
-        <div class="oc-input-select-dropdown" v-show="visiable">
-            <ul class="oc-input-select-dropdown__list" v-show="!isEmptyFlag">
-                <li class="oc-input-select-dropdown__item" 
+        <i class="el-icon-caret-bottom oc-select__icon" @click ="onClickIcon"></i>
+        <div class="oc-select-dropdown" v-show="visiable">
+            <ul class="oc-select-dropdown__list" v-show="!isEmptyFlag">
+                <li class="oc-select-dropdown__item" 
                     v-for="item in filterList" 
                     @click="handleClickItem(item.value)"
                     :class ="{'selected':item.value == value}"
@@ -24,8 +24,8 @@
                     {{item.name}}
                 </li>
             </ul>
-            <ul class="oc-input-select-dropdown__list" v-show="isEmptyFlag">
-                 <li class="oc-input-select-dropdown__empty">无数据</li> 
+            <ul class="oc-select-dropdown__list" v-show="isEmptyFlag">
+                 <li class="oc-select-dropdown__empty">无数据</li> 
             </ul>
         </div>
     </span>
@@ -120,7 +120,7 @@
     }
 </script>
 <style>
-    .oc-input-select-container{
+    .oc-select-container{
         width: 100%;
         position: relative;
         display: inline-block;
@@ -130,7 +130,7 @@
         width: 100% ;
     }*/
  
-    .oc-input-select-dropdown{
+    .oc-select-dropdown{
         position:absolute;
         z-index:1001;
         width: 100%;
@@ -144,7 +144,7 @@
         max-height:200px;
     }
     
-    .oc-input-select-dropdown__list{
+    .oc-select-dropdown__list{
         list-style:none;
         padding:5px 0;
         margin:0;
@@ -152,7 +152,7 @@
         box-sizing:border-box;
         overflow-y:auto
     }
-    .oc-input-select-dropdown__item{
+    .oc-select-dropdown__item{
         font-size: 12px;
         padding: 0px 10px;
         white-space: nowrap;
@@ -165,16 +165,16 @@
         cursor: pointer;
      }
 
-     .oc-input-select-dropdown__item.selected {
+     .oc-select-dropdown__item.selected {
         color: #fff;
         background-color: #20a0ff
      }
 
-     .oc-input-select-dropdown__item.selected:hover {
+     .oc-select-dropdown__item.selected:hover {
         background-color: #1D8CE0
      }
 
-     .oc-input-select-dropdown__empty{
+     .oc-select-dropdown__empty{
         font-size: 12px;
         padding: 0px 10px;
         white-space: nowrap;
@@ -185,7 +185,7 @@
         line-height: 22px;
         box-sizing: border-box;
      }
-     .oc-input-select-dropdown__item:hover {
+     .oc-select-dropdown__item:hover {
         background-color: #e5e9f2
      }
 
@@ -193,7 +193,7 @@
         position: absolute;
         
      }*/
-     .oc-input-select__icon{
+     .oc-select__icon{
         position: absolute;
         right: 0px;
         top: 0px;
@@ -204,7 +204,7 @@
         cursor: pointer ;
      }
 
-     .oc-input-select__icon:after {
+     .oc-select__icon:after {
         content: '';
         height: 100%;
         width: 0;
