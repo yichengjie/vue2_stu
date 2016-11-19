@@ -18,7 +18,8 @@ module.exports = {
     loaders: [
         {test: /\.vue$/,loader: 'vue'},
         {test: /\.js$/,loader: 'babel',exclude: /node_modules/},
-        {test: /\.css$/, loader: ExtractTextPlugin.extract("style-loader", "css-loader") },
+        {test: /\.css$/, loader: ExtractTextPlugin.extract("style-loader","css-loader")},
+        {test: /\.less$/,loader: ExtractTextPlugin.extract("style-loader","css-loader","less-loader")},
         {test: /\.(eot|svg|ttf|woff|woff2)$/,loader: 'file'},
         {test: /\.(png|jpg|gif|svg)$/,loader: 'file',query: {name: '[name].[ext]?[hash]'}}
     ]
@@ -44,6 +45,12 @@ module.exports = {
   plugins: [
     new ExtractTextPlugin("[name].css"),
   ],
+  vue: {
+    loaders: {
+      css: ExtractTextPlugin.extract("css"),
+      less: ExtractTextPlugin.extract("css!less")
+    }
+  }
 }
 
 if (process.env.NODE_ENV === 'production') {

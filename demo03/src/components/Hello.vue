@@ -11,7 +11,7 @@
          }
     }
 </script>
-<style>
+<style lang="less">
     .mymessage{
         font-size:28px;
         color:red;

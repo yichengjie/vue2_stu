@@ -10,7 +10,8 @@ module.exports = {
     loaders: [
       {test: /\.vue$/,loader: 'vue'},
       {test: /\.js$/,loader: 'babel',exclude: /node_modules/},
-      {test: /\.css$/, loader: ExtractTextPlugin.extract("style-loader", "css-loader") },
+      {test: /\.css$/, loader: "style-loader!css-loader" },
+      {test: /\.less$/,loader: "style-loader!css-loader!less-loader"},
       {test: /\.(jpg|png|gif)$/, loader: "url?limit=8192&name=./images/[name].[hash:8].[ext]"},
       {test: /\.(eot|woff|ttf|svg)$/, loader: "file-loader?name=./file/[name].[hash:8].[ext]" }
     ]
@@ -20,7 +21,8 @@ module.exports = {
   ],
   vue: {
     loaders: {
-        css: ExtractTextPlugin.extract("css")
+      css: ExtractTextPlugin.extract("css"),
+      less: ExtractTextPlugin.extract("css!less")
     }
   }
 }

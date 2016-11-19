@@ -10,24 +10,24 @@
         </oc-form-item2>
         <oc-form-item2 label="发布对象" prop ="pub" >
             <oc-select  slot="range1"  :readonly="readonly"
-                :options = "selectOption.pubOptions" 
+                :options = "selectOption.pubOptions"
                 v-model="ruleForm.pubType" />
             <oc-input type="text" slot="range2" v-model="ruleForm.pubValue" :readonly="readonly" />
         </oc-form-item2>
 
         <oc-form-item1 label="星期" prop="dayOfWeak">
-           <oc-checkbox name ="dayOfWeak" 
+           <oc-checkbox name ="dayOfWeak"
               :readonly="readonly"
-              :options="selectOption.dayOfWeakOption" 
+              :options="selectOption.dayOfWeakOption"
               v-model ="ruleForm.dayOfWeak" />
         </oc-form-item1>
 
         <oc-form-item1 label="是否收费" prop="freeOrNot">
-           <oc-radio name ="freeOrNot" 
-              :options="selectOption.freeOrNotOption" 
+           <oc-radio name ="freeOrNot"
+              :options="selectOption.freeOrNotOption"
               v-model ="ruleForm.freeOrNot" />
         </oc-form-item1>
-        
+
         <oc-form-item1 label="生效日期" prop="startDate">
            <oc-datepicker  :readonly="readonly"
               v-model ="ruleForm.startDate" />
@@ -39,7 +39,7 @@
         </oc-form-item1>
 
         <oc-form-item1 label="可输入可选"  :span="6">
-           <oc-input-select 
+           <oc-input-select
               :options="selectOption.inputSelectOption"
               :readonly="readonly"
               :width="160"
@@ -48,7 +48,7 @@
         </oc-form-item1>
 
         <oc-form-item1 label="可输入可选2"  :span="6">
-           <oc-input-select 
+           <oc-input-select
               :options="selectOption.inputSelectOption"
               :readonly="readonly"
               v-model ="ruleForm.dept2"
@@ -173,14 +173,15 @@
         //     }
         // }) ;
       }
-      
+
     },
     components:{
     }
   }
 </script>
-<style>
-  body{
-    margin: 50px;
+<style lang ="less">
+  @num:50px;
+  .tttt{
+    margin: @num ;
   }
 </style>
