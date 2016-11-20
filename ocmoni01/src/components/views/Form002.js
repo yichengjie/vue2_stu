@@ -94,6 +94,6 @@ export let selectOption= {
         {name:"10021",value:'10021'},
         {name:"10032",value:"10032"},
         {name:"10043",value:"10043"},
-        {name:"10054",value:"10054"},
+        {name:"10054",value:"10054"}
     ]
 };

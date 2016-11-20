@@ -1,11 +1,11 @@
 <template>
-    <select  
-        :value="value" 
-        class="form-control input-sm"  
+    <select
+        :value="value"
+        class="form-control input-sm"
         @change="onChange"
         :disabled="readonly">
-        <option 
-            v-for="item in options" 
+        <option
+            v-for="item in options"
             :value="item.value"
             >
             {{item.name}}
