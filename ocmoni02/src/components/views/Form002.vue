@@ -1,89 +1,14 @@
 <template>
-    <oc-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-        <oc-form-item1 label="活动名称" prop="name">
-            <oc-input type="text" v-model="ruleForm.name" :readonly="readonly"/>
-        </oc-form-item1>
+    <el-form :model="ruleForm" :rules="rules" :inline="true" ref="ruleForm" label-width="100px">
+        <el-form-item label="活动名称" prop="name">
+            <el-input type="text" v-model="ruleForm.name" :readonly="readonly"/>
+        </el-form-item>
 
-        <oc-form-item2 label="年龄" prop="age">
-             <oc-input type="text" slot="range1" v-model="ruleForm.age1"  :readonly="readonly"/>
-             <oc-input type="text" slot="range2" v-model="ruleForm.age2"  :readonly="readonly"/>
-        </oc-form-item2>
-        <oc-form-item2 label="发布对象" prop ="pub" >
-            <oc-select  slot="range1"  :readonly="readonly"
-                :options = "selectOption.pubOptions"
-                v-model="ruleForm.pubType" />
-            <oc-input type="text" slot="range2" v-model="ruleForm.pubValue" :readonly="readonly" />
-        </oc-form-item2>
-
-        <oc-form-item1 label="星期" prop="dayOfWeak">
-           <oc-checkbox name ="dayOfWeak"
-              :readonly="readonly"
-              :options="selectOption.dayOfWeakOption"
-              v-model ="ruleForm.dayOfWeak" />
-        </oc-form-item1>
-
-        <oc-form-item1 label="是否收费" prop="freeOrNot">
-           <oc-radio name ="freeOrNot"
-              :options="selectOption.freeOrNotOption"
-              v-model ="ruleForm.freeOrNot" />
-        </oc-form-item1>
-
-        <oc-form-item1 label="生效日期" prop="startDate">
-           <oc-datepicker  :readonly="readonly"
-              v-model ="ruleForm.startDate" />
-        </oc-form-item1>
-
-        <oc-form-item1 label="截止日期" prop="endDate">
-           <oc-datepicker  :readonly="readonly"
-              v-model ="ruleForm.endDate" />
-        </oc-form-item1>
-
-        <oc-form-item1 label="可输入可选"  :span="6">
-           <oc-input-select
-              :options="selectOption.inputSelectOption"
-              :readonly="readonly"
-              :width="160"
-              v-model ="ruleForm.dept"
-              :strict="true" />
-        </oc-form-item1>
-
-        <oc-form-item1 label="可输入可选2"  :span="6">
-           <oc-input-select
-              :options="selectOption.inputSelectOption"
-              :readonly="readonly"
-              v-model ="ruleForm.dept2"
-              />
-        </oc-form-item1>
-
-        <oc-form-item1 label="描述信息" prop="descr" :span="6">
-           <oc-textarea v-model ="ruleForm.descr"  :readonly="readonly" />
-        </oc-form-item1>
-
-        <oc-form-item0 label="金额" :span="6">
-            <table class="table table-bordered table-hover">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>First Name</th>
-                  <th>Last Name</th>
-                  <th>Username</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>3</td>
-                  <td colspan="2">Larry the Bird</td>
-                  <td>@twitter</td>
-                </tr>
-              </tbody>
-           </table>
-        </oc-form-item0>
-
-        <oc-form-item1 label =" ">
+        <el-form-item label =" ">
             <button class="btn btn-default" type="button" @click="handleSubmit">立即创建</button>
             <button class="btn btn-primary" type="button" @click="handleReset">重置</button>
-        </oc-form-item1>
-    </oc-form>
+        </el-form-item>
+    </el-form>
 </template>
 <script>
   import {validateAge,validatePub,selectOption,validateStartDate,validateEndDate} from './Form002.js' ;
