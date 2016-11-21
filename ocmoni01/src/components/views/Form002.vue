@@ -187,9 +187,18 @@
   }
 </script>
 <style lang ="less">
-  .form-control[readonly]{
-    background-color: #fff;
-    opacity: 1;
+  .form-control.oc_input_readonly{
+      background-color: #fff;
+      opacity: 1;
+  }
+  .form-control.oc_input_disabled{
+    background-color: #eee;
+    /*border-color: #D3DCE6;*/
+    color: #bbb;
+    cursor: not-allowed;
+  }
+  .oc_input_disabled::placeholder {
+      color: #C0CCDA
   }
   body{
     margin: 50px;

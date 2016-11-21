@@ -5,7 +5,8 @@
         >
         <input type="text"
             ref ="inputselect"
-            class="form-control input-sm oc-select__input"
+            class="form-control input-sm"
+            v-bind:class="{ 'oc_input_readonly': readonly, 'oc_input_disabled': disabled }"
             :name="name"
             :readonly="readonly"
             :disabled ="disabled"
