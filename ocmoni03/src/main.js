@@ -22,7 +22,7 @@ import MyPlugin from './components/common/index.js' ;
 Vue.use(MyPlugin) ;
 
 
-import App from './App.vue' ;
+import App from './components/s7-edit/App.vue' ;
 new Vue({
   el: '#app',
   render: h => h(App)
