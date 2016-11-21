@@ -7,6 +7,7 @@
 	        <span>规则</span>
 	        <span class="pull-right marginR15">
 	        	<button type="button" id="back" @click ="backPage" class="btn btn-default btn-sm">返回</button>
+                <button type="button" id="back" @click ="clickResetFormBtn" class="btn btn-danger btn-sm">重置</button>
 	            <button type="button" id="s7_save" @click ="submitForm('save')" class="btn btn-default btn-sm">保存</button>
 	            <button type="button" id="s7_saveAndPublish" @click="submitForm('saveAndPublish')"  class="btn btn-default btn-sm btn-success">保存并发布</button>
 	        </span>
@@ -26,7 +27,11 @@
                 console.info('back last page') ;
             },
             submitForm(type){
-                console.info('type : ' + type) ;
+                //console.info('type : ' + type) ;
+                this.$emit('clickSaveFormBtn',type) ;
+            },
+            clickResetFormBtn(){
+                this.$emit('clickResetFormBtn') ;
             }
         }
     }

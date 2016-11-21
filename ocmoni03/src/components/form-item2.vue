@@ -4,10 +4,10 @@
       <span>{{label}}</span>
     </label>
     <div class="col-sm-3">
-      <slot name ="range1"></slot>
+      <slot name ="slot1"></slot>
     </div>
     <div class="col-sm-3">
-      <slot name ="range2"></slot>
+      <slot name ="slot2"></slot>
     </div>
     <div class="error-tip" v-show="error !== ''">
        {{error}}

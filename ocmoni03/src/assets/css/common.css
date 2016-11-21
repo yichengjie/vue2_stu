@@ -245,7 +245,7 @@ ul{
 .content_layout .left{
     display: inline-block;
     box-sizing: border-box;
-    width: 9%;
+    width: 90px;
     float: left;
 }
 .content_layout .right{
@@ -254,7 +254,7 @@ ul{
     background-color:#F2F4F7;
     border:1px solid #C8D2DD;
     border-radius:3px;
-    width: 90%;
+    width: 92%;
     padding:15px 0px 5px;
 }
 
