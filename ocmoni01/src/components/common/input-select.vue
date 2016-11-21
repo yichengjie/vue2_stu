@@ -7,10 +7,10 @@
             ref ="inputselect"
             class="form-control input-sm oc-select__input"
             :name="name"
-            :readonly="!filterable"
-            :disabled ="readonly"
+            :readonly="readonly"
+            :disabled ="disabled"
             :placeholder="placeholder"
-            v-model ="filterKey"
+            :value="filterKey"
             @input="onInput"
             @click="onClickInput"
          />
@@ -41,15 +41,20 @@
             name:String,
             label: String,
             width:Number,
-            readonly:Boolean,
+            disabled:Boolean,
+            readonly:{
+                type:Boolean,
+                default:true
+            },
+            strict:{
+                type:Boolean,
+                default:false
+            },
             placeholder:String,
             url:String,
             value:[String,Number],
             options:Array,
-            strict:{
-                type:Boolean,
-                default:false
-            }
+            
         },
         directives: { Clickoutside },
         computed:{
@@ -77,25 +82,23 @@
             }
         },
         methods:{
-            handleClickItem(value){
+            handleClickItem(val){
                 this.visiable = false;
-                this.$emit('input',value) ;
+                this.$emit('input',val) ;
+                this.dispatch('form-item', 'el.form.change', [val]);
             },
             onInput(event){
                 let val = event.target.value ;
                 this.firstFocus = false ;
-                if(!this.strict){
-                    this.$emit('input',val) ;
-                }
+                this.filterKey = val ;
             },
             onClickInput(){
-                //如果以前
                 this.visiable = !this.visiable ;
                 this.firstFocus = true ;
             },
             handleClose(){
                 this.visiable = false;
-                this.filterKey = this.value ;
+                this.filterKey = getCheckItemName(this.options,this.value) ;
             },
             onClickIcon(){
                 this.firstFocus = true ;
@@ -106,19 +109,26 @@
             return{
                 visiable:false,
                 firstFocus:false,
-                filterKey:this.value,
-                filterable:false
+                filterKey: getCheckItemName(this.options,this.value) 
             } ;
         },
         watch:{
             value(val, oldVal){
-                this.filterKey = val ;
+                //console.info('value is change ' + val) ;
+                this.filterKey = getCheckItemName(this.options,val) ;
             }
         },
         mounted(){
             //this.filterKey = this.value ;
             //elem.find('span[name="customeEdit"]').bind('click',function  (event) {
         }
+    }
+
+    function getCheckItemName(options,val) { 
+        let retObj = options.find(function(item){
+             return item.value === val;
+        }) ;
+        return (retObj ? retObj.name : val) ;
     }
 </script>
 <style lang="less" src ="./input-select.less">

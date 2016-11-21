@@ -3,6 +3,7 @@
         :value="value"
         class="form-control input-sm"
         @change="onChange"
+        readonly="readonly"
         :disabled="readonly">
         <option
             v-for="item in options"

@@ -1,23 +1,29 @@
 <template>
     <oc-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
         <oc-form-item1 label="活动名称" prop="name">
-            <oc-input type="text" v-model="ruleForm.name" :readonly="readonly"/>
+            <oc-input type="text" v-model="ruleForm.name" :disabled="disabled" />
         </oc-form-item1>
 
         <oc-form-item2 label="年龄" prop="age">
-             <oc-input type="text" slot="range1" v-model="ruleForm.age1"  :readonly="readonly"/>
-             <oc-input type="text" slot="range2" v-model="ruleForm.age2"  :readonly="readonly"/>
+             <oc-input type="text" slot="range1" v-model="ruleForm.age1"  :disabled="disabled" />
+             <oc-input type="text" slot="range2" v-model="ruleForm.age2"  :disabled="disabled" />
         </oc-form-item2>
         <oc-form-item2 label="发布对象" prop ="pub" >
-            <oc-select  slot="range1"  :readonly="readonly"
+            <oc-input-select slot="range1" 
+              :options="selectOption.pubOptions"
+              :disabled="disabled"
+              v-model ="ruleForm.pubType"
+              :strict="true" />
+              <!--
+            <oc-select  slot="range1"  :disabled="disabled" 
                 :options = "selectOption.pubOptions"
-                v-model="ruleForm.pubType" />
-            <oc-input type="text" slot="range2" v-model="ruleForm.pubValue" :readonly="readonly" />
+                v-model="ruleForm.pubType" />-->
+            <oc-input type="text" slot="range2" v-model="ruleForm.pubValue" :disabled="disabled" />
         </oc-form-item2>
 
         <oc-form-item1 label="星期" prop="dayOfWeak">
            <oc-checkbox name ="dayOfWeak"
-              :readonly="readonly"
+              :disabled="disabled" 
               :options="selectOption.dayOfWeakOption"
               v-model ="ruleForm.dayOfWeak" />
         </oc-form-item1>
@@ -29,19 +35,19 @@
         </oc-form-item1>
 
         <oc-form-item1 label="生效日期" prop="startDate">
-           <oc-datepicker  :readonly="readonly"
+           <oc-datepicker  :disabled="disabled" 
               v-model ="ruleForm.startDate" />
         </oc-form-item1>
 
         <oc-form-item1 label="截止日期" prop="endDate">
-           <oc-datepicker  :readonly="readonly"
+           <oc-datepicker  :disabled="disabled" 
               v-model ="ruleForm.endDate" />
         </oc-form-item1>
 
         <oc-form-item1 label="可输入可选"  :span="6">
            <oc-input-select
               :options="selectOption.inputSelectOption"
-              :readonly="readonly"
+              :disabled="disabled"
               :width="160"
               v-model ="ruleForm.dept"
               :strict="true" />
@@ -50,13 +56,14 @@
         <oc-form-item1 label="可输入可选2"  :span="6">
            <oc-input-select
               :options="selectOption.inputSelectOption"
-              :readonly="readonly"
+              :disabled="disabled" 
+              :readonly="false"
               v-model ="ruleForm.dept2"
               />
         </oc-form-item1>
 
         <oc-form-item1 label="描述信息" prop="descr" :span="6">
-           <oc-textarea v-model ="ruleForm.descr"  :readonly="readonly" />
+           <oc-textarea v-model ="ruleForm.descr"  :disabled="disabled" />
         </oc-form-item1>
 
         <oc-form-item0 label="金额" :span="6">
@@ -104,7 +111,7 @@
           validateEndDate(value,callback,this) ;
       }
       return {
-        readonly:false,
+        disabled:false,
         selectOption:{
           ...selectOption
         },
@@ -180,8 +187,11 @@
   }
 </script>
 <style lang ="less">
-  @num:50px;
-  .tttt{
-    margin: @num ;
+  .form-control[readonly]{
+    background-color: #fff;
+    opacity: 1;
+  }
+  body{
+    margin: 50px;
   }
 </style>

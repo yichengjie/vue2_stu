@@ -107,7 +107,7 @@
         for(let i = 0 ; i < names.length ;i ++){
           model[names[i]] = values[i];
         }
-        console.info('model : ' ,JSON.stringify(model)) ;
+        //console.info('model : ' ,JSON.stringify(model)) ;
         validator.validate(model, { firstFields: true }, (errors, fields) => {
           this.valid = !errors;
           this.error = errors ? errors[0].message : '';

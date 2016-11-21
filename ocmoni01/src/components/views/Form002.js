@@ -87,13 +87,13 @@ export let selectOption= {
         {name:"收费",value:'1'},
     ],
     inputSelectOption:[
-        {name:"10011",value:'10011'},
-        {name:"10012",value:"10012"},
-        {name:"10013",value:"10013"},
-        {name:"10014",value:"10014"},
-        {name:"10021",value:'10021'},
-        {name:"10032",value:"10032"},
-        {name:"10043",value:"10043"},
-        {name:"10054",value:"10054"}
+        {name:"中国10011",value:'10011'},
+        {name:"人民10012",value:"10012"},
+        {name:"大学10013",value:"10013"},
+        {name:"北京10014",value:"10014"},
+        {name:"清华10021",value:'10021'},
+        {name:"大学10032",value:"10032"},
+        {name:"上海10043",value:"10043"},
+        {name:"复旦10054",value:"10054"}
     ]
 };
