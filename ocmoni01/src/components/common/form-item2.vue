@@ -40,14 +40,6 @@
         }
         return ret;
       },
-      contentStyle() {
-        var ret = {};
-        var labelWidth = this.labelWidth || this.form.labelWidth;
-        if (labelWidth) {
-          ret.marginLeft = labelWidth;
-        }
-        return ret;
-      },
       form() {
         var parent = this.$parent;
         while (parent.$options.componentName !== 'form') {
