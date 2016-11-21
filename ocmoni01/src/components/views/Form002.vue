@@ -9,11 +9,10 @@
              <oc-input type="text" slot="range2" v-model="ruleForm.age2"  :disabled="disabled" />
         </oc-form-item2>
         <oc-form-item2 label="发布对象" prop ="pub" >
-            <oc-input-select slot="range1" 
+            <oc-select slot="range1" 
               :options="selectOption.pubOptions"
               :disabled="disabled"
-              v-model ="ruleForm.pubType"
-              :strict="true" />
+              v-model ="ruleForm.pubType" />
               <!--
             <oc-select  slot="range1"  :disabled="disabled" 
                 :options = "selectOption.pubOptions"
@@ -45,16 +44,15 @@
         </oc-form-item1>
 
         <oc-form-item1 label="可输入可选"  :span="6">
-           <oc-input-select
+           <oc-select
               :options="selectOption.inputSelectOption"
               :disabled="disabled"
               :width="160"
-              v-model ="ruleForm.dept"
-              :strict="true" />
+              v-model ="ruleForm.dept"/>
         </oc-form-item1>
 
         <oc-form-item1 label="可输入可选2"  :span="6">
-           <oc-input-select
+           <oc-select
               :options="selectOption.inputSelectOption"
               :disabled="disabled" 
               :readonly="false"
@@ -126,7 +124,7 @@
           startDate:'',
           endDate:'',
           descr:'',
-          dept:'10021',
+          dept:'1002',
           dept2:''
         },
         rules: {
@@ -141,7 +139,7 @@
           },
           pub:{
             names:['pubType','pubValue'],
-            pubType:[{ validator: pub ,trigger: 'change'}],
+            pubType:[{ validator: pub ,trigger: 'change,blur'}],
           },
           startDate:[
             { required: true, message: '生效日期必填', trigger: 'change' },
@@ -197,8 +195,25 @@
     color: #bbb;
     cursor: not-allowed;
   }
-  .oc_input_disabled::placeholder {
+  .form-control.oc_input_disabled::placeholder {
       color: #C0CCDA
+  }
+  .oc-input__icon{
+      position: absolute;
+      right: 0px;
+      top: 0px;
+      width: 35px;
+      height: 100%;
+      text-align: center;
+      color: #C0CCDA;
+      cursor: pointer ;
+  }
+  .oc-input__icon:after {
+    content: '';
+    height: 100%;
+    width: 0;
+    display: inline-block;
+    vertical-align: middle
   }
   body{
     margin: 50px;

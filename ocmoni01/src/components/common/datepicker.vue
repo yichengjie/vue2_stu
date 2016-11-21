@@ -6,9 +6,10 @@
             @input ="onInput" 
             @blur ="onBlur" 
             class ="form-control input-sm"
-            :disabled="readonly"
+            :disabled="disabled"
         />
-        <label  class="glyphicon glyphicon-calendar oc-datepicker-icon"></label>
+        <!--oc-datepicker-icon-->
+        <label  class="glyphicon glyphicon-calendar  oc-input__icon"></label>
     </span>
 </template>
 <script>
@@ -22,7 +23,7 @@
                  type:String,
                  default:''
              },
-             readonly:Boolean
+             disabled:Boolean
          },
          data:function(){
             return {
