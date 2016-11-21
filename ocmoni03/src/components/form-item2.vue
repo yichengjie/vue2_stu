@@ -3,10 +3,10 @@
     <label class="control-label" :class ="{'required':required}" v-bind:style="labelStyle" v-if ="label"> 
       <span>{{label}}</span>
     </label>
-    <div class="col-sm-3">
+    <div class="col-sm-2">
       <slot name ="slot1"></slot>
     </div>
-    <div class="col-sm-3">
+    <div class="col-sm-2">
       <slot name ="slot2"></slot>
     </div>
     <div class="error-tip" v-show="error !== ''">

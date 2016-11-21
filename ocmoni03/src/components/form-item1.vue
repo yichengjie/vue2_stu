@@ -31,7 +31,7 @@
       rules: [Object, Array],
       span:{
         type:Number,
-        default:6
+        default:4
       }
     },
     computed: {
