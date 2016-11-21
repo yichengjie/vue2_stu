@@ -28,8 +28,8 @@
     display: inline-block;
     vertical-align: middle
 }
-control-label.required{
+.control-label.required::before{
     content: '*';
 	color: #ff4949;
-	margin-right: 4px
+	margin-right: 4px;
 }

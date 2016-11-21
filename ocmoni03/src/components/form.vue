@@ -11,7 +11,10 @@
       model: Object,
       rules: Object,
       labelPosition: String,
-      labelWidth: String,
+      labelWidth: {
+        type:String,
+        default:'100px'
+      },
       labelSuffix: {
         type: String,
         default: ''

@@ -36,10 +36,15 @@
 </template>
 
 <script>
-    import {getJspPageParam} from '../common/index.js' ;
+    import {getJspPageParam} from './common.js' ;
     export default {
         name: 'navbar',
-        props: ['activeName'],
+        props:{
+            activeName:{
+                type:String,
+                default:'附加服务'
+            }
+        },
         methods:{
             toIndexUI(){//首页
                 let url = "/oc/toQueryS7UI.action" ;
