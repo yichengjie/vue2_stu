@@ -128,5 +128,5 @@
         return (retObj ? retObj.name : val) ;
     }
 </script>
-<style lang="less" src ="./select.less">
+<style lang="less" src ="./select.css">
 </style>

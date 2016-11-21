@@ -1,6 +1,6 @@
 <template>
   <div class="form-group" :class ="{'has-error':error !== ''}">
-    <label class="control-label" v-bind:style="labelStyle" v-if ="label"> 
+    <label class="control-label" :class ="{'required':required}" v-bind:style="labelStyle" v-if ="label"> 
       <span>{{label}}</span>
     </label>
     <div :class="contentClass">
@@ -24,7 +24,10 @@
       label: String,
       labelWidth: String,
       prop: String,
-      required: Boolean,
+      required: {
+          type:Boolean,
+          default:false
+      },
       rules: [Object, Array],
       span:{
         type:Number,
@@ -69,7 +72,6 @@
         validateDisabled: false,
         validating: false,
         validator: {},
-        isRequired: false,
         initialValue: null
       };
     },
@@ -147,12 +149,6 @@
         this.initialValue = this.getInitialValue();
         let rules = this.getRules();
         if (rules.length) {
-          rules.every(rule => {
-            if (rule.required) {
-              this.isRequired = true;
-              return false;
-            }
-          });
           this.$on('el.form.blur', this.onFieldBlur);
           this.$on('el.form.change', this.onFieldChange);
         }

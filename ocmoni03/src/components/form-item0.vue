@@ -1,6 +1,6 @@
 <template>
     <div class="form-group">
-        <label class="control-label" :style="labelStyle" v-if ="label"> 
+        <label class="control-label" :class ="{'required':required}" :style="labelStyle" v-if ="label"> 
             <span>{{label}}</span>
         </label>
         <div :class="contentClass">
@@ -15,7 +15,10 @@
         props: {
             label: String,
             labelWidth: String,
-            required: Boolean,
+            required: {
+                type:Boolean,
+                default:false
+            },
             span:{
                 type:Number,
                 default:6

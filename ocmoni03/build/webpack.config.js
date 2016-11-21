@@ -26,6 +26,7 @@ module.exports = {
   },
   resolve: {
       alias: {
+        'assetsPath':assetsPath,
         'vue': 'vue/dist/vue.js',
         'lib':libPath,
         'tui_core_lib':libPath+"/tui-core/index.js",
@@ -33,8 +34,15 @@ module.exports = {
         'tui_drag_lib':libPath+"/tui-drag/index.js",
         'jq_datepicker_lib': libPath+"/jq-datepicker/index.js",
 	      'jq_timepicker_lib':libPath+"/jq-timepicker/index.js",
-        'jq_autocomplete_lib': libPath+"/jq-autocomplete/index.js",
-        'assetsPath':assetsPath
+        'modal_lib':libPath+"/modal.js",
+        'iconfont_lib':libPath+"/iconfont/iconfont.js",
+        'HttpClientUtil_lib':libPath+"/HttpClientUtil.js",
+        'util_lib':libPath+"/util.js",
+        'lodash_lib':libPath+"/lodash/lodash.js",
+        'moment_lib':libPath+"/moment/index.js",
+        'ajaxfileupload_lib':libPath+"/ajaxfileupload.js",
+        'is_loading_lib':libPath+"/is-loading/index.js",
+        'bt_growl_lib':libPath+"/bt-grow/jquery.bootstrap-growl.js"
       }
   },
   devServer: {

@@ -1,6 +1,6 @@
 <template>
   <div class="form-group" :class ="{'has-error':error !== ''}">
-    <label class="control-label" v-bind:style="labelStyle" v-if ="label"> 
+    <label class="control-label" :class ="{'required':required}" v-bind:style="labelStyle" v-if ="label"> 
       <span>{{label}}</span>
     </label>
     <div class="col-sm-3">
@@ -28,7 +28,10 @@
       label: String,
       labelWidth: String,
       prop: String,
-      required: Boolean,
+      required: {
+          type:Boolean,
+          default:false
+      },
       rules: [Object, Array]
     },
     computed: {
@@ -77,7 +80,6 @@
         validateDisabled: false,
         validating: false,
         validator: {},
-        isRequired: false,
         initialValueArr: null
       };
     },

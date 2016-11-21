@@ -9,7 +9,7 @@
             :disabled="disabled"
         />
         <!--oc-datepicker-icon-->
-        <label  class="glyphicon glyphicon-calendar  oc-input__icon"></label>
+        <label  class="el-icon-date  oc-input__icon"></label>
     </span>
 </template>
 <script>
