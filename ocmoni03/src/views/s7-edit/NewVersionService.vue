@@ -7,7 +7,8 @@
                     <div @click ="handleFocus" 
                          @input="handleInput"
                          class="el-input__inner" 
-                         contenteditable="true" v-html="filterKey" ></div>
+                         contenteditable="true" 
+                         v-html="filterKey" ></div>
                     <i class="el-icon-caret-bottom el-input__icon" @click ="handleFocus"></i>
                 </div>
 
