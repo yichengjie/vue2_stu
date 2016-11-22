@@ -9,6 +9,12 @@
         
         <div class="container-fluid main_content" >
            <oc-form :model ="formData" :rules="rules" ref ="editForm" label-width ="120px">
+
+              <DataSection left ="1.选择附加服务" right ="描述 | 费用">
+
+              </datasection>
+
+
                <DataSection left ="1.确定费用" right ="描述 | 费用">
                    <ContentLayout title="描述">
                         <oc-form-item1 label="销售生效日期" :required="true" prop ="firstMaintenanceDate">
