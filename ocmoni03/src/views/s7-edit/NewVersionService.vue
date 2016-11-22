@@ -17,8 +17,8 @@
                             v-for="item in filterList"
                             @click="handleClickItem(item.id)"
                             :class ="{'selected':item.id == value}"
+                            v-html="getItemShowStr(item)"
                         >
-                            {{getItemShowStr(item)}}
                         </li>
                     </ul>
                     <p class="oc-select-dropdown__empty" v-show="isEmptyFlag">
@@ -51,13 +51,11 @@
         },
         computed:{
             filterList(){
-                let joinKey =" > " ;
-                let toUpperCaseFlag = true ;
                 if((!this.firstFocus)&&this.filterKey&&this.filterKey.trim().length>0){
                     let tmp = this.filterKey.trim().toUpperCase() ;
                     //console.info('tmp : ' + tmp) ;
                     return this.options.filter(item=>{
-                        let tmpStr = getItemShowStrFn(item,joinKey,toUpperCaseFlag) ;
+                        let tmpStr = getItemShowStrFn4Filter(item) ;
                         if(tmpStr.indexOf(tmp)!=-1){
                             return true ;
                         }
@@ -79,7 +77,7 @@
                 this.visiable = false;
             },
             handleInput(event){
-                var val = $(event.target).text() ;
+                var val = $(event.target).text().trim() ;
                 this.filterKey = val ;
                 this.firstFocus = false;
             },
@@ -88,9 +86,7 @@
                 this.firstFocus = this.visiable;
             },
             getItemShowStr(item){
-                let joinKey = " > " ;
-                let toUpperCaseFlag = false;
-                return getItemShowStrFn(item,joinKey,toUpperCaseFlag) ;
+                return getItemShowStrFn(item) ;
             }
         },
         watch:{
@@ -106,18 +102,27 @@
         let retObj = options.find(function(item){
              return item.id === val;
         }) ;
-        let retStr = (retObj ? (getItemShowStrFn(retObj,joinKey,toUpperCaseFlag)) : val) ;
+        let retStr = (retObj ? (getItemShowStrFn(retObj)) : val) ;
         console.info('retStr : ' , retStr) ;
-        return  retStr;
+        return  retStr.trim();
     }
 
-    function getItemShowStrFn(item,joinKey,toUpperCaseFlag){
+    function getItemShowStrFn(item){
+        let joinKey = " > " ;
         let retStrArr = [] ;
         for(let name of filterNames){
             let val = item[name] || '空';
-            if(toUpperCaseFlag){
-                val = val.toUpperCase() ;
-            }
+            retStrArr.push("<span>"+val+"</span>") ;
+        }
+        return retStrArr.join(joinKey) ;
+    }
+
+    function getItemShowStrFn4Filter(item){
+        let joinKey = " > " ;
+        let retStrArr = [] ;
+        for(let name of filterNames){
+            let val = item[name] || '空';
+            val = val.toUpperCase() ;
             retStrArr.push(val) ;
         }
         return retStrArr.join(joinKey) ;
@@ -185,8 +190,5 @@
         width: 0;
         display: inline-block;
         vertical-align: middle
-    }
-    .oc-select-dropdown__item{
-        
     }
 </style>
