@@ -10,7 +10,7 @@
         <div class="container-fluid main_content" >
            <oc-form :model ="formData" :rules="rules" ref ="editForm" label-width ="120px">
 
-              <NewVersionService />
+              <NewVersionService v-model ="recordS5Id" :options ="optionsData.serviceChooseList" />
 
                <DataSection left ="2.确定费用" right ="描述 | 费用">
                    <ContentLayout title="描述">
@@ -36,8 +36,10 @@
                          <oc-form-item1 label="是否检查库存"  prop ="availability">
                             <oc-radio v-model ="formData.availability" :options='[{name:"是",value:"N"},{name:"否",value:"Y"}]'/>
                         </oc-form-item1>
+                        <oc-form-item1 label="测试select"  prop ="select2">
+                            <oc-select v-model ="formData.select2" :options ="options2" />
+                        </oc-form-item1>
                    </ContentLayout>
-                   
                </DataSection>
            </oc-form>
         </div>
@@ -69,13 +71,22 @@
                     description:'',
                     fareBasis:'',
                     discountCode:'',
-                    availability:''
+                    availability:'',
+                    select2:''
                 },
+                recordS5Id:'',
                 rules:{
                     firstMaintenanceDate: [
                         { required: true, message: '销售起始日期必填', trigger: 'change' },
                         { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'change' }
                     ]
+                },
+                options2:[
+                    {name:"选择",value:""},
+                    {name:"类型F",value:"F"}
+                ],
+                optionsData:{
+                     serviceChooseList:[]
                 }
             } ;
         },
@@ -98,7 +109,15 @@
        },
        mounted(){
            initPage4AddApi().then(retData=>{
-               console.info('success : ' ,retData) ;
+               if(retData.flag==='true'||retData.flag===true){
+                   let len = this.optionsData.serviceChooseList.length ;
+                   this.optionsData.serviceChooseList.splice(0,len) ;
+                   for(let item of retData.serviceChooseList){
+                       this.optionsData.serviceChooseList.push(item) ;
+                   }
+               }else{
+                   console.info('数据加载不完整...') ;
+               }
            },error =>{
                console.info('error : ',error) ;
            })

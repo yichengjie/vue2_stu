@@ -6,7 +6,7 @@
         <input type="text"
             ref ="inputselect"
             class="form-control input-sm"
-            v-bind:class="{ 'oc_input_readonly': readonly, 'oc_input_disabled': disabled }"
+            v-bind:class="{'oc_input_readonly': readonly, 'oc_input_disabled': disabled }"
             :name="name"
             :readonly="readonly"
             :disabled ="disabled"
@@ -38,6 +38,7 @@
     export default {
         name: 'oc-select',
         mixins: [emitter],
+        directives: { Clickoutside },
         props: {
             name:String,
             label: String,
@@ -53,7 +54,6 @@
             options:Array,
             
         },
-        directives: { Clickoutside },
         computed:{
             inputStyle(){
                 var inputWidth = this.width || '';
@@ -128,5 +128,5 @@
         return (retObj ? retObj.name : val) ;
     }
 </script>
-<style lang="less" src ="./select.css">
+<style  src ="./select.css">
 </style>

@@ -2,10 +2,25 @@
     <div class="data_section">
         <div class="title_layout">
             <span class="left">1.选择附加服务</span>
-            <div style="width: 57%;height: 36px; display: inline-block;vertical-align: middle;">
+            <div class="service-choose-container" v-clickoutside="handleClose">
                 <div class="el-input">
-                    <div class="el-input__inner" contenteditable="true" ></div>
+                    <div @click ="visiable = !visiable" class="el-input__inner" contenteditable="true" >{{this.value}}</div>
                     <i class="el-icon-caret-bottom el-input__icon"></i>
+                </div>
+
+                <div class="oc-select-dropdown" v-show="visiable">
+                    <ul class="oc-select-dropdown__list" v-show="!isEmptyFlag">
+                        <li class="oc-select-dropdown__item"
+                            v-for="item in options"
+                            @click="handleClickItem(item.id)"
+                            :class ="{'selected':item.id == value}"
+                        >
+                            {{item.serviceType +' ' + item.attributesGroup}}
+                        </li>
+                    </ul>
+                    <p class="oc-select-dropdown__empty" v-show="isEmptyFlag">
+                        无匹配数据
+                    </p>
                 </div>
             </div>
         </div>
@@ -13,14 +28,68 @@
     
 </template>
 <script>
+    import emitter from '../../components/util/emitter.js';
+    import Clickoutside from '../../components/util/clickoutside.js';
     export default {
         props:{
+            value:String,
             options:Array,
             currentObj:Object
+        },
+        mixins: [emitter],
+        directives: { Clickoutside },
+        data(){
+            return {
+                visiable:false,
+                filterKey: getCheckItemName(this.options,this.value) 
+            };
+        },
+        computed:{
+            filterList(){
+                if((!this.firstFocus)&&this.filterKey&&this.filterKey.trim().length>0){
+                    let tmp = this.filterKey.trim() ;
+                    return this.options.filter(item=>{
+                        if(item.name.indexOf(tmp)!=-1){
+                            return true ;
+                        }
+                        return false;
+                    });
+                }
+                return this.options ;
+            },
+            isEmptyFlag(){
+                return this.filterList.length == 0 ;
+            }
+        },
+        methods:{
+            handleClose(){
+                this.visiable = false;
+            },
+            handleClickItem(val){
+                console.info('id : ' + val) ;
+                this.$emit('input',val) ;
+                this.visiable = false;
+            }
+        },
+        watch:{
+          
         }
     } 
+    function getCheckItemName(options,val) { 
+        let retObj = options.find(function(item){
+             return item.id === val;
+        }) ;
+        return (retObj ? (item.serviceType +' ' + item.attributesGroup) : val) ;
+    }
 </script>
 <style scoped>
+    .service-choose-container{
+        width: 57%;
+        height: 36px; 
+        display: inline-block;
+        vertical-align: middle;
+        position: relative;
+    }
     .el-input {
         position: relative;
         font-size: 14px
