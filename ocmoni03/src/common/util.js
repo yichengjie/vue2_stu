@@ -5,6 +5,14 @@
 	require('bt_growl_lib') ;
 	require('is_loading_lib') ;
 	var util = {};
+	
+
+	util.getJspPageParam=function(){
+		var carrCode = $("#carrCode").val() ;
+		var contextPath = $("#contextPath").val() ;
+		return {carrCode,contextPath} ;
+	}
+
 	util.showLoading = function(){
 		$.isLoading({
             'text': "请稍候..." ,

@@ -10,12 +10,9 @@
         <div class="container-fluid main_content" >
            <oc-form :model ="formData" :rules="rules" ref ="editForm" label-width ="120px">
 
-              <DataSection left ="1.选择附加服务" right ="描述 | 费用">
+              <NewVersionService />
 
-              </datasection>
-
-
-               <DataSection left ="1.确定费用" right ="描述 | 费用">
+               <DataSection left ="2.确定费用" right ="描述 | 费用">
                    <ContentLayout title="描述">
                         <oc-form-item1 label="销售生效日期" :required="true" prop ="firstMaintenanceDate">
                             <oc-datepicker v-model ="formData.firstMaintenanceDate" />
@@ -52,12 +49,15 @@
     import QuerySection from './QuerySection.vue' ;
     import DataSection from './DataSection.vue' ;
     import ContentLayout from './ContentLayout.vue' ;
+    import NewVersionService from './NewVersionService.vue' ;
+    import {initPage4AddApi} from '../../api/s7-edit.js' ;
     export default {
         components:{
             Navbar,
             QuerySection,
             DataSection,
-            ContentLayout
+            ContentLayout,
+            NewVersionService
         },
         data(){
             return {
@@ -95,6 +95,13 @@
             handleReset() {
                 this.$refs.editForm.resetFields();
             },
+       },
+       mounted(){
+           initPage4AddApi().then(retData=>{
+               console.info('success : ' ,retData) ;
+           },error =>{
+               console.info('error : ',error) ;
+           })
        }
     }
 </script>

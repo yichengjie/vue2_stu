@@ -1,5 +1,5 @@
 let _ = require('lodash') ;
-let util = require('util_lib') ;
+let util = require('util') ;
 let ht = 140 ;
 let moment = require('moment_lib') ;
 export const defaultPageSize = 15  ;
@@ -19,15 +19,6 @@ export function orderListData(list,titleName,ascFlag){
         retArr.forEach(item => list.push(item) ) ;
     }
 }
-
-
-
-export function getJspPageParam (){
-	var carrCode = $("#carrCode").val() ;
-	var contextPath = $("#contextPath").val() ;
-	return {carrCode,contextPath} ;
-}
-
 
 //生成一个随机数
 export function random (min,max){

@@ -217,7 +217,7 @@ ul{
     border-radius:2px;
     box-shadow:0 1px 1px;
     margin:10px 0 0 0;
-    padding:20px 10px 10px 10px;
+    padding:15px 10px 10px 10px;
 }
 .data_section:after{
     clear: both;
@@ -225,8 +225,8 @@ ul{
     content: '';
 }
 .title_layout {
-    height: 30px;
-    line-height:30px;
+    height: 36px;
+    line-height:36px;
 }
 .title_layout .left{
     float: left;

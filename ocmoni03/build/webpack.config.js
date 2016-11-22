@@ -5,19 +5,23 @@ var projectRoot = path.resolve(__dirname, '../') ;
 var distPath = projectRoot + "/dist" ;
 var srcPath = projectRoot +"/src" ;
 var libPath = projectRoot +"/src/lib" ;
+var commonPath = projectRoot +"/src/common" ;
 var assetsPath = projectRoot +"/src/assets" ;
 
 module.exports = {
-  entry: srcPath+"/main.js",
+  entry: {
+    's7Edit':srcPath+"/main.js",
+    's7EditMock':srcPath+'/mockjs/s7-edit.js'
+  },
   output: {
      path: distPath,
      publicPath: '/dist/',
-     filename: 'build.js'
+     filename: '[name].js'
   },
   module: {
     loaders: [
         {test: /\.vue$/,loader: 'vue'},
-        {test: /\.js$/,loader: 'babel',exclude: /node_modules/},
+        {test: /\.js$/,loader: 'babel',exclude: /node_modules|lib/},
         {test: /\.css$/, loader: ExtractTextPlugin.extract("style-loader","css-loader")},
         {test: /\.less$/,loader: ExtractTextPlugin.extract("style-loader","css-loader","less-loader")},
         {test: /\.(eot|svg|ttf|woff|woff2)$/,loader: 'file'},
@@ -36,13 +40,13 @@ module.exports = {
 	      'jq_timepicker_lib':libPath+"/jq-timepicker/index.js",
         'modal_lib':libPath+"/modal.js",
         'iconfont_lib':libPath+"/iconfont/iconfont.js",
-        'HttpClientUtil_lib':libPath+"/HttpClientUtil.js",
-        'util_lib':libPath+"/util.js",
         'lodash_lib':libPath+"/lodash/lodash.js",
         'moment_lib':libPath+"/moment/index.js",
         'ajaxfileupload_lib':libPath+"/ajaxfileupload.js",
         'is_loading_lib':libPath+"/is-loading/index.js",
-        'bt_growl_lib':libPath+"/bt-grow/jquery.bootstrap-growl.js"
+        'bt_growl_lib':libPath+"/bt-grow/jquery.bootstrap-growl.js",
+        'HttpClientUtil':commonPath+"/HttpClientUtil.js",
+        'util':commonPath+"/util.js"
       }
   },
   devServer: {

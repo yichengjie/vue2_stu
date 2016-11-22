@@ -1,12 +1,23 @@
 <template>
-    <div class="el-input">
-        <div class="el-input__inner" contenteditable="true" ></div>
-        <i class="el-icon-caret-bottom el-input__icon"></i>
+    <div class="data_section">
+        <div class="title_layout">
+            <span class="left">1.选择附加服务</span>
+            <div style="width: 57%;height: 36px; display: inline-block;vertical-align: middle;">
+                <div class="el-input">
+                    <div class="el-input__inner" contenteditable="true" ></div>
+                    <i class="el-icon-caret-bottom el-input__icon"></i>
+                </div>
+            </div>
+        </div>
     </div>
+    
 </template>
 <script>
     export default {
-        
+        props:{
+            options:Array,
+            currentObj:Object
+        }
     } 
 </script>
 <style scoped>
@@ -33,7 +44,7 @@
         background-color: #fff;
         background-image: none;
         border: 1px solid #C0CCDA;
-        border-radius: 4px;
+        border-radius: 2px;
         -webkit-transition: border-color .2s cubic-bezier(.645,.045,.355,1);
         transition: border-color .2s cubic-bezier(.645,.045,.355,1);
         outline: 0;
