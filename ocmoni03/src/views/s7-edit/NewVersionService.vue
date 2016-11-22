@@ -186,4 +186,7 @@
         display: inline-block;
         vertical-align: middle
     }
+    .oc-select-dropdown__item{
+        
+    }
 </style>
