@@ -6,6 +6,28 @@ export const defaultPageSize = 15  ;
 export const defaultOrderTitleName = "lastUpdateDate" ;
 var datetimeForm = "YYYY-MM-DD hh:mm" ;
 
+
+var debounce = function(fn, delay) {
+    var timeout;
+    return function() {
+        var self = this;
+        var args = arguments;
+        window.clearTimeout(timeout);
+        timeout = window.setTimeout(function() {
+            fn.apply(self, args);
+        }, delay);
+    };
+};
+
+
+var escape_html = function(str) {
+    return (str + '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+};
+
 export function convertDateTimeStr2Date(str){
     return moment(str, datetimeForm) ;
 }

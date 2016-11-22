@@ -5,8 +5,6 @@ var carrCode = "CA" ;
             "description": "B747-400CMB"
  *///contextPath
 var initPage4AddUrl = contextPath+'/s7/initPage4Add.action' ;
- console.info('mock url : ' + initPage4AddUrl) ;
-
 Mock.mock(initPage4AddUrl, {
     "equipmentList|5":[
         {
@@ -33,7 +31,7 @@ Mock.mock(initPage4AddUrl, {
         }
     ],
     "serviceGroupList|+1":202,
-    "serviceChooseList|20":[
+    "serviceChooseList|10-20":[
         {
             "id":"@id",
             "carrCode":"CA",
