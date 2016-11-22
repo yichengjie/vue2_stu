@@ -18,17 +18,20 @@
                             <oc-datepicker v-model ="formData.lastMaintenanceDate" />
                         </oc-form-item1>
                         <oc-form-item2 label="服务套数" :required="true" prop ="serviceNumber">
-                            <oc-input slot="slot1" v-model ="formData.serviceNumberMinimum" />
-                             <oc-input slot="slot2" v-model ="formData.serviceNumberMaximum" />
+                            <oc-input-number slot="slot1" :min="18" :max ="100" placeholder="起始套数" v-model ="formData.serviceNumberMinimum" />
+                            <oc-input-number slot="slot2" :min="18" :max ="100" placeholder="结束套数" v-model ="formData.serviceNumberMaximum" />
                         </oc-form-item2>
                         <oc-form-item1 label="描述"  prop ="description">
-                            <oc-textarea v-model ="formData.description" />
+                            <oc-textarea v-model ="formData.description" placeholder ="描述信息" />
                         </oc-form-item1>
                         <oc-form-item1 label="产品代码"  prop ="fareBasis">
-                            <oc-input v-model ="formData.fareBasis" />
+                            <oc-input v-model ="formData.fareBasis" :upper="true"  />
                         </oc-form-item1>
                         <oc-form-item1 label="折扣代码"  prop ="discountCode">
-                            <oc-input v-model ="formData.discountCode" />
+                            <oc-input v-model ="formData.discountCode" :maxlength="5"/>
+                        </oc-form-item1>
+                         <oc-form-item1 label="是否检查库存"  prop ="availability">
+                            <oc-radio v-model ="formData.availability" :options='[{name:"是",value:"N"},{name:"否",value:"Y"}]'/>
                         </oc-form-item1>
                    </ContentLayout>
                    
@@ -59,12 +62,13 @@
                     serviceNumberMaximum:'',
                     description:'',
                     fareBasis:'',
-                    discountCode:''
+                    discountCode:'',
+                    availability:''
                 },
                 rules:{
                     firstMaintenanceDate: [
-                        { required: true, message: '请输入活动名称', trigger: 'blur' },
-                        { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+                        { required: true, message: '销售起始日期必填', trigger: 'change' },
+                        { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'change' }
                     ]
                 }
             } ;

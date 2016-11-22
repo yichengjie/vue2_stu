@@ -4,6 +4,7 @@ import FormItem0 from './form-item0.vue' ;
 import FormItem1 from './form-item1.vue' ;
 import FormItem2 from './form-item2.vue' ;
 import Input from './input.vue' ;
+import InputNumber from './input-number.vue' ;
 import Select from './select.vue' ;
 import Checkbox from './checkbox.vue' ;
 import Radio from './radio.vue' ;
@@ -18,6 +19,7 @@ function install (Vue,options){
     Vue.component(FormItem1.name, FormItem1);
     Vue.component(FormItem2.name, FormItem2);
     Vue.component(Input.name, Input);
+    Vue.component(InputNumber.name, InputNumber);
     Vue.component(Select.name, Select);
     Vue.component(Checkbox.name, Checkbox);
     Vue.component(Radio.name, Radio);

@@ -24,18 +24,23 @@
       autofocus: Boolean,
       name: String,
       maxlength: Number,
-      readonly:Boolean
+      readonly:Boolean,
+      upper:Boolean
     },
     methods: {
       handleBlur(event) {
-        this.$emit('blur', event);
-        this.dispatch('form-item', 'el.form.blur', [this.currentValue]);
+        var val = event.target.value || '';
+        this.$emit('blur', val);
+        this.dispatch('form-item', 'el.form.blur', [val]);
       },
       handleFocus(event) {
-        this.$emit('focus', event);
+        this.$emit('focus', event.target.value);
       },
       handleInput(event) {
         var val = event.target.value;
+        if(this.upper){
+          val = val.toUpperCase() ;
+        }
         this.$emit('input', val);
         this.$emit('change', val);
         this.dispatch('form-item', 'el.form.change', [val]);
