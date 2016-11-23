@@ -122,7 +122,7 @@
         let serviceSubCode = item['serviceSubCode'] || '空';
         let commercialName = item['commercialName'] || '空';
         let serviceType = item['serviceType'] || '空' ;
-        let showServiceTypeStr = '<span class="marginL5 serviceTypeSpan">'+serviceType+'</span>' ;
+        let showServiceTypeStr = '<span class="marginLR5 serviceTypeSpan">'+serviceType+'</span>' ;
         return serviceGroupDescription +joinKey + serviceSubCode + joinKey +"["+serviceSubCode+"] "+commercialName +showServiceTypeStr;
     }
 
