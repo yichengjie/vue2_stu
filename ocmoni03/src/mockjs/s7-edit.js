@@ -41,6 +41,7 @@ Mock.mock(initPage4AddUrl, {
             "attributesGroup|1":["BG","BD"],
             "attributesSubgroup|1":['22','54','44'],
             "serviceGroupDescription|1":['22','54','44'],
+            "subGroupDescription|1":['Priority Boarding','Priority','Boarding',''],
             "subCodeTableNo163|1":['9000101',"9000102","9000103"]
         }
     ]

@@ -115,6 +115,7 @@
                    for(let item of retData.serviceChooseList){
                        this.optionsData.serviceChooseList.push(item) ;
                    }
+                   console.info("retList : " ,retData.serviceChooseList) ;
                }else{
                    console.info('数据加载不完整...') ;
                }

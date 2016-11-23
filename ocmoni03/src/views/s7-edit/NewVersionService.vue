@@ -8,7 +8,7 @@
                          @input="handleInput"
                          class="el-input__inner" 
                          contenteditable="true" 
-                         v-html="filterKey" ></div>
+                         v-html="filterKey"></div>
                     <i class="el-icon-caret-bottom el-input__icon" @click ="handleFocus"></i>
                 </div>
 
@@ -34,7 +34,8 @@
 <script>
     import emitter from '../../components/util/emitter.js';
     import Clickoutside from '../../components/util/clickoutside.js';
-    let filterNames = ["serviceType","attributesGroup"] ;
+    import {escape_html} from '../common/common.js' ;
+    let filterNames = ["serviceGroupDescription","subGroupDescription","serviceSubCode","commercialName","serviceType"] ;
     export default {
         props:{
             value:String,
@@ -55,8 +56,10 @@
                 if((!this.firstFocus)&&this.filterKey&&this.filterKey.trim().length>0){
                     let tmp = this.filterKey.trim().toUpperCase() ;
                     //console.info('tmp : ' + tmp) ;
+                    //22 > 0JK > [0JK] cm002
                     return this.options.filter(item=>{
                         let tmpStr = getItemShowStrFn4Filter(item) ;
+                        //console.info('test : ' + tmpStr) ;
                         if(tmpStr.indexOf(tmp)!=-1){
                             return true ;
                         }
@@ -72,15 +75,18 @@
         methods:{
             handleClose(){
                 this.visiable = false;
+                this.filterKey = getCheckItemName(this.options,this.value)  ;
             },
             handleClickItem(val){
                 this.$emit('input',val) ;
                 this.visiable = false;
             },
             handleInput(event){
-                var val = $(event.target).text().trim() ;
+                var val = $(event.target).text() ;
+                //console.info('val : ' + val) ;
                 this.filterKey = val ;
                 this.firstFocus = false;
+               // $(event.target).focus() ;
             },
             handleFocus(){
                 this.visiable = !this.visiable ;
@@ -104,30 +110,33 @@
              return item.id === val;
         }) ;
         let retStr = (retObj ? (getItemShowStrFn(retObj)) : val) ;
-        console.info('retStr : ' , retStr) ;
+        //console.info('retStr : ' , retStr) ;
         return  retStr.trim();
     }
 
     function getItemShowStrFn(item){
         let joinKey = " > " ;
-        let retStrArr = [] ;
-        for(let name of filterNames){
-            let val = item[name] || '空';
-            retStrArr.push("<span>"+val+"</span>") ;
-        }
-        return retStrArr.join(joinKey) ;
+        //"serviceGroupDescription","subGroupDescription","serviceSubCode","commercialName","serviceType"
+        let serviceGroupDescription = item['serviceGroupDescription'] || '空';
+        let subGroupDescription = item['subGroupDescription'] || '空';
+        let serviceSubCode = item['serviceSubCode'] || '空';
+        let commercialName = item['commercialName'] || '空';
+        let serviceType = item['serviceType'] || '空' ;
+        let showServiceTypeStr = '<span class="marginL5 serviceTypeSpan">'+serviceType+'</span>' ;
+        return serviceGroupDescription +joinKey + serviceSubCode + joinKey +"["+serviceSubCode+"] "+commercialName +showServiceTypeStr;
     }
 
     function getItemShowStrFn4Filter(item){
         let joinKey = " > " ;
-        let retStrArr = [] ;
-        for(let name of filterNames){
-            let val = item[name] || '空';
-            val = val.toUpperCase() ;
-            retStrArr.push(val) ;
-        }
-        return retStrArr.join(joinKey) ;
+        let serviceGroupDescription = item['serviceGroupDescription'] || '空';
+        let subGroupDescription = item['subGroupDescription'] || '空';
+        let serviceSubCode = item['serviceSubCode'] || '空';
+        let commercialName = item['commercialName'] || '空';
+        let serviceType = item['serviceType'] || '空' ;
+        let retStr = serviceGroupDescription +joinKey + serviceSubCode + joinKey +"["+serviceSubCode+"] "+commercialName +serviceType ;
+        return  retStr.toUpperCase() ;;
     }
+    
 </script>
 <style scoped>
     .service-choose-container{

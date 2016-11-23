@@ -19,14 +19,13 @@ var debounce = function(fn, delay) {
     };
 };
 
-
-var escape_html = function(str) {
+export function escape_html (str){
     return (str + '')
         .replace(/&/g, '&amp;')
         .replace(/</g, '&lt;')
         .replace(/>/g, '&gt;')
         .replace(/"/g, '&quot;');
-};
+}
 
 export function convertDateTimeStr2Date(str){
     return moment(str, datetimeForm) ;
