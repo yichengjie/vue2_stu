@@ -1,7 +1,7 @@
 <template>
   <div class="form-group" :class ="{'has-error':error !== ''}">
-    <label class="control-label" :class ="{'required':required}" v-bind:style="labelStyle" v-if ="label"> 
-      <span>{{label}}</span>
+    <label class="control-label" :title="label" :class ="{'required':required}" v-bind:style="labelStyle" v-if ="label"> 
+      {{label}}
     </label>
     <div class="col-sm-2">
       <slot name ="slot1"></slot>
@@ -23,7 +23,6 @@
     name: 'oc-form-item2',
     componentName: 'form-item',
     mixins: [emitter],
-
     props: {
       label: String,
       labelWidth: String,
@@ -32,6 +31,7 @@
           type:Boolean,
           default:false
       },
+      names:Array,
       rules: [Object, Array]
     },
     computed: {
@@ -51,13 +51,14 @@
         return parent;
       },
       fieldNameArr(){//获取字段名称数组
-          var formRules = this.form.rules;//[this.prop]
-          var fieldRules = formRules ? formRules[this.prop] : undefined ;
-          if(fieldRules && fieldRules['names']){
-            return fieldRules['names'] ;
-          }else{
-            return [] ;
-          }
+          // var formRules = this.form.rules;//[this.prop]
+          // var fieldRules = formRules ? formRules[this.prop] : undefined ;
+          // if(fieldRules && fieldRules['names']){
+          //   return fieldRules['names'] ;
+          // }else{
+          //   return [] ;
+          // }
+          return this.names || [] ;
       },
       fieldValueArr: {
         cache: false,

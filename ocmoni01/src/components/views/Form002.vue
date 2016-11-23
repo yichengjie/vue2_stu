@@ -5,8 +5,8 @@
         </oc-form-item1>
 
         <oc-form-item2 label="年龄" prop="age">
-             <oc-input type="text" slot="range1" v-model="ruleForm.age1"  :disabled="disabled" />
-             <oc-input type="text" slot="range2" v-model="ruleForm.age2"  :disabled="disabled" />
+             <oc-input-number type="text" slot="range1" v-model="ruleForm.age1"  :disabled="disabled" />
+             <oc-input-number type="text" slot="range2" v-model="ruleForm.age2"  :disabled="disabled" />
         </oc-form-item2>
         <oc-form-item2 label="发布对象" prop ="pub" >
             <oc-select slot="range1" 
@@ -14,6 +14,7 @@
               :disabled="disabled"
               v-model ="ruleForm.pubType" />
               <!--
+
             <oc-select  slot="range1"  :disabled="disabled" 
                 :options = "selectOption.pubOptions"
                 v-model="ruleForm.pubType" />-->

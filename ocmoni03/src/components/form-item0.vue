@@ -1,7 +1,7 @@
 <template>
     <div class="form-group">
-        <label class="control-label" :class ="{'required':required}" :style="labelStyle" v-if ="label"> 
-            <span>{{label}}</span>
+        <label class="control-label" :title="label" :class ="{'required':required}" :style="labelStyle" v-if ="label"> 
+            {{label}}
         </label>
         <div :class="contentClass">
             <slot></slot>
@@ -24,6 +24,11 @@
                 default:4
             }
         },//computed:
+        data(){
+            return {
+                visiable:true
+            } ;
+        },
         computed: {
             labelStyle() {
                 var ret = {};
@@ -36,7 +41,7 @@
             form() {
                 var parent = this.$parent;
                 while (parent.$options.componentName !== 'form') {
-                parent = parent.$parent;
+                    parent = parent.$parent;
                 }
                 return parent;
             },

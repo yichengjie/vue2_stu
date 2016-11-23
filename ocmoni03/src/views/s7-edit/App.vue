@@ -10,7 +10,7 @@
         <div class="container-fluid main_content" >
            <oc-form :model ="formData" :rules="rules" ref ="editForm" label-width ="120px">
 
-              <NewVersionService v-model ="recordS5Id" :options ="optionsData.serviceChooseList" />
+               <NewVersionService :value ="recordS5Id" @input ="handleSelectService" :options ="optionsData.serviceChooseList" />
 
                <DataSection left ="2.确定费用" right ="描述 | 费用">
                    <ContentLayout title="描述">
@@ -20,9 +20,9 @@
                         <oc-form-item1 label="销售截止日期"  prop ="lastMaintenanceDate">
                             <oc-datepicker v-model ="formData.lastMaintenanceDate" />
                         </oc-form-item1>
-                        <oc-form-item2 label="服务套数" :required="true" prop ="serviceNumber">
-                            <oc-input-number slot="slot1" :min="18" :max ="100" placeholder="起始套数" v-model ="formData.serviceNumberMinimum" />
-                            <oc-input-number slot="slot2" :min="18" :max ="100" placeholder="结束套数" v-model ="formData.serviceNumberMaximum" />
+                        <oc-form-item2 label="服务套数" prop ="serviceNumber" :names ="['serviceNumberMinimum','serviceNumberMaximum']">
+                            <oc-input-number slot="slot1" :min="0" :max ="100" placeholder="0-100之间" v-model ="formData.serviceNumberMinimum" />
+                            <oc-input-number slot="slot2" :min="0" :max ="100" placeholder="0-100之间" v-model ="formData.serviceNumberMaximum" />
                         </oc-form-item2>
                         <oc-form-item1 label="描述"  prop ="description">
                             <oc-textarea v-model ="formData.description" placeholder ="描述信息" />
@@ -36,7 +36,7 @@
                          <oc-form-item1 label="是否检查库存"  prop ="availability">
                             <oc-radio v-model ="formData.availability" :options='[{name:"是",value:"N"},{name:"否",value:"Y"}]'/>
                         </oc-form-item1>
-                        <oc-form-item1 label="测试select"  prop ="select2">
+                        <oc-form-item1 label="RESULTING TICKET DESIGNATOR"  prop ="select2">
                             <oc-select v-model ="formData.select2" :options ="options2" />
                         </oc-form-item1>
                    </ContentLayout>
@@ -106,6 +106,10 @@
             handleReset() {
                 this.$refs.editForm.resetFields();
             },
+            handleSelectService(id){
+                console.info('id : ' + id) ;
+                this.recordS5Id = id ;
+            }
        },
        mounted(){
            initPage4AddApi().then(retData=>{

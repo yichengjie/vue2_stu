@@ -1,7 +1,7 @@
 <template>
   <div class="form-group" :class ="{'has-error':error !== ''}">
-    <label class="control-label" :class ="{'required':required}" v-bind:style="labelStyle" v-if ="label"> 
-      <span>{{label}}</span>
+    <label class="control-label" :title="label" :class ="{'required':required}" v-bind:style="labelStyle" v-if ="label"> 
+      {{label}}
     </label>
     <div :class="contentClass">
       <slot></slot>
