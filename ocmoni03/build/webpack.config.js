@@ -22,8 +22,8 @@ module.exports = {
     loaders: [
         {test: /\.vue$/,loader: 'vue'},
         {test: /\.js$/,loader: 'babel',exclude: /node_modules|lib/},
-        {test: /\.css$/, loader: ExtractTextPlugin.extract("style-loader","css-loader")},
-        {test: /\.less$/,loader: ExtractTextPlugin.extract("style-loader","css-loader","less-loader")},
+        {test: /\.css$/, loader: ExtractTextPlugin.extract("css-loader")},
+        {test: /\.less$/,loader: ExtractTextPlugin.extract("css-loader","less-loader")},
         {test: /\.json$/,loader: 'json-loader'},
         {test: /\.(eot|svg|ttf|woff|woff2)$/,loader: 'file'},
         {test: /\.(png|jpg|gif|svg)$/,loader: 'file',query: {name: '[name].[ext]?[hash]'}}
