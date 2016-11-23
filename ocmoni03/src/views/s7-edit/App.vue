@@ -9,9 +9,7 @@
         
         <div class="container-fluid main_content" >
            <oc-form :model ="formData" :rules="rules" ref ="editForm" label-width ="120px">
-
-               <NewVersionService :value ="serviceData.recordS5Id" 
-                    @input ="handleSelectService" 
+               <NewVersionService :value ="serviceData.recordS5Id" @input ="handleSelectService" 
                     :options ="serviceData.serviceChooseList" />
 
                <DataSection left ="2.确定费用" right ="描述 | 费用">
@@ -20,6 +18,9 @@
                             <oc-datepicker v-model ="formData.firstMaintenanceDate" />
                         </oc-form-item1>
                         <oc-form-item1 label="销售截止日期"  prop ="lastMaintenanceDate">
+                            <oc-datepicker v-model ="formData.lastMaintenanceDate" />
+                        </oc-form-item1>
+                        <oc-form-item1 label="使用时间限制"  prop ="lastMaintenanceDate">
                             <oc-datepicker v-model ="formData.lastMaintenanceDate" />
                         </oc-form-item1>
                         <oc-form-item2 label="服务套数" prop ="serviceNumber" 
