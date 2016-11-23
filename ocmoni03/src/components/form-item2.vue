@@ -1,5 +1,5 @@
 <template>
-  <div class="form-group" :class ="{'has-error':error !== ''}">
+  <div class="form-group" :class ="{'has-error':error !== ''}" v-show ="visiable">
     <label class="control-label" :title="label" :class ="{'required':required}" v-bind:style="labelStyle" v-if ="label"> 
       {{label}}
     </label>
@@ -18,11 +18,12 @@
 <script>
   import AsyncValidator from 'async-validator';
   import emitter from './util/emitter';
+  import mixin2 from './mixin/form-item.js' ;
 
   export default {
     name: 'oc-form-item2',
     componentName: 'form-item',
-    mixins: [emitter],
+    mixins: [emitter,mixin2],
     props: {
       label: String,
       labelWidth: String,
@@ -81,11 +82,18 @@
         validateDisabled: false,
         validating: false,
         validator: {},
-        initialValueArr: null
+        initialValueArr: null,
+        visiable:true/*是否可见，如果控件不可见，对应的字段value将会被清空**/
       };
     },
     methods: {
       validate(trigger, cb) {
+        //如果控件不可见，则不做表单校验
+        if(!this.visiable){
+           cb && cb();
+           return true;
+        }
+        //进行验证先关的操作
         //console.info('validate .......') ;
         var rules = this.getFilteredRule(trigger);
         if (rules==null) {
@@ -169,6 +177,12 @@
       }
     },
     mounted() {
+
+      console.info('serviceTypeList ',this.serviceTypeList) ;
+      console.info('groupList ',this.groupList) ;
+      console.info('subGroupList ',this.subGroupList) ;
+
+
       if (this.prop) {
         this.dispatch('form', 'el.form.addField', [this]);
         this.initialValueArr = this.getInitialValueArr();

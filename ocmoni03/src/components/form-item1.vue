@@ -1,5 +1,5 @@
 <template>
-  <div class="form-group" :class ="{'has-error':error !== ''}">
+  <div class="form-group" :class ="{'has-error':error !== ''}" v-show ="visiable">
     <label class="control-label" :title="label" :class ="{'required':required}" v-bind:style="labelStyle" v-if ="label"> 
       {{label}}
     </label>
@@ -15,11 +15,12 @@
 <script>
   import AsyncValidator from 'async-validator';
   import emitter from './util/emitter';
+  import mixin2 from './mixin/form-item.js' ;
 
   export default {
     name: 'oc-form-item1',
     componentName: 'form-item',
-    mixins: [emitter],
+    mixins: [emitter,mixin2],
     props: {
       label: String,
       labelWidth: String,
@@ -72,11 +73,17 @@
         validateDisabled: false,
         validating: false,
         validator: {},
-        initialValue: null
+        initialValue: null,
       };
     },
     methods: {
       validate(trigger, cb) {
+        //如果控件不可见，则不做表单校验
+        if(!this.visiable){
+           cb && cb();
+           return true;
+        }
+        //进行验证先关的操作
         var rules = this.getFilteredRule(trigger);
         if (!rules || rules.length === 0) {
           cb && cb();
@@ -158,4 +165,5 @@
       this.dispatch('form', 'el.form.removeField', [this]);
     }
   };
+
 </script>

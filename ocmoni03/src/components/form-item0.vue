@@ -26,7 +26,7 @@
         },//computed:
         data(){
             return {
-                visiable:true
+                visiable:true/*是否可见，如果控件不可见，对应的字段value将会被清空**/
             } ;
         },
         computed: {
