@@ -20,12 +20,12 @@
                         <oc-form-item1 label="销售截止日期"  prop ="lastMaintenanceDate">
                             <oc-datepicker v-model ="formData.lastMaintenanceDate" />
                         </oc-form-item1>
-                        <oc-form-item2 label="使用时间限制"  prop="test"
+                        <oc-form-item2 label="使用时间限制"  prop="useDateLimit"
                             :subGroupList="['FP','FL']"
-                            :subGroup="serviceData.subGroup" >
+                            :subGroup="serviceData.subGroup" 
+                            :names="['firstUseDate','lastUseDate','effectivePeriodType','effectivePeriodNumber','effectivePeriodUnit']">
                             <div class="col-sm-4">
-                                <UseDateLimitChangeBtn v-model ="formData.useDateLimitTye" 
-                                    :formData="formData"
+                                <UseDateLimitChangeBtn v-model ="formData.useDateLimitTye"  :formData="formData"
                                     :subGroup="serviceData.subGroup"/>
                                 <div class = "table_layout" style="width: 100%;" v-show="formData.useDateLimitTye==''">
                                     <oc-datepicker v-model="formData.firstUseDate" style="width:48%;display: inline-block;" />
@@ -86,7 +86,7 @@
     import ContentLayout from './ContentLayout.vue' ;
     import NewVersionService from './NewVersionService.vue' ;
     import {initPage4AddApi} from '../../api/s7-edit.js' ;
-    import {validateServiceNumber} from './validate.js' ;
+    import {validateServiceNumber,validateUseDateLimit} from './validate.js' ;
     import UseDateLimitChangeBtn from './UseDateLimitChangeBtn.vue' ;
     export default {
         components:{
@@ -99,8 +99,11 @@
         },
         data(){
 
-            let serviceNumber =(rule, value, callback)=>{
+            let serviceNumber =(rule, value, callback) =>{
                  validateServiceNumber(value,callback,this) ;
+            }
+            let useDateLimit = (rule, value, callback) =>{
+                validateUseDateLimit(value,callback,this) ;
             }
 
             return {
@@ -137,6 +140,11 @@
                     serviceNumber:{
                         serviceNumberMinimum:[{required:true,trigger:'blur',message: '服务套数1必填'}],
                         serviceNumberMaximum:[{ validator: serviceNumber ,trigger: 'blur'}]
+                    },
+                    useDateLimit:{
+                        firstUseDate:[
+                            {validator: useDateLimit ,trigger: 'change,blur'}
+                        ]
                     }
                 },
                 options2:[

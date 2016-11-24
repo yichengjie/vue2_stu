@@ -81,12 +81,14 @@
     margin-bottom: 12px;
   }
   .form-group .error-tip{
+      display: inline-block;
       color: red ;
       margin-top: 7px;
       margin-left: 0px;
       padding-left: 0px;
       font-size: 12px ;
       float: left ;
-      width: 150px;
+      width: 200px;
+      height: 100%;
   }
 </style>

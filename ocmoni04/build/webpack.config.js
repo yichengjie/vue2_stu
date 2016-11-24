@@ -63,7 +63,8 @@ module.exports = {
       css: ExtractTextPlugin.extract("css"),
       less: ExtractTextPlugin.extract("css!less")
     }
-  }
+  },
+  devtool:'#source-map' 
 }
 
 if (process.env.NODE_ENV === 'production') {

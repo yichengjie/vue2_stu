@@ -16,7 +16,7 @@
       } ,
       methods:{
           handleChangeUseDateLimitTye(val){
-              if(this.subGroup==='FP'){
+              if(this.subGroup !== 'FL'){
                   this.$emit('input',val) ;
               }
           }
