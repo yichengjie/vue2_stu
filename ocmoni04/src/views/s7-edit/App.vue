@@ -21,12 +21,19 @@
                             <oc-datepicker v-model ="formData.lastMaintenanceDate" />
                         </oc-form-item1>
                         <oc-form-item2 label="使用时间限制"  prop="test"
-                            :names ="[]"
                             :subGroupList="['FP','FL']"
-                            :subGroup="serviceData.subGroup"
-                            >
+                            :subGroup="serviceData.subGroup" >
                             <div class="col-sm-4">
-                                 <oc-input ></oc-input>
+                                <UseDateLimitChangeBtn v-model ="formData.useDateLimitTye"/>
+                                <div class = "table_layout" style="width: 100%;" v-show="formData.useDateLimitTye==''">
+                                    <oc-datepicker style="width:48%;display: inline-block;" />
+                                    <oc-datepicker style="width:48%;display: inline-block;" />
+                                </div>
+                                <div class = "table_layout" style="width: 100%;" v-show="formData.useDateLimitTye=='1'">
+                                    <oc-select style="width:32%;display: inline-block;"  :options ="options2"/>
+                                    <oc-input style="width:32%;display: inline-block;" />
+                                    <oc-select style="width:33%;display: inline-block;"  :options ="options2"/>
+                                </div>
                             </div>
                         </oc-form-item2>
                         <oc-form-item2 label="服务套数" prop ="serviceNumber" 
@@ -76,13 +83,15 @@
     import NewVersionService from './NewVersionService.vue' ;
     import {initPage4AddApi} from '../../api/s7-edit.js' ;
     import {validateServiceNumber} from './validate.js' ;
+    import UseDateLimitChangeBtn from './UseDateLimitChangeBtn.vue' ;
     export default {
         components:{
             Navbar,
             QuerySection,
             DataSection,
             ContentLayout,
-            NewVersionService
+            NewVersionService,
+            UseDateLimitChangeBtn
         },
         data(){
 
@@ -100,7 +109,8 @@
                     fareBasis:'',
                     discountCode:'',
                     availability:'',
-                    select2:''
+                    select2:'',
+                    useDateLimitTye:'',//使用时间限制类型[时间段:'']或[期限:'1']
                 },
                 serviceData:{/*选择服务相关的数据**/
                     recordS5Id:'',
