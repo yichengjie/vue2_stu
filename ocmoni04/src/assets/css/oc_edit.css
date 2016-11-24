@@ -136,10 +136,31 @@
     border-left:0 none;
 }
 /**服务选择相关css end*/
-.discountBtn {  color:#EEE; padding: 3px 10px; margin:0 0 5px 3px; border-radius: 15px; cursor: pointer;background-color: #AAA;}
-.discountCheck{ background-color: #F20;color: white;}
-.inputDisabled{cursor: not-allowed;background-color: #999999;opacity: 0.3;}
+.discountBtn {  
+    color:#EEE; 
+    padding: 3px 10px; 
+    margin:0 0 5px 3px; 
+    border-radius: 15px; 
+    cursor: pointer;
+    background-color: #AAA;
+}
+.discountCheck{ 
+    background-color: #F20;
+    color: white;
+}
+.inputDisabled{
+    cursor: not-allowed;
+    background-color: #999999;
+    opacity: 0.3;
+}
 
+.discountBtn.is-disabled{
+    color: #C0CCDA;
+	cursor: not-allowed
+}
+.discountBtn.is-disabled:hover{
+    background-color: #fff
+}
 /*****************  xmlValidate start *********************/
 .xmlResponseLayout{
     position:fixed;

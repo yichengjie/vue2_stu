@@ -281,11 +281,11 @@
             "carrCode": "CA",
             "serviceType": "F",
             "serviceSubCode": "0JK",
-            "commercialName": "INFBAG UPTO15LB-bg",
-            "attributesGroup": "BG",
-            "attributesSubgroup": "IN",
-            "serviceGroupDescription": "Baggage",
-            "subGroupDescription": "Infant Baggage",
+            "commercialName": "Fare Lock-fl",
+            "attributesGroup": "FL",
+            "attributesSubgroup": "FL",
+            "serviceGroupDescription": "fare lock",
+            "subGroupDescription": "fare lock",
             "subCodeTableNo163": 0
         },
         {

@@ -480,3 +480,11 @@ td input[type=text],td select{
     text-overflow:ellipsis;
     white-space:nowrap;
 }
+
+is-disabled{
+    color: #C0CCDA;
+	cursor: not-allowed
+}
+is-disabled:hover{
+    background-color: #fff
+}

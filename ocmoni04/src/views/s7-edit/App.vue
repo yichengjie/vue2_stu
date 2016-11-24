@@ -24,15 +24,19 @@
                             :subGroupList="['FP','FL']"
                             :subGroup="serviceData.subGroup" >
                             <div class="col-sm-4">
-                                <UseDateLimitChangeBtn v-model ="formData.useDateLimitTye"/>
+                                <UseDateLimitChangeBtn v-model ="formData.useDateLimitTye" 
+                                    :formData="formData"
+                                    :subGroup="serviceData.subGroup"/>
                                 <div class = "table_layout" style="width: 100%;" v-show="formData.useDateLimitTye==''">
-                                    <oc-datepicker style="width:48%;display: inline-block;" />
-                                    <oc-datepicker style="width:48%;display: inline-block;" />
+                                    <oc-datepicker v-model="formData.firstUseDate" style="width:48%;display: inline-block;" />
+                                    <oc-datepicker v-model="formData.lastUseDate" style="width:48%;display: inline-block;" />
                                 </div>
                                 <div class = "table_layout" style="width: 100%;" v-show="formData.useDateLimitTye=='1'">
-                                    <oc-select style="width:32%;display: inline-block;"  :options ="options2"/>
-                                    <oc-input style="width:32%;display: inline-block;" />
-                                    <oc-select style="width:33%;display: inline-block;"  :options ="options2"/>
+                                    <oc-select v-model="formData.effectivePeriodType" style="width:48%;display: inline-block;"  
+                                        :options ="optionsData.effectivePeriodType"/>
+                                    <oc-input v-model ="formData.effectivePeriodNumber" style="width:24%;display: inline-block;" />
+                                    <oc-select v-model ="formData.effectivePeriodUnit" style="width:24%;display: inline-block;"  
+                                        :options ="optionsData.effectivePeriodUnit"/>
                                 </div>
                             </div>
                         </oc-form-item2>
@@ -111,6 +115,11 @@
                     availability:'',
                     select2:'',
                     useDateLimitTye:'',//使用时间限制类型[时间段:'']或[期限:'1']
+                    effectivePeriodType:'',
+                    effectivePeriodNumber:'',
+                    effectivePeriodUnit:'',
+                    firstUseDate:'',
+                    lastUseDate:''
                 },
                 serviceData:{/*选择服务相关的数据**/
                     recordS5Id:'',
@@ -135,7 +144,14 @@
                     {name:"类型F",value:"F"}
                 ],
                 optionsData:{
-                     
+                    effectivePeriodType:[
+                        {"name":"选择","value":""},{"name":"距购买服务后","value":"A"},
+                        {"name":"距服务兑换后","value":"B"},{"name":"距航班起飞前","value":"D"}
+                    ] ,
+                    effectivePeriodUnit:[
+                        {"name":"天","value":"D"},{"name":"月","value":"M"},
+                        {"name":"小时","value":"H"}
+                    ]
                 }
             } ;
         },
