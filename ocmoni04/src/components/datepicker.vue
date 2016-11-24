@@ -23,7 +23,11 @@
                  type:String,
                  default:''
              },
-             disabled:Boolean
+             disabled:Boolean,
+             time:{
+                 type:Boolean,
+                 default:false
+             }
          },
          data:function(){
             return {
@@ -46,13 +50,26 @@
          },
          mounted:function(el){
             var _self = this ;
-            var options = {"showButtonPanel":true,"dateFormat":"yy-mm-dd"} ;
-            options.onSelect = function(dateText,picker){
+            var minDate = new Date() ;
+            var optionObj = {"showButtonPanel":true,"dateFormat":"yy-mm-dd"} ;
+            optionObj.onSelect = function(dateText,picker){
                 _self.$emit('input',dateText) ;
                 _self.$emit('change', dateText);
                 _self.dispatch('form-item', 'el.form.change', dateText);
             }
-            $('#'+this.randomId).datepicker(options) ;
+            optionObj.minDate = minDate ;
+            if(this.time){
+                optionObj.timeFormat = 'HH:mm' ;
+                optionObj.timeText="&nbsp;&nbsp;时间" ; 
+                optionObj.hourText ="&nbsp;&nbsp;时" ;
+                optionObj.minuteText ="&nbsp;&nbsp;分" ;  
+                //optionObj.secondText = "&nbsp;&nbsp;秒" ;
+                optionObj.currentText = "当前" ;
+                optionObj.closeText = "关闭" ;
+                $('#'+this.randomId).datetimepicker(optionObj) ;
+            }else{
+                $('#'+this.randomId).datepicker(optionObj) ;
+            }
          }
     }
 </script>

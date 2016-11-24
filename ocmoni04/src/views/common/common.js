@@ -6,7 +6,6 @@ export const defaultPageSize = 15  ;
 export const defaultOrderTitleName = "lastUpdateDate" ;
 var datetimeForm = "YYYY-MM-DD hh:mm" ;
 
-
 var debounce = function(fn, delay) {
     var timeout;
     return function() {

@@ -79,16 +79,18 @@
   }
   .form-group{
     margin-bottom: 12px;
+    position: relative;
   }
   .form-group .error-tip{
       display: inline-block;
+      position: absolute;
       color: red ;
       margin-top: 7px;
       margin-left: 0px;
       padding-left: 0px;
       font-size: 12px ;
-      float: left ;
       width: 200px;
-      height: 100%;
+      bottom: 7px ;
+      
   }
 </style>

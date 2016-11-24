@@ -8,6 +8,7 @@ require('tui_core_lib') ;
 require('tui_dialog_lib') ;
 require('tui_drag_lib') ;
 require('jq_datepicker_lib') ;
+require('jq_timepicker_lib') ;
 require('assetsPath/css/common.css') ;
 require('assetsPath/css/oc_edit.css') ;
 require('assetsPath/css/tui_dialog.css') ;

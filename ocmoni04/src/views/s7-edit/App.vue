@@ -15,10 +15,10 @@
                <DataSection left ="2.确定费用" right ="描述 | 费用">
                    <ContentLayout title="描述">
                         <oc-form-item1 label="销售生效日期" :required="true" prop ="firstMaintenanceDate">
-                            <oc-datepicker v-model ="formData.firstMaintenanceDate" />
+                            <oc-datepicker v-model ="formData.firstMaintenanceDate" :time="true" />
                         </oc-form-item1>
                         <oc-form-item1 label="销售截止日期"  prop ="lastMaintenanceDate">
-                            <oc-datepicker v-model ="formData.lastMaintenanceDate" />
+                            <oc-datepicker v-model ="formData.lastMaintenanceDate"  :time="true" />
                         </oc-form-item1>
                         <oc-form-item2 label="使用时间限制"  prop="useDateLimit"
                             :subGroupList="['FP','FL']"
@@ -98,14 +98,12 @@
             UseDateLimitChangeBtn
         },
         data(){
-
             let serviceNumber =(rule, value, callback) =>{
                  validateServiceNumber(value,callback,this) ;
             }
             let useDateLimit = (rule, value, callback) =>{
                 validateUseDateLimit(value,callback,this) ;
             }
-
             return {
                 formData:{
                     firstMaintenanceDate:'',
@@ -134,8 +132,7 @@
                 },
                 rules:{
                     firstMaintenanceDate: [
-                        { required: true, message: '销售起始日期必填', trigger: 'change' },
-                        { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'change' }
+                        { required: true, message: '销售起始日期必填', trigger: 'change' }
                     ],
                     serviceNumber:{
                         serviceNumberMinimum:[{required:true,trigger:'blur',message: '服务套数1必填'}],
