@@ -33,7 +33,7 @@
     </span>
 </template>
 <script>
-    import emitter from './util/emitter';
+    import emitter from './mixin/emitter';
     import Clickoutside from './util/clickoutside';
     export default {
         name: 'oc-select',

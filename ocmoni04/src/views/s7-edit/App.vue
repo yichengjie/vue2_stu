@@ -20,9 +20,15 @@
                         <oc-form-item1 label="销售截止日期"  prop ="lastMaintenanceDate">
                             <oc-datepicker v-model ="formData.lastMaintenanceDate" />
                         </oc-form-item1>
-                        <oc-form-item1 label="使用时间限制"  prop ="lastMaintenanceDate">
-                            <oc-datepicker v-model ="formData.lastMaintenanceDate" />
-                        </oc-form-item1>
+                        <oc-form-item2 label="使用时间限制"  prop="test"
+                            :names ="[]"
+                            :subGroupList="['FP','FL']"
+                            :subGroup="serviceData.subGroup"
+                            >
+                            <div class="col-sm-4">
+                                 <oc-input ></oc-input>
+                            </div>
+                        </oc-form-item2>
                         <oc-form-item2 label="服务套数" prop ="serviceNumber" 
                             :names ="['serviceNumberMinimum','serviceNumberMaximum']"
                             :serviceTypeList="['F','R','T','A','B','C','E','P']"

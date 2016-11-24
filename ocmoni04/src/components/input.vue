@@ -13,7 +13,7 @@
       />
 </template>
 <script>
-  import emitter from './util/emitter';
+  import emitter from './mixin/emitter';
   //import calcTextareaHeight from './calcTextareaHeight';
   export default {
     name: 'oc-input',

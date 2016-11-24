@@ -13,7 +13,7 @@
     </span>
 </template>
 <script>
-    import emitter from './util/emitter';
+    import emitter from './mixin/emitter';
     export default {
          name:'oc-datepicker',
          //props:['value'],

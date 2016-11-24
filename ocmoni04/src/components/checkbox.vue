@@ -12,7 +12,7 @@
     </div>
 </template>
 <script>
-    import emitter from './util/emitter';
+    import emitter from './mixin/emitter';
     export default {
         name: 'oc-checkbox',
         mixins: [emitter],

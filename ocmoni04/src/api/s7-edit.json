@@ -269,11 +269,11 @@
             "carrCode": "CA",
             "serviceType": "F",
             "serviceSubCode": "123",
-            "commercialName": "tyyyy-y",
-            "attributesGroup": "Y",
-            "attributesSubgroup": "ER",
-            "serviceGroupDescription": "yuu",
-            "subGroupDescription": "",
+            "commercialName": "通用券-fp",
+            "attributesGroup": "FP",
+            "attributesSubgroup": "FP",
+            "serviceGroupDescription": "通用券",
+            "subGroupDescription": "通用券",
             "subCodeTableNo163": 0
         },
         {

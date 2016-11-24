@@ -12,7 +12,7 @@
 
 <script>
   import AsyncValidator from 'async-validator';
-  import emitter from './util/emitter';
+  import emitter from './mixin/emitter';
   import mixin2 from './mixin/form-item.js' ;
 
   export default {
