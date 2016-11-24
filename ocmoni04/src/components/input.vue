@@ -34,7 +34,7 @@
         this.dispatch('form-item', 'el.form.blur', [val]);
       },
       handleFocus(event) {
-        this.$emit('focus', event.target.value);
+        this.$emit('focus', event);
       },
       handleInput(event) {
         var val = event.target.value;

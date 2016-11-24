@@ -3,12 +3,7 @@
     <label class="control-label" :title="label" :class ="{'required':required}" v-bind:style="labelStyle" v-if ="label"> 
       {{label}}
     </label>
-    <div class="col-sm-2">
-      <slot name ="slot1"></slot>
-    </div>
-    <div class="col-sm-2">
-      <slot name ="slot2"></slot>
-    </div>
+    <slot></slot>
     <div class="error-tip" v-show="error !== ''">
        {{error}}
     </div>
@@ -108,7 +103,7 @@
         var values = this.fieldValueArr ;
         var model = {};
         for(let i = 0 ; i < names.length ;i ++){
-          model[names[i]] = values[i];
+          model[names[i]] = values[i] +"";
         }
         //console.info('model : ' ,JSON.stringify(model)) ;
         validator.validate(model, { firstFields: true }, (errors, fields) => {

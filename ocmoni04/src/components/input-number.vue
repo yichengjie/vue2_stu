@@ -33,10 +33,7 @@
       min: {
         type: Number,
         default: 0
-      },
-      value: {
-        default: 0
-      },
+      }
     },
     data(){
         // let value = this.value;
@@ -55,11 +52,10 @@
     methods: {
       handleBlur(event) {
          let value = Number(this.currentValue);
+         //如果页面上填写的数据有问题，进行回退到上一次的数据,否则不管
          if (isNaN(value) || value > this.max || value < this.min) {
             this.currentValue = this.value;
-         } else {
-           this.currentValue = value;
-         }
+         } 
          this.$emit('blur', this.currentValue);
          this.dispatch('form-item', 'el.form.blur', [this.currentValue]);
       },
@@ -78,8 +74,9 @@
       }
     },
     watch: {
-      value(val) {
-        this.currentValue = val;
+      value(newVal,oldVal) {
+        console.info('newVal : ' + newVal) ;
+        this.currentValue = newVal;
       }
     },
   };

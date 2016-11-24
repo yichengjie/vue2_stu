@@ -30,8 +30,12 @@
                             :groupList="['FP']"
                             :group="serviceData.group"
                             >
-                            <oc-input-number slot="slot1" :min="0" :max ="100" placeholder="0-100之间" v-model ="formData.serviceNumberMinimum" />
-                            <oc-input-number slot="slot2" :min="0" :max ="100" placeholder="0-100之间" v-model ="formData.serviceNumberMaximum" />
+                            <div class="col-sm-2">
+                                <oc-input-number slot="slot1" :min="0" :max ="100" placeholder="0-100之间" v-model ="formData.serviceNumberMinimum" />
+                            </div>
+                            <div class="col-sm-2">
+                                 <oc-input-number slot="slot2" :min="0" :max ="100" placeholder="0-100之间" v-model ="formData.serviceNumberMaximum" />
+                            </div>
                         </oc-form-item2>
                         <oc-form-item1 label="描述"  prop ="description"
                             :serviceTypeList="['F','M','R','T','B','E']"
@@ -65,6 +69,7 @@
     import ContentLayout from './ContentLayout.vue' ;
     import NewVersionService from './NewVersionService.vue' ;
     import {initPage4AddApi} from '../../api/s7-edit.js' ;
+    import {validateServiceNumber} from './validate.js' ;
     export default {
         components:{
             Navbar,
@@ -74,6 +79,11 @@
             NewVersionService
         },
         data(){
+
+            let serviceNumber =(rule, value, callback)=>{
+                 validateServiceNumber(value,callback,this) ;
+            }
+
             return {
                 formData:{
                     firstMaintenanceDate:'',
@@ -98,7 +108,11 @@
                     firstMaintenanceDate: [
                         { required: true, message: '销售起始日期必填', trigger: 'change' },
                         { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'change' }
-                    ]
+                    ],
+                    serviceNumber:{
+                        serviceNumberMinimum:[{required:true,trigger:'blur',message: '服务套数1必填'}],
+                        serviceNumberMaximum:[{ validator: serviceNumber ,trigger: 'blur'}]
+                    }
                 },
                 options2:[
                     {name:"选择",value:""},
