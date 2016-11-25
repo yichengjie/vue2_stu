@@ -15,8 +15,8 @@ export function initPage4AddApi(){
 
 
 export function initPage4UpdateApi(){
-    let formData = {
-        firstMaintenanceDate:'2016-10-21'
+    let formData = {//2016-10-21 13:45
+        firstMaintenanceDate:''
     } ;
     let retData ={
         flag:true ,

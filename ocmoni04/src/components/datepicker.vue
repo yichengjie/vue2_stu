@@ -56,7 +56,8 @@
                     this.$emit('input',val) ;
                     this.dispatch('form-item', 'el.form.blur', val);
                 }else{
-                     this.currentValue = this.value ;
+                    this.currentValue = this.value ;
+                    this.dispatch('form-item', 'el.form.blur', this.value);
                 }
                 //console.info('---------------> ' + this.currentValue) ;
             }

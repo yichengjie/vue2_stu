@@ -15,7 +15,7 @@
                <DataSection left ="2.确定费用" right ="描述 | 费用">
                    <ContentLayout title="描述">
                         <oc-form-item1 label="销售生效日期" :required="true" prop ="firstMaintenanceDate">
-                            <oc-datepicker v-model ="formData.firstMaintenanceDate" :time="false" />
+                            <oc-datepicker v-model ="formData.firstMaintenanceDate" :time="true" />
                         </oc-form-item1>
                         <oc-form-item1 label="销售截止日期"  prop ="lastMaintenanceDate">
                             <oc-datepicker v-model ="formData.lastMaintenanceDate"  :time="true" />
@@ -48,10 +48,12 @@
                             :group="serviceData.group"
                             >
                             <div class="col-sm-2">
-                                <oc-input-number slot="slot1" :min="0" :max ="100" placeholder="0-100之间" v-model ="formData.serviceNumberMinimum" />
+                                <oc-input-number slot="slot1" :min="0" :max ="100" placeholder="0-100之间" 
+                                    v-model ="formData.serviceNumberMinimum" />
                             </div>
                             <div class="col-sm-2">
-                                 <oc-input-number slot="slot2" :min="0" :max ="100" placeholder="0-100之间" v-model ="formData.serviceNumberMaximum" />
+                                 <oc-input-number slot="slot2" :min="0" :max ="100" placeholder="0-100之间" 
+                                    v-model ="formData.serviceNumberMaximum" />
                             </div>
                         </oc-form-item2>
                         <oc-form-item1 label="描述"  prop ="description"
@@ -86,7 +88,7 @@
     import ContentLayout from './ContentLayout.vue' ;
     import NewVersionService from './NewVersionService.vue' ;
     import {initPage4AddApi,initPage4UpdateApi} from '../../api/s7-edit.js' ;
-    import {validateServiceNumber,validateUseDateLimit} from './validate.js' ;
+    import {validateFirstMaintenanceDate,validateLastMaintenanceDate,validateServiceNumber,validateUseDateLimit} from './validate.js' ;
     import UseDateLimitChangeBtn from './UseDateLimitChangeBtn.vue' ;
     export default {
         components:{
@@ -98,12 +100,19 @@
             UseDateLimitChangeBtn
         },
         data(){
+            let firstMaintenanceDate = (rule,value,callback)=>{
+                validateFirstMaintenanceDate(value,callback,this.formData) ;
+            }
+            let lastMaintenanceDate =(rule,value,callback)=>{
+                validateLastMaintenanceDate(value,callback,this.formData) ;
+            }
             let serviceNumber =(rule, value, callback) =>{
-                 validateServiceNumber(value,callback,this) ;
+                 validateServiceNumber(value,callback,this.formData) ;
             }
             let useDateLimit = (rule, value, callback) =>{
-                validateUseDateLimit(value,callback,this) ;
+                validateUseDateLimit(value,callback,this.formData) ;
             }
+
             return {
                 formData:{
                     firstMaintenanceDate:'',
@@ -132,7 +141,11 @@
                 },
                 rules:{
                     firstMaintenanceDate: [
-                        { required: true, message: '销售起始日期必填', trigger: 'change' }
+                        {required: true, message: '销售起始日期必填', trigger: 'change,blur' },
+                        {validator:firstMaintenanceDate,trigger:'change,blur'}
+                    ],
+                    lastMaintenanceDate:[
+                        {validator: lastMaintenanceDate ,trigger: 'change,blur'}
                     ],
                     serviceNumber:{
                         serviceNumberMinimum:[{required:true,trigger:'blur',message: '服务套数1必填'}],
