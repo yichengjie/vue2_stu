@@ -5,6 +5,27 @@
 	require('bt_growl_lib') ;
 	require('is_loading_lib') ;
 	var util = {};
+
+
+	util.debounce = function(fn, delay) {
+		var timeout;
+		return function() {
+			var self = this;
+			var args = arguments;
+			window.clearTimeout(timeout);
+			timeout = window.setTimeout(function() {
+				fn.apply(self, args);
+			}, delay);
+		};
+	};
+
+	util.escape_html = function(str){
+		return (str + '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+	}
 	
 
 	util.getJspPageParam=function(){
@@ -153,7 +174,7 @@
 	};
 	
 	util.isDateOC = function(datavalue){
-		return isLegalDate(datavalue,true);//可以超过20年 
+		return _isLegalDate(datavalue);//可以超过20年 
 	};
 	
 	util.isDateTimeOC = function(datetimeValue){
@@ -162,13 +183,14 @@
    		if(datetimeValue&&datetimeValue.length>0){
    			var infos = datetimeValue.split(' ') ;
    			if(infos.length==2){
-   				if(isLegalDate(infos[0],true)&&isLegalTime(infos[1])){
+   				if(_isLegalDate(infos[0])&&_isLegalTime(infos[1])){
 					flag = true ;
    				}
    			}
    		}
    		return flag ;
 	};
+	util.isTimeOC = _isLegalTime ;
 	
     util.isBiggerDateThan = function(val1,val2){
     	var date1 = moment(val1,dataFormatStr) ;
@@ -275,46 +297,81 @@
 		return /^[0-9]{3}$/i.test(value) ;
 	} ;
 
+	util.checkDataValid = checkDataValid ;
+
+	//检查日期是否合法
+	/**
+	 * @param:value 需要检查的日期字符串
+	 * @param:splitStr 日期用什么分隔符 eg 2016-11-25使用的是'-'
+	 * @param:noTimeLimit 不限制20年内的日期才合法(可以无限年)
+	 */
+	function checkDataValid(value,splitChar,noTimeLimit){
+		var tmpSplit = splitChar || '-' ;
+	   	var date = value;
+		var notLimitFlag = true ;
+		if(noTimeLimit==false){
+			notLimitFlag = false;
+		}
+		var regStr = "^[0-9]{4}"+tmpSplit+"[0-9]{2}"+tmpSplit+"[0-9]{2}$"  ;
+		var reg =new RegExp(regStr); // re为/^\d+bl$/gim	
+		if(!reg.test(date)){
+			 return false;
+		}
+		var result = true;
+		var curYear = (new Date().getFullYear() - 0);
+		var ymd = date.split(tmpSplit);
+		var year = ymd[0] - 0;
+		var month = ymd[1] - 0;
+		var day = ymd[2] - 0;
+			/* month-day relation, January begins from index 1 */
+		var mdr = [0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+		var isLeapYear = function(){
+			// 判断年份是否是闰年
+			return (year % 400 === 0) || ((year % 4 === 0) && (year % 100 !== 0));
+			};
+		if((!noTimeLimit)&&(year < curYear - 20 || year > curYear + 20)){
+			// 年份超过前后20年，则校验失败
+			result = false;
+		}
+		if(month > 12 || month < 1){
+			// 如果月份不合法，则校验失败
+			result = false;
+		}
+		if(mdr[month] < day || day < 1 || day > 31){
+			// 日期天数不合法，校验失败
+			result = false;
+		}
+		if(month === 2 && !isLeapYear() && day > 28){
+			// 年份不是闰年，日期天数不合法，校验失败
+			result = false;
+		}
+		return result;
+	}
+
 	
 	//判断日期是否合法
-	var  isLegalDate=function(datavalue,noTimeLimit){
-	   var date = datavalue;
-	   if( !/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/.test(date)){
-		  return false;
-		}
-	   var result = true;
-	   var curYear = (new Date().getFullYear() - 0);
-	   var ymd = date.split(/-/);
-	   var year = ymd[0] - 0;
-	   var month = ymd[1] - 0;
-	   var day = ymd[2] - 0;
-		/* month-day relation, January begins from index 1 */
-	   var mdr = [0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-	   var isLeapYear = function(){
-		  // 判断年份是否是闰年
-		  return (year % 400 === 0) || ((year % 4 === 0) && (year % 100 !== 0));
-		};
-	   if(!noTimeLimit&&(year < curYear - 20 || year > curYear + 20)){
-		// 年份超过前后20年，则校验失败
-		result = false;
-		}
-	   if(month > 12 || month < 1){
-		// 如果月份不合法，则校验失败
-		result = false;
-	   }
-	  if(mdr[month] < day || day < 1 || day > 31){
-		// 日期天数不合法，校验失败
-		result = false;
-	   }
-	  if(month === 2 && !isLeapYear() && day > 28){
-		// 年份不是闰年，日期天数不合法，校验失败
-		result = false;
-	   }
-	  return result;
+	function _isLegalDate(datavalue){
+		checkDataValid(datavalue,'-',true) ;
+    };
+   
+    function _isLegalTime (timvalues) {
+		var flag = false ;
+	  	if(timvalues&&timvalues.length!=0){    
+	   	var reg=/^((20|21|22|23|[0-1]\d)\:[0-5][0-9])(\:[0-5][0-9])?$/ ;    
+	       if(reg.test(timvalues)){    
+	           flag= true; 
+	       }  
+	   }   
+	   return flag; 
    };
-   
-   
-   
+
+   util.slideToggleDiv = slideToggleDiv ;
+   util.slideUpDiv = slideUpDiv ;
+   util.slideDownDiv = slideDownDiv ;
+   util.fadeToggleDiv = fadeToggleDiv ;
+   util.fadeInDiv = fadeInDiv ;
+   util.fadeOutDiv = fadeOutDiv ;
+
    //滑入滑出
    function slideToggleDiv(divID){
    	  $('#' + divID).slideToggle();
@@ -336,23 +393,5 @@
    function fadeOutDiv(divID){
    	  $('#' + divID).fadeOut();
    };
-   
-   util.slideToggleDiv = slideToggleDiv ;
-   util.slideUpDiv = slideUpDiv ;
-   util.slideDownDiv = slideDownDiv ;
-   util.fadeToggleDiv = fadeToggleDiv ;
-   util.fadeInDiv = fadeInDiv ;
-   util.fadeOutDiv = fadeOutDiv ;
-   
-   var isLegalTime = function  (timvalues) {
-		var flag = false ;
-	  	if(timvalues&&timvalues.length!=0){    
-	   	var reg=/^((20|21|22|23|[0-1]\d)\:[0-5][0-9])(\:[0-5][0-9])?$/ ;    
-	       if(reg.test(timvalues)){    
-	           flag= true; 
-	       }  
-	   }   
-	   return flag; 
-  };
-	module.exports = util ;
+   module.exports = util ;
 //});

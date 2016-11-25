@@ -85,7 +85,7 @@
     import DataSection from './DataSection.vue' ;
     import ContentLayout from './ContentLayout.vue' ;
     import NewVersionService from './NewVersionService.vue' ;
-    import {initPage4AddApi} from '../../api/s7-edit.js' ;
+    import {initPage4AddApi,initPage4UpdateApi} from '../../api/s7-edit.js' ;
     import {validateServiceNumber,validateUseDateLimit} from './validate.js' ;
     import UseDateLimitChangeBtn from './UseDateLimitChangeBtn.vue' ;
     export default {
@@ -215,6 +215,12 @@
            },error =>{
                console.info('error : ',error) ;
            })
+
+           initPage4UpdateApi().then(retData=>{
+               let {formData} = retData ;
+               Object.assign(this.formData,formData) ;
+           }) ;
+
        }
     }
 </script>

@@ -1,11 +1,11 @@
 <template>
     <span class="oc-datepicker-container">
         <input type ="text"   
+            class ="form-control input-sm"
             :id ="randomId"
-            :value="value" 
+            :value="currentValue" 
             @input ="onInput" 
             @blur ="onBlur" 
-            class ="form-control input-sm"
             :disabled="disabled"
         />
         <!--oc-datepicker-icon-->
@@ -14,6 +14,8 @@
 </template>
 <script>
     import emitter from './mixin/emitter';
+    import util from 'util' ;
+
     export default {
          name:'oc-datepicker',
          //props:['value'],
@@ -27,39 +29,52 @@
              time:{
                  type:Boolean,
                  default:false
+             },
+             splitChar:{
+                 type:String,
+                 default:'-'
              }
          },
          data:function(){
             return {
-                randomId:('input-' + Math.random()).replace('\.','-') 
+                randomId:('input-' + Math.random()).replace('\.','-') ,
+                currentValue:this.value
             } ;
          },
          methods:{
             onInput(event){
                 var val = event.target.value ;
-                this.$emit('input',val) ;
+                this.currentValue = val ;
+                //this.$emit('input',val) ;
                 //this.$emit('change', val);
-                this.dispatch('form-item', 'el.form.change', val);
+                //this.dispatch('form-item', 'el.form.change', val);
             },
             onBlur(event){
-                var val = event.target.value ;
-                this.$emit('input',val) ;
-                //this.$emit('change', val);
-                this.dispatch('form-item', 'el.form.blur', val);
+                let val = event.target.value ;
+                let flag = checkInputValid(val,this.time,this.splitChar) ;//inputStr,withTimeFlag,splitChar
+                if(flag){
+                    this.$emit('input',val) ;
+                    this.dispatch('form-item', 'el.form.blur', val);
+                }else{
+                     this.currentValue = this.value ;
+                }
+                //console.info('---------------> ' + this.currentValue) ;
             }
          },
          mounted:function(el){
             var _self = this ;
             var minDate = new Date() ;
-            var optionObj = {"showButtonPanel":true,"dateFormat":"yy-mm-dd"} ;
+            var dataFormat = "yy"+this.splitChar+"mm"+this.splitChar+"dd" ;
+            var timeFormat = "HH:mm" ;
+            var optionObj = {"showButtonPanel":true,"dateFormat":this.dataFormat} ;
             optionObj.onSelect = function(dateText,picker){
                 _self.$emit('input',dateText) ;
                 _self.$emit('change', dateText);
                 _self.dispatch('form-item', 'el.form.change', dateText);
             }
-            optionObj.minDate = minDate ;
+            //optionObj.minDate = minDate ;
             if(this.time){
-                optionObj.timeFormat = 'HH:mm' ;
+                optionObj.timeFormat = this.timeFormat ;
                 optionObj.timeText="&nbsp;&nbsp;时间" ; 
                 optionObj.hourText ="&nbsp;&nbsp;时" ;
                 optionObj.minuteText ="&nbsp;&nbsp;分" ;  
@@ -70,8 +85,43 @@
             }else{
                 $('#'+this.randomId).datepicker(optionObj) ;
             }
+         },
+         watch:{
+             value(newVal,oldVal){
+                 this.currentValue = newVal ;
+             }
          }
     }
+
+    /**
+     *检查输入字符串是否合法
+     *  */
+    function checkInputValid(inputStr,withTimeFlag,splitChar){
+        if(withTimeFlag){//如果是日期+时间
+            let datetimeStr = inputStr || '' ;
+            let infos = datetimeStr.split(' ') ;//日期与时间之前以空格分隔
+            if(infos.length!==2) return false;
+            if(checkDate(infos[0],splitChar)&&checkTime(infos[1])){
+                return true ;
+   			}
+            return false;
+        }else{//仅仅是日期
+            return checkDate(inputStr,splitChar);
+        }
+    }
+
+    function checkDate(dataStr,splitChar){
+        let noTimeLimit = true ;
+        let flag =  util.checkDataValid(dataStr,splitChar,noTimeLimit) ;
+        console.info('data flag : ' + flag) ;
+        return flag ;
+    }
+    function checkTime(timeStr){
+       let flag = util.isTimeOC(timeStr) ;
+       console.info('time flag : ' + flag) ;
+       return flag ;
+    }
+
 </script>
 <style>
     .oc-datepicker-container{
