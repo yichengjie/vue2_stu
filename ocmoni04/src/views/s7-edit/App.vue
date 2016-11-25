@@ -15,7 +15,7 @@
                <DataSection left ="2.确定费用" right ="描述 | 费用">
                    <ContentLayout title="描述">
                         <oc-form-item1 label="销售生效日期" :required="true" prop ="firstMaintenanceDate">
-                            <oc-datepicker v-model ="formData.firstMaintenanceDate" :time="true" />
+                            <oc-datepicker v-model ="formData.firstMaintenanceDate" :time="false" />
                         </oc-form-item1>
                         <oc-form-item1 label="销售截止日期"  prop ="lastMaintenanceDate">
                             <oc-datepicker v-model ="formData.lastMaintenanceDate"  :time="true" />

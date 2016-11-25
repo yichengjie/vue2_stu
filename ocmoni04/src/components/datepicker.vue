@@ -113,12 +113,10 @@
     function checkDate(dataStr,splitChar){
         let noTimeLimit = true ;
         let flag =  util.checkDataValid(dataStr,splitChar,noTimeLimit) ;
-        console.info('data flag : ' + flag) ;
         return flag ;
     }
     function checkTime(timeStr){
        let flag = util.isTimeOC(timeStr) ;
-       console.info('time flag : ' + flag) ;
        return flag ;
     }
 
