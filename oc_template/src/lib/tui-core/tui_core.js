@@ -1,8 +1,3 @@
-/*!
- * tui核心基础组件
- * 2013-12-03 增加了isMobile方法，用于判断浏览器是否在ios的移动端
- * 2014-02-08 修改了win8下的IE11判断方法。
- */
 ;(function( $, undefined ) {
 
 // prevent duplicate loading

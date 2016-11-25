@@ -1,27 +1,3 @@
-/*
- * tsDrag是GUI项目中的拖拽插件，该插件基于jquery开发，在jquery原始方法中添加拖拽功能。可以通过参数进行实时修改。
- * 该拖拽插件支持一般的拖拽和特殊拖拽，用于各类拖拽的情况。
- * Copyright: Copyright (c) 2012                       
- * Company: 中国民航信息网络股份有限公司               
- * @author  马驰                  
- * @version 1.0                     
- * @see                                                
- *	HISTORY                                            
- * 2012-4-13 创建文件
- * 2012-4-16 版本更新，添加了proxy参数，允许设定拖动的模式，如果为clone，则拖动clone的元素，如果为function，则拖动函数返回的jquery对象
- * 2012-4-20 修改了程序结构，由调用者的jquery对象保存参数，并可以根据参数实时对部分属性进行修改。
- * 2012-5-15 版本更新，将拖拽层在初始化中设置position的操作放置在鼠标按下事件中。添加了onFinshed回调函数
- * 2012-6-13 版本更新，修改了定位细节和点击未拖动时坐标错误的bug
- * 2012-9-21 版本更新,onBeforeDrag改名为onReadyDrag,tsDragMask改为tuiDragMask
- * 2012-9-26 版本更新,by 党会建，针对代理proxy的方式进行修改。默认情况clone,创建在当前元素的同级下，不再是body下。
-                     加上proxy:{$appendTo:"body",cssText:{}}//允许传如创建的对象，和代理的样式
- * 2012-10-30 版本更新，修正了错误的事件命名空间。修改了事件的绑定方式。
- * 2013-01-25 版本更新，添加了解除绑定拖拽的方法。
- * 2013-07-23 版本更新，修正了proxy参数中回调函数的$drag上下文
- * 2013-10-10 1.0，删除$.browser方法
- *
- */
-// JavaScript Document
 ;(function(){
 	//取消绑定拖拽。
 	$.fn.tuiOffDrag=function(){
