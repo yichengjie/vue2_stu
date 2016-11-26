@@ -21,6 +21,7 @@
                             <oc-datepicker v-model ="formData.lastMaintenanceDate"  :time="true" />
                         </oc-form-item1>
                         <oc-form-item2 label="使用时间限制"  prop="useDateLimit"
+                            :serviceType="serviceData.serviceType"
                             :subGroupList="['FP','FL']"
                             :subGroup="serviceData.subGroup" 
                             :names="['firstUseDate','lastUseDate','effectivePeriodType','effectivePeriodNumber','effectivePeriodUnit']">
@@ -125,7 +126,7 @@
                     availability:'',
                     select2:'',
                     useDateLimitTye:'',//使用时间限制类型[时间段:'']或[期限:'1']
-                    effectivePeriodType:'D',
+                    effectivePeriodType:'',
                     effectivePeriodNumber:'',
                     effectivePeriodUnit:'',
                     firstUseDate:'',

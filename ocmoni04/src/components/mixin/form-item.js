@@ -4,6 +4,7 @@ function _updateVisiableData(cp){
     if(!flag){//如果隐藏控件
         cp.resetField() ;
     }
+    //console.info('cp.label : ' + cp.label , "flag : " + cp.visiable) ;
 }
 function _getVisiableFlag(cp){
     //serviceTypeList:Array, //serviceType:String,
@@ -16,13 +17,26 @@ function _getVisiableFlag(cp){
     let subGroupList = cp.subGroupList ;
     let subGroup = cp.subGroup ;
     let flag1 = _checkListContainsStr(serviceTypeList,serviceType) ;
-    let flag2 = _checkListContainsStr(groupList,group) ;
-    let flag3 = _checkListContainsStr(subGroupList,subGroup) ;
-    return (flag1 && flag2 && flag3) ;
+    let flag2 = _checkListContainsStr2(groupList,group) ;
+    //console.info('group flag : ' + flag2) ;
+    let flag3 = _checkListContainsStr2(subGroupList,subGroup) ;
+    //console.info('sub group flag : ' + flag3) ;
+    let retFlag = (flag1 && flag2 && flag3) ;
+    //console.info('retFlag : ' + retFlag)
+    return retFlag ;
 }
+//主要是为了serviceType判断
 function _checkListContainsStr(list,str){
     if( (!list) ||list.length==0 ) return true ;
     if( (!str) || str.trim().length==0 ) return true ;
+    return list.includes(str) ;
+}
+//主要是为了group和subGroup判断
+function _checkListContainsStr2(list,str){
+    if( (!list) ||list.length==0 ) return true ;
+    //list存在的情况下str必须的存在,这个与上面的判断serviceType不一样需要注意
+    //console.info('222222222222222222') ;
+    if( (!str) || str.trim().length==0 ) return false ;
     return list.includes(str) ;
 }
 
@@ -42,15 +56,15 @@ export default {
      },
      watch:{
       serviceType(newVal,oldVal){
-         console.info('serviceType is change ...') ;
+         //console.info('serviceType is change ...') ;
          _updateVisiableData(this) ;
       },
       group(newVal,oldVal){
-        console.info('group is change ...') ;
+        //console.info('group is change ...') ;
         _updateVisiableData(this) ;
       },
       subGroup(newVal,oldVal){
-        console.info('subGroup is change ...') ;
+        //console.info('subGroup is change ...') ;
         _updateVisiableData(this) ;
       }
     }

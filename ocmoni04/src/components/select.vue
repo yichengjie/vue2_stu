@@ -20,7 +20,7 @@
             <ul class="oc-select-dropdown__list" v-show="!isEmptyFlag">
                 <li class="oc-select-dropdown__item"
                     v-for="item in filterList"
-                    @click="handleClickItem(item.value,item.disabled)"
+                    @click.stop="handleClickItem(item.value,item.disabled)"
                     :class ="{'selected':item.value == value,'is-disabled': item.disabled}"
                     >
                     {{item.name}}

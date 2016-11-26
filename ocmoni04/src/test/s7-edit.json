@@ -206,61 +206,6 @@
             "attributesGroup": "BD",
             "serviceGroupDescription": "123456789012345678901234567890",
             "s7VoList": [ ]
-        },
-        {
-            "attributesGroup": "U",
-            "serviceGroupDescription": "u",
-            "s7VoList": [ ]
-        },
-        {
-            "attributesGroup": "5",
-            "serviceGroupDescription": "5",
-            "s7VoList": [ ]
-        },
-        {
-            "attributesGroup": "BD",
-            "serviceGroupDescription": "BD1BD2BD3BD4",
-            "s7VoList": [ ]
-        },
-        {
-            "attributesGroup": "BD",
-            "serviceGroupDescription": "2",
-            "s7VoList": [ ]
-        },
-        {
-            "attributesGroup": "44",
-            "serviceGroupDescription": "44",
-            "s7VoList": [ ]
-        },
-        {
-            "attributesGroup": "BD",
-            "serviceGroupDescription": "976543210976543210976543210",
-            "s7VoList": [ ]
-        },
-        {
-            "attributesGroup": "FP",
-            "serviceGroupDescription": "空",
-            "s7VoList": [ ]
-        },
-        {
-            "attributesGroup": "Y",
-            "serviceGroupDescription": "67",
-            "s7VoList": [ ]
-        },
-        {
-            "attributesGroup": "LG",
-            "serviceGroupDescription": "Lounge",
-            "s7VoList": [ ]
-        },
-        {
-            "attributesGroup": "00",
-            "serviceGroupDescription": "00",
-            "s7VoList": [ ]
-        },
-        {
-            "attributesGroup": "YUYU",
-            "serviceGroupDescription": "yuyu",
-            "s7VoList": [ ]
         }
     ],
     "serviceChooseList": [

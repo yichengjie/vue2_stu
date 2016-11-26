@@ -172,12 +172,9 @@
       }
     },
     mounted() {
-
-      console.info('serviceTypeList ',this.serviceTypeList) ;
-      console.info('groupList ',this.groupList) ;
-      console.info('subGroupList ',this.subGroupList) ;
-
-
+      //console.info('serviceTypeList ',this.serviceTypeList) ;
+      //console.info('groupList ',this.groupList) ;
+      //console.info('subGroupList ',this.subGroupList) ;
       if (this.prop) {
         this.dispatch('form', 'el.form.addField', [this]);
         this.initialValueArr = this.getInitialValueArr();
