@@ -125,7 +125,7 @@
                     availability:'',
                     select2:'',
                     useDateLimitTye:'',//使用时间限制类型[时间段:'']或[期限:'1']
-                    effectivePeriodType:'',
+                    effectivePeriodType:'D',
                     effectivePeriodNumber:'',
                     effectivePeriodUnit:'',
                     firstUseDate:'',
@@ -164,7 +164,8 @@
                 optionsData:{
                     effectivePeriodType:[
                         {"name":"选择","value":""},{"name":"距购买服务后","value":"A"},
-                        {"name":"距服务兑换后","value":"B"},{"name":"距航班起飞前","value":"D"}
+                        {"name":"距服务兑换后","value":"B"},
+                        {"name":"距航班起飞前","value":"D",disabled:true}
                     ] ,
                     effectivePeriodUnit:[
                         {"name":"天","value":"D"},{"name":"月","value":"M"},
