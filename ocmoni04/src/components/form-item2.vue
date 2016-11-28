@@ -122,6 +122,7 @@
         this.validateDisabled = true;
         for(let i = 0 ; i < names.length; i++){
            model[names[i]] = initialValues[i];
+
         }
       },
       getRuleObj() {
@@ -188,6 +189,8 @@
               this.$on('el.form.change', this.onFieldChange);
             }
         }
+        //更新显隐状态
+        this._updateVisiableData() ;
       }
     },
     beforeDestroy() {

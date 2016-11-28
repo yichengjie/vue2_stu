@@ -75,7 +75,7 @@
     },
     watch: {
       value(newVal,oldVal) {
-        console.info('newVal : ' + newVal) ;
+        //console.info('newVal : ' + newVal) ;
         this.currentValue = newVal;
       }
     },

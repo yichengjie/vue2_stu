@@ -236,9 +236,9 @@
         {
             "id": "7d10d15697e5477b83f09470c5a0f9fc",
             "carrCode": "CA",
-            "serviceType": "F",
+            "serviceType": "A",
             "serviceSubCode": "0JJ",
-            "commercialName": "UPTO70LB 32KG-bg",
+            "commercialName": "免费行李",
             "attributesGroup": "BG",
             "attributesSubgroup": "",
             "serviceGroupDescription": "Baggage",
@@ -248,13 +248,13 @@
         {
             "id": "b293f43b9e9a4b4eb393e86307c921a6",
             "carrCode": "CA",
-            "serviceType": "F",
-            "serviceSubCode": "222",
-            "commercialName": "xx-bd",
-            "attributesGroup": "BD",
+            "serviceType": "C",
+            "serviceSubCode": "0B5",
+            "commercialName": "收费行李",
+            "attributesGroup": "BG",
             "attributesSubgroup": "22",
-            "serviceGroupDescription": "bd",
-            "subGroupDescription": "bd",
+            "serviceGroupDescription": "bg",
+            "subGroupDescription": "bg",
             "subCodeTableNo163": 9000101
         },
         {

@@ -72,10 +72,40 @@
                          <oc-form-item1 label="是否检查库存"  prop ="availability">
                             <oc-radio v-model ="formData.availability" :options='[{name:"是",value:"N"},{name:"否",value:"Y"}]'/>
                         </oc-form-item1>
-                        <oc-form-item1 label="RESULTING TICKET DESIGNATOR"  prop ="select2">
-                            <oc-select v-model ="formData.select2" :options ="options2" />
-                        </oc-form-item1>
                    </ContentLayout>
+
+                    <ContentLayout title="行李" v-if="serviceData.serviceType == 'A' || serviceData.serviceType == 'C' || serviceData.serviceType == 'P'">
+                        <oc-form-item1 label="免费行李件数"  prop ="freeBaggageAllowancePieces"
+                            :serviceTypeList="['A']" :serviceType="serviceData.serviceType">
+                            <oc-input-number v-model ="formData.freeBaggageAllowancePieces" :min="1" placeholder ="正整数" />
+                        </oc-form-item1>
+                        <oc-form-item2 label="收费行李件数"  prop ="excessOccurrence"
+                            :serviceTypeList="['C']" :serviceType="serviceData.serviceType">
+                            <div class="col-sm-2">
+                                 <oc-input-number v-model ="formData.firstExcessOccurrence" :min="1" placeholder ="正整数"/>
+                            </div>
+                            <div class="col-sm-2">
+                                 <oc-input-number v-model ="formData.lastExcessOccurrence" :min="1" placeholder ="正整数" />
+                            </div>
+                        </oc-form-item2>
+                         <oc-form-item2 label="行李重量"  prop ="freeBaggageAllowanceWeight"
+                            :serviceTypeList="['A','C','P']" :serviceType="serviceData.serviceType">
+                            <div class="col-sm-2">
+                                 <oc-input-number v-model ="formData.freeBaggageAllowanceWeight" :min="1" placeholder ="正整数"/>
+                            </div>
+                            <div class="col-sm-2">
+                                 <oc-select v-model ="formData.freeBaggageAllowanceUnit" :options="options2"/>
+                            </div>
+                        </oc-form-item2>
+                        <oc-form-item1 label="行李使用范围"  prop ="baggageTravelApplication"
+                            :serviceTypeList="['A','C','P']" :serviceType="serviceData.serviceType">
+                            <oc-select v-model ="formData.baggageTravelApplication" :options="options2"/>
+                        </oc-form-item1>
+                        <oc-form-item0 label="备注例外行李"  prop ="list196VO"
+                            :serviceTypeList="['A','C','P']" :serviceType="serviceData.serviceType">
+                            <Table196 :list="formData.list196VO"/>
+                        </oc-form-item0>
+                    </ContentLayout>
                </DataSection>
            </oc-form>
         </div>
@@ -91,6 +121,7 @@
     import {initPage4AddApi,initPage4UpdateApi} from '../../api/s7-edit.js' ;
     import {validateFirstMaintenanceDate,validateLastMaintenanceDate,validateServiceNumber,validateUseDateLimit} from './validate.js' ;
     import UseDateLimitChangeBtn from './UseDateLimitChangeBtn.vue' ;
+    import Table196 from './Table196.vue' ;
     export default {
         components:{
             Navbar,
@@ -98,7 +129,8 @@
             DataSection,
             ContentLayout,
             NewVersionService,
-            UseDateLimitChangeBtn
+            UseDateLimitChangeBtn,
+            Table196
         },
         data(){
             let firstMaintenanceDate = (rule,value,callback)=>{
@@ -130,11 +162,18 @@
                     effectivePeriodNumber:'',
                     effectivePeriodUnit:'',
                     firstUseDate:'',
-                    lastUseDate:''
+                    lastUseDate:'',
+                    freeBaggageAllowancePieces:'',
+                    firstExcessOccurrence:'',
+                    lastExcessOccurrence:'',
+                    freeBaggageAllowanceWeight:'',
+                    freeBaggageAllowanceUnit:'',
+                    baggageTravelApplication:''/*行李使用范围*/,
+                    list196VO:[]
                 },
                 serviceData:{/*选择服务相关的数据**/
                     recordS5Id:'',
-                    serviceType:'',
+                    serviceType:'F',
                     group:'',
                     subGroup:'',
                     subCode:'',

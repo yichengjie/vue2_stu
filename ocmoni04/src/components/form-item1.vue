@@ -159,6 +159,8 @@
           this.$on('el.form.blur', this.onFieldBlur);
           this.$on('el.form.change', this.onFieldChange);
         }
+        //更新显隐状态
+        this._updateVisiableData() ;
       }
     },
     beforeDestroy() {

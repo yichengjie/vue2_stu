@@ -36,7 +36,7 @@
 </template>
 
 <script>
-    import {getJspPageParam} from './common.js' ;
+    var util = require('util') ;
     export default {
         name: 'navbar',
         props:{
@@ -67,7 +67,7 @@
                 this.toUIWithContextPath(url) ;
             },
             toUIWithContextPath(url){
-                let {contextPath} = getJspPageParam() ;
+                let {contextPath} = util.getJspPageParam() ;
                 window.location.href = contextPath + url ;
             }
         }
