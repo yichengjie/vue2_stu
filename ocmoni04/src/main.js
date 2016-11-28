@@ -9,11 +9,13 @@ require('tui_dialog_lib') ;
 require('tui_drag_lib') ;
 require('jq_datepicker_lib') ;
 require('jq_timepicker_lib') ;
+require('jq_validate_lib') ;
 require('assetsPath/css/common.css') ;
 require('assetsPath/css/oc_edit.css') ;
 require('assetsPath/css/tui_dialog.css') ;
 require('assetsPath/css/jquery_ui.datepicker-modify.css') ;
 require('assetsPath/css/jquery-ui-timepicker-addon.css') ;
+require('assetsPath/css/jq_validator.css') ;
 //css_path/jquery.autocomplete.css
 require('assetsPath/icon/icon.css') ;
 import MyPlugin from './components/index.js' ;

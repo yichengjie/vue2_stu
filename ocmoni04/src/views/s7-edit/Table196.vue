@@ -1,10 +1,10 @@
 <template>
      <div class="col-sm-6">
         <div class="table_control">
-            <ShowHideTable/>
-            <span class="marginR10">复用表号</span>
+            <ShowHideTable v-model ="visiable"/>
+            <TableNoReuse />
         </div>
-        <div class = "table_layout" style ="width:275px" >
+        <div class = "table_layout" style ="width:275px" v-show ="visiable" >
             <table>
                 <thead>
                     <tr>
@@ -34,12 +34,20 @@
 </template>
 <script>
     import ShowHideTable from './ShowHideTable.vue' ;
+    import TableNoReuse from './TableNoReuse.vue' ;
+
     export default {
         props:{
             list:Array
         },
         components:{
-            ShowHideTable
+            ShowHideTable,
+            TableNoReuse
+        },
+        data(){
+            return {
+                visiable:false
+            } ;
         },
         methods:{
             clickTableTr(obj){

@@ -39,6 +39,7 @@ module.exports = {
         'tui_drag_lib':libPath+"/tui-drag/index.js",
         'jq_datepicker_lib': libPath+"/jq-datepicker/index.js",
 	      'jq_timepicker_lib':libPath+"/jq-timepicker/index.js",
+        'jq_validate_lib':libPath+"/jq-validate/index.js",
         'modal_lib':libPath+"/modal.js",
         'iconfont_lib':libPath+"/iconfont/iconfont.js",
         'lodash_lib':libPath+"/lodash/lodash.js",

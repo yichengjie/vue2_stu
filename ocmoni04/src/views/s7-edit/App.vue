@@ -8,7 +8,7 @@
         </div>
         
         <div class="container-fluid main_content" >
-           <oc-form :model ="formData" :rules="rules" ref ="editForm" label-width ="120px">
+           <oc-form id="s7_form" :model ="formData" :rules="rules" ref ="editForm" label-width ="120px">
                <NewVersionService :value ="serviceData.recordS5Id" @input ="handleSelectService" 
                     :options ="serviceData.serviceChooseList" />
 
@@ -74,7 +74,7 @@
                         </oc-form-item1>
                    </ContentLayout>
 
-                    <ContentLayout title="行李" v-if="serviceData.serviceType == 'A' || serviceData.serviceType == 'C' || serviceData.serviceType == 'P'">
+                    <ContentLayout title="行李" v-show="serviceData.serviceType == 'A' || serviceData.serviceType == 'C' || serviceData.serviceType == 'P'">
                         <oc-form-item1 label="免费行李件数"  prop ="freeBaggageAllowancePieces"
                             :serviceTypeList="['A']" :serviceType="serviceData.serviceType">
                             <oc-input-number v-model ="formData.freeBaggageAllowancePieces" :min="1" placeholder ="正整数" />
@@ -101,7 +101,7 @@
                             :serviceTypeList="['A','C','P']" :serviceType="serviceData.serviceType">
                             <oc-select v-model ="formData.baggageTravelApplication" :options="options2"/>
                         </oc-form-item1>
-                        <oc-form-item0 label="备注例外行李"  prop ="list196VO"
+                        <oc-form-item0 label="备注例外行李"  prop ="list196VO" :span="6"
                             :serviceTypeList="['A','C','P']" :serviceType="serviceData.serviceType">
                             <Table196 :list="formData.list196VO"/>
                         </oc-form-item0>
@@ -217,6 +217,9 @@
         methods:{
             handleSaveForm(type){
                console.info('formData : ' + JSON.stringify(this.formData)) ;
+
+               var jqFlag = this.validator.form() ;
+               console.info('jquery validate flag  : ' +jqFlag )  ;
                //校验整个表单
                this.$refs.editForm.validate((valid) => {
                   if (valid) {
@@ -269,12 +272,13 @@
            },error =>{
                console.info('error : ',error) ;
            })
-
            initPage4UpdateApi().then(retData=>{
                let {formData} = retData ;
                Object.assign(this.formData,formData) ;
            }) ;
 
+           var validator = $("#s7_form").validate({meta : ""});
+		   this.validator = validator ;
        }
     }
 </script>

@@ -1,5 +1,5 @@
 <template>
- <form class="form-horizontal" role="form">
+ <form :id ="id" class="form-horizontal" role="form">
     <slot></slot>
   </form>
 </template>
@@ -8,6 +8,7 @@
     name: 'oc-form',
     componentName: 'form',
     props: {
+      id:String,
       model: Object,
       rules: Object,
       labelPosition: String,

@@ -3,9 +3,7 @@
         <label class="control-label" :title="label" :class ="{'required':required}" :style="labelStyle" v-if ="label"> 
             {{label}}
         </label>
-        <div :class="contentClass">
-            <slot></slot>
-        </div>
+        <slot></slot>
     </div>
 </template>
 <script>
@@ -18,10 +16,6 @@
             required: {
                 type:Boolean,
                 default:false
-            },
-            span:{
-                type:Number,
-                default:4
             }
         },//computed:
         data(){
@@ -44,10 +38,7 @@
                     parent = parent.$parent;
                 }
                 return parent;
-            },
-            contentClass() {
-                return 'col-sm-' + this.span ;
-            },
+            }
         },
     }
 </script>
