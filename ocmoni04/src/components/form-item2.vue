@@ -1,5 +1,5 @@
 <template>
-  <div class="form-group" :class ="{'has-error':error !== ''}" v-show ="visiable">
+  <div class="form-group" :class ="{'has-error':error !== '','form-group-bottom-error':errorPosition==='bottom'}" v-show ="visiable">
     <label class="control-label" :title="label" :class ="{'required':required}" v-bind:style="labelStyle" v-if ="label"> 
       {{label}}
     </label>
@@ -7,6 +7,9 @@
     <div class="error-tip" v-show="error !== ''">
        {{error}}
     </div>
+    <div class="clearfix"></div>
+    <label class="control-label" v-bind:style="labelStyle" v-if ="label">&nbsp;</label>
+    <slot name ="slot2"></slot>
   </div>
 </template>
 
@@ -28,7 +31,11 @@
           default:false
       },
       names:Array,
-      rules: [Object, Array]
+      rules: [Object, Array],
+      errorPosition:{
+        type:String,
+        default:''
+      }
     },
     computed: {
       labelStyle() {

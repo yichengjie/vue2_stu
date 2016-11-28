@@ -85,3 +85,25 @@ export function validateServiceNumber(value,callback,formData){
       callback() ;
       return true;   
 }
+
+
+export function validateLoc(value,callback,formData){
+      let {locValue} = formData ;
+      if(value&&value.length>0){
+          if(locValue&&locValue.length>0){
+              callback &&callback() ;
+              return true ;
+          }else{
+             callback && callback('区域代码不能为空!') ;
+             return false;
+          }
+      }else{
+          if(locValue&&locValue.length>0){
+             callback && callback('区域类型不能为空!') ;
+             return false;
+          }else{
+              callback &&callback() ;
+              return true ; 
+          }
+      }
+}

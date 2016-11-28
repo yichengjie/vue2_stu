@@ -20,7 +20,7 @@
                         <oc-form-item1 label="销售截止日期"  prop ="lastMaintenanceDate">
                             <oc-datepicker v-model ="formData.lastMaintenanceDate"  :time="true" />
                         </oc-form-item1>
-                        <oc-form-item2 label="使用时间限制"  prop="useDateLimit"
+                        <oc-form-item2 label="使用时间限制"  prop="useDateLimit" errorPosition ="bottom"
                             :serviceType="serviceData.serviceType"
                             :subGroupList="['FP','FL']"
                             :subGroup="serviceData.subGroup" 
@@ -106,6 +106,39 @@
                             <Table196 :list="formData.list196VO"/>
                         </oc-form-item0>
                     </ContentLayout>
+
+                    <ContentLayout title="费用">
+                      <oc-form-item1 label="是否收费"  prop ="noChargeNotAvailable">
+                          <oc-select :options ="options2" v-model ="formData.noChargeNotAvailable"/>
+                      </oc-form-item1>  
+                      <oc-form-item0 label="金额"  prop ="list170VOAndlist201VO">
+                          <Table170And201 :serviceType="serviceData.serviceType" 
+                            :list201VO="formData.list201VO"
+                            :list170VO="formData.list170VO"
+                          />
+                      </oc-form-item0>  
+                      <oc-form-item2 label="测试区域"  prop ="loc" :names="['locType','locValue']" >
+                          <div class="col-sm-2">
+                              <oc-select :options="options2" v-model ="formData.locType"/>
+                          </div>
+                          <div class="col-sm-2">
+                              <oc-input v-model ="formData.locValue" />
+                          </div>
+                          <div class="col-sm-2">
+                              <div class="table_control">
+                        		自定义区域
+                                ---复用标号
+                        	  </div>
+                          </div>
+                          
+                          <div slot="slot2">
+                              <div class="col-sm-8">
+                                  <Table178/>
+                              </div>
+                          </div>
+                      </oc-form-item2>  
+
+                    </ContentLayout>
                </DataSection>
            </oc-form>
         </div>
@@ -119,9 +152,12 @@
     import ContentLayout from './ContentLayout.vue' ;
     import NewVersionService from './NewVersionService.vue' ;
     import {initPage4AddApi,initPage4UpdateApi} from '../../api/s7-edit.js' ;
-    import {validateFirstMaintenanceDate,validateLastMaintenanceDate,validateServiceNumber,validateUseDateLimit} from './validate.js' ;
+    import {validateFirstMaintenanceDate,validateLastMaintenanceDate,validateServiceNumber,
+        validateUseDateLimit,validateLoc} from './validate.js' ;
     import UseDateLimitChangeBtn from './UseDateLimitChangeBtn.vue' ;
     import Table196 from './Table196.vue' ;
+    import Table170And201 from './Table170And201.vue' ;
+    import Table178 from './Table178.vue' ;
     export default {
         components:{
             Navbar,
@@ -130,7 +166,9 @@
             ContentLayout,
             NewVersionService,
             UseDateLimitChangeBtn,
-            Table196
+            Table196,
+            Table170And201,
+            Table178
         },
         data(){
             let firstMaintenanceDate = (rule,value,callback)=>{
@@ -144,6 +182,9 @@
             }
             let useDateLimit = (rule, value, callback) =>{
                 validateUseDateLimit(value,callback,this.formData) ;
+            }
+            let loc = (rule,value,callback) =>{
+                validateLoc(value,callback,this.formData) ;
             }
 
             return {
@@ -169,7 +210,12 @@
                     freeBaggageAllowanceWeight:'',
                     freeBaggageAllowanceUnit:'',
                     baggageTravelApplication:''/*行李使用范围*/,
-                    list196VO:[]
+                    list196VO:[],
+                    noChargeNotAvailable:'',/*是否收费*/
+                    list170VO:[],
+                    list201VO:[],
+                    locType:'',
+                    locValue:''
                 },
                 serviceData:{/*选择服务相关的数据**/
                     recordS5Id:'',
@@ -194,6 +240,11 @@
                     useDateLimit:{
                         firstUseDate:[
                             {validator: useDateLimit ,trigger: 'change,blur'}
+                        ]
+                    },
+                    loc:{
+                        locType:[
+                             {validator: loc ,trigger: 'change,blur'} 
                         ]
                     }
                 },

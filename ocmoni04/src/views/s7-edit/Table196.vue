@@ -1,10 +1,10 @@
 <template>
      <div class="col-sm-6">
         <div class="table_control">
-            <ShowHideTable v-model ="visiable"/>
+            <ShowHideTable v-model ="currentVisiable"/>
             <TableNoReuse />
         </div>
-        <div class = "table_layout" style ="width:275px" v-show ="visiable" >
+        <div class = "table_layout" style ="width:275px" v-show ="currentVisiable" >
             <table>
                 <thead>
                     <tr>
@@ -38,7 +38,11 @@
 
     export default {
         props:{
-            list:Array
+            list:Array,
+            visiable:{
+                type:Boolean,
+                default:false
+            }
         },
         components:{
             ShowHideTable,
@@ -46,7 +50,7 @@
         },
         data(){
             return {
-                visiable:false
+                currentVisiable:this.visiable
             } ;
         },
         methods:{
@@ -71,7 +75,10 @@
                }
             }
         },
-        mounted(){
+        watch:{
+            visiable(newVal){
+                this.currentVisiable = newVal ;
+            }
         }
     } ;
 </script>

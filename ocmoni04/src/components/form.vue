@@ -80,18 +80,21 @@
   }
   .form-group{
     margin-bottom: 12px;
-    position: relative;
   }
   .form-group .error-tip{
       display: inline-block;
-      position: absolute;
       color: red ;
       margin-top: 7px;
       margin-left: 0px;
       padding-left: 0px;
       font-size: 12px ;
       width: 200px;
-      bottom: 7px ;
-      
+  }
+  .form-group-bottom-error.form-group{
+     position: relative;
+  }
+  .form-group-bottom-error .error-tip{
+      position: absolute;
+      bottom: 10px ;
   }
 </style>
