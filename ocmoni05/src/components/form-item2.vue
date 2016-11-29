@@ -7,9 +7,7 @@
     <div class="error-tip" v-show="error !== ''">
        {{error}}
     </div>
-    <div class="clearfix" v-if="$slots.slot2"></div>
-    <label class="control-label" v-bind:style="labelStyle" v-if ="label && $slots.slot2">&nbsp;</label>
-    <slot name ="slot2" v-if="$slots.slot2"></slot>
+    <slot name ="slot2"></slot>
   </div>
 </template>
 

@@ -11,7 +11,6 @@
            <oc-form id="s7_form" :model ="formData" :rules="rules" ref ="editForm" label-width ="120px">
                <NewVersionService :value ="serviceData.recordS5Id" @input ="handleSelectService" 
                     :options ="serviceData.serviceChooseList" />
-
                <DataSection left ="2.确定费用" right ="描述 | 费用">
                    <ContentLayout title="描述">
                         <oc-form-item1 label="销售生效日期" :required="true" prop ="firstMaintenanceDate">
@@ -111,30 +110,15 @@
                       <oc-form-item1 label="是否收费"  prop ="noChargeNotAvailable">
                           <oc-select :options ="options2" v-model ="formData.noChargeNotAvailable"/>
                       </oc-form-item1>  
-                      <oc-form-item0 label="金额"  prop ="list170VOAndlist201VO">
-                          <Table170And201 :serviceType="serviceData.serviceType" 
-                            :list201VO="formData.list201VO"
-                            :list170VO="formData.list170VO"
-                          />
-                      </oc-form-item0>  
+                      <oc-form-item1 label="金额"  prop ="list170VOAndlist201VO">
+                          <oc-input />
+                      </oc-form-item1>  
                       <oc-form-item2 label="测试区域"  prop ="loc" :names="['locType','locValue']" >
                           <div class="col-sm-2">
                               <oc-select :options="options2" v-model ="formData.locType"/>
                           </div>
                           <div class="col-sm-2">
                               <oc-input v-model ="formData.locValue" />
-                          </div>
-                          <div class="col-sm-2">
-                              <div class="table_control">
-                        		自定义区域
-                                ---复用标号
-                        	  </div>
-                          </div>
-                          
-                          <div slot="slot2">
-                              <div class="col-sm-8">
-                                  <Table178/>
-                              </div>
                           </div>
                       </oc-form-item2>  
 
@@ -285,18 +269,6 @@
                 this.$refs.editForm.resetFields();
             },
             handleSelectService(id){
-                //console.info('id : ' + id) ;
-                /*  "id": "bgdataimp100018",
-                "carrCode": "CA",
-                "serviceType": "P",
-                "serviceSubCode": "0GO",
-                "commercialName": "UPTO50LB 23KG AND62LI 158LCM",
-                "attributesGroup": "BG",
-                "attributesSubgroup": "",
-                "serviceGroupDescription": "Baggage",
-                "subGroupDescription": "",
-                "subCodeTableNo163": 0
-                */
                 let retObj = this.serviceData.serviceChooseList.find(function(item){
                     return item.id === id ;
                 });
