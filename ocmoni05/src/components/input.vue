@@ -3,7 +3,8 @@
         class="form-control input-sm"
         type="text"
         :name="name"
-        :disabled="readonly"
+        :readonly="readonly"
+        :disabled="disabled"
         :placeholder="placeholder"
         :maxlength="maxlength"
         :value="value"
@@ -25,6 +26,7 @@
       name: String,
       maxlength: Number,
       readonly:Boolean,
+      disabled:Boolean,
       upper:Boolean
     },
     methods: {

@@ -111,7 +111,7 @@
                           <oc-select :options ="options2" v-model ="formData.noChargeNotAvailable"/>
                       </oc-form-item1>  
                       <oc-form-item1 label="金额"  prop ="list170VOAndlist201VO">
-                          <oc-input />
+                          <oc-input :readonly="true" />
                       </oc-form-item1>  
                       <oc-form-item2 label="测试区域"  prop ="loc" :names="['locType','locValue']" >
                           <div class="col-sm-2">
@@ -253,8 +253,8 @@
             handleSaveForm(type){
                console.info('formData : ' + JSON.stringify(this.formData)) ;
 
-               var jqFlag = this.validator.form() ;
-               console.info('jquery validate flag  : ' +jqFlag )  ;
+               //var jqFlag = this.validator.form() ;
+               //console.info('jquery validate flag  : ' +jqFlag )  ;
                //校验整个表单
                this.$refs.editForm.validate((valid) => {
                   if (valid) {
@@ -299,9 +299,8 @@
                let {formData} = retData ;
                Object.assign(this.formData,formData) ;
            }) ;
-
-           var validator = $("#s7_form").validate({meta : ""});
-		   this.validator = validator ;
+           //var validator = $("#s7_form").validate({meta : ""});
+		   //this.validator = validator ;
        }
     }
 </script>

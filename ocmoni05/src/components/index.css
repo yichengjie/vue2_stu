@@ -2,6 +2,10 @@
     background-color: #fff;
     opacity: 1;
 }
+.form-control[readonly]{
+  background-color: #fff;
+  opacity: 1;
+}
 .form-control.oc_input_disabled{
     background-color: #eee;
     border-color: #D3DCE6;
