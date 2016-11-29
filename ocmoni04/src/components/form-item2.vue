@@ -121,10 +121,6 @@
         });
       },
       resetField() {
-        this.resetField2() ;
-        this.validateDisabled = true;
-      },
-      resetField2() {
         this.valid = true;
         this.error = '';
         let model = this.form.model;
@@ -167,10 +163,10 @@
         //主要原因在于，点击‘重置按钮’的时，表单数据的change事件不能进行校验，否则又将显示出校验错误信息
         //console.info('on field change ...') ;
         //console.info('this.validateDisabled ..' + this.validateDisabled) ;
-        if (this.validateDisabled) {//如果之前不能校验，则直接返回，并将状态改为能校验
-          this.validateDisabled = false;
-          return;
-        }
+        // if (this.validateDisabled) {//如果之前不能校验，则直接返回，并将状态改为能校验
+        //   this.validateDisabled = false;
+        //   return;
+        // }
         this.validate('change');
       },
       getInitialValueArr() {

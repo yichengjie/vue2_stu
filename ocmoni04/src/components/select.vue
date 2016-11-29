@@ -83,8 +83,8 @@
                 if (disabled !== true) {
                     this.visiable = false;
                     this.$emit('input',val) ;
-                    //this.dispatch('form-item', 'el.form.change', [val]);
-                    this.dispatch('form-item', 'el.form.blur', [val]);
+                    this.dispatch('form-item', 'el.form.change', [val]);
+                    //this.dispatch('form-item', 'el.form.blur', [val]);
                 }
             },
             onInput(event){

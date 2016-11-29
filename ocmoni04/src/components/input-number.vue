@@ -67,9 +67,9 @@
          this.currentValue = val ;
          let valNum = Number(val);
          if (valNum <= this.max && valNum >= this.min) {
-           this.$emit('change', valNum);
+           //this.$emit('change', valNum);
            this.$emit('input', valNum);
-           this.dispatch('form-item', 'el.form.blur', [valNum]);
+           this.dispatch('form-item', 'el.form.change', [valNum]);
          }
       }
     },

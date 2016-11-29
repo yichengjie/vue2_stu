@@ -43,7 +43,7 @@
         }
         this.$emit('input', val);
         //this.$emit('change', val);
-        //this.dispatch('form-item', 'el.form.change', [val]);
+        this.dispatch('form-item', 'el.form.change', [val]);
       }
     }
   };

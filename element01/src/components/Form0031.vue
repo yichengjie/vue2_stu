@@ -7,13 +7,13 @@
             <el-input type="text" v-model="ruleForm2.checkPass" auto-complete="off"></el-input>
         </el-form-item>
 
-        <el-form-item label="年龄1" prop="age1">
+        <ELFormItem label="年龄1" prop="age1">
             <el-input v-model="ruleForm2.age1"></el-input>
-        </el-form-item>
+        </ELFormItem>
 
-        <el-form-item label="年龄" prop="age2">
+        <ELFormItem label="年龄" prop="age2">
              <el-input v-model="ruleForm2.age2"></el-input>
-        </el-form-item>
+        </ELFormItem>
 
         <el-form-item>
             <el-button type="primary" @click="handleSubmit2">提交</el-button>
@@ -22,8 +22,12 @@
     </el-form>
 </template>
 <script>
+    import ELFormItem from './form-item.vue' ;
     //自定义验证
     export default {
+        components:{
+            ELFormItem
+        },
         data() {
             var checkAge = (rule, value, callback) => {
                 var age = parseInt(value, 10);
