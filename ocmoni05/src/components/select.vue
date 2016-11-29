@@ -51,7 +51,10 @@
             placeholder:String,
             url:String,
             value:[String,Number],
-            options:Array,
+            options:{
+                type:Array,
+                required:true
+            },
             
         },
         computed:{
@@ -125,10 +128,13 @@
     }
 
     function getCheckItemName(options,val) { 
-        let retObj = options.find(function(item){
-             return item.value === val;
-        }) ;
-        return (retObj ? retObj.name : val) ;
+        let retObj = null ;
+        if(options&&options !=null && options.length>0){
+            retObj = options.find(function(item){
+                return item.value === val;
+            }) ;
+        }
+        return (retObj ? retObj.name : val) ; 
     }
 </script>
 <style  src ="./select.css">
