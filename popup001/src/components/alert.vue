@@ -3,13 +3,20 @@
     <p>Alert!</p>
   </div>
 </template>
+<style>
+  .alert {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+</style>
 <script>
   import Popup from 'vue-popup';
   require('vue-popup/lib/popup.css');
   export default {
       mixins: [Popup],
       props: {
-        visible:Boolean,
         modal: {
           default: true
         },
@@ -19,11 +26,3 @@
       }
     };
 </script>
-<style>
-  .alert {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-</style>
