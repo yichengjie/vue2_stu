@@ -213,7 +213,7 @@
                     list196VO:[],
                     noChargeNotAvailable:'',/*是否收费*/
                     list170VO:[],
-                    list201VO:[],
+                    list201VO:[1,2,3],
                     locType:'',
                     locValue:''
                 },
@@ -227,24 +227,24 @@
                 },
                 rules:{
                     firstMaintenanceDate: [
-                        {required: true, message: '销售起始日期必填', trigger: 'change,blur' },
-                        {validator:firstMaintenanceDate,trigger:'change,blur'}
+                        {required: true, message: '销售起始日期必填', trigger: 'change' },
+                        {validator:firstMaintenanceDate,trigger:'change'}
                     ],
                     lastMaintenanceDate:[
-                        {validator: lastMaintenanceDate ,trigger: 'change,blur'}
+                        {validator: lastMaintenanceDate ,trigger: 'change'}
                     ],
                     serviceNumber:{
-                        serviceNumberMinimum:[{required:true,trigger:'blur',message: '服务套数1必填'}],
-                        serviceNumberMaximum:[{ validator: serviceNumber ,trigger: 'blur'}]
+                        serviceNumberMinimum:[{required:true,trigger:'change',message: '服务套数1必填'}],
+                        serviceNumberMaximum:[{ validator: serviceNumber ,trigger: 'change'}]
                     },
                     useDateLimit:{
                         firstUseDate:[
-                            {validator: useDateLimit ,trigger: 'change,blur'}
+                            {validator: useDateLimit ,trigger: 'change'}
                         ]
                     },
                     loc:{
                         locType:[
-                             {validator: loc ,trigger: 'change,blur'} 
+                             {validator: loc ,trigger: 'change'} 
                         ]
                     }
                 },

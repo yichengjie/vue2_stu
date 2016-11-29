@@ -47,10 +47,10 @@
             </div>
         </div>
          <!--201-->
-         <div class = "table_layout" style="width: 440px;"  v-show="currentVisiable && discountOrNot=='0'">
+         <div class = "table_layout" style="width: 440px;"  v-show="currentVisiable && discountOrNot=='0' ">
              <table>
 				<tbody>
-                    <tr v-for="(item,index) in list201VO" @click ="clickTableTr(item)">
+                    <tr v-for="(item,index) in list201VO">
                         <td width ="300">1</td>
                         <td width ="180">2</td>
                         <td width ="180">3</td>

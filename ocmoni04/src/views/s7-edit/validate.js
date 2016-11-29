@@ -39,22 +39,33 @@ export function validateLastMaintenanceDate(value,callback,formData){
 export function validateUseDateLimit(value,callback,formData){
       let useDateLimitTye = formData.useDateLimitTye ;
       let {firstUseDate,lastUseDate,effectivePeriodType,effectivePeriodNumber,effectivePeriodUnit} = formData;
-      if(useDateLimitTye==''){
+      if(useDateLimitTye===''){
           let flag1 = true ; 
           let flag2 = true ;
+          let count = 0 ;
           if(firstUseDate&&firstUseDate.length>0){
               flag1 = util.isBiggerThanCurrent(firstUseDate) ;
+              count ++ ;
           }
           if(flag1&&lastUseDate&&lastUseDate.length>0){
-              flag2 = util.isBiggerThanCurrent(firstUseDate) ;
+              flag2 = util.isBiggerThanCurrent(lastUseDate) ;
+              count ++ ;
           }
           if( (!flag1) || (!flag2) ){
               callback('日期必须大于今天') ;
               return false;
           }
+          //如果截止日期还必须大于生效日期
+          if(flag1&&flag2&& (count ===2)){
+              let flag3 = util.isBiggerDateThan(lastUseDate,firstUseDate) ; 
+              if(!flag3){
+                callback('结束必须大于起始值') ;
+                return false;
+              }
+          }
           callback() ;
           return true ;
-      }else if(useDateLimitTye=='1'){
+      }else if(useDateLimitTye==='1'){
           if(effectivePeriodType===''){
               if(effectivePeriodNumber!==''||effectivePeriodUnit!==''){
                    callback('期限类型必填') ;
