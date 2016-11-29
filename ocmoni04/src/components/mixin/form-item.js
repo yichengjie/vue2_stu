@@ -61,7 +61,7 @@ export default {
               var flag = _getVisiableFlag(cp) ;
               cp.visiable = flag ; 
               if(!flag){//如果隐藏控件
-                cp.resetField() ;
+                cp.resetField2() ;
               }
          }
      },

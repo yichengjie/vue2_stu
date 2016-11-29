@@ -89,7 +89,7 @@
                 this.discountOrNot = type ;
             },
             clickTableTr(obj){
-                this.list.map(item=>{
+                this.list170VO.map(item=>{
                     item.checked = false;
                 });
                 obj.checked = true ;

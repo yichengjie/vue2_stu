@@ -70,8 +70,8 @@
             var optionObj = {"showButtonPanel":true,"dateFormat":this.dataFormat} ;
             optionObj.onSelect = function(dateText,picker){
                 _self.$emit('input',dateText) ;
-                _self.$emit('change', dateText);
-                _self.dispatch('form-item', 'el.form.change', dateText);
+                //_self.$emit('change', dateText);
+                _self.dispatch('form-item', 'el.form.blur', dateText);
             }
             //optionObj.minDate = minDate ;
             if(this.time){

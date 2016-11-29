@@ -7,9 +7,9 @@
     <div class="error-tip" v-show="error !== ''">
        {{error}}
     </div>
-    <div class="clearfix"></div>
-    <label class="control-label" v-bind:style="labelStyle" v-if ="label">&nbsp;</label>
-    <slot name ="slot2"></slot>
+    <div class="clearfix" v-if="$slots.slot2"></div>
+    <label class="control-label" v-bind:style="labelStyle" v-if ="label && $slots.slot2">&nbsp;</label>
+    <slot name ="slot2" v-if="$slots.slot2"></slot>
   </div>
 </template>
 
@@ -121,15 +121,17 @@
         });
       },
       resetField() {
+        this.resetField2() ;
+        this.validateDisabled = true;
+      },
+      resetField2() {
         this.valid = true;
         this.error = '';
         let model = this.form.model;
         var names = this.fieldNameArr ;
         var initialValues = this.initialValueArr ;
-        this.validateDisabled = true;
         for(let i = 0 ; i < names.length; i++){
            model[names[i]] = initialValues[i];
-
         }
       },
       getRuleObj() {
@@ -163,6 +165,8 @@
       },
       onFieldChange() {//当字段变化的时候，如果需要校验，则进行校验，否则不校验
         //主要原因在于，点击‘重置按钮’的时，表单数据的change事件不能进行校验，否则又将显示出校验错误信息
+        //console.info('on field change ...') ;
+        //console.info('this.validateDisabled ..' + this.validateDisabled) ;
         if (this.validateDisabled) {//如果之前不能校验，则直接返回，并将状态改为能校验
           this.validateDisabled = false;
           return;
@@ -188,13 +192,13 @@
         this.initialValueArr = this.getInitialValueArr();
         //console.info(' this.initialValueArr : ' ,this.initialValueArr) ;
         //----------------------------
-        if(this.getRuleObj()){
-            var validator = this.getRuleObj().validator;
-            var names = this.fieldNameArr ;
-            if (names.length>0 || validator) {
+        if(this.getRuleObj()!=null){
+            //var validator = this.getRuleObj().validator;
+            //var names = this.fieldNameArr ;
+            //if (names.length>0 || validator) {
               this.$on('el.form.blur', this.onFieldBlur);
               this.$on('el.form.change', this.onFieldChange);
-            }
+            //}
         }
         //更新显隐状态
         this._updateVisiableData() ;

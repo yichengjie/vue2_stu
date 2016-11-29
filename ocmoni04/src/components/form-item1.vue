@@ -60,9 +60,11 @@
           var model = this.form.model;
           if (!model || !this.prop) { return; }
           var temp = this.prop.split(':');
-          return temp.length > 1
+          var retVal = temp.length > 1
             ? model[temp[0]][temp[1]]
-            : model[this.prop];
+            : model[this.prop] ;
+          //console.info('temp : ' + temp , "retval : " + retVal) ;
+          return retVal;
         }
       }
     },
@@ -106,15 +108,25 @@
       resetField() {
         this.valid = true;
         this.error = '';
-
         let model = this.form.model;
         let value = this.fieldValue;
-
+        console.info('-------------> this prop name ['+this.prop+'] value : ' + value) ;
         if (Array.isArray(value) && value.length > 0) {
+          model[this.prop] = [];
           this.validateDisabled = true;
+        } else if (value) {
+          model[this.prop] = this.initialValue;
+          this.validateDisabled = true;
+        }
+      },
+      resetField2() {
+        this.valid = true;
+        this.error = '';
+        let model = this.form.model;
+        let value = this.fieldValue;
+        if (Array.isArray(value) && value.length > 0) {
           model[this.prop] = [];
         } else if (value) {
-          this.validateDisabled = true;
           model[this.prop] = this.initialValue;
         }
       },
