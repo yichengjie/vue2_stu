@@ -316,10 +316,10 @@
                       </oc-form-item1>
                   </ContentLayout>
                   <ContentLayout title="退款">
-                      <oc-form-item1 label ="是否可退" prop ="indicatorReissueRefund">
+                      <oc-form-item1 label ="是否可退" prop ="indicatorReissueRefund" :span ="6">
                           <oc-radio v-model ="formData.indicatorReissueRefund" :options ="optionsData.indicatorReissueRefund" />
                       </oc-form-item1>
-                      <oc-form-item1 label ="退款形式" prop ="formOfRefund">
+                      <oc-form-item1 label ="退款形式" prop ="formOfRefund" :span ="6">
                           <oc-radio v-model ="formData.formOfRefund" :options ="optionsData.formOfRefund" />
                       </oc-form-item1>
                   </ContentLayout>
