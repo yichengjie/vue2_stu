@@ -26,8 +26,8 @@
                 var val = event.target.value ;
                //console.info('val ' ,val) ;
                 this.$emit('input', val);
-                this.$emit('change', val);
-                this.dispatch('form-item', 'el.form.change', val);
+                //this.$emit('change', val);
+                this.dispatch('form-item', 'el.form.change', [val]);
             }
         }
     }

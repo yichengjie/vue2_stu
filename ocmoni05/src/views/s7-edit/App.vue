@@ -250,9 +250,9 @@
                             :serviceTypeList='["F","M","R","T","A","B","C","E","P"]' :serviceType="serviceData.serviceType">
                             <oc-datetimepicker v-model ="formData.travelStartDate">
                       </oc-form-item1>
-                      <oc-form-item1 label="旅行结束日期"  prop ="travelStartDate"
+                      <oc-form-item1 label="旅行结束日期"  prop ="travelEndDate"
                             :serviceTypeList='["F","M","R","T","A","B","C","E","P"]' :serviceType="serviceData.serviceType">
-                            <oc-datetimepicker v-model ="formData.travelStartDate">
+                            <oc-datetimepicker v-model ="formData.travelEndDate">
                       </oc-form-item1>
                       <oc-form-item1 label="开始时刻"  prop ="startTime"
                             :serviceTypeList='["F","M","R","T","A","B","C","E","P"]' :serviceType="serviceData.serviceType">

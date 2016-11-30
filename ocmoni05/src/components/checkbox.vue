@@ -43,7 +43,7 @@
                 }
                 this.$emit('input', newArr);
                 this.$emit('change', newArr);
-                this.dispatch('form-item', 'el.form.change', newArr);
+                this.dispatch('form-item', 'el.form.change', [newArr]);
             }
         }
     } ;

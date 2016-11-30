@@ -54,10 +54,10 @@
                 let flag = checkInputValid(val,this.time,this.splitChar) ;//inputStr,withTimeFlag,splitChar
                 if(flag){
                     this.$emit('input',val) ;
-                    this.dispatch('form-item', 'el.form.blur', val);
+                    this.dispatch('form-item', 'el.form.blur', [val]);
                 }else{
                     this.currentValue = this.value ;
-                    this.dispatch('form-item', 'el.form.blur', this.value);
+                    this.dispatch('form-item', 'el.form.blur', [this.value]);
                 }
                 //console.info('---------------> ' + this.currentValue) ;
             }
@@ -116,7 +116,7 @@
             _self.$emit('input',dateText) ;
             //_self.$emit('change', dateText);
             //_self.dispatch('form-item', 'el.form.blur', dateText);
-            _self.dispatch('form-item', 'el.form.change', dateText);
+            _self.dispatch('form-item', 'el.form.change', [dateText]);
         }
         $('#'+_self.randomId).datetimepicker(optionObj);
     }
@@ -129,7 +129,7 @@
             _self.$emit('input',dateText) ;
             //_self.$emit('change', dateText);
             //_self.dispatch('form-item', 'el.form.blur', dateText);
-            _self.dispatch('form-item', 'el.form.change', dateText);
+            _self.dispatch('form-item', 'el.form.change', [dateText]);
         }
         //optionObj.minDate = minDate ;
         optionObj.timeFormat = timeFormat ;
