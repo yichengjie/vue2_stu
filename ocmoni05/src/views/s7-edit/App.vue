@@ -280,7 +280,7 @@
                           <oc-select v-model ="formData.upgradeToCabin" :options ="optionsData.cabin">
                       </oc-form-item1>
                   </ContentLayout>
-                  <ContentLayout title="购买">
+                  <ContentLayout title="购买" v-show ="serviceData.serviceType !== 'A' && serviceData.serviceType !== 'B' &&serviceData.serviceType !== 'E'">
                        <oc-form-item2 label="提前购票时间"  prop ="advancedPurchasePeriodAndUnit" :names="['advancedPurchasePeriod','advancedPurchaseUnit']"
                             :serviceTypeList='["F","M","R","T","C","P"]' :serviceType="serviceData.serviceType">
                            <div class="col-sm-2"><oc-input-number v-model ="formData.advancedPurchasePeriod"  /></div>
@@ -597,15 +597,17 @@
                 this.$refs.editForm.resetFields();
             },
             handleSelectService(id){
+                this.serviceData.recordS5Id = '';
                 let retObj = this.serviceData.serviceChooseList.find(function(item){
                     return item.id === id ;
                 });
-                let {attributesGroup,attributesSubgroup,serviceType,serviceSubCode} = retObj ;
-                this.serviceData.recordS5Id = id ;
-                this.serviceData.serviceType = serviceType ;
-                this.serviceData.group = attributesGroup ;
-                this.serviceData.subGroup = attributesSubgroup ;
-                this.serviceData.subCode = serviceSubCode ;
+                //if(){}
+                let {attributesGroup,attributesSubgroup,serviceType,serviceSubCode} = retObj ||{} ;
+                this.serviceData.recordS5Id = id || '';
+                this.serviceData.serviceType = serviceType || 'F' ;
+                this.serviceData.group = attributesGroup || '';
+                this.serviceData.subGroup = attributesSubgroup || '' ;
+                this.serviceData.subCode = serviceSubCode || '';
             }
        },
        mounted(){
