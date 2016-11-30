@@ -134,7 +134,7 @@
                 return item.value === val;
             }) ;
         }
-        return (retObj ? retObj.name : val) ; 
+        return (retObj ? retObj.name : '空') ; 
     }
 </script>
 <style  src ="./select.css">

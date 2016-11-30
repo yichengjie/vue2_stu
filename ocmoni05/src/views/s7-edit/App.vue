@@ -58,33 +58,32 @@
                         </oc-form-item2>
                         <oc-form-item1 label="描述"  prop ="description"
                             :serviceTypeList="['F','M','R','T','B','E']"
-                            :serviceType="serviceData.serviceType"
-                            >
+                            :serviceType="serviceData.serviceType">
                             <oc-textarea v-model ="formData.description" placeholder ="描述信息" />
                         </oc-form-item1>
-                        <oc-form-item1 label="产品代码"  prop ="fareBasis">
-                            <oc-input v-model ="formData.fareBasis" :upper="true"  />
+                        <oc-form-item1 label="产品代号"  prop ="fareBasis">
+                            <oc-input v-model ="formData.fareBasis" maxlength="20" :upper="true"  />
                         </oc-form-item1>
                         <oc-form-item1 label="折扣代码"  prop ="discountCode">
-                            <oc-input v-model ="formData.discountCode" :maxlength="5"/>
+                            <oc-input v-model ="formData.discountCode" maxlength="5"/>
                         </oc-form-item1>
                          <oc-form-item1 label="是否检查库存"  prop ="availability">
-                            <oc-radio v-model ="formData.availability" :options='[{name:"是",value:"N"},{name:"否",value:"Y"}]'/>
+                            <oc-radio v-model ="formData.availability" :options="optionsData.availability"/>
                         </oc-form-item1>
                    </ContentLayout>
 
                     <ContentLayout title="行李" v-show="serviceData.serviceType == 'A' || serviceData.serviceType == 'C' || serviceData.serviceType == 'P'">
                         <oc-form-item1 label="免费行李件数"  prop ="freeBaggageAllowancePieces"
                             :serviceTypeList="['A']" :serviceType="serviceData.serviceType">
-                            <oc-input-number v-model ="formData.freeBaggageAllowancePieces" :min="1" placeholder ="正整数" />
+                            <oc-input-number v-model ="formData.freeBaggageAllowancePieces" :min="1" :max ="99" placeholder ="1-99" />
                         </oc-form-item1>
-                        <oc-form-item2 label="收费行李件数"  prop ="excessOccurrence"
-                            :serviceTypeList="['C']" :serviceType="serviceData.serviceType">
+                        <oc-form-item2 label="收费行李件数"  prop ="excessOccurrence" :name="['firstExcessOccurrence','lastExcessOccurrence']"
+                            :serviceTypeList="['C','P']" :serviceType="serviceData.serviceType">
                             <div class="col-sm-2">
-                                 <oc-input-number v-model ="formData.firstExcessOccurrence" :min="1" placeholder ="正整数"/>
+                                 <oc-input-number v-model ="formData.firstExcessOccurrence" :min="1" :max="99" placeholder ="1-99"/>
                             </div>
                             <div class="col-sm-2">
-                                 <oc-input-number v-model ="formData.lastExcessOccurrence" :min="1" placeholder ="正整数" />
+                                 <oc-input-number v-model ="formData.lastExcessOccurrence" :min="1" :max ="99" placeholder ="1-99"  />
                             </div>
                         </oc-form-item2>
                          <oc-form-item2 label="行李重量"  prop ="freeBaggageAllowanceWeight"
@@ -108,7 +107,7 @@
 
                     <ContentLayout title="费用">
                       <oc-form-item1 label="是否收费"  prop ="noChargeNotAvailable">
-                          <oc-select :options ="options2" v-model ="formData.noChargeNotAvailable"/>
+                          <oc-select :options ="optionsData.noChargeNotAvailable" v-model ="formData.noChargeNotAvailable"/>
                       </oc-form-item1>  
                       <oc-form-item1 label="金额"  prop ="list170VOAndlist201VO">
                           <oc-input :readonly="true" />

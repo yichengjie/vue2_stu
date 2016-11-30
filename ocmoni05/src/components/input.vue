@@ -24,7 +24,7 @@
       placeholder: String,
       autofocus: Boolean,
       name: String,
-      maxlength: Number,
+      maxlength: [String,Number],
       readonly:Boolean,
       disabled:Boolean,
       upper:Boolean

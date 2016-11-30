@@ -27,7 +27,7 @@ export let formData ={
     specSevFeeAndOrIndicator:'',/*或-和*/
     mileageExchangeIndicator:'',/*里程积分兑换标识*/
     specifiedServiceFeeMileage:'',/*里程费*/
-    specifiedServiceFeeApp:'适用于',
+    specifiedServiceFeeApp:'',/**适用于 */
     specServiceFeeColSub:'',/*包含-扣除*/
     specServiceFeeNetSell:'',/*净价-销售价*/
     indicatorComission:'Y',/*有无代理费*/
@@ -89,20 +89,29 @@ export let serviceData ={
 };
 
 export let optionsData ={
-    effectivePeriodType:[
+    effectivePeriodType:[/**使用时间限制 */
         {name:"选择","value":""},{name:"距购买服务后",value:"A"},
         {name:"距服务兑换后",value:"B"},
         {name:"距航班起飞前",value:"D",disabled:true}
     ] ,
-    effectivePeriodUnit:[
+    effectivePeriodUnit:[/**使用时间限制 */
         {name:"天",value:"D"},{name:"月",value:"M"},
         {name:"小时",value:"H"}
+    ],
+    availability:[/**是否检查库存 */
+        {name:"是",value:"N"},{name:"否",value:"Y"}
     ],
     specSevFeeAndOrIndicator:[/*或-和*/
         {name:"或",value:""},{name:"和",value:"A"},
     ],
     mileageExchangeIndicator:[/*里程积分兑换标识*/
         {name:"不兑换",value:''},{name:"兑换，用里程支付",value:'1'},{name:"兑换，用里程或金额支付",value:'2'}
+    ],
+    noChargeNotAvailable:[/**是否收费 */
+        {"name":"收费","value":""},{"name":"不适用","value":"X"},
+        {"name":"免费，不出EMD单","value":"F"},{"name":"免费，出EMD单","value":"E"},
+        {"name":"免费，不出EMD单，不要求预定","value":"G"},{"name":"免费，出EMD单，不要求预定","value":"H"},
+        {"name":"免费，行李规则遵循市场方航空公司规则","value":"D"},{"name":"免费，行李规则遵循承运方航空公司规则","value":"O"}
     ],
     specifiedServiceFeeApp:[/*适用于*/
         {"name":"每一个票价组成部分算一次服务费用","value":"1"},{"name":"每一个票价组成部分算一半的服务费用","value":"2"},

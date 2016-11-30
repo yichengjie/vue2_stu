@@ -1,15 +1,15 @@
 var util = require('util') ;
 
 //校验的func的简单封装
-export function wrapValidateFn(validateFn,vm){
+export function wrapValidateFn(validateFn,cfg){
     return function(rule,value,callback){
-        validateFn.call(null,value,callback,vm.formData) ;
+        return validateFn.call(null,{value,callback,cfg}) ;
     }
 }
 
 //校验销售生效日期
-export function validateFirstMaintenanceDate(value,callback,formData){
-      let {lastMaintenanceDate} = formData ;
+export function validateFirstMaintenanceDate({value,callback,cfg}){
+      let {lastMaintenanceDate} = cfg.vm.formData ;
       if(value&&value.length>0){//大于当前时间下一小时0分
             let flag = util.isBiggerDateTimeThanCurrentNextHour(value) ;
             //console.info('flag : ' + flag) ;
@@ -25,9 +25,9 @@ export function validateFirstMaintenanceDate(value,callback,formData){
       }
 }
 //校验销售截止日期
-export function validateLastMaintenanceDate(value,callback,formData){
-      console.info('formData : ' ,formData) ;
-      let {firstMaintenanceDate} = formData ;
+export function validateLastMaintenanceDate({value,callback,cfg}){
+      //console.info('formData : ' ,formData) ;
+      let {firstMaintenanceDate} = cfg.vm.formData  ;
       if(firstMaintenanceDate&&firstMaintenanceDate.length>0&&value&&value.length>0){//截止日期需要大于生效日期
            let flag = util.isBiggerDateTimeThan(value,firstMaintenanceDate) ;
            if(!flag){
@@ -42,9 +42,9 @@ export function validateLastMaintenanceDate(value,callback,formData){
       }
 }
 //校验使用时间限制
-export function validateUseDateLimit(value,callback,formData){
-      let useDateLimitTye = formData.useDateLimitTye ;
-      let {firstUseDate,lastUseDate,effectivePeriodType,effectivePeriodNumber,effectivePeriodUnit} = formData;
+export function validateUseDateLimit({value,callback,cfg}){
+      let useDateLimitTye = cfg.vm.formData  ;
+      let {firstUseDate,lastUseDate,effectivePeriodType,effectivePeriodNumber,effectivePeriodUnit} = cfg.vm.formData ;
       if(useDateLimitTye===''){
           let flag1 = true ; 
           let flag2 = true ;
@@ -90,9 +90,11 @@ export function validateUseDateLimit(value,callback,formData){
       }
 }
 //校验服务套数
-export function validateServiceNumber(value,callback,formData){
+export function validateServiceNumber({value,callback,cfg}){
       //'serviceNumberMinimum','serviceNumberMaximum'
-      let {serviceNumberMinimum,serviceNumberMaximum} = formData ;
+      let {serviceNumberMinimum,serviceNumberMaximum} = cfg.vm.formData  ;
+      //console.info('serviceNumberMinimum : ' + serviceNumberMinimum) ;
+      //console.info('serviceNumberMaximum : ' + serviceNumberMaximum) ;
       if(serviceNumberMinimum !='' &&serviceNumberMaximum !=''){
             if(serviceNumberMinimum>serviceNumberMaximum){
                callback('最大值不能小于最小值!');
@@ -103,9 +105,40 @@ export function validateServiceNumber(value,callback,formData){
       return true;   
 }
 
+
+/**校验字母或数字的组合输入 */
+export function validateLettersOrNumber({value,callback}){
+    let flag = util.islettersOrNumber(value);
+    if(!flag){
+        callback('字母或数字组合!') ;
+        return false;
+    }
+    callback() ;
+    return true ;
+}
+
+export function validateBiggerNumber(value,propName,callback,cfg){
+    let {smallerNum,biggerNum} = cfg ;
+    let smaller = cfg['formData'][smallerNum] ;
+    let bigger = cfg['formData'][biggerNum] ;
+
+    console.info('smaller : ' + smaller) ;
+    console.info('bigger : ' + bigger) ;
+    // if(serviceNumberMinimum !='' &&serviceNumberMaximum !=''){
+    //     if(serviceNumberMinimum>serviceNumberMaximum){
+    //         callback('最大值不能小于最小值!');
+    //         return false ;
+    //     }
+    // }
+    // callback() ;
+    // return true;   
+}
+
+
+
 //校验区域代码
-export function validateLoc(value,callback,formData){
-      let {locValue} = formData ;
+export function validateLoc(value,callback){
+      let {locValue} = cfg.vm.formData  ;
       if(value&&value.length>0){
           if(locValue&&locValue.length>0){
               callback &&callback() ;
@@ -123,4 +156,9 @@ export function validateLoc(value,callback,formData){
               return true ; 
           }
       }
+}
+
+
+export const i18n_cn ={
+  required: '%s 必填',
 }

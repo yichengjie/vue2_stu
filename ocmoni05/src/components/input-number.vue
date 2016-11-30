@@ -24,7 +24,7 @@
       value: [String, Number],
       placeholder: String,
       name: String,
-      maxlength: Number,
+      maxlength: [String,Number],
       disabled:Boolean,
       max: {
         type: Number,

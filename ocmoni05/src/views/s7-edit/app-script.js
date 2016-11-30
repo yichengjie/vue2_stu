@@ -5,7 +5,7 @@ import ContentLayout from './ContentLayout.vue' ;
 import NewVersionService from './NewVersionService.vue' ;
 import {initPage4AddApi,initPage4UpdateApi} from '../../api/s7-edit.js' ;
 import {wrapValidateFn,validateFirstMaintenanceDate,validateLastMaintenanceDate,validateServiceNumber,
-    validateUseDateLimit,validateLoc} from './validate.js' ;
+    validateUseDateLimit,validateLettersOrNumber,validateBiggerNumber} from './validate.js' ;
 import UseDateLimitChangeBtn from './UseDateLimitChangeBtn.vue' ;
 import Table196 from './Table196.vue' ;
 import Table170And201 from './Table170And201.vue' ;
@@ -19,10 +19,13 @@ export default {
     },
     data(){
         //所有的校验方法
-        let firstMaintenanceDate = wrapValidateFn(validateFirstMaintenanceDate,this) ; 
-        let lastMaintenanceDate = wrapValidateFn(validateLastMaintenanceDate,this) ;
-        let serviceNumber =wrapValidateFn(validateServiceNumber,this) ;
-        let useDateLimit = wrapValidateFn(validateUseDateLimit,this) ;
+        let firstMaintenanceDate = wrapValidateFn(validateFirstMaintenanceDate,{vm:this}) ; 
+        let lastMaintenanceDate = wrapValidateFn(validateLastMaintenanceDate,{vm:this}) ;
+        let serviceNumber =wrapValidateFn(validateServiceNumber,{vm:this}) ;
+        let useDateLimit = wrapValidateFn(validateUseDateLimit,{vm:this}) ;
+        let lettersOrNumber = wrapValidateFn(validateLettersOrNumber) ;
+        //收费行李件数
+        let excessOccurrence = wrapValidateFn(validateBiggerNumber,{vm:this,smallerNum:'firstExcessOccurrence',biggerNum:'lastExcessOccurrence'}) ;
 
         return {
             formData:{
@@ -46,7 +49,17 @@ export default {
                     firstUseDate:[
                         {validator: useDateLimit ,trigger: 'change'}
                     ]
-                }
+                },
+                fareBasis:[
+                    {validator: lettersOrNumber ,trigger: 'change'}
+                ],
+                discountCode:[
+                    {validator: lettersOrNumber ,trigger: 'change'}
+                ],
+                excessOccurrence:[
+                    {validator: excessOccurrence ,trigger: 'change'}
+                ]
+
             },
             options2:[
                 {name:"选择",value:""},
