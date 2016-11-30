@@ -78,14 +78,17 @@
                 this.filterKey = getCheckItemName(this.options,this.value)  ;
             },
             handleClickItem(val){
+                this.filterKey = getCheckItemName(this.options,this.value)  ; 
                 this.$emit('input',val) ;
                 this.visiable = false;
             },
             handleInput(event){
+                //this.$emit('input','') ;
                 var val = $(event.target).text() ;
-                //console.info('val : ' + val) ;
+               // console.info('val : ' + val) ;
                 this.filterKey = val ;
                 this.firstFocus = false;
+                this.visiable = true ;
                // $(event.target).focus() ;
             },
             handleFocus(){

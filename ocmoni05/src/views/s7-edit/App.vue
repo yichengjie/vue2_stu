@@ -14,10 +14,10 @@
                <DataSection left ="2.确定费用" right ="描述 | 费用">
                    <ContentLayout title="描述">
                         <oc-form-item1 label="销售生效日期" :required="true" prop ="firstMaintenanceDate">
-                            <oc-datepicker v-model ="formData.firstMaintenanceDate" :time="true" />
+                            <oc-datetimepicker pickerType="datetime" v-model ="formData.firstMaintenanceDate"  />
                         </oc-form-item1>
                         <oc-form-item1 label="销售截止日期"  prop ="lastMaintenanceDate">
-                            <oc-datepicker v-model ="formData.lastMaintenanceDate"  :time="true" />
+                            <oc-datetimepicker pickerType="datetime" v-model ="formData.lastMaintenanceDate"   />
                         </oc-form-item1>
                         <oc-form-item2 label="使用时间限制"  prop="useDateLimit" errorPosition ="bottom"
                             :serviceType="serviceData.serviceType"
@@ -28,8 +28,8 @@
                                 <UseDateLimitChangeBtn v-model ="formData.useDateLimitTye"  :formData="formData"
                                     :subGroup="serviceData.subGroup"/>
                                 <div class = "table_layout" style="width: 100%;" v-show="formData.useDateLimitTye==''">
-                                    <oc-datepicker v-model="formData.firstUseDate" style="width:48%;display: inline-block;" />
-                                    <oc-datepicker v-model="formData.lastUseDate" style="width:48%;display: inline-block;" />
+                                    <oc-datetimepicker v-model="formData.firstUseDate" style="width:48%;display: inline-block;" />
+                                    <oc-datetimepicker v-model="formData.lastUseDate" style="width:48%;display: inline-block;" />
                                 </div>
                                 <div class = "table_layout" style="width: 100%;" v-show="formData.useDateLimitTye=='1'">
                                     <oc-select v-model="formData.effectivePeriodType" style="width:48%;display: inline-block;"  
@@ -58,33 +58,32 @@
                         </oc-form-item2>
                         <oc-form-item1 label="描述"  prop ="description"
                             :serviceTypeList="['F','M','R','T','B','E']"
-                            :serviceType="serviceData.serviceType"
-                            >
+                            :serviceType="serviceData.serviceType">
                             <oc-textarea v-model ="formData.description" placeholder ="描述信息" />
                         </oc-form-item1>
-                        <oc-form-item1 label="产品代码"  prop ="fareBasis">
-                            <oc-input v-model ="formData.fareBasis" :upper="true"  />
+                        <oc-form-item1 label="产品代号"  prop ="fareBasis">
+                            <oc-input v-model ="formData.fareBasis" maxlength="20" :upper="true"  />
                         </oc-form-item1>
                         <oc-form-item1 label="折扣代码"  prop ="discountCode">
-                            <oc-input v-model ="formData.discountCode" :maxlength="5"/>
+                            <oc-input v-model ="formData.discountCode" maxlength="5"/>
                         </oc-form-item1>
                          <oc-form-item1 label="是否检查库存"  prop ="availability">
-                            <oc-radio v-model ="formData.availability" :options='[{name:"是",value:"N"},{name:"否",value:"Y"}]'/>
+                            <oc-radio v-model ="formData.availability" :options="optionsData.availability"/>
                         </oc-form-item1>
                    </ContentLayout>
 
                     <ContentLayout title="行李" v-show="serviceData.serviceType == 'A' || serviceData.serviceType == 'C' || serviceData.serviceType == 'P'">
                         <oc-form-item1 label="免费行李件数"  prop ="freeBaggageAllowancePieces"
                             :serviceTypeList="['A']" :serviceType="serviceData.serviceType">
-                            <oc-input-number v-model ="formData.freeBaggageAllowancePieces" :min="1" placeholder ="正整数" />
+                            <oc-input-number v-model ="formData.freeBaggageAllowancePieces" :min="1" :max ="99" placeholder ="1-99" />
                         </oc-form-item1>
-                        <oc-form-item2 label="收费行李件数"  prop ="excessOccurrence"
-                            :serviceTypeList="['C']" :serviceType="serviceData.serviceType">
+                        <oc-form-item2 label="收费行李件数"  prop ="excessOccurrence" :name="['firstExcessOccurrence','lastExcessOccurrence']"
+                            :serviceTypeList="['C','P']" :serviceType="serviceData.serviceType">
                             <div class="col-sm-2">
-                                 <oc-input-number v-model ="formData.firstExcessOccurrence" :min="1" placeholder ="正整数"/>
+                                 <oc-input-number v-model ="formData.firstExcessOccurrence" :min="1" :max="99" placeholder ="1-99"/>
                             </div>
                             <div class="col-sm-2">
-                                 <oc-input-number v-model ="formData.lastExcessOccurrence" :min="1" placeholder ="正整数" />
+                                 <oc-input-number v-model ="formData.lastExcessOccurrence" :min="1" :max ="99" placeholder ="1-99"  />
                             </div>
                         </oc-form-item2>
                          <oc-form-item2 label="行李重量"  prop ="freeBaggageAllowanceWeight"
@@ -108,7 +107,7 @@
 
                     <ContentLayout title="费用">
                       <oc-form-item1 label="是否收费"  prop ="noChargeNotAvailable">
-                          <oc-select :options ="options2" v-model ="formData.noChargeNotAvailable"/>
+                          <oc-select :options ="optionsData.noChargeNotAvailable" v-model ="formData.noChargeNotAvailable"/>
                       </oc-form-item1>  
                       <oc-form-item1 label="金额"  prop ="list170VOAndlist201VO">
                           <oc-input :readonly="true" />
@@ -129,10 +128,6 @@
                             :serviceTypeList ='["F","M","R","T","C","P"]' :serviceType="serviceData.serviceType">
                           <oc-select  v-model ="formData.specifiedServiceFeeApp" :options ="optionsData.specifiedServiceFeeApp" />
                       </oc-form-item1> 
-                      <oc-form-item1 label="适用于"  prop ="specifiedServiceFeeApp" 
-                            :serviceTypeList ='["F","M","R","T","C","P"]' :serviceType="serviceData.serviceType">
-                          <oc-select  v-model ="formData.specifiedServiceFeeApp" :options ="optionsData.specifiedServiceFeeApp" />
-                      </oc-form-item1>
                       <oc-form-item1 label="包含/扣除"  prop ="specServiceFeeColSub" 
                             :serviceTypeList ='["F","M","R","T","A","B","C","E","P"]' :serviceType="serviceData.serviceType">
                           <oc-select  v-model ="formData.specServiceFeeColSub" :options ="optionsData.specServiceFeeColSub" />
@@ -252,19 +247,19 @@
                   <ContentLayout title="航班">
                       <oc-form-item1 label="旅行开始日期"  prop ="travelStartDate"
                             :serviceTypeList='["F","M","R","T","A","B","C","E","P"]' :serviceType="serviceData.serviceType">
-                            <oc-datepicker v-model ="formData.travelStartDate">
+                            <oc-datetimepicker v-model ="formData.travelStartDate">
                       </oc-form-item1>
-                      <oc-form-item1 label="旅行结束日期"  prop ="travelStartDate"
+                      <oc-form-item1 label="旅行结束日期"  prop ="travelEndDate"
                             :serviceTypeList='["F","M","R","T","A","B","C","E","P"]' :serviceType="serviceData.serviceType">
-                            <oc-datepicker v-model ="formData.travelStartDate">
+                            <oc-datetimepicker v-model ="formData.travelEndDate">
                       </oc-form-item1>
                       <oc-form-item1 label="开始时刻"  prop ="startTime"
                             :serviceTypeList='["F","M","R","T","A","B","C","E","P"]' :serviceType="serviceData.serviceType">
-                            <oc-input v-model ="formData.startTime">
+                            <oc-datetimepicker pickerType="time" v-model ="formData.startTime">
                       </oc-form-item1>
                       <oc-form-item1 label="结束时刻"  prop ="stopTime"
                             :serviceTypeList='["F","M","R","T","A","B","C","E","P"]' :serviceType="serviceData.serviceType">
-                            <oc-input v-model ="formData.stopTime">
+                            <oc-datetimepicker pickerType="time" v-model ="formData.stopTime">
                       </oc-form-item1>
                       <oc-form-item1 label="星期"  prop ="dayOfWeek" :span ="7"
                             :serviceTypeList='["F","T","A","B","C","E","P"]' :serviceType="serviceData.serviceType">
@@ -284,7 +279,7 @@
                           <oc-select v-model ="formData.upgradeToCabin" :options ="optionsData.cabin">
                       </oc-form-item1>
                   </ContentLayout>
-                  <ContentLayout title="购买">
+                  <ContentLayout title="购买" v-show ="serviceData.serviceType !== 'A' && serviceData.serviceType !== 'B' &&serviceData.serviceType !== 'E'">
                        <oc-form-item2 label="提前购票时间"  prop ="advancedPurchasePeriodAndUnit" :names="['advancedPurchasePeriod','advancedPurchaseUnit']"
                             :serviceTypeList='["F","M","R","T","C","P"]' :serviceType="serviceData.serviceType">
                            <div class="col-sm-2"><oc-input-number v-model ="formData.advancedPurchasePeriod"  /></div>
@@ -326,318 +321,10 @@
                </DataSection>
            </oc-form>
         </div>
-
     </div>
 </template>
-<script>
-    import Navbar from '../common/Navbar.vue' ;
-    import QuerySection from './QuerySection.vue' ;
-    import DataSection from './DataSection.vue' ;
-    import ContentLayout from './ContentLayout.vue' ;
-    import NewVersionService from './NewVersionService.vue' ;
-    import {initPage4AddApi,initPage4UpdateApi} from '../../api/s7-edit.js' ;
-    import {validateFirstMaintenanceDate,validateLastMaintenanceDate,validateServiceNumber,
-        validateUseDateLimit,validateLoc} from './validate.js' ;
-    import UseDateLimitChangeBtn from './UseDateLimitChangeBtn.vue' ;
-    import Table196 from './Table196.vue' ;
-    import Table170And201 from './Table170And201.vue' ;
-    import Table178 from './Table178.vue' ;
-    export default {
-        components:{
-            Navbar,
-            QuerySection,
-            DataSection,
-            ContentLayout,
-            NewVersionService,
-            UseDateLimitChangeBtn,
-            Table196,
-            Table170And201,
-            Table178
-        },
-        data(){
-            let firstMaintenanceDate = (rule,value,callback)=>{
-                validateFirstMaintenanceDate(value,callback,this.formData) ;
-            }
-            let lastMaintenanceDate =(rule,value,callback)=>{
-                validateLastMaintenanceDate(value,callback,this.formData) ;
-            }
-            let serviceNumber =(rule, value, callback) =>{
-                 validateServiceNumber(value,callback,this.formData) ;
-            }
-            let useDateLimit = (rule, value, callback) =>{
-                validateUseDateLimit(value,callback,this.formData) ;
-            }
-            let loc = (rule,value,callback) =>{
-                validateLoc(value,callback,this.formData) ;
-            }
-
-            return {
-                formData:{
-                    firstMaintenanceDate:'',
-                    lastMaintenanceDate:'',
-                    serviceNumberMinimum:'',
-                    serviceNumberMaximum:'',
-                    description:'',
-                    fareBasis:'',
-                    discountCode:'',
-                    availability:'',
-                    select2:'',
-                    useDateLimitTye:'',//使用时间限制类型[时间段:'']或[期限:'1']
-                    effectivePeriodType:'',
-                    effectivePeriodNumber:'',
-                    effectivePeriodUnit:'',
-                    firstUseDate:'',
-                    lastUseDate:'',
-                    freeBaggageAllowancePieces:'',
-                    firstExcessOccurrence:'',
-                    lastExcessOccurrence:'',
-                    freeBaggageAllowanceWeight:'',
-                    freeBaggageAllowanceUnit:'',
-                    baggageTravelApplication:''/*行李使用范围*/,
-                    list196VO:[],
-                    noChargeNotAvailable:'',/*是否收费*/
-                    list170VO:[],
-                    list201VO:[],
-                    specSevFeeAndOrIndicator:'',/*或-和*/
-                    mileageExchangeIndicator:'',/*里程积分兑换标识*/
-                    specifiedServiceFeeMileage:'',/*里程费*/
-                    specifiedServiceFeeApp:'适用于',
-                    specServiceFeeColSub:'',/*包含-扣除*/
-                    specServiceFeeNetSell:'',/*净价-销售价*/
-                    indicatorComission:'Y',/*有无代理费*/
-                    taxApplication:'Y',/*有无税费*/
-                    sequenceNumber:'',/*优先级序号*/
-                    passengerTypeCode:'',/**旅客类型*/
-                    minPassengerAge:'',/*年龄范围*/
-                    maxPassengerAge:'',
-                    allowancePeopleMinimum:'',/*服务人数范围*/
-                    allowancePeopleMaximum:'',
-                    firstPassengerOccurrence:'',/*旅客序号范围*/
-                    lastPassengerOccurrence:'',
-                    frequentFlyerStatus:'',/*常旅客状态*/
-                    customerIndexScoreMinimum:'',/**客户积分范围*/
-                    customerIndexScoreMaxmum:'',
-                    list172VO:[],/*大客户-特殊客户**/
-                    list178VO:[],/**发布对象*/
-                    publicPrivateIndicator:'',/*公布私有**/
-                    geoSpecFromToWithin:'',/*区域限制*/
-                    geoSpecSectPortJourney:'',/**区域部分全程*/
-                    geoSpecTravelIndicator:'',/*指定区域*/
-                    geoSpecExceptionStopTime:'',/*经停时间*/
-                    geoSpecExceptionStopUnit:'',/*经停单位*/
-                    geoSpecStopConnDes:'',/*经停类型*/
-                    geoSpecLoc1Type:'',/*区域1*/
-                    geoSpecLoc1:'',
-                    geoSpecLoc2Type:'',/*区域2*/
-                    geoSpecLoc2:'',
-                    geoSpecLoc3Type:'',/*区域3*/
-                    geoSpecLoc3:'',
-                    mileageMinimum:'',/*里程范围*/
-                    mileageMaximum:'',
-                    indicatorInterline:'Y',/*是否联程*/
-                    travelStartDate:'',/*旅行开始日期*/
-                    travelEndtDate:'',/*旅行截止日期*/
-                    startTime:'',/*起始时刻*/
-                    stopTime:'',/*结束时刻*/
-                    dayOfWeek:['3'],/*星期*/
-                    equipment:'',/*机型*/
-                    cabin:'',/*舱位等级*/
-                    upgradeToCabin:'',/*升舱到的服务等级*/
-                    advancedPurchasePeriod:'',/*提前购票时间*/
-                    advancedPurchaseUnit:'',/*提前购票时间单位*/
-                    tourCode:'',/*旅行编码*/
-                    tariff:'',/*TARIFF NO.**/
-                    rule:'',/*RULE NO.*/
-                    advancedPurchaseTktIssue:'',/*与机票同时出票**/
-                    indicatorReissueRefund:'',/**是否可退*/
-                    formOfRefund:''/*退款形式*/
-                },
-                serviceData:{/*选择服务相关的数据**/
-                    recordS5Id:'',
-                    serviceType:'F',
-                    group:'',
-                    subGroup:'',
-                    subCode:'',
-                    serviceChooseList:[]
-                },
-                rules:{
-                    firstMaintenanceDate: [
-                        {required: true, message: '销售起始日期必填', trigger: 'change' },
-                        {validator:firstMaintenanceDate,trigger:'change'}
-                    ],
-                    lastMaintenanceDate:[
-                        {validator: lastMaintenanceDate ,trigger: 'change'}
-                    ],
-                    serviceNumber:{
-                        serviceNumberMinimum:[{required:true,trigger:'change',message: '服务套数1必填'}],
-                        serviceNumberMaximum:[{ validator: serviceNumber ,trigger: 'change'}]
-                    },
-                    useDateLimit:{
-                        firstUseDate:[
-                            {validator: useDateLimit ,trigger: 'change'}
-                        ]
-                    }
-                },
-                options2:[
-                    {name:"选择",value:""},
-                    {name:"类型F",value:"F"}
-                ],
-                optionsData:{
-                    effectivePeriodType:[
-                        {name:"选择","value":""},{name:"距购买服务后",value:"A"},
-                        {name:"距服务兑换后",value:"B"},
-                        {name:"距航班起飞前",value:"D",disabled:true}
-                    ] ,
-                    effectivePeriodUnit:[
-                        {name:"天",value:"D"},{name:"月",value:"M"},
-                        {name:"小时",value:"H"}
-                    ],
-                    specSevFeeAndOrIndicator:[/*或-和*/
-                        {name:"或",value:""},{name:"和",value:"A"},
-                    ],
-                    mileageExchangeIndicator:[/*里程积分兑换标识*/
-                        {name:"不兑换",value:''},{name:"兑换，用里程支付",value:'1'},{name:"兑换，用里程或金额支付",value:'2'}
-                    ],
-                    specifiedServiceFeeApp:[/*适用于*/
-                        {"name":"每一个票价组成部分算一次服务费用","value":"1"},{"name":"每一个票价组成部分算一半的服务费用","value":"2"},
-                        {"name":"每用一次服务算一次服务费用","value":"3"},{"name":"匹配的部分航程算一次服务费用","value":"4"},
-                        {"name":"往返程服务费用【F/R/T】","value":"5"},{"name":"每公斤按公布运价的0.5%收费","value":"H"},
-                        {"name":"每公斤按公布运价的1%收费","value":"C"},{"name":"每公斤按公布运价的1.5%收费","value":"P"},
-                        {"name":"按每公斤收费","value":"K"},{"name":"按每5公斤收费","value":"F"}
-                    ],
-                    specServiceFeeColSub:[/*包含扣除**/
-                        {"name":"包含在票价中","value":"I"},{"name":"单独收费","value":""}
-                    ],
-                    specServiceFeeNetSell:[
-                        {"name":"销售价","value":""},{"name":"净价","value":"N"}
-                    ],
-                    indicatorComission:[/*有无代理费*/
-                        {"name":"有","value":"Y"},{"name":"无","value":"N"}
-                    ],
-                    taxApplication:[/*有无税费*/
-                       {"name":"有","value":"Y"},{"name":"无","value":"N"}  
-                    ],
-                    passengerTypeCode:[/**旅客类型(这个数据从后台查询过来)*/
-                        {name:'选择',value:''}
-                    ],
-                    frequentFlyerStatus:[/*常旅客状态(这个数据从后台查询过来)*/
-                        {name:'选择',value:''}
-                    ],
-                    publicPrivateIndicator:[/*公布-私有*/
-                         {name:'公布',value:''},{name:'私有',value:'P'}
-                    ],
-                    geoSpecFromToWithin:[/**区域限制*/
-                        {name:'不限区域',value:''},{name:'区域1→2',value:'1'},
-                        {name:'区域2→1',value:'2'},{name:'区域1内部',value:'W'}
-                    ],
-                    geoSpecSectPortJourney:[/**区域-部分-全程*/
-                        {"name":"选择","value":""},{"name":"Sector","value":"S"},
-                        {"name":"Portion","value":"P"},{"name":"Journey","value":"J"}
-                    ],
-                    geoSpecExceptionStopUnit:[/**经停时间单位*/
-                        {"name":"选择","value":""},{"name":"分","value":"N"},
-                        {"name":"小时","value":"H"},{"name":"天","value":"D"},
-                        {"name":"月","value":"M"}
-                    ],
-                    geoSpecLoc1Type:[/**区域单位*/
-                        {"name":"选择","value":""},
-                        {"name":"大区","value":"A"},{"name":"城市","value":"C"},
-                        {"name":"国家","value":"N"},{"name":"机场","value":"P"},
-                        {"name":"州","value":"S"},{"name":"区域","value":"Z"}
-                    ],
-                    indicatorInterline:[
-                        {"name":"是","value":"Y"},{"name":"否","value":"N"}
-                    ],
-                    dayOfWeek:[
-                        {"name":"星期一","value":"1"},{"name":"星期二","value":"2"},
-                        {"name":"星期三","value":"3"},{"name":"星期四","value":"4"},
-                        {"name":"星期五","value":"5"},{"name":"星期六","value":"6"},
-                        {"name":"星期日","value":"7"}
-                    ],
-                    equipment:[/*机型(这个数据从后台查询过来)**/
-                         {name:'选择',value:''}
-                    ],
-                    cabin:[/*舱位等级*/
-                        {"name":"选择","value":""},
-                        {"name":"豪华头等舱","value":"R"},{"name":"头等舱","value":"F"},
-                        {"name":"豪华商务舱","value":"J"},{"name":"商务舱","value":"C"},
-                        {"name":"豪华经济舱","value":"P"},{"name":"经济舱","value":"Y"}
-                    ],
-                    advancedPurchaseUnit:[/*提前购票时间单位*/
-                        {"name":"分","value":"N"}, {"name":"小时","value":"H"},
-                        {"name":"天","value":"D"}, {"name":"月","value":"M"}
-                    ],
-                    advancedPurchaseTktIssue:[/**与机票同时出票*/
-                        {"name":"是","value":""}, {"name":"否","value":"X"},
-                    ],
-                    indicatorReissueRefund:[/*是否可退*/
-                        {"name":"不可退款","value":"N"},
-                        {"name":"可退款","value":"Y"}, {"name":"可改","value":"R"}
-                    ],
-                    formOfRefund:[/**退款形式*/
-                        {"name":"选择","value":""},{"name":"按原付款渠道退款","value":"1"},
-				        {"name":"按电子凭证退款","value":"2"}
-                    ]
-                }
-            } ;
-        },
-        methods:{
-            handleSaveForm(type){
-               console.info('formData : ' + JSON.stringify(this.formData)) ;
-
-               //var jqFlag = this.validator.form() ;
-               //console.info('jquery validate flag  : ' +jqFlag )  ;
-               //校验整个表单
-               this.$refs.editForm.validate((valid) => {
-                  if (valid) {
-                      alert('submit!');
-                  } else {
-                      console.log('error submit!!');
-                      return false;
-                  }
-              });
-            },
-            handleReset() {
-                this.$refs.editForm.resetFields();
-            },
-            handleSelectService(id){
-                let retObj = this.serviceData.serviceChooseList.find(function(item){
-                    return item.id === id ;
-                });
-                let {attributesGroup,attributesSubgroup,serviceType,serviceSubCode} = retObj ;
-                this.serviceData.recordS5Id = id ;
-                this.serviceData.serviceType = serviceType ;
-                this.serviceData.group = attributesGroup ;
-                this.serviceData.subGroup = attributesSubgroup ;
-                this.serviceData.subCode = serviceSubCode ;
-            }
-       },
-       mounted(){
-           initPage4AddApi().then(retData=>{
-               if(retData.flag==='true'||retData.flag===true){
-                   let len = this.serviceData.serviceChooseList.length ;
-                   this.serviceData.serviceChooseList.splice(0,len) ;
-                   for(let item of retData.serviceChooseList){
-                       this.serviceData.serviceChooseList.push(item) ;
-                   }
-                   //console.info("retList : " ,retData.serviceChooseList) ;
-               }else{
-                   console.info('数据加载不完整...') ;
-               }
-           },error =>{
-               console.info('error : ',error) ;
-           })
-           initPage4UpdateApi().then(retData=>{
-               let {formData} = retData ;
-               Object.assign(this.formData,formData) ;
-           }) ;
-           //var validator = $("#s7_form").validate({meta : ""});
-		   //this.validator = validator ;
-       }
-    }
+<script src ="./app-script.js">
 </script>
 <style>
-    body{
-        margin-bottom: 50px;
-    }
+    body{margin-bottom: 50px;}
 </style>
