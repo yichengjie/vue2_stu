@@ -1,6 +1,13 @@
 var util = require('util') ;
 
+//校验的func的简单封装
+export function wrapValidateFn(validateFn,vm){
+    return function(rule,value,callback){
+        validateFn.call(null,value,callback,vm.formData) ;
+    }
+}
 
+//校验销售生效日期
 export function validateFirstMaintenanceDate(value,callback,formData){
       let {lastMaintenanceDate} = formData ;
       if(value&&value.length>0){//大于当前时间下一小时0分
@@ -17,10 +24,9 @@ export function validateFirstMaintenanceDate(value,callback,formData){
             return true ;
       }
 }
-
-
-
+//校验销售截止日期
 export function validateLastMaintenanceDate(value,callback,formData){
+      console.info('formData : ' ,formData) ;
       let {firstMaintenanceDate} = formData ;
       if(firstMaintenanceDate&&firstMaintenanceDate.length>0&&value&&value.length>0){//截止日期需要大于生效日期
            let flag = util.isBiggerDateTimeThan(value,firstMaintenanceDate) ;
@@ -35,7 +41,7 @@ export function validateLastMaintenanceDate(value,callback,formData){
             return true ;
       }
 }
-
+//校验使用时间限制
 export function validateUseDateLimit(value,callback,formData){
       let useDateLimitTye = formData.useDateLimitTye ;
       let {firstUseDate,lastUseDate,effectivePeriodType,effectivePeriodNumber,effectivePeriodUnit} = formData;
@@ -83,7 +89,7 @@ export function validateUseDateLimit(value,callback,formData){
           }
       }
 }
-
+//校验服务套数
 export function validateServiceNumber(value,callback,formData){
       //'serviceNumberMinimum','serviceNumberMaximum'
       let {serviceNumberMinimum,serviceNumberMaximum} = formData ;
@@ -97,7 +103,7 @@ export function validateServiceNumber(value,callback,formData){
       return true;   
 }
 
-
+//校验区域代码
 export function validateLoc(value,callback,formData){
       let {locValue} = formData ;
       if(value&&value.length>0){
