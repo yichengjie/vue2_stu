@@ -129,10 +129,6 @@
                             :serviceTypeList ='["F","M","R","T","C","P"]' :serviceType="serviceData.serviceType">
                           <oc-select  v-model ="formData.specifiedServiceFeeApp" :options ="optionsData.specifiedServiceFeeApp" />
                       </oc-form-item1> 
-                      <oc-form-item1 label="适用于"  prop ="specifiedServiceFeeApp" 
-                            :serviceTypeList ='["F","M","R","T","C","P"]' :serviceType="serviceData.serviceType">
-                          <oc-select  v-model ="formData.specifiedServiceFeeApp" :options ="optionsData.specifiedServiceFeeApp" />
-                      </oc-form-item1>
                       <oc-form-item1 label="包含/扣除"  prop ="specServiceFeeColSub" 
                             :serviceTypeList ='["F","M","R","T","A","B","C","E","P"]' :serviceType="serviceData.serviceType">
                           <oc-select  v-model ="formData.specServiceFeeColSub" :options ="optionsData.specServiceFeeColSub" />
