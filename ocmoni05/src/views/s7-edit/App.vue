@@ -71,13 +71,13 @@
                             <oc-radio v-model ="formData.availability" :options="optionsData.availability"/>
                         </oc-form-item1>
                    </ContentLayout>
-
                     <ContentLayout title="行李" v-show="serviceData.serviceType == 'A' || serviceData.serviceType == 'C' || serviceData.serviceType == 'P'">
                         <oc-form-item1 label="免费行李件数"  prop ="freeBaggageAllowancePieces"
                             :serviceTypeList="['A']" :serviceType="serviceData.serviceType">
                             <oc-input-number v-model ="formData.freeBaggageAllowancePieces" :min="1" :max ="99" placeholder ="1-99" />
                         </oc-form-item1>
-                        <oc-form-item2 label="收费行李件数"  prop ="excessOccurrence" :name="['firstExcessOccurrence','lastExcessOccurrence']"
+                        <oc-form-item2 label="收费行李件数"  prop ="excessOccurrence" 
+                            :names="['firstExcessOccurrence','lastExcessOccurrence']"
                             :serviceTypeList="['C','P']" :serviceType="serviceData.serviceType">
                             <div class="col-sm-2">
                                  <oc-input-number v-model ="formData.firstExcessOccurrence" :min="1" :max="99" placeholder ="1-99"/>

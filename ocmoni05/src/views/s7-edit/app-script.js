@@ -19,14 +19,19 @@ export default {
     },
     data(){
         //所有的校验方法
+        //销售生效日期
         let firstMaintenanceDate = wrapValidateFn(validateFirstMaintenanceDate,{vm:this}) ; 
+        //销售截止日期
         let lastMaintenanceDate = wrapValidateFn(validateLastMaintenanceDate,{vm:this}) ;
-        let serviceNumber =wrapValidateFn(validateServiceNumber,{vm:this}) ;
+        //服务套数
+        let serviceNumber =wrapValidateFn(validateBiggerNumber,{vm:this,smallerNum:'serviceNumberMinimum',biggerNum:'serviceNumberMaximum'}) ;
+        //使用时间限制
         let useDateLimit = wrapValidateFn(validateUseDateLimit,{vm:this}) ;
+        //数字字码校验
         let lettersOrNumber = wrapValidateFn(validateLettersOrNumber) ;
         //收费行李件数
         let excessOccurrence = wrapValidateFn(validateBiggerNumber,{vm:this,smallerNum:'firstExcessOccurrence',biggerNum:'lastExcessOccurrence'}) ;
-
+        
         return {
             formData:{
                 ...formData 
@@ -45,21 +50,22 @@ export default {
                 serviceNumber:{
                     serviceNumberMaximum:[{ validator: serviceNumber ,trigger: 'change'}]
                 },
-                useDateLimit:{
+                useDateLimit:{/**使用时间限制 */
                     firstUseDate:[
                         {validator: useDateLimit ,trigger: 'change'}
                     ]
                 },
-                fareBasis:[
+                fareBasis:[/**产品代号*/
                     {validator: lettersOrNumber ,trigger: 'change'}
                 ],
-                discountCode:[
+                discountCode:[/**折扣代码 */
                     {validator: lettersOrNumber ,trigger: 'change'}
                 ],
-                excessOccurrence:[
-                    {validator: excessOccurrence ,trigger: 'change'}
-                ]
-
+                excessOccurrence:{/**收费行李件数 */
+                    firstExcessOccurrence:[
+                        {validator: excessOccurrence ,trigger: 'change'}
+                    ]
+                }
             },
             options2:[
                 {name:"选择",value:""},

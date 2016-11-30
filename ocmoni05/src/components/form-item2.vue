@@ -88,6 +88,7 @@
     },
     methods: {
       validate(trigger, cb) {
+        //console.info('--------validate : ' + trigger) ;
         //如果控件不可见，则不做表单校验
         if(!this.visiable){
            cb && cb();
@@ -96,6 +97,7 @@
         //进行验证先关的操作
         //console.info('validate .......') ;
         var rules = this.getFilteredRule(trigger);
+        console.info('rules : ' ,rules) ;
         if (rules==null) {
           cb && cb();
           return true;
@@ -135,11 +137,17 @@
       },
       getFilteredRule(trigger) {
         var ruleObj = this.getRuleObj();
+        //console.info('ruleObj : ' ,ruleObj) ;
         var names = this.fieldNameArr ;
         let retRuleObj = {} ;
-        if(!ruleObj||names.length==0){//如果为空直接返回
+        if(!ruleObj){//如果为空直接返回
           return null ;
         }
+        if(names.length==0){
+           console.warn('names为空，将不进行校验，请检查!') ;
+           return null ;
+        }
+        //console.info('2222222222222222222222') ;
         let isEmptyFlag = true;
         for(let name of names){
            let tmpArr = ruleObj[name] || [];

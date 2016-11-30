@@ -70,6 +70,7 @@
            //this.$emit('change', valNum);
            this.$emit('input', valNum);
            this.dispatch('form-item', 'el.form.change', [valNum]);
+           //console.info('--------> ' + valNum) ;
          }
       }
     },
