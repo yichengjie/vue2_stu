@@ -14,10 +14,10 @@
                <DataSection left ="2.确定费用" right ="描述 | 费用">
                    <ContentLayout title="描述">
                         <oc-form-item1 label="销售生效日期" :required="true" prop ="firstMaintenanceDate">
-                            <oc-datepicker v-model ="formData.firstMaintenanceDate" :time="true" />
+                            <oc-datetimepicker pickerType="datetime" v-model ="formData.firstMaintenanceDate" :time="true" />
                         </oc-form-item1>
                         <oc-form-item1 label="销售截止日期"  prop ="lastMaintenanceDate">
-                            <oc-datepicker v-model ="formData.lastMaintenanceDate"  :time="true" />
+                            <oc-datetimepicker pickerType="datetime" v-model ="formData.lastMaintenanceDate"  :time="true" />
                         </oc-form-item1>
                         <oc-form-item2 label="使用时间限制"  prop="useDateLimit" errorPosition ="bottom"
                             :serviceType="serviceData.serviceType"
@@ -28,8 +28,8 @@
                                 <UseDateLimitChangeBtn v-model ="formData.useDateLimitTye"  :formData="formData"
                                     :subGroup="serviceData.subGroup"/>
                                 <div class = "table_layout" style="width: 100%;" v-show="formData.useDateLimitTye==''">
-                                    <oc-datepicker v-model="formData.firstUseDate" style="width:48%;display: inline-block;" />
-                                    <oc-datepicker v-model="formData.lastUseDate" style="width:48%;display: inline-block;" />
+                                    <oc-datetimepicker v-model="formData.firstUseDate" style="width:48%;display: inline-block;" />
+                                    <oc-datetimepicker v-model="formData.lastUseDate" style="width:48%;display: inline-block;" />
                                 </div>
                                 <div class = "table_layout" style="width: 100%;" v-show="formData.useDateLimitTye=='1'">
                                     <oc-select v-model="formData.effectivePeriodType" style="width:48%;display: inline-block;"  
@@ -248,19 +248,19 @@
                   <ContentLayout title="航班">
                       <oc-form-item1 label="旅行开始日期"  prop ="travelStartDate"
                             :serviceTypeList='["F","M","R","T","A","B","C","E","P"]' :serviceType="serviceData.serviceType">
-                            <oc-datepicker v-model ="formData.travelStartDate">
+                            <oc-datetimepicker v-model ="formData.travelStartDate">
                       </oc-form-item1>
                       <oc-form-item1 label="旅行结束日期"  prop ="travelStartDate"
                             :serviceTypeList='["F","M","R","T","A","B","C","E","P"]' :serviceType="serviceData.serviceType">
-                            <oc-datepicker v-model ="formData.travelStartDate">
+                            <oc-datetimepicker v-model ="formData.travelStartDate">
                       </oc-form-item1>
                       <oc-form-item1 label="开始时刻"  prop ="startTime"
                             :serviceTypeList='["F","M","R","T","A","B","C","E","P"]' :serviceType="serviceData.serviceType">
-                            <oc-input v-model ="formData.startTime">
+                            <oc-datetimepicker pickerType="time" v-model ="formData.startTime">
                       </oc-form-item1>
                       <oc-form-item1 label="结束时刻"  prop ="stopTime"
                             :serviceTypeList='["F","M","R","T","A","B","C","E","P"]' :serviceType="serviceData.serviceType">
-                            <oc-input v-model ="formData.stopTime">
+                            <oc-datetimepicker pickerType="time" v-model ="formData.stopTime">
                       </oc-form-item1>
                       <oc-form-item1 label="星期"  prop ="dayOfWeek" :span ="7"
                             :serviceTypeList='["F","T","A","B","C","E","P"]' :serviceType="serviceData.serviceType">

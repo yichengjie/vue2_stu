@@ -8,7 +8,7 @@ import InputNumber from './input-number.vue' ;
 import Select from './select.vue' ;
 import Checkbox from './checkbox.vue' ;
 import Radio from './radio.vue' ;
-import Datepicker from './datepicker.vue' ;
+import Datetimepicker from './datetimepicker.vue' ;
 import Textarea from './textarea.vue' ;
 import Icon from './icon.vue' ;
 function install (Vue,options){
@@ -23,7 +23,7 @@ function install (Vue,options){
     Vue.component(Select.name, Select);
     Vue.component(Checkbox.name, Checkbox);
     Vue.component(Radio.name, Radio);
-    Vue.component(Datepicker.name, Datepicker);
+    Vue.component(Datetimepicker.name, Datetimepicker);
     Vue.component(Textarea.name, Textarea);
     Vue.component(Icon.name, Icon);
     install.installed = true ;
