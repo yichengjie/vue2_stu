@@ -8,11 +8,13 @@ export function changeGlobalOptionStatus(optionsData,formData,checkedItem,change
     _changeAvailabilityOption(optionsData,serviceType) ;
     _changeGeoSpecSectPortJourneyOption(optionsData,serviceType,attributesSubgroup) ;
     _changeSpecifiedServiceFeeAppOption(optionsData,serviceType) ;
+    _changeEffectivePeriodTypeOption(optionsData,attributesSubgroup) ;
     if(changeDefaultValueFlag===true){
         _changeNoChargeNotAvailableDefaultValue(formData,serviceType) ;
         _changeSpecSevFeeAndOrIndicatorDefaultValue(formData,serviceType) ;
         _changeAvailabilityDefaultValue(formData,serviceType) ;
         _changeGeoSpecSectPortJourneyDefaultValue(formData,serviceType,attributesSubgroup) ;
+        _changeEffectivePeriodTypeDefaultValue(formData,attributesSubgroup) ;
     }
 }
 
@@ -125,7 +127,22 @@ function _changeSpecifiedServiceFeeAppOption(optionsData,serviceType){
         P:['1','2','5']
     } ;
      _changeDisableHelper(list,obj[serviceType]) ;
-   
+}
+
+function _changeEffectivePeriodTypeOption(optionsData,attributesSubgroup){
+    let list = optionsData['effectivePeriodType'] ;
+    let disableValueList = null ;
+    if('FP'===attributesSubgroup){
+        disableValueList = ['B','D'] ;
+    }else if('FL'===attributesSubgroup){
+         disableValueList = ['A'] ;
+    }
+    _changeDisableHelper(list,disableValueList) ;
+}
+function _changeEffectivePeriodTypeDefaultValue(formData,attributesSubgroup){
+    if(['FL','FP'].includes(attributesSubgroup)){
+        formData['effectivePeriodType'] = '' ;
+    }
 }
 
 
