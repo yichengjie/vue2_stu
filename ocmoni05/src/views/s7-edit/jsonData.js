@@ -101,6 +101,14 @@ export let optionsData ={
     availability:[/**是否检查库存 */
         {name:"是",value:"N"},{name:"否",value:"Y"}
     ],
+    baggageTravelApplication:[/**行李适用范围 */
+        {"name":"必须匹配所有的航段","value":"A"},{"name":"至少匹配一个航段","value":"S"},
+        {"name":"必须匹配旅行航段中的主航段","value":"M"},{"name":"必须匹配整个行程的每一段","value":"J"},
+        {"name":"不限制","value":""}
+    ],
+    freeBaggageAllowanceUnit:[/**行李重量单位 */
+        {"name":"选择","value":""},{"name":"千克","value":"K"},{"name":"磅","value":"P"}
+    ],
     specSevFeeAndOrIndicator:[/*或-和*/
         {name:"或",value:""},{name:"和",value:"A"},
     ],

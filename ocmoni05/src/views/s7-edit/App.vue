@@ -92,12 +92,12 @@
                                  <oc-input-number v-model ="formData.freeBaggageAllowanceWeight" :min="1" placeholder ="正整数"/>
                             </div>
                             <div class="col-sm-2">
-                                 <oc-select v-model ="formData.freeBaggageAllowanceUnit" :options="options2"/>
+                                 <oc-select v-model ="formData.freeBaggageAllowanceUnit" :options="optionsData.freeBaggageAllowanceUnit"/>
                             </div>
                         </oc-form-item2>
-                        <oc-form-item1 label="行李使用范围"  prop ="baggageTravelApplication"
+                        <oc-form-item1 label="行李适用范围"  prop ="baggageTravelApplication"
                             :serviceTypeList="['A','C','P']" :serviceType="serviceData.serviceType">
-                            <oc-select v-model ="formData.baggageTravelApplication" :options="options2"/>
+                            <oc-select v-model ="formData.baggageTravelApplication" :options="optionsData.baggageTravelApplication"/>
                         </oc-form-item1>
                         <oc-form-item0 label="备注例外行李"  prop ="list196VO" :span="6"
                             :serviceTypeList="['A','C','P']" :serviceType="serviceData.serviceType">

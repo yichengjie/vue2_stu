@@ -67,10 +67,6 @@ export default {
                     ]
                 }
             },
-            options2:[
-                {name:"选择",value:""},
-                {name:"类型F",value:"F"}
-            ],
             optionsData:{
                 ...optionsData
             }
