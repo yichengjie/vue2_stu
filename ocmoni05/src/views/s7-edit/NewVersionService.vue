@@ -36,18 +36,21 @@
     import Clickoutside from '../../components/util/clickoutside.js';
     import {escape_html} from '../common/common.js' ;
     let filterNames = ["serviceGroupDescription","subGroupDescription","serviceSubCode","commercialName","serviceType"] ;
+    import {changeGlobalOptionStatus} from './busi/NewVersionServiceBusi.js' ;
     export default {
         props:{
             value:String,
             options:Array,
-            currentObj:Object
+            currentObj:Object,
+            optionsData:Object,
+            formData:Object
         },
         //mixins: [emitter],
         directives: { Clickoutside },
         data(){
             return {
                 visiable:false,
-                filterKey: getCheckItemName(this.options,this.value),
+                filterKey: getCheckedItemNameById(this.options,this.value),
                 firstFocus:false 
             };
         },
@@ -75,12 +78,19 @@
         methods:{
             handleClose(){
                 this.visiable = false;
-                this.filterKey = getCheckItemName(this.options,this.value)  ;
+                this.filterKey = getCheckedItemNameById(this.options,this.value)  ;
             },
-            handleClickItem(val){
-                this.filterKey = getCheckItemName(this.options,this.value)  ; 
-                this.$emit('input',val) ;
+            handleClickItem(id){
+                let changeDefaultValueFlag = true ;
+                //因为有时过滤后选择同一条记录的话bugfix
+                this.filterKey = getCheckedItemNameById(this.options,id)  ; 
+                this.$emit('input',id) ;
                 this.visiable = false;
+                let checkedItem = getCheckedItemById(this.options,id) ;
+                //console.info(checkedItem) ;
+                //改变各种select的是否可选状态
+                //var serviceType = checkedItem.serviceType ;
+                changeGlobalOptionStatus(this.optionsData,this.formData,checkedItem,changeDefaultValueFlag) ;
             },
             handleInput(event){
                 //this.$emit('input','') ;
@@ -101,20 +111,24 @@
         },
         watch:{
           value(newVal,oldVal){
-              this.filterKey = getCheckItemName(this.options,newVal)  ;
+              this.filterKey = getCheckedItemNameById(this.options,newVal)  ;
           }
         }
     } 
 
-    function getCheckItemName(options,val) { 
-        let joinKey = " > " ; 
-        let toUpperCaseFlag = false;
-        let retObj = options.find(function(item){
-             return item.id === val;
-        }) ;
-        let retStr = (retObj ? (getItemShowStrFn(retObj)) : val) ;
+    function getCheckedItemNameById(options,id) { 
+        let retObj = getCheckedItemById(options,id) ;
+        let retStr = (retObj ? (getItemShowStrFn(retObj)) : id) ;
         //console.info('retStr : ' , retStr) ;
         return  retStr.trim();
+    }
+
+    //查找选中的Item
+    function getCheckedItemById(options,id){
+        let retObj = options.find(function(item){
+             return item.id === id;
+        }) ;
+        return retObj ;
     }
 
     function getItemShowStrFn(item){

@@ -10,7 +10,8 @@
         <div class="container-fluid main_content" >
            <oc-form id="s7_form" :model ="formData" :rules="rules" ref ="editForm" label-width ="120px">
                <NewVersionService :value ="serviceData.recordS5Id" @input ="handleSelectService" 
-                    :options ="serviceData.serviceChooseList" />
+                    :options ="serviceData.serviceChooseList"  :optionsData="optionsData" :formData="formData"/>
+
                <DataSection left ="2.确定费用" right ="描述 | 费用">
                    <ContentLayout title="描述">
                         <oc-form-item1 label="销售生效日期" :required="true" prop ="firstMaintenanceDate">
@@ -86,10 +87,10 @@
                                  <oc-input-number v-model ="formData.lastExcessOccurrence" :min="1" :max ="99" placeholder ="1-99"  />
                             </div>
                         </oc-form-item2>
-                         <oc-form-item2 label="行李重量"  prop ="freeBaggageAllowanceWeight"
+                         <oc-form-item2 label="行李重量"  prop ="freeBaggageAllowanceWeightAndUnit" :names="['freeBaggageAllowanceWeight','freeBaggageAllowanceUnit']"
                             :serviceTypeList="['A','C','P']" :serviceType="serviceData.serviceType">
                             <div class="col-sm-2">
-                                 <oc-input-number v-model ="formData.freeBaggageAllowanceWeight" :min="1" placeholder ="正整数"/>
+                                 <oc-input-number v-model.trim ="formData.freeBaggageAllowanceWeight" :min="1" placeholder ="正整数"/>
                             </div>
                             <div class="col-sm-2">
                                  <oc-select v-model ="formData.freeBaggageAllowanceUnit" :options="optionsData.freeBaggageAllowanceUnit"/>
@@ -97,7 +98,7 @@
                         </oc-form-item2>
                         <oc-form-item1 label="行李适用范围"  prop ="baggageTravelApplication"
                             :serviceTypeList="['A','C','P']" :serviceType="serviceData.serviceType">
-                            <oc-select v-model ="formData.baggageTravelApplication" :options="optionsData.baggageTravelApplication"/>
+                            <oc-select v-model.trim ="formData.baggageTravelApplication" :options="optionsData.baggageTravelApplication"/>
                         </oc-form-item1>
                         <oc-form-item0 label="备注例外行李"  prop ="list196VO" :span="6"
                             :serviceTypeList="['A','C','P']" :serviceType="serviceData.serviceType">

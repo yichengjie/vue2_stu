@@ -5,7 +5,7 @@ import ContentLayout from './ContentLayout.vue' ;
 import NewVersionService from './NewVersionService.vue' ;
 import {initPage4AddApi,initPage4UpdateApi} from '../../api/s7-edit.js' ;
 import {wrapValidateFn,validateFirstMaintenanceDate,validateLastMaintenanceDate,validateServiceNumber,
-    validateUseDateLimit,validateLettersOrNumber,validateBiggerNumber} from './validate.js' ;
+    validateUseDateLimit,validateLettersOrNumber,validateBiggerNumber,validateAllEmptyOrNot} from './validate.js' ;
 import UseDateLimitChangeBtn from './UseDateLimitChangeBtn.vue' ;
 import Table196 from './Table196.vue' ;
 import Table170And201 from './Table170And201.vue' ;
@@ -31,7 +31,7 @@ export default {
         let lettersOrNumber = wrapValidateFn(validateLettersOrNumber) ;
         //收费行李件数
         let excessOccurrence = wrapValidateFn(validateBiggerNumber,{vm:this,smallerNum:'firstExcessOccurrence',biggerNum:'lastExcessOccurrence'}) ;
-        
+        let freeBaggageAllowanceWeightAndUnit = wrapValidateFn(validateAllEmptyOrNot,{vm:this,name1:'freeBaggageAllowanceWeight',name2:'freeBaggageAllowanceUnit'}) ;
         return {
             formData:{
                 ...formData 
@@ -64,6 +64,11 @@ export default {
                 excessOccurrence:{/**收费行李件数 */
                     firstExcessOccurrence:[
                         {validator: excessOccurrence ,trigger: 'change'}
+                    ]
+                },
+                freeBaggageAllowanceWeightAndUnit:{
+                    freeBaggageAllowanceWeight:[
+                         {validator: freeBaggageAllowanceWeightAndUnit ,trigger: 'change'}
                     ]
                 }
             },

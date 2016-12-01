@@ -5,6 +5,7 @@
                 :name="name" 
                 :value="item.value"
                 :checked="item.value === value"
+                :disabled="disabled || item.disabled"
                 @click="onClick"
             /> {{item.name}}
         </label>
@@ -19,7 +20,7 @@
            name:String,
            options:Array,
            value:[String,Number],
-           readonly:Boolean
+           disabled:Boolean
         },
         methods:{
             onClick(event){

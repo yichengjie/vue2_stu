@@ -74,15 +74,20 @@
       handleInput(event) {
          var val = event.target.value;
          this.currentValue = val ;
-         let valNum = Number(val);
-         let flag = checkMinMax(valNum,this.min,this.max) ;
-         if(!flag){
-           return false;
-         }
-         flag = checkInteger(valNum,this.intFlag) ;
-         if(flag){
-             this.$emit('input', valNum);
-             this.dispatch('form-item', 'el.form.change', [valNum]);
+         if(val!==''){
+            let valNum = Number(val);
+           let flag = checkMinMax(valNum,this.min,this.max) ;
+           if(!flag){
+             return false;
+           }
+           flag = checkInteger(valNum,this.intFlag) ;
+           if(flag){
+              this.$emit('input', val);
+              this.dispatch('form-item', 'el.form.change', [val]);
+           }
+         }else{
+            this.$emit('input', val);
+            this.dispatch('form-item', 'el.form.change', [val]);
          }
       }
     },

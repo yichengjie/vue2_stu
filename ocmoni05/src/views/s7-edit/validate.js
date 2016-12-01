@@ -106,6 +106,27 @@ export function validateUseDateLimit(value,callback,cfg){
 //       return true;   
 // }
 
+export function validateAllEmptyOrNot(value,callback,cfg){
+    let {name1,name2} = cfg ;
+    let formData = cfg['vm']['formData'] ;
+    let value1 = (formData[name1]);
+    let value2 = (formData[name2]) ;
+    console.info('name1 : ['+name1+'] , value  : ['+value1+'] ') ;
+    console.info('name1 : ['+name1+'] , value : ['+value2+'] ') ;
+    if(value1 ===''){
+        if(value2!==''){
+            callback('同时有值或无值!') ;
+            return false;
+        }
+    }else{//如果value1不为空
+        if(value2===''){
+            callback('同时有值或无值!') ;
+            return false;
+        }
+    }
+    callback() ;
+    return true ;
+}
 
 /**校验字母或数字的组合输入 */
 export function validateLettersOrNumber(value,callback){
