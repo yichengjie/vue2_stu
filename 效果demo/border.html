@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        body{
+            background: black;
+        }
+        .spinner{
+            width: 10em;
+            height: 10em;
+            margin: 100px auto;
+            border: 1.1em solid rgba(255,255,255,.2);
+            border-left-color: #fff;
+            border-radius: 50%;
+            -webkit-animation: load 1.1s infinite linear;
+        }
+        @-webkit-keyframes load {
+            from{
+                transform: rotate(0deg);
+            }
+            to{
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="spinner"></div>
+</body>
+</html>
