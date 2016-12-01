@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        /*.div{*/
+            /*background-color: red;*/
+            /*padding: 50%;*/
+        /*}*/
+        .tip-info{
+            position: relative;
+        }
+        .tip-info:hover::after{
+            content: attr(data-title);
+            position: absolute;
+            display: inline-block;
+            font-size: 12px;
+            padding: 10px 14px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 200px;
+            bottom: 20px;
+            left: -5px;
+        }
+        body{
+            margin: 100px auto;
+            width: 800px;
+        }
+    </style>
+</head>
+<body>
+    <div class="tip-info"
+         data-title ="hello world 测试错误提示信息，以为有的错误提示信息比较长">
+        hello ....
+    </div>
+</body>
+</html>
