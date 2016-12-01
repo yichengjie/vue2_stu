@@ -97,7 +97,7 @@
         //进行验证先关的操作
         //console.info('validate .......') ;
         var rules = this.getFilteredRule(trigger);
-        console.info('rules : ' ,rules) ;
+        //console.info('rules : ' ,rules) ;
         if (rules==null) {
           cb && cb();
           return true;

@@ -33,6 +33,10 @@
       min: {
         type: Number,
         default: 0
+      },
+      intFlag:{
+        type:Boolean,
+        default:true
       }
     },
     data(){
@@ -51,13 +55,18 @@
     },
     methods: {
       handleBlur(event) {
-         let value = Number(this.currentValue);
+         let valNum = Number(this.currentValue);
          //如果页面上填写的数据有问题，进行回退到上一次的数据,否则不管
-         if (isNaN(value) || value > this.max || value < this.min) {
+         let flag = checkMinMax(valNum,this.min,this.max) ;
+         if(!flag){//如果输入数组不在最大最小范围内
             this.currentValue = this.value;
-         } 
-         this.$emit('blur', this.currentValue);
-         this.dispatch('form-item', 'el.form.blur', [this.currentValue]);
+         }
+         flag = checkInteger(valNum,this.intFlag) ;
+         if(!flag){
+            this.currentValue = this.value;
+         }
+         this.$emit('blur', this.value);
+         this.dispatch('form-item', 'el.form.blur', [this.value]);
       },
       handleFocus(event) {
         this.$emit('focus', event);
@@ -66,11 +75,14 @@
          var val = event.target.value;
          this.currentValue = val ;
          let valNum = Number(val);
-         if (valNum <= this.max && valNum >= this.min) {
-           //this.$emit('change', valNum);
-           this.$emit('input', valNum);
-           this.dispatch('form-item', 'el.form.change', [valNum]);
-           //console.info('--------> ' + valNum) ;
+         let flag = checkMinMax(valNum,this.min,this.max) ;
+         if(!flag){
+           return false;
+         }
+         flag = checkInteger(valNum,this.intFlag) ;
+         if(flag){
+             this.$emit('input', valNum);
+             this.dispatch('form-item', 'el.form.change', [valNum]);
          }
       }
     },
@@ -81,4 +93,19 @@
       }
     },
   };
+
+  function checkMinMax(val,min,max){
+     if (val <= max && val >= min) {
+       return true ;
+     }
+     return false;
+  }
+
+  function checkInteger(val,intFlag){//是否为正整数
+     if(intFlag){
+        var re = /^-?[0-9]\d*$/ ;
+        return re.test(val)
+     }
+     return true ;
+  }  
 </script>

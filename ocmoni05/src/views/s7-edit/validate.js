@@ -119,12 +119,14 @@ export function validateLettersOrNumber(value,callback){
 }
 /**数字后者大于前者校验 */
 export function validateBiggerNumber(value,callback,cfg){
-    console.info('cfg' ,cfg) ;
+    //console.info('cfg' ,cfg) ;
     let {smallerNum,biggerNum} = cfg ;
     let formData = cfg['vm']['formData'] ;
     let smaller = formData[smallerNum] ;
     let bigger = formData[biggerNum] ;
-    if(smaller !='' &&bigger !=''){
+    //console.info('smaller : ['+smaller+']') ;
+    //console.info('bigger : ['+bigger+']') ;
+    if(smaller !=='' && bigger !==''){
         if(smaller>bigger){
             callback('最大值不能小于最小值!');
             return false ;
