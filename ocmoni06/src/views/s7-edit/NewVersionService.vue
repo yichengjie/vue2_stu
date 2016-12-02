@@ -86,11 +86,9 @@
                 //因为有时过滤后选择同一条记录的话bugfix
                 this.filterKey = getCheckedItemNameById(this.serviceData.serviceChooseList,id)  ; 
                 //this.$emit('input',id) ;
+                this.serviceData.recordS5Id = id ;
                 this.visiable = false;
                 let checkedItem = getCheckedItemById(this.serviceData.serviceChooseList,id) ;
-
-             
-
                 //console.info(checkedItem) ;
                 changeGlobalOptionDefaultValue(this.formData,checkedItem) ;
             },

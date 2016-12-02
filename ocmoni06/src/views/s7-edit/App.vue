@@ -11,7 +11,6 @@
            <oc-form id="s7_form" :model ="formData" :rules="rules" ref ="editForm" label-width ="120px">
                <NewVersionService :value ="serviceData.recordS5Id" :serviceData="serviceData"  
                     :optionsData="optionsData" :formData="formData"/>
-
                <DataSection left ="2.确定费用" right ="描述 | 费用">
                    <ContentLayout title="描述">
                         <oc-form-item1 label="销售生效日期" :required="true" prop ="firstMaintenanceDate">
@@ -228,7 +227,7 @@
                            <div class="col-sm-2"><oc-input v-model ="formData.geoSpecLoc1"  /></div>
                       </oc-form-item2>
                       <oc-form-item2 label="区域2"  prop ="geoSpec2" :names="['geoSpecLoc2Type','geoSpecLoc2']">
-                           <div class="col-sm-2"><oc-select v-model ="formData.geoSpecLo21Type" :options ="optionsData.geoSpecLoc1Type" /></div>
+                           <div class="col-sm-2"><oc-select v-model ="formData.geoSpecLoc2Type" :options ="optionsData.geoSpecLoc1Type" /></div>
                            <div class="col-sm-2"><oc-input v-model ="formData.geoSpecLoc2"  /></div>
                       </oc-form-item2>
                       <oc-form-item2 label="经过区域"  prop ="geoSpec3" :names="['geoSpecLoc3Type','geoSpecLoc3']">
