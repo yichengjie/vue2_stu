@@ -257,7 +257,6 @@
 	util.isAlphanumericOrStart = function(value){
 		return /^[A-Za-z0-9]{0,}$|^[\*]{1}$/.test(value) ;
 	}
-
 	util.isValidGeoLocal = function(value,geoType){
 		//{'A':'areacode','C':'citycode','N':'countrycode','P':'airportcode','S':'statecode','Z':'zonecode'
 		if(geoType=='A'){

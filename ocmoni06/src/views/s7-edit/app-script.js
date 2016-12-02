@@ -6,7 +6,7 @@ import NewVersionService from './NewVersionService.vue' ;
 import {initPage4AddApi,initPage4UpdateApi} from '../../api/s7-edit.js' ;
 import {wrapValidateFn,validateFirstMaintenanceDate,validateLastMaintenanceDate,validateServiceNumber,
     validateUseDateLimit,validateLettersOrNumber,validateBiggerNumber,validateAllEmptyOrNot,
-    validateNoChargeNotAvailable,validateSpecifiedServiceFeeApp} from './busi/validate.js' ;
+    validateNoChargeNotAvailable,validateSpecifiedServiceFeeApp,validatGeoSpec} from './busi/validate.js' ;
 import UseDateLimitChangeBtn from './UseDateLimitChangeBtn.vue' ;
 import Table196 from './Table196.vue' ;
 import Table170And201 from './Table170And201.vue' ;
@@ -37,6 +37,11 @@ export default {
         let noChargeNotAvailable = wrapValidateFn(validateNoChargeNotAvailable,{vvm:this}) ;
         //适用于校验
         let specifiedServiceFeeApp = wrapValidateFn(validateSpecifiedServiceFeeApp,{vvm:this}) ;
+        //区域校验
+        let geoSpec1 = wrapValidateFn(validatGeoSpec,{vvm:this,name1:'geoSpecLoc1Type',name2:'geoSpecLoc1'}) ; 
+        let geoSpec2 = wrapValidateFn(validatGeoSpec,{vvm:this,name1:'geoSpecLoc2Type',name2:'geoSpecLoc2'}) ; 
+        let geoSpec3 = wrapValidateFn(validatGeoSpec,{vvm:this,name1:'geoSpecLoc3Type',name2:'geoSpecLoc3'}) ; 
+
         return {
             formData:{
                 ...formData 
@@ -81,7 +86,22 @@ export default {
                 ],
                 specifiedServiceFeeApp:[
                     {validator: specifiedServiceFeeApp ,trigger: 'change'}
-                ]
+                ],
+                geoSpec1:{
+                    geoSpecLoc1Type:[
+                        {validator: geoSpec1 ,trigger: 'change'}
+                    ]
+                },
+                geoSpec2:{
+                    geoSpecLoc2Type:[
+                        {validator: geoSpec2 ,trigger: 'change'}
+                    ]
+                },
+                geoSpec3:{
+                    geoSpecLoc3Type:[
+                        {validator: geoSpec3 ,trigger: 'change'}
+                    ]
+                }
             },
             optionsData:{
                 ...optionsData

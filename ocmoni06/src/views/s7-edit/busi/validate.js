@@ -197,6 +197,37 @@ export function validateSpecifiedServiceFeeApp(value,callback,vvm){
     return true ;
 }
 
+export function validatGeoSpec(value,callback,vvm,otherCfg){
+    let msgObj = {A:'大区代码错误!',C:'城市代码错误',N:'国家代码错误','P':'机场代码错误',S:'州代码错误',Z:'区域代码错误'} ;
+    let {name1,name2} = otherCfg ;
+    let {formData} = vvm ;
+    let geoSpecLocType = formData[name1] ;
+    let geoSpecLoc = formData[name2] ;
+    if(geoSpecLocType===''){
+        if(geoSpecLoc!==''){
+            callback('区域类型必填!') ;
+            return false;
+        }else{
+            callback() ;
+            return true ;
+        }
+    }else{//如果类型不为空
+        if(geoSpecLoc===''){
+            callback('区域代码必填!') ;
+            return false;
+        }else{
+           let flag = util.isValidGeoLocal(geoSpecLoc,geoSpecLocType) ;
+           if(flag){
+               callback() ;
+               return true ;
+           }else{
+               callback(msgObj[geoSpecLocType]) ;
+               return true ;
+           }
+        }
+    }
+}
+
 
 
 

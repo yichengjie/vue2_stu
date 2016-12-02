@@ -225,15 +225,15 @@
                       </oc-form-item1>
                       <oc-form-item2 label="区域1"  prop ="geoSpec1" :names="['geoSpecLoc1Type','geoSpecLoc1']">
                            <div class="col-sm-2"><oc-select v-model ="formData.geoSpecLoc1Type" :options ="optionsData.geoSpecLoc1Type" /></div>
-                           <div class="col-sm-2"><oc-input-number v-model ="formData.geoSpecLoc1"  /></div>
+                           <div class="col-sm-2"><oc-input v-model ="formData.geoSpecLoc1"  /></div>
                       </oc-form-item2>
                       <oc-form-item2 label="区域2"  prop ="geoSpec2" :names="['geoSpecLoc2Type','geoSpecLoc2']">
                            <div class="col-sm-2"><oc-select v-model ="formData.geoSpecLo21Type" :options ="optionsData.geoSpecLoc1Type" /></div>
-                           <div class="col-sm-2"><oc-input-number v-model ="formData.geoSpecLoc2"  /></div>
+                           <div class="col-sm-2"><oc-input v-model ="formData.geoSpecLoc2"  /></div>
                       </oc-form-item2>
                       <oc-form-item2 label="经过区域"  prop ="geoSpec3" :names="['geoSpecLoc3Type','geoSpecLoc3']">
                            <div class="col-sm-2"><oc-select v-model ="formData.geoSpecLoc3Type" :options ="optionsData.geoSpecLoc1Type" /></div>
-                           <div class="col-sm-2"><oc-input-number v-model ="formData.geoSpecLoc3"  /></div>
+                           <div class="col-sm-2"><oc-input v-model ="formData.geoSpecLoc3"  /></div>
                       </oc-form-item2>
                       <oc-form-item2 label="里程范围"  prop ="mileageMinAndMaximum" :names="['mileageMinimum','mileageMaximum']"
                             :serviceTypeList='["F","T","A","B","C","E","P"]' :serviceType="serviceData.serviceType">
