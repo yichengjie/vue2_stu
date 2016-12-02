@@ -88,7 +88,7 @@
       margin-left: 0px;
       padding-left: 0px;
       font-size: 12px ;
-      width: 200px;
+      width: 250px;
   }
   .form-group-bottom-error.form-group{
      position: relative;

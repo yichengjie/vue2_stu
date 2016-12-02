@@ -143,8 +143,32 @@ export function validateBiggerNumber(value,callback,vvm,otherCfg){
     return true;   
 }
 
-export function validateNoChargeNotAvailable(value,callback){
-
+export function validateNoChargeNotAvailable(value,callback,vvm){
+    //是否收费，170-201，里程费，适用于//免费行李件数
+    let {formData:{noChargeNotAvailable,list170VO,list201VO,specifiedServiceFeeMileage,specifiedServiceFeeApp,freeBaggageAllowancePieces}} = vvm ;
+    if(noChargeNotAvailable!==''){//如果费用不为空，则金额必须为空，里程费必须为空，适用于必须为空
+        if(list170VO.length>0||list201VO.length>0){
+            callback('当为免费时【金额】必须为空!') ;
+            return false;
+        }
+        if(specifiedServiceFeeMileage!==''){
+            callback('当为免费时【里程费】必须为空!') ;
+            return false;
+        }
+        if(specifiedServiceFeeApp!==''){
+            callback('当为免费时【适用于】必须为空!') ;
+            return false;
+        }
+        if(['D','O'].includes(noChargeNotAvailable)){
+            let tNum = Number(freeBaggageAllowancePieces) ;
+            if(tNum!==0){
+                callback('当为免费时【免费行李件数】必须为0!') ;
+                return false;
+            }
+        }
+    }
+    callback() ;
+    return true ;
 }
 
 
