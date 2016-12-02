@@ -123,6 +123,7 @@ export let optionsData ={
         {"name":"免费，行李规则遵循市场方航空公司规则","value":"D",disabled:false},{"name":"免费，行李规则遵循承运方航空公司规则","value":"O",disabled:false}
     ],
     specifiedServiceFeeApp:[/*适用于*/
+        {"name":"选择","value":"",disabled:false},
         {"name":"每一个票价组成部分算一次服务费用","value":"1",disabled:false},{"name":"每一个票价组成部分算一半的服务费用","value":"2",disabled:false},
         {"name":"每用一次服务算一次服务费用","value":"3",disabled:false},{"name":"匹配的部分航程算一次服务费用","value":"4",disabled:false},
         {"name":"往返程服务费用【F/R/T】","value":"5",disabled:false},{"name":"每公斤按公布运价的0.5%收费","value":"H",disabled:false},

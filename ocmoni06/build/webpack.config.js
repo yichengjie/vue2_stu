@@ -32,7 +32,7 @@ module.exports = {
   resolve: {
       alias: {
         'assetsPath':assetsPath,
-        'vue': 'vue/dist/vue.js',
+        'vue': 'vue/dist/vue.common.js',
         'lib':libPath,
         'tui_core_lib':libPath+"/tui-core/index.js",
         'tui_dialog_lib':libPath+"/tui-dialog/index.js",

@@ -9,8 +9,9 @@ export function changeGlobalOptionStatus(optionsData,checkedItem){
     _changeSpecSevFeeAndOrIndicatorOption(optionsData,serviceType) ;
     _changeAvailabilityOption(optionsData,serviceType) ;
     _changeGeoSpecSectPortJourneyOption(optionsData,serviceType,attributesSubgroup) ;
-    _changeSpecifiedServiceFeeAppOption(optionsData,serviceType) ;
     _changeEffectivePeriodTypeOption(optionsData,attributesSubgroup) ;
+    //适用于
+    _changeSpecifiedServiceFeeAppOption(optionsData,serviceType) ;
     
 }
 
