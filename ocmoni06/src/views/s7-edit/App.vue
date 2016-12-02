@@ -9,8 +9,8 @@
         
         <div class="container-fluid main_content" >
            <oc-form id="s7_form" :model ="formData" :rules="rules" ref ="editForm" label-width ="120px">
-               <NewVersionService :value ="serviceData.recordS5Id" @input ="handleSelectService" 
-                    :options ="serviceData.serviceChooseList"  :optionsData="optionsData" :formData="formData"/>
+               <NewVersionService :value ="serviceData.recordS5Id" :serviceData="serviceData"  
+                    :optionsData="optionsData" :formData="formData"/>
 
                <DataSection left ="2.确定费用" right ="描述 | 费用">
                    <ContentLayout title="描述">

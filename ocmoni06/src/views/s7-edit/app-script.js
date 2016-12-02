@@ -107,22 +107,12 @@ export default {
             this.$refs.editForm.resetFields();
         },
         handleSelectService(id){
-            this.serviceData.recordS5Id = '';
-            let retObj = this.serviceData.serviceChooseList.find(function(item){
-                return item.id === id ;
-            });
-            //if(){}
-            let {attributesGroup,attributesSubgroup,serviceType,serviceSubCode} = retObj ||{} ;
-            this.serviceData.recordS5Id = id || '';
-            this.serviceData.serviceType = serviceType || 'F' ;
-            this.serviceData.group = attributesGroup || '';
-            this.serviceData.subGroup = attributesSubgroup || '' ;
-            this.serviceData.subCode = serviceSubCode || '';
+           
         }
     },
     mounted(){
         initPage4AddApi().then(retData=>{
-            this.serviceData.serviceType = 'F' ;
+            //this.serviceData.serviceType = 'F' ;
             if(retData.flag==='true'||retData.flag===true){
                 let len = this.serviceData.serviceChooseList.length ;
                 this.serviceData.serviceChooseList.splice(0,len) ;
@@ -136,7 +126,14 @@ export default {
         },error =>{
             console.info('error : ',error) ;
         })
+
+
         initPage4UpdateApi().then(retData=>{
+            let id = '56372eb40480478a83e85040f945e416' ;//FP类型--F
+            id ='8fefc6fcce0e4c8e8df3772cb3ac609a' ;//FL类型--F
+            id = '7d10d15697e5477b83f09470c5a0f9fc';//A类型
+            id = 'b293f43b9e9a4b4eb393e86307c921a6';//C类型
+            this.serviceData.recordS5Id = id;
             let {formData} = retData ;
             Object.assign(this.formData,formData) ;
         }) ;

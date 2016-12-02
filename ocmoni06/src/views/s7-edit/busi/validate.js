@@ -97,8 +97,8 @@ export function validateAllEmptyOrNot(value,callback,vvm,otherCfg){
     let formData = vvm.formData ;
     let value1 = (formData[name1]);
     let value2 = (formData[name2]) ;
-    console.info('name1 : ['+name1+'] , value  : ['+value1+'] ') ;
-    console.info('name1 : ['+name1+'] , value : ['+value2+'] ') ;
+    //console.info('name1 : ['+name1+'] , value  : ['+value1+'] ') ;
+    //console.info('name1 : ['+name1+'] , value : ['+value2+'] ') ;
     if(value1 ===''){
         if(value2!==''){
             callback('同时有值或无值!') ;

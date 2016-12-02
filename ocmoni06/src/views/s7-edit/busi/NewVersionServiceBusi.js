@@ -1,5 +1,5 @@
 //改变select的各个option是否可选
-export function changeGlobalOptionStatus(optionsData,formData,checkedItem,changeDefaultValueFlag){
+export function changeGlobalOptionStatus(optionsData,checkedItem){
     //改变是否收费
     let {serviceType,attributesSubgroup} = checkedItem ;
     //console.info(checkedItem) ;
@@ -9,13 +9,16 @@ export function changeGlobalOptionStatus(optionsData,formData,checkedItem,change
     _changeGeoSpecSectPortJourneyOption(optionsData,serviceType,attributesSubgroup) ;
     _changeSpecifiedServiceFeeAppOption(optionsData,serviceType) ;
     _changeEffectivePeriodTypeOption(optionsData,attributesSubgroup) ;
-    if(changeDefaultValueFlag===true){
-        _changeNoChargeNotAvailableDefaultValue(formData,serviceType) ;
-        _changeSpecSevFeeAndOrIndicatorDefaultValue(formData,serviceType) ;
-        _changeAvailabilityDefaultValue(formData,serviceType) ;
-        _changeGeoSpecSectPortJourneyDefaultValue(formData,serviceType,attributesSubgroup) ;
-        _changeEffectivePeriodTypeDefaultValue(formData,attributesSubgroup) ;
-    }
+    
+}
+
+export function changeGlobalOptionDefaultValue(formData,checkedItem){
+     let {serviceType,attributesSubgroup} = checkedItem ;
+     _changeNoChargeNotAvailableDefaultValue(formData,serviceType) ;
+     _changeSpecSevFeeAndOrIndicatorDefaultValue(formData,serviceType) ;
+     _changeAvailabilityDefaultValue(formData,serviceType) ;
+     _changeGeoSpecSectPortJourneyDefaultValue(formData,serviceType,attributesSubgroup) ;
+     _changeEffectivePeriodTypeDefaultValue(formData,attributesSubgroup) ;
 }
 
 /**更新‘区域/部分/全程’ */

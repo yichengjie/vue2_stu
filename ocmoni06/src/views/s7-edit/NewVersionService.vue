@@ -36,21 +36,21 @@
     import Clickoutside from '../../components/util/clickoutside.js';
     import {escape_html} from '../common/common.js' ;
     let filterNames = ["serviceGroupDescription","subGroupDescription","serviceSubCode","commercialName","serviceType"] ;
-    import {changeGlobalOptionStatus} from './busi/NewVersionServiceBusi.js' ;
+    import {changeGlobalOptionStatus,changeGlobalOptionDefaultValue} from './busi/NewVersionServiceBusi.js' ;
     export default {
         props:{
             value:String,
-            options:Array,
-            currentObj:Object,
+            //options:Array,
             optionsData:Object,
-            formData:Object
+            formData:Object,
+            serviceData:Object
         },
         //mixins: [emitter],
         directives: { Clickoutside },
         data(){
             return {
                 visiable:false,
-                filterKey: getCheckedItemNameById(this.options,this.value),
+                filterKey: getCheckedItemNameById(this.serviceData.serviceChooseList,this.value),
                 firstFocus:false 
             };
         },
@@ -60,7 +60,7 @@
                     let tmp = this.filterKey.trim().toUpperCase() ;
                     //console.info('tmp : ' + tmp) ;
                     //22 > 0JK > [0JK] cm002
-                    return this.options.filter(item=>{
+                    return this.serviceData.serviceChooseList.filter(item=>{
                         let tmpStr = getItemShowStrFn4Filter(item) ;
                         //console.info('test : ' + tmpStr) ;
                         if(tmpStr.indexOf(tmp)!=-1){
@@ -69,7 +69,7 @@
                         return false;
                     });
                 }
-                return this.options ;
+                return this.serviceData.serviceChooseList ;
             },
             isEmptyFlag(){
                 return this.filterList.length == 0 ;
@@ -78,19 +78,21 @@
         methods:{
             handleClose(){
                 this.visiable = false;
-                this.filterKey = getCheckedItemNameById(this.options,this.value)  ;
+                this.filterKey = getCheckedItemNameById(this.serviceData.serviceChooseList,this.value)  ;
             },
             handleClickItem(id){
+                console.info('checked id is : ' + id) ;
                 let changeDefaultValueFlag = true ;
                 //因为有时过滤后选择同一条记录的话bugfix
-                this.filterKey = getCheckedItemNameById(this.options,id)  ; 
-                this.$emit('input',id) ;
+                this.filterKey = getCheckedItemNameById(this.serviceData.serviceChooseList,id)  ; 
+                //this.$emit('input',id) ;
                 this.visiable = false;
-                let checkedItem = getCheckedItemById(this.options,id) ;
+                let checkedItem = getCheckedItemById(this.serviceData.serviceChooseList,id) ;
+
+             
+
                 //console.info(checkedItem) ;
-                //改变各种select的是否可选状态
-                //var serviceType = checkedItem.serviceType ;
-                changeGlobalOptionStatus(this.optionsData,this.formData,checkedItem,changeDefaultValueFlag) ;
+                changeGlobalOptionDefaultValue(this.formData,checkedItem) ;
             },
             handleInput(event){
                 //this.$emit('input','') ;
@@ -111,7 +113,21 @@
         },
         watch:{
           value(newVal,oldVal){
-              this.filterKey = getCheckedItemNameById(this.options,newVal)  ;
+              let checkedItem = getCheckedItemById(this.serviceData.serviceChooseList,newVal) ;
+              //console.info('------['+newVal+']  , ['+oldVal+'] ' ) ;
+              this.filterKey = getCheckedItemNameById(this.serviceData.serviceChooseList,newVal)  ;
+              //改变各种select的是否可选状态
+              //var serviceType = checkedItem.serviceType ;
+              changeGlobalOptionStatus(this.optionsData,checkedItem) ;
+                 let retObj = this.serviceData.serviceChooseList.find(function(item){
+                 return item.id === newVal ;
+              });
+              let {attributesGroup,attributesSubgroup,serviceType,serviceSubCode} = retObj ;
+              this.serviceData.recordS5Id = newVal || '';
+              this.serviceData.serviceType = serviceType || 'F' ;
+              this.serviceData.group = attributesGroup || '';
+              this.serviceData.subGroup = attributesSubgroup || '' ;
+              this.serviceData.subCode = serviceSubCode || '';
           }
         }
     } 
