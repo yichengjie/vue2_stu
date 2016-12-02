@@ -6,7 +6,7 @@ import NewVersionService from './NewVersionService.vue' ;
 import {initPage4AddApi,initPage4UpdateApi} from '../../api/s7-edit.js' ;
 import {wrapValidateFn,validateFirstMaintenanceDate,validateLastMaintenanceDate,validateServiceNumber,
     validateUseDateLimit,validateLettersOrNumber,validateBiggerNumber,validateAllEmptyOrNot,
-    validateNoChargeNotAvailable} from './busi/validate.js' ;
+    validateNoChargeNotAvailable,validateSpecifiedServiceFeeApp} from './busi/validate.js' ;
 import UseDateLimitChangeBtn from './UseDateLimitChangeBtn.vue' ;
 import Table196 from './Table196.vue' ;
 import Table170And201 from './Table170And201.vue' ;
@@ -35,6 +35,8 @@ export default {
         let freeBaggageAllowanceWeightAndUnit = wrapValidateFn(validateAllEmptyOrNot,{vvm:this,name1:'freeBaggageAllowanceWeight',name2:'freeBaggageAllowanceUnit'}) ;
         //是否收费校验
         let noChargeNotAvailable = wrapValidateFn(validateNoChargeNotAvailable,{vvm:this}) ;
+        //适用于校验
+        let specifiedServiceFeeApp = wrapValidateFn(validateSpecifiedServiceFeeApp,{vvm:this}) ;
         return {
             formData:{
                 ...formData 
@@ -76,6 +78,9 @@ export default {
                 },/**是否收费 */
                 noChargeNotAvailable:[
                     {validator: noChargeNotAvailable ,trigger: 'change'}
+                ],
+                specifiedServiceFeeApp:[
+                    {validator: specifiedServiceFeeApp ,trigger: 'change'}
                 ]
             },
             optionsData:{

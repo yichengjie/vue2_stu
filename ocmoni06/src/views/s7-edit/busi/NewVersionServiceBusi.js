@@ -1,3 +1,5 @@
+import {isBaggageByServiceType} from '../../common/common.js' ;
+
 //改变select的各个option是否可选
 export function changeGlobalOptionStatus(optionsData,checkedItem){
     //改变是否收费
@@ -133,7 +135,7 @@ function _changeSpecifiedServiceFeeAppOption(optionsData,serviceType){
      //对适用于的特殊处理
      let str3 = '每用一次服务算一次服务费用' ;
      let str4 = '匹配的部分航程算一次服务费用' ;
-     if(_isBaggageByServiceType(serviceType)){
+     if(isBaggageByServiceType(serviceType)){
         str3 = '按托运点收费' ;
         str4 = '按全行程收费' ;
      }
@@ -163,8 +165,6 @@ function _changeEffectivePeriodTypeDefaultValue(formData,attributesSubgroup){
 }
 
 
-
-
 function _changeDisableHelper(list,disableValueList){
     if(disableValueList == null || disableValueList.length===0){
         list.forEach(item=>{
@@ -182,9 +182,3 @@ function _changeDisableHelper(list,disableValueList){
 }
 
 
-export function _isBaggageByServiceType(serviceType){
-    if(['A','B','C','E','P'].includes(serviceType)){
-        return true;
-    }
-    return false ;
-}

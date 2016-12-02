@@ -1,4 +1,5 @@
 var util = require('util') ;
+import {isBaggageByServiceType} from '../../common/common.js' ;
 
 //校验的func的简单封装
 export function wrapValidateFn(validateFn,cfg){
@@ -146,8 +147,18 @@ export function validateBiggerNumber(value,callback,vvm,otherCfg){
 /**是否收费的校验逻辑 */
 export function validateNoChargeNotAvailable(value,callback,vvm){
     //是否收费，170-201，里程费，适用于//免费行李件数
+    let serviceType = vvm.serviceData.serviceType ;
     let {formData:{noChargeNotAvailable,list170VO,list201VO,specifiedServiceFeeMileage,specifiedServiceFeeApp,freeBaggageAllowancePieces}} = vvm ;
-    if(noChargeNotAvailable!==''){//如果费用不为空，则金额必须为空，里程费必须为空，适用于必须为空
+    if(['D','O'].includes(noChargeNotAvailable)){
+        //如果是行李的话
+        if(isBaggageByServiceType(serviceType)){
+            let tNum = Number(freeBaggageAllowancePieces) ;
+            if(tNum!==0){
+                callback('收费为D/O时,【免费行李件数】必须为0!') ;
+                return false;
+            }
+        }
+    }else if(['X','F','E','G','H'].includes(noChargeNotAvailable)){
         if(list170VO.length>0||list201VO.length>0){
             callback('当为免费时【金额】必须为空!') ;
             return false;
@@ -157,15 +168,8 @@ export function validateNoChargeNotAvailable(value,callback,vvm){
             return false;
         }
         if(specifiedServiceFeeApp!==''){
-            callback('当为免费时【适用于】必须为空!') ;
+            callback('当不为D/O时【适用于】必须为空!') ;
             return false;
-        }
-        if(['D','O'].includes(noChargeNotAvailable)){
-            let tNum = Number(freeBaggageAllowancePieces) ;
-            if(tNum!==0){
-                callback('当为免费时【免费行李件数】必须为0!') ;
-                return false;
-            }
         }
     }
     callback() ;
@@ -173,9 +177,24 @@ export function validateNoChargeNotAvailable(value,callback,vvm){
 }
 /**适用于的校验逻辑 */
 export function validateSpecifiedServiceFeeApp(value,callback,vvm){
-
-    
-
+    //适用于,是否收费,list170VO,list201VO,serviceType//specifiedServiceFeeApp
+    let {formData:{specifiedServiceFeeApp,noChargeNotAvailable,list170VO,list201VO},serviceData:{serviceType}} = vvm ;
+    //当值为空时：1.收费（Not Available/No Charge）字段的值必须为D/X/F/E。
+    if( ['D','X','F','E'].includes(noChargeNotAvailable)){
+        if(specifiedServiceFeeApp!==''){
+            callback('收费为D/X/F/E时，【适用于】必须为空!') ;
+            return false;
+        }
+    }
+    if(['H','C','P'].includes(specifiedServiceFeeApp)){//否则就是字段不为空
+        //当本字段的值为H/C/P时，T170和T201的值为0
+        if(list170VO.length>0||list201VO.length>0){
+            callback('当金额有值，【适用于】不能为H/C/P') ;
+            return false;
+        }
+    }
+    callback() ;
+    return true ;
 }
 
 

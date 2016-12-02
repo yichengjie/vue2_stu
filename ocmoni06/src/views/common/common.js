@@ -37,3 +37,11 @@ export function toastDanger(msg){
 export function toastSuccess(msg){
 	util.toastSuccess(msg,ht) ;
 }
+
+/**根据serviceType判断服务是否为行李 */
+export function isBaggageByServiceType(serviceType){
+    if(['A','B','C','E','P'].includes(serviceType)){
+        return true;
+    }
+    return false ;
+}
