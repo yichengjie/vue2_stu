@@ -143,6 +143,7 @@ export function validateBiggerNumber(value,callback,vvm,otherCfg){
     return true;   
 }
 
+/**是否收费的校验逻辑 */
 export function validateNoChargeNotAvailable(value,callback,vvm){
     //是否收费，170-201，里程费，适用于//免费行李件数
     let {formData:{noChargeNotAvailable,list170VO,list201VO,specifiedServiceFeeMileage,specifiedServiceFeeApp,freeBaggageAllowancePieces}} = vvm ;
@@ -170,6 +171,14 @@ export function validateNoChargeNotAvailable(value,callback,vvm){
     callback() ;
     return true ;
 }
+/**适用于的校验逻辑 */
+export function validateSpecifiedServiceFeeApp(value,callback,vvm){
+
+    
+
+}
+
+
 
 
 export const i18n_cn ={

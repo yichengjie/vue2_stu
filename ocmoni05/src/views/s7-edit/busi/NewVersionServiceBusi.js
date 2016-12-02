@@ -127,6 +127,20 @@ function _changeSpecifiedServiceFeeAppOption(optionsData,serviceType){
         P:['1','2','5']
     } ;
      _changeDisableHelper(list,obj[serviceType]) ;
+     //对适用于的特殊处理
+     let str3 = '每用一次服务算一次服务费用' ;
+     let str4 = '匹配的部分航程算一次服务费用' ;
+     if(_isBaggageByServiceType(serviceType)){
+        str3 = '按托运点收费' ;
+        str4 = '按全行程收费' ;
+     }
+     list.forEach(item=>{
+        if(item.value==='3'){
+            item.name = str3 ;
+        }else if(item.value==='4'){
+            item.name = str4 ;
+        }
+     }) ;
 }
 
 function _changeEffectivePeriodTypeOption(optionsData,attributesSubgroup){
@@ -162,4 +176,12 @@ function _changeDisableHelper(list,disableValueList){
             }
         }) ;
     }
+}
+
+
+export function _isBaggageByServiceType(serviceType){
+    if(['A','B','C','E','P'].includes(serviceType)){
+        return true;
+    }
+    return false ;
 }
