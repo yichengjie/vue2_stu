@@ -2,7 +2,7 @@
 export function changeGlobalOptionStatus(optionsData,formData,checkedItem,changeDefaultValueFlag){
     //改变是否收费
     let {serviceType,attributesSubgroup} = checkedItem ;
-    console.info(checkedItem) ;
+    //console.info(checkedItem) ;
     _changeNoChargeNotAvailableOption(optionsData,serviceType) ;
     _changeSpecSevFeeAndOrIndicatorOption(optionsData,serviceType) ;
     _changeAvailabilityOption(optionsData,serviceType) ;

@@ -3,14 +3,15 @@ var util = require('util') ;
 //校验的func的简单封装
 export function wrapValidateFn(validateFn,cfg){
     return function(rule,value,callback){
-        return validateFn.call(null,value,callback,cfg) ;
+        let {vvm,...otherCfg} = cfg ;
+        return validateFn.call(null,value,callback,vvm,otherCfg) ;
     }
 }
 
 //校验销售生效日期
-export function validateFirstMaintenanceDate(value,callback,cfg){
+export function validateFirstMaintenanceDate(value,callback){
       //console.info('cfg : ' + cfg) ;
-      let {lastMaintenanceDate} = cfg.vm.formData ;
+      //let {lastMaintenanceDate} = cfg.vm.formData ;
       if(value&&value.length>0){//大于当前时间下一小时0分
             let flag = util.isBiggerDateTimeThanCurrentNextHour(value) ;
             //console.info('flag : ' + flag) ;
@@ -26,9 +27,9 @@ export function validateFirstMaintenanceDate(value,callback,cfg){
       }
 }
 //校验销售截止日期
-export function validateLastMaintenanceDate(value,callback,cfg){
+export function validateLastMaintenanceDate(value,callback,vvm){
       //console.info('formData : ' ,formData) ;
-      let {firstMaintenanceDate} = cfg.vm.formData  ;
+      let {firstMaintenanceDate} = vvm.formData  ;
       if(firstMaintenanceDate&&firstMaintenanceDate.length>0&&value&&value.length>0){//截止日期需要大于生效日期
            let flag = util.isBiggerDateTimeThan(value,firstMaintenanceDate) ;
            if(!flag){
@@ -43,9 +44,9 @@ export function validateLastMaintenanceDate(value,callback,cfg){
       }
 }
 //校验使用时间限制
-export function validateUseDateLimit(value,callback,cfg){
-      let useDateLimitTye = cfg.vm.formData  ;
-      let {firstUseDate,lastUseDate,effectivePeriodType,effectivePeriodNumber,effectivePeriodUnit} = cfg.vm.formData ;
+export function validateUseDateLimit(value,callback,vvm){
+      let useDateLimitTye = vvm.formData  ;
+      let {firstUseDate,lastUseDate,effectivePeriodType,effectivePeriodNumber,effectivePeriodUnit} = vvm.formData ;
       if(useDateLimitTye===''){
           let flag1 = true ; 
           let flag2 = true ;
@@ -90,25 +91,10 @@ export function validateUseDateLimit(value,callback,cfg){
           }
       }
 }
-//校验服务套数
-// export function validateServiceNumber(value,callback,cfg){
-//       //'serviceNumberMinimum','serviceNumberMaximum'
-//       let {serviceNumberMinimum,serviceNumberMaximum} = cfg.vm.formData  ;
-//       //console.info('serviceNumberMinimum : ' + serviceNumberMinimum) ;
-//       //console.info('serviceNumberMaximum : ' + serviceNumberMaximum) ;
-//       if(serviceNumberMinimum !='' &&serviceNumberMaximum !=''){
-//             if(serviceNumberMinimum>serviceNumberMaximum){
-//                callback('最大值不能小于最小值!');
-//                return false ;
-//             }
-//       }
-//       callback() ;
-//       return true;   
-// }
 
-export function validateAllEmptyOrNot(value,callback,cfg){
-    let {name1,name2} = cfg ;
-    let formData = cfg['vm']['formData'] ;
+export function validateAllEmptyOrNot(value,callback,vvm,otherCfg){
+    let {name1,name2} = otherCfg ;
+    let formData = vvm.formData ;
     let value1 = (formData[name1]);
     let value2 = (formData[name2]) ;
     console.info('name1 : ['+name1+'] , value  : ['+value1+'] ') ;
@@ -139,10 +125,10 @@ export function validateLettersOrNumber(value,callback){
     return true ;
 }
 /**数字后者大于前者校验 */
-export function validateBiggerNumber(value,callback,cfg){
+export function validateBiggerNumber(value,callback,vvm,otherCfg){
     //console.info('cfg' ,cfg) ;
-    let {smallerNum,biggerNum} = cfg ;
-    let formData = cfg['vm']['formData'] ;
+    let {smallerNum,biggerNum} = otherCfg ;
+    let formData = vvm['formData'] ;
     let smaller = formData[smallerNum] ;
     let bigger = formData[biggerNum] ;
     //console.info('smaller : ['+smaller+']') ;
@@ -157,26 +143,8 @@ export function validateBiggerNumber(value,callback,cfg){
     return true;   
 }
 
-//校验区域代码
-export function validateLoc(value,callback){
-      let {locValue} = cfg.vm.formData  ;
-      if(value&&value.length>0){
-          if(locValue&&locValue.length>0){
-              callback &&callback() ;
-              return true ;
-          }else{
-             callback && callback('区域代码不能为空!') ;
-             return false;
-          }
-      }else{
-          if(locValue&&locValue.length>0){
-             callback && callback('区域类型不能为空!') ;
-             return false;
-          }else{
-              callback &&callback() ;
-              return true ; 
-          }
-      }
+export function validateNoChargeNotAvailable(value,callback){
+
 }
 
 

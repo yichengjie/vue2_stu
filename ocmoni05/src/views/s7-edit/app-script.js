@@ -5,12 +5,12 @@ import ContentLayout from './ContentLayout.vue' ;
 import NewVersionService from './NewVersionService.vue' ;
 import {initPage4AddApi,initPage4UpdateApi} from '../../api/s7-edit.js' ;
 import {wrapValidateFn,validateFirstMaintenanceDate,validateLastMaintenanceDate,validateServiceNumber,
-    validateUseDateLimit,validateLettersOrNumber,validateBiggerNumber,validateAllEmptyOrNot} from './validate.js' ;
+    validateUseDateLimit,validateLettersOrNumber,validateBiggerNumber,validateAllEmptyOrNot} from './busi/validate.js' ;
 import UseDateLimitChangeBtn from './UseDateLimitChangeBtn.vue' ;
 import Table196 from './Table196.vue' ;
 import Table170And201 from './Table170And201.vue' ;
 import Table178 from './Table178.vue' ;
-import {formData,serviceData,optionsData} from './jsonData.js' ;
+import {formData,serviceData,optionsData} from './busi/jsonData.js' ;
 export default {
     components:{
         Navbar,QuerySection,DataSection,ContentLayout,
@@ -20,18 +20,20 @@ export default {
     data(){
         //所有的校验方法
         //销售生效日期
-        let firstMaintenanceDate = wrapValidateFn(validateFirstMaintenanceDate,{vm:this}) ; 
+        let firstMaintenanceDate = wrapValidateFn(validateFirstMaintenanceDate,{vvm:this}) ; 
         //销售截止日期
-        let lastMaintenanceDate = wrapValidateFn(validateLastMaintenanceDate,{vm:this}) ;
+        let lastMaintenanceDate = wrapValidateFn(validateLastMaintenanceDate,{vvm:this}) ;
         //服务套数
-        let serviceNumber =wrapValidateFn(validateBiggerNumber,{vm:this,smallerNum:'serviceNumberMinimum',biggerNum:'serviceNumberMaximum'}) ;
+        let serviceNumber = wrapValidateFn(validateBiggerNumber,{vvm:this,smallerNum:'serviceNumberMinimum',biggerNum:'serviceNumberMaximum'}) ;
         //使用时间限制
-        let useDateLimit = wrapValidateFn(validateUseDateLimit,{vm:this}) ;
-        //数字字码校验
-        let lettersOrNumber = wrapValidateFn(validateLettersOrNumber) ;
+        let useDateLimit = wrapValidateFn(validateUseDateLimit,{vvm:this}) ;
+        //数字字母校验
+        let lettersOrNumber = wrapValidateFn(validateLettersOrNumber,{vvm:null}) ;
         //收费行李件数
-        let excessOccurrence = wrapValidateFn(validateBiggerNumber,{vm:this,smallerNum:'firstExcessOccurrence',biggerNum:'lastExcessOccurrence'}) ;
-        let freeBaggageAllowanceWeightAndUnit = wrapValidateFn(validateAllEmptyOrNot,{vm:this,name1:'freeBaggageAllowanceWeight',name2:'freeBaggageAllowanceUnit'}) ;
+        let excessOccurrence = wrapValidateFn(validateBiggerNumber,{vvm:this,smallerNum:'firstExcessOccurrence',biggerNum:'lastExcessOccurrence'}) ;
+        let freeBaggageAllowanceWeightAndUnit = wrapValidateFn(validateAllEmptyOrNot,{vvm:this,name1:'freeBaggageAllowanceWeight',name2:'freeBaggageAllowanceUnit'}) ;
+        //是否收费校验
+        //let noChargeNotAvailable = wrapValidateFn() ;
         return {
             formData:{
                 ...formData 
@@ -116,6 +118,7 @@ export default {
     },
     mounted(){
         initPage4AddApi().then(retData=>{
+            this.serviceData.serviceType = 'F' ;
             if(retData.flag==='true'||retData.flag===true){
                 let len = this.serviceData.serviceChooseList.length ;
                 this.serviceData.serviceChooseList.splice(0,len) ;

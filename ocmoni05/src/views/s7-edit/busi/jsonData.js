@@ -81,7 +81,7 @@ export let formData ={
 
 export let serviceData ={
     recordS5Id:'',
-    serviceType:'F',
+    serviceType:'',
     group:'',
     subGroup:'',
     subCode:'',
