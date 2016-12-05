@@ -1,4 +1,4 @@
-require('./index.css') ;
+require('./_index.css') ;
 import Form from "./form.vue" ;
 import FormItem0 from './form-item0.vue' ;
 import FormItem1 from './form-item1.vue' ;

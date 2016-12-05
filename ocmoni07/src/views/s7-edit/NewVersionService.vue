@@ -33,7 +33,7 @@
 </template>
 <script>
     //import emitter from '../../components/mixin/emitter.js';
-    import Clickoutside from '../../components/util/clickoutside.js';
+    import Clickoutside from 'componentsPath/util/clickoutside.js';
     import {escape_html} from '../common/common.js' ;
     let filterNames = ["serviceGroupDescription","subGroupDescription","serviceSubCode","commercialName","serviceType"] ;
     import {changeGlobalOptionStatus,changeGlobalOptionDefaultValue} from './busi/NewVersionServiceBusi.js' ;

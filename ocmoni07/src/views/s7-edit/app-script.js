@@ -9,7 +9,7 @@ import {wrapValidateFn,validateFirstMaintenanceDate,validateLastMaintenanceDate,
     validateNoChargeNotAvailable,validateSpecifiedServiceFeeApp,validatGeoSpec} from './busi/validate.js' ;
 import UseDateLimitChangeBtn from './UseDateLimitChangeBtn.vue' ;
 import {formData,serviceData,optionsData} from './busi/jsonData.js' ;
-import util_lib from 'util_lib' ;
+import util_lib from 'util_lib2' ;
 export default {
     components:{
         Navbar,QuerySection,DataSection,ContentLayout,

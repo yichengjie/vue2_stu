@@ -36,7 +36,7 @@
 </template>
 
 <script>
-    var util = require('util_lib') ;
+    var util = require('util_lib2') ;
     export default {
         name: 'navbar',
         props:{
