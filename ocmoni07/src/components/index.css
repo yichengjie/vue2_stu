@@ -1,0 +1,44 @@
+.form-control.oc_input_readonly{
+    background-color: #fff;
+    opacity: 1;
+}
+.form-control[readonly]{
+  background-color: #fff;
+  opacity: 1;
+}
+.form-control.oc_input_disabled{
+    background-color: #eee;
+    border-color: #D3DCE6;
+    color: #bbb;
+    cursor: not-allowed;
+}
+.form-control.oc_input_disabled::placeholder {
+    color: #C0CCDA
+}
+.oc-input__icon{
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    width: 35px;
+    height: 100%;
+    text-align: center;
+    color: #C0CCDA;
+    cursor: pointer ;
+}
+.oc-input__icon:after {
+    content: '';
+    height: 100%;
+    width: 0;
+    display: inline-block;
+    vertical-align: middle
+}
+.control-label.required::before{
+    content: '*';
+	color: #ff4949;
+	margin-right: 4px;
+}
+.control-label {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
