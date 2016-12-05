@@ -47,8 +47,9 @@ module.exports = {
         'ajaxfileupload_lib':libPath+"/ajaxfileupload.js",
         'is_loading_lib':libPath+"/is-loading/index.js",
         'bt_growl_lib':libPath+"/bt-grow/jquery.bootstrap-growl.js",
-        'HttpClientUtil':commonPath+"/HttpClientUtil.js",
-        'util':commonPath+"/util.js"
+        'HttpClientUtil_lib':commonPath+"/HttpClientUtil.js",
+        'modal_helper_lib':commonPath+'/modal.helper.js',
+        'util_lib':commonPath+"/util.js"
       }
   },
   devServer: {

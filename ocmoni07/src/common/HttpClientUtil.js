@@ -43,12 +43,19 @@ function __dealBaseAjaxRequest({serverURL,config={}}){
         $.ajax(tmpCfg); //发送ajax请 
     }) ;
 }
-
-export default  {
+module.exports ={
     dealAjaxRequestWithoutParam,
     dealAjaxRequest4SimpleParam,
     dealAjaxRequest4JSObj,
     dealSYNCHAjaxRequestWithoutParam,
     dealSYNCHAjaxRequest4SimpleParam,
     dealSYNCHAjaxRequest4JSObj
-} ;
+}
+// export default  {
+//     dealAjaxRequestWithoutParam,
+//     dealAjaxRequest4SimpleParam,
+//     dealAjaxRequest4JSObj,
+//     dealSYNCHAjaxRequestWithoutParam,
+//     dealSYNCHAjaxRequest4SimpleParam,
+//     dealSYNCHAjaxRequest4JSObj
+// } ;

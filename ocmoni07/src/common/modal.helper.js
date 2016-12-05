@@ -11,26 +11,27 @@
  * 	   var modalHelper = new ModalHelper("tskCustomeTipInfo");'
  */
 //define(function (require, exports, module) {
-	function ModalHelper(tipId){
-		if(this==window){
-			throw new Error("please new an ModalHelper object to use it !");
-		}
-		this.tipId = tipId ;
-		//this.el = $("#"+tipId) ;
-	} ;
-	
-	
-	ModalHelper.prototype.cleanTipInfo = function(){
-		$("#"+this.tipId).html("") ;
-	} ;
-	
-	ModalHelper.prototype.addErrorTip = function(errMsg){
-		$("#"+this.tipId).append("<li><span class ='text-danger'>"+errMsg+"</span></li>") ;
-	} ;
-	ModalHelper.prototype.addSuccessTip = function(sucMsg){
-		$("#"+this.tipId).append("<li><span class =\"text-success\">"+sucMsg+"</span></li>") ;
-	} ;
-	module.exports = ModalHelper;
+function ModalHelper(tipId){
+	if(this==window){
+		throw new Error("please new an ModalHelper object to use it !");
+	}
+	this.tipId = tipId ;
+	//this.el = $("#"+tipId) ;
+} ;
+
+
+ModalHelper.prototype.cleanTipInfo = function(){
+	$("#"+this.tipId).html("") ;
+} ;
+
+ModalHelper.prototype.addErrorTip = function(errMsg){
+	$("#"+this.tipId).append("<li><span class ='text-danger'>"+errMsg+"</span></li>") ;
+} ;
+ModalHelper.prototype.addSuccessTip = function(sucMsg){
+	$("#"+this.tipId).append("<li><span class =\"text-success\">"+sucMsg+"</span></li>") ;
+} ;
+//export default ModalHelper ;
+module.exports = ModalHelper;
 //}) ;
 
 

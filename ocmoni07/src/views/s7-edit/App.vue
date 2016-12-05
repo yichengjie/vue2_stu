@@ -99,10 +99,10 @@
                             :serviceTypeList="['A','C','P']" :serviceType="serviceData.serviceType">
                             <oc-select v-model.trim ="formData.baggageTravelApplication" :options="optionsData.baggageTravelApplication"/>
                         </oc-form-item1>
-                        <oc-form-item0 label="备注例外行李"  prop ="list196VO" :span="6"
+                        <oc-form-item1 label="备注例外行李"  prop ="list196VO" 
                             :serviceTypeList="['A','C','P']" :serviceType="serviceData.serviceType">
-                            <Table196 :list="formData.list196VO"/>
-                        </oc-form-item0>
+                            <oc-input placeholder="这里是子表号" />
+                        </oc-form-item1>
                     </ContentLayout>
 
                     <ContentLayout title="费用">

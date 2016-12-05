@@ -8,15 +8,11 @@ import {wrapValidateFn,validateFirstMaintenanceDate,validateLastMaintenanceDate,
     validateUseDateLimit,validateLettersOrNumber,validateBiggerNumber,validateAllEmptyOrNot,
     validateNoChargeNotAvailable,validateSpecifiedServiceFeeApp,validatGeoSpec} from './busi/validate.js' ;
 import UseDateLimitChangeBtn from './UseDateLimitChangeBtn.vue' ;
-import Table196 from './Table196.vue' ;
-import Table170And201 from './Table170And201.vue' ;
-import Table178 from './Table178.vue' ;
 import {formData,serviceData,optionsData} from './busi/jsonData.js' ;
 export default {
     components:{
         Navbar,QuerySection,DataSection,ContentLayout,
-        NewVersionService,UseDateLimitChangeBtn,Table196,
-        Table170And201,Table178
+        NewVersionService,UseDateLimitChangeBtn
     },
     data(){
         //所有的校验方法

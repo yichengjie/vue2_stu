@@ -1,5 +1,5 @@
-let HttpClientUtil = require('HttpClientUtil') ;
-let util =  require('util');
+let HttpClientUtil = require('HttpClientUtil_lib') ;
+let util =  require('util_lib');
 let jsonData = require('../test/s7-edit.json')
 
 export function initPage4AddApi(){
