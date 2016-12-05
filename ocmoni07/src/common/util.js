@@ -31,7 +31,9 @@
 	util.getJspPageParam=function(){
 		var carrCode = $("#carrCode").val() ;
 		var contextPath = $("#contextPath").val() ;
-		return {carrCode,contextPath} ;
+		var action = $("#action").val() ;
+		var id = $("#id").val() ;
+		return {carrCode,contextPath,action,id} ;
 	}
 
 	util.showLoading = function(){

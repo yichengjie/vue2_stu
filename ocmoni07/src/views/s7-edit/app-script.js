@@ -9,6 +9,7 @@ import {wrapValidateFn,validateFirstMaintenanceDate,validateLastMaintenanceDate,
     validateNoChargeNotAvailable,validateSpecifiedServiceFeeApp,validatGeoSpec} from './busi/validate.js' ;
 import UseDateLimitChangeBtn from './UseDateLimitChangeBtn.vue' ;
 import {formData,serviceData,optionsData} from './busi/jsonData.js' ;
+import util_lib from 'util_lib' ;
 export default {
     components:{
         Navbar,QuerySection,DataSection,ContentLayout,
@@ -132,33 +133,54 @@ export default {
         }
     },
     mounted(){
-        initPage4AddApi().then(retData=>{
-            //this.serviceData.serviceType = 'F' ;
-            if(retData.flag==='true'||retData.flag===true){
-                let len = this.serviceData.serviceChooseList.length ;
-                this.serviceData.serviceChooseList.splice(0,len) ;
-                for(let item of retData.serviceChooseList){
-                    this.serviceData.serviceChooseList.push(item) ;
-                }
-                //console.info("retList : " ,retData.serviceChooseList) ;
-            }else{
-                console.info('数据加载不完整...') ;
-            }
-        },error =>{
-            console.info('error : ',error) ;
-        })
-
-
-        initPage4UpdateApi().then(retData=>{
-            let id = '56372eb40480478a83e85040f945e416' ;//FP类型--F
-            id ='8fefc6fcce0e4c8e8df3772cb3ac609a' ;//FL类型--F
-            id = '7d10d15697e5477b83f09470c5a0f9fc';//A类型
-            id = 'b293f43b9e9a4b4eb393e86307c921a6';//C类型
-            this.serviceData.recordS5Id = id;
-            let {formData} = retData ;
-            Object.assign(this.formData,formData) ;
-        }) ;
-        //var validator = $("#s7_form").validate({meta : ""});
-        //this.validator = validator ;
+        let pageParam = util_lib.getJspPageParam() ;
+        let {action} = pageParam ;
+        console.info('==== [action] ==== : ' + action) ;
+        switch(action){
+            case 'add':
+                initPage4Add(this) ;
+                break ;
+            case 'update':
+                initPage4Update(this) ;
+                break ;
+            case 'copy':
+                initPage4Update(this) ;
+                break ;
+            default:
+                initPage4Add(this) ;
+                break ;
+        }
     }
+}
+
+function initPage4Update(_vm){
+    initPage4UpdateApi().then(retData=>{
+        let id = '56372eb40480478a83e85040f945e416' ;//FP类型--F
+        //id ='8fefc6fcce0e4c8e8df3772cb3ac609a' ;//FL类型--F
+        //id = '7d10d15697e5477b83f09470c5a0f9fc';//A类型
+        id = 'b293f43b9e9a4b4eb393e86307c921a6';//C类型
+        _vm.serviceData.recordS5Id = id;
+        let {formData} = retData ;
+        Object.assign(_vm.formData,formData) ;
+    }) ;
+}
+
+function initPage4Add(_vm){
+     //默认服务类型为F
+     initPage4AddApi().then(retData=>{
+        _vm.serviceData.serviceType = 'F' ;
+        if(retData.flag==='true'||retData.flag===true){
+            let len = _vm.serviceData.serviceChooseList.length ;
+            _vm.serviceData.serviceChooseList.splice(0,len) ;
+            for(let item of retData.serviceChooseList){
+                _vm.serviceData.serviceChooseList.push(item) ;
+            }
+            //console.info("retList : " ,retData.serviceChooseList) ;
+        }else{
+            console.info('数据加载不完整...') ;
+        }
+    },error =>{
+        console.info('error : ',error) ;
+    })
+
 }
