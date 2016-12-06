@@ -9,11 +9,11 @@ var commonPath = projectRoot +"/src/common" ;
 var componentsPath = projectRoot +"/src/components" ;
 var assetsPath = projectRoot +"/src/assets" ;
 var apiPath = projectRoot + "/src/api" ;
+var mockjsPath = projectRoot + "/src/mockjs" ;
 
 module.exports = {
   entry: {
-    's7Edit':srcPath+"/main.js",
-    's7EditMock':srcPath+'/mockjs/s7-edit.js'
+    's7Edit':srcPath+"/main.js"
   },
   output: {
      path: distPath,
@@ -34,6 +34,7 @@ module.exports = {
   resolve: {
       alias: {
         apiPath:apiPath,
+        mockjsPath:mockjsPath,
         assetsPath:assetsPath,
         componentsPath:componentsPath,
         vue: 'vue/dist/vue.common.js',
@@ -70,7 +71,7 @@ module.exports = {
       less: ExtractTextPlugin.extract("css!less")
     }
   },
-  devtool:'#source-map' 
+  devtool:'#source-map'
 }
 
 if (process.env.NODE_ENV === 'production') {

@@ -18,6 +18,9 @@ require('assetsPath/css/jquery-ui-timepicker-addon.css') ;
 //require('assetsPath/css/jq_validator.css') ;
 //css_path/jquery.autocomplete.css
 require('assetsPath/icon/icon.css') ;
+//测试时返回假数据
+require('mockjsPath/s7-edit.js') ;
+
 import MyPlugin from 'componentsPath/_index.js' ;
 //调用插件
 Vue.use(MyPlugin) ;

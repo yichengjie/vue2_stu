@@ -1,33 +1,19 @@
 let HttpClientUtil = require('HttpClientUtil_lib2') ;
-let util =  require('util_lib');
-let jsonData = require('../test/s7-edit.json');
+let jsonData = require('../test/s7-edit.json') ;
+let util = require('util_lib') ;
+
 
 export function initPage4AddApi(){
-    //let {carrCode,contextPath} = util.getJspPageParam() ;
-    //let url = contextPath+'/s7/initPage4Add.action' ;
-    //return HttpClientUtil.dealAjaxRequestWithoutParam(url) ;
-    return new Promise((resolve,reject)=>{
-        setTimeout(()=>{
-            resolve(jsonData) ;
-        },100) ;
-    }) ;
+    let {carrCode,contextPath} = util.getJspPageParam() ;
+    let url = contextPath+'/s7/initPage4Add.action' ;
+    return HttpClientUtil.dealAjaxRequestWithoutParam(url) ;
 }
 
 
 export function initPage4UpdateApi(){
-    let formData = {//2016-10-21 13:45
-        firstMaintenanceDate:'',
-        serviceType:'A',
-        serviceSubCode:'0JJ'
-    } ;
-    let retData ={
-        flag:true ,
-        formData,
-        ...jsonData
-    };
     return new Promise((resolve,reject)=>{
         setTimeout(()=>{
-            resolve(retData) ;
+            resolve({}) ;
         },300) ;
     }) ;
 
