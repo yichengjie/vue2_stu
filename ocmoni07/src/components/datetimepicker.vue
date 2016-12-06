@@ -14,7 +14,7 @@
 </template>
 <script>
     import emitter from './mixin/emitter';
-    import util from 'util' ;
+    import util from 'util_lib' ;
 
     export default {
          name:'oc-datetimepicker',

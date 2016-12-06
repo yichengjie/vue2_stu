@@ -8,6 +8,7 @@ var libPath = projectRoot +"/src/lib" ;
 var commonPath = projectRoot +"/src/common" ;
 var componentsPath = projectRoot +"/src/components" ;
 var assetsPath = projectRoot +"/src/assets" ;
+var apiPath = projectRoot + "/src/api" ;
 
 module.exports = {
   entry: {
@@ -32,6 +33,7 @@ module.exports = {
   },
   resolve: {
       alias: {
+        apiPath:apiPath,
         assetsPath:assetsPath,
         componentsPath:componentsPath,
         vue: 'vue/dist/vue.common.js',
@@ -50,8 +52,8 @@ module.exports = {
         is_loading_lib:libPath+"/is-loading/index.js",
         bt_growl_lib:libPath+"/bt-grow/jquery.bootstrap-growl.js",
         HttpClientUtil_lib2:commonPath+"/HttpClientUtil.js",
-        modal_helper_lib2:commonPath+'/modal.helper.js',
-        util_lib2:commonPath+"/util.js"
+        modal_helper_lib:commonPath+'/modal.helper.js',
+        util_lib:commonPath+"/util.js"
       }
   },
   devServer: {

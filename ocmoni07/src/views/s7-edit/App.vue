@@ -323,7 +323,125 @@
         </div>
     </div>
 </template>
-<script src ="./app-script.js">
+<script>
+import Navbar from '../common/Navbar.vue' ;
+import QuerySection from './QuerySection.vue' ;
+import DataSection from './DataSection.vue' ;
+import ContentLayout from './ContentLayout.vue' ;
+import NewVersionService from './NewVersionService.vue' ;
+import UseDateLimitChangeBtn from './UseDateLimitChangeBtn.vue' ;
+import {formData,serviceData,optionsData} from './busi/jsonData.js' ;
+import {initPageData,handleSaveForm,findRecordS5Id} from './busi/appBusi.js' ;
+import {wrapValidateFn,validateFirstMaintenanceDate,validateLastMaintenanceDate,validateServiceNumber,
+    validateUseDateLimit,validateLettersOrNumber,validateBiggerNumber,validateAllEmptyOrNot,
+    validateNoChargeNotAvailable,validateSpecifiedServiceFeeApp,validatGeoSpec} from './busi/validate.js' ;
+export default {
+    components:{
+        Navbar,QuerySection,DataSection,ContentLayout,
+        NewVersionService,UseDateLimitChangeBtn
+    },
+    data(){
+        //所有的校验方法
+        //销售生效日期
+        let firstMaintenanceDate = wrapValidateFn(validateFirstMaintenanceDate,{vvm:this}) ; 
+        //销售截止日期
+        let lastMaintenanceDate = wrapValidateFn(validateLastMaintenanceDate,{vvm:this}) ;
+        //服务套数
+        let serviceNumber = wrapValidateFn(validateBiggerNumber,{vvm:this,smallerNum:'serviceNumberMinimum',biggerNum:'serviceNumberMaximum'}) ;
+        //使用时间限制
+        let useDateLimit = wrapValidateFn(validateUseDateLimit,{vvm:this}) ;
+        //数字字母校验
+        let lettersOrNumber = wrapValidateFn(validateLettersOrNumber,{vvm:null}) ;
+        //收费行李件数
+        let excessOccurrence = wrapValidateFn(validateBiggerNumber,{vvm:this,smallerNum:'firstExcessOccurrence',biggerNum:'lastExcessOccurrence'}) ;
+        let freeBaggageAllowanceWeightAndUnit = wrapValidateFn(validateAllEmptyOrNot,{vvm:this,name1:'freeBaggageAllowanceWeight',name2:'freeBaggageAllowanceUnit'}) ;
+        //是否收费校验
+        let noChargeNotAvailable = wrapValidateFn(validateNoChargeNotAvailable,{vvm:this}) ;
+        //适用于校验
+        let specifiedServiceFeeApp = wrapValidateFn(validateSpecifiedServiceFeeApp,{vvm:this}) ;
+        //区域校验
+        let geoSpec1 = wrapValidateFn(validatGeoSpec,{vvm:this,name1:'geoSpecLoc1Type',name2:'geoSpecLoc1'}) ; 
+        let geoSpec2 = wrapValidateFn(validatGeoSpec,{vvm:this,name1:'geoSpecLoc2Type',name2:'geoSpecLoc2'}) ; 
+        let geoSpec3 = wrapValidateFn(validatGeoSpec,{vvm:this,name1:'geoSpecLoc3Type',name2:'geoSpecLoc3'}) ; 
+
+        return {
+            formData:{
+                ...formData 
+            },
+            serviceData:{/*选择服务相关的数据**/
+                ...serviceData 
+            },
+            rules:{
+                firstMaintenanceDate: [
+                    {required: true, message: '必填', trigger: 'change' },
+                    {validator:firstMaintenanceDate,trigger:'change'}
+                ],
+                lastMaintenanceDate:[
+                    {validator: lastMaintenanceDate ,trigger: 'change'}
+                ],
+                serviceNumber:{
+                    serviceNumberMaximum:[{ validator: serviceNumber ,trigger: 'change'}]
+                },
+                useDateLimit:{/**使用时间限制 */
+                    firstUseDate:[
+                        {validator: useDateLimit ,trigger: 'change'}
+                    ]
+                },
+                fareBasis:[/**产品代号*/
+                    {validator: lettersOrNumber ,trigger: 'change'}
+                ],
+                discountCode:[/**折扣代码 */
+                    {validator: lettersOrNumber ,trigger: 'change'}
+                ],
+                excessOccurrence:{/**收费行李件数 */
+                    firstExcessOccurrence:[
+                        {validator: excessOccurrence ,trigger: 'change'}
+                    ]
+                },
+                freeBaggageAllowanceWeightAndUnit:{
+                    freeBaggageAllowanceWeight:[
+                         {validator: freeBaggageAllowanceWeightAndUnit ,trigger: 'change'}
+                    ]
+                },/**是否收费 */
+                noChargeNotAvailable:[
+                    {validator: noChargeNotAvailable ,trigger: 'change'}
+                ],
+                specifiedServiceFeeApp:[
+                    {validator: specifiedServiceFeeApp ,trigger: 'change'}
+                ],
+                geoSpec1:{
+                    geoSpecLoc1Type:[
+                        {validator: geoSpec1 ,trigger: 'change'}
+                    ]
+                },
+                geoSpec2:{
+                    geoSpecLoc2Type:[
+                        {validator: geoSpec2 ,trigger: 'change'}
+                    ]
+                },
+                geoSpec3:{
+                    geoSpecLoc3Type:[
+                        {validator: geoSpec3 ,trigger: 'change'}
+                    ]
+                }
+            },
+            optionsData:{
+                ...optionsData
+            }
+        } ;
+    },
+    methods:{
+        handleSaveForm(type){
+           handleSaveForm(this) ;
+        },
+        handleReset() {
+            this.$refs.editForm.resetFields();
+        }
+    },
+    mounted(){
+       initPageData(this) ;
+    }
+}
 </script>
 <style>
     body{margin-bottom: 50px;}
