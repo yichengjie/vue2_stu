@@ -111,6 +111,9 @@
         },
         watch:{
           value(newVal,oldVal){
+
+              console.info('newVal : ' + newVal) ;
+
               let checkedItem = getCheckedItemById(this.serviceData.serviceChooseList,newVal) ;
               //console.info('------['+newVal+']  , ['+oldVal+'] ' ) ;
               this.filterKey = getCheckedItemNameById(this.serviceData.serviceChooseList,newVal)  ;

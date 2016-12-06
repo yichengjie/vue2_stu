@@ -1,6 +1,6 @@
 let HttpClientUtil = require('HttpClientUtil_lib2') ;
 let util =  require('util_lib');
-let jsonData = require('../test/s7-edit.json')
+let jsonData = require('../test/s7-edit.json');
 
 export function initPage4AddApi(){
     //let {carrCode,contextPath} = util.getJspPageParam() ;
@@ -16,11 +16,14 @@ export function initPage4AddApi(){
 
 export function initPage4UpdateApi(){
     let formData = {//2016-10-21 13:45
-        firstMaintenanceDate:''
+        firstMaintenanceDate:'',
+        serviceType:'A',
+        serviceSubCode:'0JJ'
     } ;
     let retData ={
         flag:true ,
-        formData
+        formData,
+        ...jsonData
     };
     return new Promise((resolve,reject)=>{
         setTimeout(()=>{
