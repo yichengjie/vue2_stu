@@ -46,9 +46,25 @@ export function validateLastMaintenanceDate(value,callback,vvm){
 }
 //校验使用时间限制
 export function validateUseDateLimit(value,callback,vvm){
-      let useDateLimitTye = vvm.formData  ;
+      let useDateLimitTye = vvm.formData.useDateLimitTye  ;
       let {firstUseDate,lastUseDate,effectivePeriodType,effectivePeriodNumber,effectivePeriodUnit} = vvm.formData ;
-      if(useDateLimitTye===''){
+      if(useDateLimitTye==='1'){
+          if(effectivePeriodType===''){
+              if(effectivePeriodNumber!==''||effectivePeriodUnit!==''){
+                   callback('期限类型必填') ;
+                   return false;  
+              } 
+              callback() ;
+              return true;   
+          }else{//type 不为空 
+             if(effectivePeriodNumber ===''||effectivePeriodUnit ===''){
+                  callback('期限值必填') ;
+                  return false;  
+             } 
+             callback() ;
+             return true;   
+          }
+      }else{
           let flag1 = true ; 
           let flag2 = true ;
           let count = 0 ;
@@ -74,22 +90,6 @@ export function validateUseDateLimit(value,callback,vvm){
           }
           callback() ;
           return true ;
-      }else if(useDateLimitTye==='1'){
-          if(effectivePeriodType===''){
-              if(effectivePeriodNumber!==''||effectivePeriodUnit!==''){
-                   callback('期限类型必填') ;
-                   return false;  
-              } 
-              callback() ;
-              return true;   
-          }else{//type 不为空 
-             if(effectivePeriodNumber ===''||effectivePeriodUnit ===''){
-                  callback('期限值必填') ;
-                  return false;  
-             } 
-             callback() ;
-             return true;   
-          }
       }
 }
 
