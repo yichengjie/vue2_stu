@@ -9,12 +9,10 @@ export function initPage4AddApi(){
     return HttpClientUtil.dealAjaxRequestWithoutParam(url) ;
 }
 
-
 export function initPage4UpdateApi(){
-    return new Promise((resolve,reject)=>{
-        setTimeout(()=>{
-            resolve({}) ;
-        },300) ;
-    }) ;
-
+    let pageParam = util.getJspPageParam() ;
+    let {contextPath,id} = pageParam ;
+    let simpleJsonData = {s7Id:id} ;
+    let url = contextPath +"/s7/initPage4Upate.action" ;
+    return HttpClientUtil.dealAjaxRequest4SimpleParam(url,simpleJsonData) ;
 }

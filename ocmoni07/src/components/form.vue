@@ -31,14 +31,24 @@
     created() {
       this.$on('el.form.addField', (field) => {
         //fields['age'] = field ;
-        this.fields[field.prop] = field;
-        this.fieldLength++;
+        let tmp =  this.fields[field.prop] ;
+        if(tmp==null){
+           this.fields[field.prop] = field;
+           this.fieldLength++;
+        }else{
+          console.warn('you add the form-item with duplicate prop name ['+field.prop+'],please check your code .') ;
+        }
       });
       /* istanbul ignore next */
       this.$on('el.form.removeField', (field) => {
-        delete this.fields[field.prop];
-        // delete this.fileds['age'] ;
-        this.fieldLength--;
+        let tmp =  this.fields[field.prop] ;
+        if(tmp==null){
+            console.warn('the form-item prop name ['+field.prop+'] is not exist ,please check your code .') ;
+        }else{
+          delete this.fields[field.prop];
+          // delete this.fileds['age'] ;
+          this.fieldLength--;
+        }
       });
     },
     methods: {
@@ -74,5 +84,5 @@
   };
 </script>
 <style>
-  
+
 </style>
