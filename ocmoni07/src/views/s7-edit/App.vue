@@ -13,13 +13,13 @@
                     :optionsData="optionsData" :formData="formData"/>
                <DataSection left ="2.确定费用" right ="描述 | 费用">
                    <ContentLayout title="描述">
-                        <oc-form-item1 label="销售生效日期" :required="true" prop ="firstMaintenanceDate">
+                        <oc-form-item1 label="销售生效日期" :tooltip ="true" :required="true" prop ="firstMaintenanceDate">
                             <oc-datetimepicker pickerType="datetime" v-model ="formData.firstMaintenanceDate"  />
                         </oc-form-item1>
                         <oc-form-item1 label="销售截止日期"  prop ="lastMaintenanceDate">
                             <oc-datetimepicker pickerType="datetime" v-model ="formData.lastMaintenanceDate"   />
                         </oc-form-item1>
-                        <oc-form-item2 label="使用时间限制"  prop="useDateLimit" errorPosition ="bottom"
+                        <oc-form-item2 label="使用时间限制" prop="useDateLimit" errorPosition ="bottom"
                             :serviceType="serviceData.serviceType"
                             :subGroupList="['FP','FL']"
                             :subGroup="serviceData.subGroup" 
@@ -373,7 +373,7 @@ export default {
             },
             rules:{
                 firstMaintenanceDate: [
-                    {required: true, message: '必填', trigger: 'change' },
+                    {required: true, message: '答：我们注意到有关报道。今天是二战时期日本偷袭珍珠港和太平洋战争爆发75周年。日本军国主义发动的那场侵略战争给本地区国家、特别是亚洲受害国人', trigger: 'change' },
                     {validator:firstMaintenanceDate,trigger:'change'}
                 ],
                 lastMaintenanceDate:[

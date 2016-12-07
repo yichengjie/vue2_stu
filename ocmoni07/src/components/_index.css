@@ -15,7 +15,7 @@
 	color: #ff4949;
 	margin-right: 4px;
 }
-.form-group .error-tip{
+.form-group .error-container{
     display: inline-block;
     color: red ;
     margin-top: 7px;
@@ -24,10 +24,16 @@
     font-size: 12px ;
     width: 250px;
 }
+.form-group .error-container .error-info{
+    display: block;
+    white-space:nowrap; 
+    overflow:hidden; 
+    text-overflow:ellipsis;
+}
 .form-group-bottom-error.form-group{
     position: relative;
 }
-.form-group-bottom-error .error-tip{
+.form-group-bottom-error .error-container{
     position: absolute;
     bottom: 10px ;
 }
@@ -141,3 +147,19 @@
     box-sizing: border-box;
  }
 /**select 相关的end*/
+.tooltip-error{
+    position: relative;
+}
+.tooltip-error:hover::after{
+    content: attr(data-title);
+    position: absolute;
+    display: inline-block;
+    font-size: 12px;
+    padding: 10px 14px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 240px;
+    bottom: 25px;
+    left: -5px;
+    background-color: #EBEDF1 ;
+}
