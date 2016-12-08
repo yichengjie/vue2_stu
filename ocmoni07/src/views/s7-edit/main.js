@@ -28,5 +28,11 @@ Vue.use(MyPlugin) ;
 import App from './App.vue' ;
 new Vue({
   el: '#app',
-  render: h => h(App)
+  //render: h => h(App)
+  render(h){
+    //let h = this.$createElement ;
+    return h(App) ;
+    //return h('div',[h(App)]) ;
+    //return (<App/>);
+  }
 })
