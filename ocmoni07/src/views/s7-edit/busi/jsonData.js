@@ -189,6 +189,7 @@ export let optionsData ={
         {"name":"豪华经济舱","value":"P",disabled:false},{"name":"经济舱","value":"Y",disabled:false}
     ],
     advancedPurchaseUnit:[/*提前购票时间单位*/
+        {"name":"选择","value":"",disabled:false},
         {"name":"分","value":"N",disabled:false}, {"name":"小时","value":"H",disabled:false},
         {"name":"天","value":"D",disabled:false}, {"name":"月","value":"M",disabled:false}
     ],
