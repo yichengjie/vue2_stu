@@ -284,9 +284,9 @@
         {
             "id": "c8606770bbb84f66ac026a87acd78a30",
             "carrCode": "CA",
-            "serviceType": "E",
+            "serviceType": "M",
             "serviceSubCode": "0G6",
-            "commercialName": "免费行李",
+            "commercialName": "普通服务M类型",
             "attributesGroup": "TS",
             "attributesSubgroup": "PR",
             "serviceGroupDescription": "Travel Services",

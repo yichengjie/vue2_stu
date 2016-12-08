@@ -18,10 +18,12 @@
   "homepage": "https://github.com/yichengjie/vue2_stu#readme",
   "dependencies": {
     "element-ui": "^1.0.3",
+    "jquery": "^3.1.1",
     "json-loader": "^0.5.4",
     "lodash": "^4.16.6",
     "mockjs": "^1.0.1-beta3",
     "moment": "^2.15.2",
+    "popper.js": "^0.6.4",
     "vue": "^2.1.4",
     "vue-popup": "^0.2.12",
     "vuex": "^2.0.0"
