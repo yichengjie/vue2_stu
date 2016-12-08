@@ -15,6 +15,7 @@
     </div>  
 </template>
 <script>
+    import util  from 'util_lib' ;
     export default {
         props:{
             title:{
@@ -24,7 +25,8 @@
         },
         methods:{
             backPage(){
-                console.info('back last page') ;
+                let url = "/oc/toQueryS7UI.action" ;
+                util.goToPageByUrl(url) ;
             },
             submitForm(type){
                 //console.info('type : ' + type) ;

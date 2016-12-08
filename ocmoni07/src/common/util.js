@@ -6,6 +6,11 @@
 	require('is_loading_lib') ;
 	var util = {};
 
+	util.goToPageByUrl = function(url){
+		let {contextPath} = util.getJspPageParam() ;  
+		window.location.href = contextPath +url ;
+	};
+
 
 	util.debounce = function(fn, delay) {
 		var timeout;

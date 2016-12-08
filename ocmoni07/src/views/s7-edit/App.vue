@@ -19,8 +19,6 @@
                         <oc-form-item1 label="销售截止日期"  prop ="lastMaintenanceDate">
                             <oc-datetimepicker pickerType="datetime" v-model ="formData.lastMaintenanceDate"   />
                         </oc-form-item1>
-
-
                         <oc-form-item2 label="使用时间限制"  prop="useDateLimit" errorPosition ="bottom"
                             :serviceType="serviceData.serviceType"
                             :subGroupList="['FP','FL']"
