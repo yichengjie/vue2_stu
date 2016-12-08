@@ -6,8 +6,8 @@
     <div :class="contentClass">
       <slot></slot>
     </div>
-    <div class="error-tip" v-show="error !== ''">
-       {{error}}
+    <div class="error-container" :class ="{'tooltip-error':tooltip}" :data-title ="error" v-show="error !== ''">
+      <span class="error-info">{{error}}</span>
     </div>
   </div>
 </template>
@@ -33,6 +33,10 @@
       span:{
         type:Number,
         default:4
+      },
+      tooltip:{
+        type:Boolean,
+        default:false
       }
     },
     computed: {

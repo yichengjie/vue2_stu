@@ -4,8 +4,8 @@
       {{label}}
     </label>
     <slot></slot>
-    <div class="error-tip" v-show="error !== ''">
-       {{error}}
+    <div class="error-container" :class ="{'tooltip-error':tooltip}" :data-title ="error" v-show="error !== ''">
+      <span class="error-info">{{error}}</span>
     </div>
     <slot name ="slot2"></slot>
   </div>
@@ -33,6 +33,10 @@
       errorPosition:{
         type:String,
         default:''
+      },
+      tooltip:{
+        type:Boolean,
+        default:false
       }
     },
     computed: {
