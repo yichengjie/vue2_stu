@@ -17,7 +17,7 @@
 }
 .form-group .error-container{
     display: inline-block;
-    color: red ;
+    color: #A94442 ;
     margin-top: 7px;
     margin-left: 0px;
     padding-left: 0px;
@@ -26,8 +26,8 @@
 }
 .form-group .error-container .error-info{
     display: block;
-    white-space:nowrap; 
-    overflow:hidden; 
+    white-space:nowrap;
+    overflow:hidden;
     text-overflow:ellipsis;
 }
 .form-group-bottom-error.form-group{
@@ -93,7 +93,7 @@
     margin:5px 0;
     overflow-y:auto;
     max-height:300px;
-    
+
 }
 
 .oc-select-dropdown__list{
