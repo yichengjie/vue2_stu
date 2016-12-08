@@ -6,7 +6,8 @@ module.exports = {
     "demo003":'./src/demo003.js',
     "demo004":'./src/demo004.js',
     "demo005":'./src/demo005.js',
-    "demo007":'./src/demo007.js'
+    "demo007":'./src/demo007.js',
+    "other001":'./src/other001.js'
   },
   output: {
     path: __dirname+"/dist/",

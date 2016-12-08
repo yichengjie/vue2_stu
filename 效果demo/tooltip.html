@@ -10,11 +10,16 @@
         /*}*/
         .tip-info{
             position: relative;
+            width: 100px;
+            white-space:nowrap;
+            /*overflow:hidden;*/
+            text-overflow:ellipsis;
         }
         .tip-info:hover::after{
             content: attr(data-title);
             position: absolute;
             display: inline-block;
+            white-space:pre-wrap;
             font-size: 12px;
             padding: 10px 14px;
             border: 1px solid #ddd;
