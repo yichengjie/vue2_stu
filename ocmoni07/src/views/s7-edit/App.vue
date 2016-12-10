@@ -3,7 +3,9 @@
         <div class="header-container ">
             <div class="navbar-fixed-top">
                  <Navbar/>
-                <QuerySection v-on:clickSaveFormBtn="handleSaveForm" v-on:clickResetFormBtn="handleReset"/>
+                <QuerySection 
+                    :handleSaveForm="handleSaveForm" 
+                    :handleResetForm="handleResetForm"/>
             </div>
         </div>
 
@@ -523,7 +525,7 @@ export default {
            //console.info('-----------------------------------') ;
            handleSaveForm(this) ;
         },
-        handleReset() {
+        handleResetForm() {
             this.$refs.editForm.resetFields();
         }
     },

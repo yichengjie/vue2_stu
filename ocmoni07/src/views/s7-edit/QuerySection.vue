@@ -21,7 +21,9 @@
             title:{
                 type:String,
                 default:'新建服务费用'
-            }
+            },
+            handleSaveForm:Function,
+            handleResetForm:Function
         },
         methods:{
             backPage(){
@@ -30,10 +32,12 @@
             },
             submitForm(type){
                 //console.info('type : ' + type) ;
-                this.$emit('clickSaveFormBtn',type) ;
+                //this.$emit('clickSaveFormBtn',type) ;
+                this.handleSaveForm(type) ;
             },
             clickResetFormBtn(){
-                this.$emit('clickResetFormBtn') ;
+                //this.$emit('clickResetFormBtn') ;
+                this.handleResetForm() ;
             }
         }
     }
