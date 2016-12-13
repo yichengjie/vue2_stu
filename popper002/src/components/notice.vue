@@ -6,7 +6,7 @@
 <script>
     export default {
         mounted(){
-
+            
             var states = [
                 'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California',
                 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 
