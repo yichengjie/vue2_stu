@@ -31,8 +31,8 @@ new Vue({
   //render: h => h(App)
   render(h){
     //let h = this.$createElement ;
-    return h(App) ;
+    //return h(App) ;
     //return h('div',[h(App)]) ;
-    //return (<App/>);
+    return <App/>;
   }
 })
