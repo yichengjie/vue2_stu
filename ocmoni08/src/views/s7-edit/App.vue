@@ -3,8 +3,8 @@
         <div class="header-container ">
             <div class="navbar-fixed-top">
                  <Navbar/>
-                <QuerySection 
-                    :handleSaveForm="handleSaveForm" 
+                <QuerySection
+                    :handleSaveForm="handleSaveForm"
                     :handleResetForm="handleResetForm"/>
             </div>
         </div>
@@ -342,6 +342,7 @@ import {wrapValidateFn,validateFirstMaintenanceDate,validateLastMaintenanceDate,
     validateSequenceNumber,validateLetter,validateBiggerCurrentDate,validateTravelEndDate,validateGeoSpecFromToWithin,
     validateGeoSpecSectPortJourney} from './busi/validate.js' ;
 export default {
+    name:'app',
     components:{
         Navbar,QuerySection,DataSection,ContentLayout,
         NewVersionService,UseDateLimitChangeBtn
