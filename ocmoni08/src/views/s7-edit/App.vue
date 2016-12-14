@@ -10,7 +10,7 @@
         </div>
 
         <div class="container-fluid main_content" >
-           <oc-form id="s7_form" :model ="formData" :rules="rules" ref ="editForm" label-width ="120px">
+           <oc-form id="s7_form" :model ="formData" :rules="rules" ref ="editForm" label-width ="120px" v-show ="!otherData.showSubTableFlag" >
                <NewVersionService :value ="serviceData.recordS5Id" :serviceData="serviceData"
                     :optionsData="optionsData" :formData="formData"/>
                <DataSection left ="2.确定费用" right ="描述 | 费用">
@@ -334,7 +334,7 @@ import DataSection from './DataSection.vue' ;
 import ContentLayout from './ContentLayout.vue' ;
 import NewVersionService from './NewVersionService.vue' ;
 import UseDateLimitChangeBtn from './UseDateLimitChangeBtn.vue' ;
-import {formData,serviceData,optionsData} from './busi/jsonData.js' ;
+import {formData,serviceData,optionsData,otherData} from './busi/jsonData.js' ;
 import {initPageData,handleSaveForm,findRecordS5Id} from './busi/appBusi.js' ;
 import {wrapValidateFn,validateFirstMaintenanceDate,validateLastMaintenanceDate,validateServiceNumber,
     validateUseDateLimit,validateLettersOrNumber,validateBiggerNumber,validateAllEmptyOrNot,
@@ -404,6 +404,12 @@ export default {
             },
             serviceData:{/*选择服务相关的数据**/
                 ...serviceData
+            },
+            optionsData:{
+                ...optionsData
+            },
+            otherData:{
+                ...otherData
             },
             rules:{
                 firstMaintenanceDate: [
@@ -514,9 +520,6 @@ export default {
                 geoSpecSectPortJourney:[
                     {validator:geoSpecSectPortJourney,trigger:'change'}
                 ]
-            },
-            optionsData:{
-                ...optionsData
             }
         } ;
     },
@@ -527,6 +530,7 @@ export default {
         },
         handleResetForm() {
             this.$refs.editForm.resetFields();
+            this.otherData.showSubTableFlag = !this.otherData.showSubTableFlag ;
         }
     },
     mounted(){

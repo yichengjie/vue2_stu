@@ -88,6 +88,11 @@ export let serviceData ={
     serviceChooseList:[]
 };
 
+
+export let otherData ={
+    showSubTableFlag:false
+} ;
+
 export let optionsData ={
     effectivePeriodType:[/**使用时间限制 */
         {name:"选择","value":"",disabled:false},{name:"距购买服务后",value:"A",disabled:false},
