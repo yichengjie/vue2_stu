@@ -52,20 +52,20 @@ export function validateUseDateLimit(value,callback,vvm){
           if(effectivePeriodType===''){
               if(effectivePeriodNumber!==''||effectivePeriodUnit!==''){
                    callback('期限类型必填') ;
-                   return false;
-              }
+                   return false;  
+              } 
               callback() ;
-              return true;
-          }else{//type 不为空
+              return true;   
+          }else{//type 不为空 
              if(effectivePeriodNumber ===''||effectivePeriodUnit ===''){
                   callback('期限值必填') ;
-                  return false;
-             }
+                  return false;  
+             } 
              callback() ;
-             return true;
+             return true;   
           }
       }else{
-          let flag1 = true ;
+          let flag1 = true ; 
           let flag2 = true ;
           let count = 0 ;
           if(firstUseDate&&firstUseDate.length>0){
@@ -82,7 +82,7 @@ export function validateUseDateLimit(value,callback,vvm){
           }
           //如果截止日期还必须大于生效日期
           if(flag1&&flag2&& (count ===2)){
-              let flag3 = util.isBiggerDateThan(lastUseDate,firstUseDate) ;
+              let flag3 = util.isBiggerDateThan(lastUseDate,firstUseDate) ; 
               if(!flag3){
                 callback('结束必须大于起始值') ;
                 return false;
@@ -156,7 +156,7 @@ export function validateBiggerNumber(value,callback,vvm,otherCfg){
         }
     }
     callback() ;
-    return true;
+    return true;   
 }
 
 
@@ -221,7 +221,7 @@ export function validateSpecifiedServiceFeeMileage(value,callback,vvm){
     if(specSevFeeAndOrIndicator==='A'){
         if(value===''){
             callback('当【或/和】为‘和’时，里程费必填!') ;
-            return false;
+            return false; 
         }
     }
     callback() ;
@@ -337,7 +337,7 @@ export function validateGeoSpecFromToWithin(value,callback,vvm){
     if(geoSpecFromToWithin!==''){
         if(loc1IsNullFlag){
            callback('选择的不是“不限区域”，【区域1】必填！') ;
-           return false;
+           return false;  
         }
     }
     if(geoSpecFromToWithin==='W'){

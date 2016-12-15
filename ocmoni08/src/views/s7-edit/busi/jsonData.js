@@ -54,15 +54,18 @@ export let formData ={
     geoSpecStopConnDes:'',/*经停类型*/
     geoSpecLoc1Type:'',/*区域1*/
     geoSpecLoc1:'',
+    list178Loc1:[],
     geoSpecLoc2Type:'',/*区域2*/
     geoSpecLoc2:'',
+    list178Loc2:[],
     geoSpecLoc3Type:'',/*区域3*/
     geoSpecLoc3:'',
+    list178Loc3:[],
     mileageMinimum:'',/*里程范围*/
     mileageMaximum:'',
     indicatorInterline:'Y',/*是否联程*/
     travelStartDate:'',/*旅行开始日期*/
-    travelEndtDate:'',/*旅行截止日期*/
+    travelEndDate:'',/*旅行截止日期*/
     startTime:'',/*起始时刻*/
     stopTime:'',/*结束时刻*/
     dayOfWeek:['3'],/*星期*/
@@ -87,11 +90,6 @@ export let serviceData ={
     subCode:'',
     serviceChooseList:[]
 };
-
-
-export let otherData ={
-    showSubTableFlag:false
-} ;
 
 export let optionsData ={
     effectivePeriodType:[/**使用时间限制 */
@@ -153,6 +151,9 @@ export let optionsData ={
     frequentFlyerStatus:[/*常旅客状态(这个数据从后台查询过来)*/
         {name:'选择',value:'',disabled:false}
     ],
+    equipment:[/*机型(这个数据从后台查询过来)**/
+        {name:'选择',value:'',disabled:false}
+    ],
     publicPrivateIndicator:[/*公布-私有*/
         {name:'公布',value:'',disabled:false},{name:'私有',value:'P',disabled:false}
     ],
@@ -183,9 +184,6 @@ export let optionsData ={
         {"name":"星期三","value":"3",disabled:false},{"name":"星期四","value":"4",disabled:false},
         {"name":"星期五","value":"5",disabled:false},{"name":"星期六","value":"6",disabled:false},
         {"name":"星期日","value":"7",disabled:false}
-    ],
-    equipment:[/*机型(这个数据从后台查询过来)**/
-            {name:'选择',value:''}
     ],
     cabin:[/*舱位等级*/
         {"name":"选择","value":"",disabled:false},
