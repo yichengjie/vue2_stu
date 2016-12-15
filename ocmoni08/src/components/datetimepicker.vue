@@ -50,8 +50,9 @@
                 //this.dispatch('form-item', 'el.form.change', val);
             },
             onBlur(event){
-                let val = event.target.value ;
-                let flag = checkInputValid(val,this.time,this.splitChar) ;//inputStr,withTimeFlag,splitChar
+                let val = event.target.value.trim() ;
+                let flag = checkInputValid(val,this.pickerType,this.splitChar) ;//inputStr,withTimeFlag,splitChar
+                //console.info('checkInputValid flag : ' + flag) ;
                 if(flag){
                     this.$emit('input',val) ;
                     this.dispatch('form-item', 'el.form.blur', [val]);
@@ -146,6 +147,9 @@
      *  */
     function checkInputValid(inputStr,pickerType,splitChar){
         let retFlag = true;
+        if(inputStr===''){
+            return retFlag ;
+        }
         switch(pickerType){
             case 'date':
                 retFlag = checkDate(inputStr,splitChar) ;
