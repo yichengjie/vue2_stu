@@ -12,77 +12,61 @@
       model: Object,
       rules: Object,
       labelPosition: String,
-      labelWidth: {
-        type:String,
-        default:'100px'
-      },
+      labelWidth: String,
       labelSuffix: {
         type: String,
         default: ''
       },
       inline: Boolean
     },
+    watch: {
+      rules() {
+        this.validate();
+      }
+    },
     data() {
       return {
-        fields: {},
-        fieldLength: 0
+        fields: []
       };
     },
     created() {
       this.$on('el.form.addField', (field) => {
-        //fields['age'] = field ;
-        let tmp =  this.fields[field.prop] ;
-        if(tmp==null){
-           this.fields[field.prop] = field;
-           this.fieldLength++;
-        }else{
-          console.warn('you add the form-item with duplicate prop name ['+field.prop+'],please check your code .') ;
+        if (field.prop) {
+          this.fields.push(field);
         }
       });
       /* istanbul ignore next */
       this.$on('el.form.removeField', (field) => {
-        let tmp =  this.fields[field.prop] ;
-        if(tmp==null){
-            console.warn('the form-item prop name ['+field.prop+'] is not exist ,please check your code .') ;
-        }else{
-          delete this.fields[field.prop];
-          // delete this.fileds['age'] ;
-          this.fieldLength--;
+        if (field.prop) {
+          this.fields.splice(this.fields.indexOf(field), 1);
         }
       });
     },
     methods: {
       resetFields() {
-        for (let prop in this.fields) {
-          let field = this.fields[prop];
+        this.fields.forEach(field => {
           field.resetField();
-        }
+        });
       },
       validate(callback) {
-        var count = 0;
-        var valid = true;
-        for (let prop in this.fields) {
-          //遍历出所有需要校验的规则eg: [age ,name ,addr]
-          let field = this.fields[prop];
+        let valid = true;
+        this.fields.forEach((field, index) => {
           field.validate('', errors => {
             if (errors) {
               valid = false;
             }
-            //等所有formItem的validate都执行完成以后返回一个是否全部验证通过的flag
-            if (++count === this.fieldLength) {
+            if (typeof callback === 'function' && index === this.fields.length - 1) {
               callback(valid);
             }
           });
-        }
+        });
       },
       validateField(prop, cb) {
-        var field = this.fields[prop];
+        var field = this.fields.filter(field => field.prop === prop)[0];
         if (!field) { throw new Error('must call validateField with valid prop string!'); }
+
         field.validate('', cb);
       }
     }
   };
 </script>
-<style>
-
-</style>
