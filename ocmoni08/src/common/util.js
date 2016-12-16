@@ -357,7 +357,7 @@
 	
 	//判断日期是否合法
 	function _isLegalDate(datavalue){
-		checkDataValid(datavalue,'-',true) ;
+		return checkDataValid(datavalue,'-',true) ;
     };
    
     function _isLegalTime (timvalues) {

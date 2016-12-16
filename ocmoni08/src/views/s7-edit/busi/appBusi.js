@@ -122,6 +122,7 @@ function _initPage4Add(_vm){
             }
             //处理db select 的option
              _initDBSelectList(_vm,retData) ;
+             Object.assign( _vm.formData,retData.formData) ;
             //console.info("retList : " ,retData.serviceChooseList) ;
         }else{
             console.info('数据加载不完整...') ;

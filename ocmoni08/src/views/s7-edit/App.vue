@@ -16,10 +16,10 @@
                <DataSection left ="2.确定费用" right ="描述 | 费用">
                    <ContentLayout title="描述">
                         <oc-form-item1 label="销售生效日期" :required="true" prop ="firstMaintenanceDate">
-                            <oc-datetimepicker pickerType="datetime" v-model ="formData.firstMaintenanceDate"  />
+                            <oc-datetimepicker pickerType="datetime" :minDate="minDate" v-model ="formData.firstMaintenanceDate"  />
                         </oc-form-item1>
                         <oc-form-item1 label="销售截止日期"  prop ="lastMaintenanceDate">
-                            <oc-datetimepicker pickerType="datetime" v-model ="formData.lastMaintenanceDate"   />
+                            <oc-datetimepicker pickerType="datetime" :minDate="minDate" v-model ="formData.lastMaintenanceDate"   />
                         </oc-form-item1>
                         <oc-form-item2 label="使用时间限制"  prop="useDateLimit" errorPosition ="bottom"
                             :serviceType="serviceData.serviceType"
@@ -251,19 +251,19 @@
                   <ContentLayout title="航班">
                       <oc-form-item1 label="旅行开始日期"  prop ="travelStartDate"
                             :serviceTypeList='["F","M","R","T","A","B","C","E","P"]' :serviceType="serviceData.serviceType">
-                            <oc-datetimepicker v-model ="formData.travelStartDate">
+                            <oc-datetimepicker v-model ="formData.travelStartDate" :minDate="minDate" />
                       </oc-form-item1>
                       <oc-form-item1 label="旅行结束日期"  prop ="travelEndDate"
                             :serviceTypeList='["F","M","R","T","A","B","C","E","P"]' :serviceType="serviceData.serviceType">
-                            <oc-datetimepicker v-model ="formData.travelEndDate">
+                            <oc-datetimepicker v-model ="formData.travelEndDate" :minDate="minDate" />
                       </oc-form-item1>
                       <oc-form-item1 label="开始时刻"  prop ="startTime"
                             :serviceTypeList='["F","M","R","T","A","B","C","E","P"]' :serviceType="serviceData.serviceType">
-                            <oc-datetimepicker pickerType="time" v-model ="formData.startTime">
+                            <oc-datetimepicker pickerType="time" v-model ="formData.startTime" />
                       </oc-form-item1>
                       <oc-form-item1 label="结束时刻"  prop ="stopTime"
                             :serviceTypeList='["F","M","R","T","A","B","C","E","P"]' :serviceType="serviceData.serviceType">
-                            <oc-datetimepicker pickerType="time" v-model ="formData.stopTime">
+                            <oc-datetimepicker pickerType="time" v-model ="formData.stopTime" />
                       </oc-form-item1>
                       <oc-form-item1 label="星期"  prop ="dayOfWeek" :span ="7"
                             :serviceTypeList='["F","T","A","B","C","E","P"]' :serviceType="serviceData.serviceType">
@@ -398,8 +398,8 @@ export default {
         let geoSpecFromToWithin = wrapValidateFn(validateGeoSpecFromToWithin,{vvm:this}) ;
         //区域部分全程
         let geoSpecSectPortJourney = wrapValidateFn(validateGeoSpecSectPortJourney,{vvm:this});
-
         return {
+            minDate:new Date(),
             formData:{
                 ...formData
             },
@@ -414,11 +414,11 @@ export default {
             },
             rules:{
                 firstMaintenanceDate: [
-                    {required: true, message: '必填', trigger: 'change' },
-                    {validator:firstMaintenanceDate,trigger:'change'}
+                    {required: true, message: '必填', trigger: 'change,blur' },
+                    {validator:firstMaintenanceDate,trigger:'change,blur'}
                 ],
                 lastMaintenanceDate:[
-                    {validator: lastMaintenanceDate ,trigger: 'change'}
+                    {validator: lastMaintenanceDate ,trigger: 'change,blur'}
                 ],
                 serviceNumber:{
                     serviceNumberMaximum:[{ validator: serviceNumber ,trigger: 'change'}]

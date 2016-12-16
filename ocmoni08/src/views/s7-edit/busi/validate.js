@@ -243,7 +243,9 @@ export function validateSequenceNumber(value,callback){
 /**日期大于当前日期 */
 export function validateBiggerCurrentDate(value,callback){
     if(value!==''){
+        //console.info('value : ' + value) ;
         let flag = util.isDateOC(value) ;
+        //console.info('flag : ' + flag) ;
         if(flag){
             flag = util.isBiggerThanCurrent(value) ;
             if(flag){

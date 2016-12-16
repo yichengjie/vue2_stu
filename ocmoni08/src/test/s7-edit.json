@@ -1,4 +1,8 @@
 {
+    "formData":{
+        "firstMaintenanceDate":"2016-12-08 00:00",
+        "travelStartDate":"2016-12-11" 
+    },
     "equipmentList": [
         {
             "code": "747",

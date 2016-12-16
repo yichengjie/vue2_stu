@@ -33,34 +33,39 @@
              splitChar:{
                  type:String,
                  default:'-'
-             }
+             },
+             minDate:Date
          },
          data:function(){
             return {
                 randomId:('input-' + Math.random()).replace('\.','-') ,
-                currentValue:this.value
+                currentValue:this.value,
+                inputedFlag:false
             } ;
          },
          methods:{
             onInput(event){
                 var val = event.target.value ;
                 this.currentValue = val ;
+                this.inputedFlag = true ;
                 //this.$emit('input',val) ;
                 //this.$emit('change', val);
                 //this.dispatch('form-item', 'el.form.change', val);
             },
-            onBlur(event){
-                let val = event.target.value.trim() ;
-                let flag = checkInputValid(val,this.pickerType,this.splitChar) ;//inputStr,withTimeFlag,splitChar
-                //console.info('checkInputValid flag : ' + flag) ;
-                if(flag){
-                    this.$emit('input',val) ;
-                    this.dispatch('form-item', 'el.form.blur', [val]);
-                }else{
-                    this.currentValue = this.value ;
-                    this.dispatch('form-item', 'el.form.blur', [this.value]);
+            onBlur(event){//主要针对输入的值进行处理
+                if(this.inputedFlag){
+                    let val = event.target.value.trim() ;
+                    let flag = checkInputValid(val,this.pickerType,this.splitChar) ;//inputStr,withTimeFlag,splitChar
+                    if(flag){
+                        this.$emit('input',val) ;
+                        this.dispatch('form-item', 'el.form.blur', [val]);
+                        //this.dispatch('form-item', 'el.form.change', [val]);
+                        return ;
+                    }
                 }
-                //console.info('---------------> ' + this.currentValue) ;
+                //没有输入过，或则输入的错误，则值需要被回退
+                this.dispatch('form-item', 'el.form.blur', [this.value]);
+                $(event.target).val(this.currentValue) ;
             }
          },
          mounted:function(el){
@@ -88,7 +93,7 @@
     }
 
     function initDate(_self){
-        //var minDate = new Date() ;
+        var minDate = _self.minDate ;
         var dataFormat = "yy"+_self.splitChar+"mm"+_self.splitChar+"dd" ;
         var timeFormat = "HH:mm" ;
         var optionObj = {"showButtonPanel":true,"dateFormat":_self.dataFormat} ;
@@ -97,6 +102,10 @@
             //_self.$emit('change', dateText);
             //_self.dispatch('form-item', 'el.form.blur', dateText);
             _self.dispatch('form-item', 'el.form.change', dateText);
+        }
+        if(minDate!=null){
+            //optionObj.minDate = new Date(minDateStr) ;
+            optionObj.minDate = minDate;
         }
         $('#'+_self.randomId).datepicker(optionObj) ;
     }
@@ -122,7 +131,7 @@
         $('#'+_self.randomId).datetimepicker(optionObj);
     }
     function initDatetime(_self){
-        //var minDate = new Date() ;
+        var minDate = _self.minDate ;
         var dataFormat = "yy"+_self.splitChar+"mm"+_self.splitChar+"dd" ;
         var timeFormat = "HH:mm" ;
         var optionObj = {"showButtonPanel":true,"dateFormat":_self.dataFormat} ;
@@ -132,7 +141,10 @@
             //_self.dispatch('form-item', 'el.form.blur', dateText);
             _self.dispatch('form-item', 'el.form.change', [dateText]);
         }
-        //optionObj.minDate = minDate ;
+        if(minDate!=null){
+           // optionObj.minDate = new Date(minDateStr) ;
+            optionObj.minDate = minDate;
+        }
         optionObj.timeFormat = timeFormat ;
         optionObj.timeText="&nbsp;&nbsp;时间" ; 
         optionObj.hourText ="&nbsp;&nbsp;时" ;
