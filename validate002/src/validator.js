@@ -2,14 +2,20 @@ export default class Validator {
     constructor(){
         this.cache = [] ;
     }
-    add (dom,rule,errorMsg) {
-        let  ary = rule.split( ':' ) ;//把strategy和参数分开
-        this.cache.push(function(){//把校验的步骤用空函数包裹起来，并放入cache
-            var strategy = ary.shift() ;//用户挑选的stragey
-            ary.unshift(dom.value);
-            ary.push(errorMsg) ;
-            return strategies[strategy].apply(dom,ary) ;
-        }) ;
+    add (dom,rules) {
+        var self = this ;
+        for(let rule of rules){
+            (function(rule){
+                var strategyAry = rule.strategy.split( ':' ) ;
+                var errorMsg =  rule.errorMsg ;
+                self.cache.push(function(){
+                    var strategy = strategyAry.shift() ;//用户挑选的stragey
+                    strategyAry.unshift(dom.value);
+                    strategyAry.push(errorMsg) ;
+                    return strategies[strategy].apply(dom,strategyAry) ;
+                }) ;
+            })(rule) ;
+        }
     }
     start () {
         for (let validatorFn of this.cache){
