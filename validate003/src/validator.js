@@ -17,9 +17,14 @@ export default class Validator {
                     }) ;
                 }else{
                     var fn = rule.validator ;
+                    // var callback = function(){
+                    //     return  ;
+                    // }
                     if(fn && typeof fn === 'function'){
                         self.cache.push(function(){
                             return fn.call(dom,dom.value) ;
+                            //fn.call(dom,dom.value) ;
+                           // return callback();
                         } ) ;
                     }
                 }
