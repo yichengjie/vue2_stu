@@ -27,15 +27,27 @@ var data = {
 
 var validateFunc = function(myForm){
     var validator = new Validator() ;
-    var vfn = function(value){
+    // var vfn = function(value){
+    //     if(value  === '' ){
+    //         return '不能为空';
+    //     }
+    //     if(value === '123'){
+    //         return '密码不能为123'  ;
+    //     }
+    //     if(data.addr === '123'){
+    //         return '地址不能是123' ;
+    //     }
+    // }
+
+     var vfn = function(value,callback){
         if(value  === '' ){
-            return '不能为空';
+            callback ('不能为空');
         }
         if(value === '123'){
-            return '密码不能为123'  ;
+            callback ('密码不能为123')   ;
         }
         if(data.addr === '123'){
-            return '地址不能是123' ;
+            callback ('地址不能是123')  ;
         }
     }
 

@@ -49,15 +49,29 @@
                     callback();
                 }
             };
-            var validatePass2 = (rule, value, callback) => {
+
+            // var validatePass2 = (rule, value, callback) => {
+            //     if (value === '') {
+            //         callback(new Error('请再次输入密码'));
+            //     } else if (value !== this.ruleForm2.pass) {
+            //         callback(new Error('两次输入密码不一致!'));
+            //     } else {
+            //         callback();
+            //     }
+            // };
+            var self = this ;
+            function validatePass2 (rule, value, callback){
+                console.info('this : ' ,JSON.stringify(this)) ;
+                console.info('that : ' ,self) ;
                 if (value === '') {
                     callback(new Error('请再次输入密码'));
-                } else if (value !== this.ruleForm2.pass) {
+                } else if (value !== self.ruleForm2.pass) {
                     callback(new Error('两次输入密码不一致!'));
                 } else {
                     callback();
                 }
             };
+            
         return {
             ruleForm2: {
                 pass: '',

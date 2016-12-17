@@ -17,14 +17,18 @@ export default class Validator {
                     }) ;
                 }else{
                     var fn = rule.validator ;
-                    // var callback = function(){
-                    //     return  ;
-                    // }
                     if(fn && typeof fn === 'function'){
+                        var error = null ;
+                        var callback = function(err){
+                            error = err ;
+                            return  ;
+                        }
                         self.cache.push(function(){
-                            return fn.call(dom,dom.value) ;
-                            //fn.call(dom,dom.value) ;
-                           // return callback();
+                            //reutrn fn.call(dom,dom.value) ;
+                            //如果直接用fn return错误信息也是可以的，
+                            //效果和这里的callback一样的
+                            fn.call(dom,dom.value,callback) ;
+                            return error;
                         } ) ;
                     }
                 }
