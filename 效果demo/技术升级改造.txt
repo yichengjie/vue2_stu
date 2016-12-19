@@ -35,7 +35,16 @@
   代码可读性增加：
   复杂的页面代码行数会有显著的减少(主页:1500多行->300行)，因为业务分散到不同的独立的组件中了。
 
-  
+
+mvn deploy:deploy-file --settings E:\install\apache-maven-3.0.5\conf\settings.xml -DgroupId=com.travelsky.fare –DartifactId=auth -Dpackaging=jar -Dversion=0.1 -Dfile=D:\auth.jar -DrepositoryId=releases -Durl=http://172.27.18.106:8081/nexus/content/repositories/releases
+
+mvn deploy:deploy-file --settings E:\install\apache-maven-3.0.5\conf\settings.xml -DgroupId=com.travelsky.fare -DartifactId=auth -Dversion=0.1 -Dpackaging=jar -Dfile=D:\auth.jar -Durl=http://172.27.18.106:8081/nexus/content/repositories/releases/ -DrepositoryId=releases
+
+---
+mvn deploy:deploy-file --settings E:\install\apache-maven-3.0.5\conf\settings.xml -DgroupId=com.travelsky.fare -DartifactId=auth -Dversion=0.1 -Dpackaging=jar -Dfile=D:\auth.jar -Durl=http://172.27.18.106:8081/nexus/content/repositories/releases/ -DrepositoryId=nexus-releases
+
+
+mvn deploy:deploy-file --settings E:\install\apache-maven-3.0.5\conf\settings.xml -DgroupId=com.travelsky.fare -DartifactId=auth -Dversion=0.1 -Dpackaging=jar -Dfile=D:\auth.jar -Durl=http://172.27.18.106:8081/nexus/content/groups/public/ -DrepositoryId=releases
 
 
 
