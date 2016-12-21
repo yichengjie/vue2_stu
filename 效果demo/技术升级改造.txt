@@ -41,8 +41,9 @@ mvn deploy:deploy-file --settings E:\install\apache-maven-3.0.5\conf\settings.xm
 mvn deploy:deploy-file --settings E:\install\apache-maven-3.0.5\conf\settings.xml -DgroupId=com.travelsky.fare -DartifactId=auth -Dversion=0.1 -Dpackaging=jar -Dfile=D:\auth.jar -Durl=http://172.27.18.106:8081/nexus/content/repositories/releases/ -DrepositoryId=releases
 
 ---成功执行的
-mvn deploy:deploy-file --settings E:\install\apache-maven-3.0.5\conf\settings.xml -DgroupId=com.travelsky.fare -DartifactId=auth -Dversion=0.1 -Dpackaging=jar -Dfile=D:\auth.jar -Durl=http://172.27.18.106:8081/nexus/content/repositories/releases/ -DrepositoryId=nexus-releases
+mvn deploy:deploy-file --settings E:\install\apache-maven-3.0.5\conf\settings.xml -DgroupId=com.travelsky.fare -DartifactId=auth -Dversion=0.4 -Dpackaging=jar -Dfile=D:\auth.jar -Durl=http://172.27.18.106:8081/nexus/content/repositories/releases/ -DrepositoryId=nexus-releases
 
+mvn deploy:deploy-file --settings E:\install\apache-maven-3.0.5\conf\settings.xml -DgroupId=com.travelsky.fare -DartifactId=auth -Dversion=0.5 -Dpackaging=jar -Dfile=D:\auth.jar -Durl=http://172.27.18.106:8081/nexus/content/groups/public -DrepositoryId=nexus-snapshots
 
 mvn deploy:deploy-file --settings E:\install\apache-maven-3.0.5\conf\settings.xml -DgroupId=com.travelsky.fare -DartifactId=auth -Dversion=0.1 -Dpackaging=jar -Dfile=D:\auth.jar -Durl=http://172.27.18.106:8081/nexus/content/groups/public/ -DrepositoryId=nexus-releases
 
