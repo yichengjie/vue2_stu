@@ -82,6 +82,10 @@ export let formData ={
     formOfRefund:''/*退款形式*/
 } ;
 
+export let showHideState = {
+    list170VOAnd201:false
+} ;
+
 export let serviceData ={
     recordS5Id:'',
     serviceType:'',

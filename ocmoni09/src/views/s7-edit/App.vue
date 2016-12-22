@@ -115,13 +115,16 @@
                       </oc-form-item1>
                       <oc-form-item0 label="金额"  prop ="list170VOAndlist201VO">
                           <div class="col-sm-6">
-                              <div class="table_control">
-                                  <span class="discountBtn marginR15 discountCheck">全额</span>
-                                  <span class="discountBtn marginR15">全额</span>
-                                  <show-hide-table tname = "list170VO"></show-hide-table> 
-                              </div>
+                              <Switch170201Btn>
+                                  <ShowHideTable :showHideState ="showHideState" 
+                                    name="list170VOAnd201">
+                                  </ShowHideTable> 
+                                  <ReuseTableNo></ReuseTableNo>
+                              </Switch170201Btn>
+                              <TableLayout :showFlag="showHideState.list170VOAnd201">
+                                  <Table170 :list = "formData.list170VO"></Table170>
+                              </TableLayout>
                           </div>
-
                       </oc-form-item0>
                       <oc-form-item1 label="或/和"  prop ="specSevFeeAndOrIndicator" :serviceTypeList ='["F","M","R","T","C","P"]'
                             :serviceType="serviceData.serviceType">
@@ -341,7 +344,12 @@ import DataSection from './DataSection.vue' ;
 import ContentLayout from './ContentLayout.vue' ;
 import NewVersionService from './NewVersionService.vue' ;
 import UseDateLimitChangeBtn from './UseDateLimitChangeBtn.vue' ;
-import {formData,serviceData,optionsData,otherData} from './busi/jsonData.js' ;
+import ShowHideTable from './ShowHideTable.vue' ;
+import Switch170201Btn from './Switch170201Btn.vue' ;
+import ReuseTableNo from './ReuseTableNo.vue' ;
+import TableLayout from './TableLayout.vue' ;
+import Table170 from './Table170.vue' ;
+import {formData,serviceData,optionsData,otherData,showHideState} from './busi/jsonData.js' ;
 import {initPageData,handleSaveForm,findRecordS5Id} from './busi/appBusi.js' ;
 import {wrapValidateFn,validateFirstMaintenanceDate,validateLastMaintenanceDate,validateServiceNumber,
     validateUseDateLimit,validateLettersOrNumber,validateBiggerNumber,validateAllEmptyOrNot,
@@ -352,7 +360,8 @@ export default {
     name:'app',
     components:{
         Navbar,QuerySection,DataSection,ContentLayout,
-        NewVersionService,UseDateLimitChangeBtn
+        NewVersionService,UseDateLimitChangeBtn,ShowHideTable,
+        Switch170201Btn,ReuseTableNo,TableLayout,Table170
     },
     data(){
         //所有的校验方法
@@ -418,6 +427,9 @@ export default {
             },
             otherData:{
                 ...otherData
+            },
+            showHideState:{
+                ...showHideState
             },
             rules:{
                 firstMaintenanceDate: [
@@ -543,6 +555,9 @@ export default {
     },
     mounted(){
        initPageData(this) ;
+       setTimeout(() => {
+           this.showHideState.list170VOAnd201 = true ;
+       },1000) ;
     }
 }
 </script>
