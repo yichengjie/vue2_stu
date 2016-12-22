@@ -26,6 +26,7 @@
     "popper.js": "^0.6.4",
     "vue": "^2.1.6",
     "vue-popup": "^0.2.12",
+    "vue-template-compiler": "^2.1.6",
     "vuex": "^2.0.0"
   },
   "devDependencies": {
