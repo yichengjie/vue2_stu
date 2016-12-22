@@ -113,9 +113,16 @@
                       <oc-form-item1 label="是否收费"  prop ="noChargeNotAvailable">
                           <oc-select :options ="optionsData.noChargeNotAvailable" v-model ="formData.noChargeNotAvailable"/>
                       </oc-form-item1>
-                      <oc-form-item1 label="金额"  prop ="list170VOAndlist201VO">
-                          <oc-input :readonly="true" />
-                      </oc-form-item1>
+                      <oc-form-item0 label="金额"  prop ="list170VOAndlist201VO">
+                          <div class="col-sm-6">
+                              <div class="table_control">
+                                  <span class="discountBtn marginR15 discountCheck">全额</span>
+                                  <span class="discountBtn marginR15">全额</span>
+                                  <show-hide-table tname = "list170VO"></show-hide-table> 
+                              </div>
+                          </div>
+
+                      </oc-form-item0>
                       <oc-form-item1 label="或/和"  prop ="specSevFeeAndOrIndicator" :serviceTypeList ='["F","M","R","T","C","P"]'
                             :serviceType="serviceData.serviceType">
                           <oc-radio  v-model ="formData.specSevFeeAndOrIndicator" :options ="optionsData.specSevFeeAndOrIndicator"/>
