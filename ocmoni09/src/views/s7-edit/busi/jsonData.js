@@ -22,6 +22,7 @@ export let formData ={
     baggageTravelApplication:''/*行李使用范围*/,
     list196VO:[],
     noChargeNotAvailable:'',/*是否收费*/
+    discountOrNot:false,
     list170VO:[],
     list201VO:[],
     specSevFeeAndOrIndicator:'',/*或-和*/
@@ -95,8 +96,7 @@ export let serviceData ={
     serviceChooseList:[]
 };
 
-export let otherData = {
-    discountFlag:false,
+export let otherData = {//discountOrNot
     list163:[]
 } ;
 

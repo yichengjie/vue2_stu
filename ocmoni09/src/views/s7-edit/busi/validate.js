@@ -215,8 +215,8 @@ export function validateSpecifiedServiceFeeApp(value,callback,vvm){
 
 //里程费
 export function validateSpecifiedServiceFeeMileage(value,callback,vvm){
-    //当 ‘或/和’ 字段为 ‘和’ 时 ，里程费必填
-    let {formData:{specSevFeeAndOrIndicator}} = vvm ;
+    //当 ‘或/和’ 字段为 ‘和’ 时 ，里程费必填//里程积分兑换标识不为空的时候，里程费必须为空
+    let {formData:{specSevFeeAndOrIndicator,mileageExchangeIndicator,discountOrNot}} = vvm ;
     //specSevFeeAndOrIndicator=='A'
     if(specSevFeeAndOrIndicator==='A'){
         if(value===''){
@@ -224,9 +224,26 @@ export function validateSpecifiedServiceFeeMileage(value,callback,vvm){
             return false; 
         }
     }
+    if(mileageExchangeIndicator !==''){//如果里程积分兑换标识不为空，则里程费必须为空空
+        if(value===''){
+            callback('当【里程积分兑换标识】为兑换时，里程费必须为空!') ;
+            return false; 
+        }
+    }
+    //如果为折扣，则里程费必须为空
+    if(discountOrNot==='0'){
+        if(value===''){
+            callback('当【金额】为折扣时，里程费必须为空!') ;
+            return false; 
+        }
+    }
     callback() ;
     return true ;
 }
+
+
+
+
 //优先级序号
 export function validateSequenceNumber(value,callback){
     let {action} = util.getJspPageParam() ;

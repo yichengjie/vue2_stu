@@ -121,9 +121,9 @@
                                   </ShowHideTable> 
                                   <ReuseTableNo></ReuseTableNo>
                               </Switch170201Btn>
-                              <TableLayout :showFlag="showHideState.list170VOAnd201" :footer="!otherData.discountFlag" width="500">
-                                  <Table170 :list = "formData.list170VO" v-show ="!otherData.discountFlag"></Table170>
-                                  <Table201 :list="formData.list201VO" v-show ="otherData.discountFlag"></Table201>
+                              <TableLayout :showFlag="showHideState.list170VOAnd201" :footer="!formData.discountOrNot" width="500">
+                                  <Table170 :list = "formData.list170VO" v-show ="!formData.discountOrNot"></Table170>
+                                  <Table201 :list="formData.list201VO" v-show ="formData.discountOrNot"></Table201>
                               </TableLayout>
                           </div>
                       </oc-form-item0>
@@ -137,7 +137,7 @@
                       </oc-form-item1>
                       <oc-form-item1 label="里程费"  prop ="specifiedServiceFeeMileage"
                             :serviceTypeList ='["F","M","R","T","C","P"]' :serviceType="serviceData.serviceType">
-                          <oc-input-number  v-model ="formData.specifiedServiceFeeMileage" :min ="0" maxlength="8"  />
+                          <oc-input-number  v-model ="formData.specifiedServiceFeeMileage" :min ="0"  maxlength="8" placeholder="非负整数"  />
                       </oc-form-item1>
                       <oc-form-item1 label="适用于"  prop ="specifiedServiceFeeApp"
                             :serviceTypeList ='["F","M","R","T","C","P"]' :serviceType="serviceData.serviceType">
