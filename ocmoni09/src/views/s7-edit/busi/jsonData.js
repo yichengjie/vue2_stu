@@ -83,7 +83,7 @@ export let formData ={
 } ;
 
 export let showHideState = {
-    list170VOAnd201:false
+    list170VOAnd201:true
 } ;
 
 export let serviceData ={
@@ -94,6 +94,11 @@ export let serviceData ={
     subCode:'',
     serviceChooseList:[]
 };
+
+export let otherData = {
+    discountFlag:false,
+    list163:[]
+} ;
 
 export let optionsData ={
     effectivePeriodType:[/**使用时间限制 */

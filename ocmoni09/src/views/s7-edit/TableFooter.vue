@@ -1,5 +1,5 @@
 <template>
-    <div class="table_footer">
+    <div class="table_footer" v-show ="footer">
         <button type="button" class="btn btn-success btn-sm"
             @click ="this.handleAddTableLine">增加一行</button>
         <button type="button" class="btn btn-default btn-sm"
@@ -10,7 +10,11 @@
     export default {
         props:{
             handleAddTableLine:Function,
-            handleDeleteTableLine:Function
+            handleDeleteTableLine:Function,
+            footer:{
+                type:Boolean,
+                default:true
+            }
         }
     }
 </script>

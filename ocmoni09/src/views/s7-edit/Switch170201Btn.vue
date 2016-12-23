@@ -1,20 +1,35 @@
 <template>
     <div class="table_control">
-        <span class="discountBtn marginR15" :class ="{'discountCheck':!discountFlag}" @click ="handleSwitchDiscount(false)">全额</span>
-        <span class="discountBtn marginR15" :class ="{'discountCheck':discountFlag}" @click ="handleSwitchDiscount(true)">折扣</span>
+        <span class="discountBtn marginR15" :class ="{'discountCheck':!otherData.discountFlag}" @click ="handleSwitchDiscount(false)">全额</span>
+        <span class="discountBtn marginR15" :class ="{'discountCheck':otherData.discountFlag ,'is-disabled':list163.length==0}" @click ="handleSwitchDiscount(true)">折扣</span>
         <slot></slot>
     </div>
 </template>
 <script>
     export default {
-        data () {
-            return {
-                discountFlag:false
-            } ;
+        props:{
+            otherData:Object,
+            formData:Object,
+            list163:Array
         },
         methods:{
             handleSwitchDiscount (flag) {
-                this.discountFlag = flag ;
+                if(this.otherData.discountFlag === flag || this.list163.length ===0){
+                    return false;
+                }
+                //当需要切换时
+                this.otherData.discountFlag = flag;
+                let {list170VO,list201VO} = this.formData;
+                if(flag){//如果切换到折扣,清空170
+                   console.info('切换到折扣....'+ this.list163.length) ;
+                   list170VO.splice(0,list170VO.length) ; 
+                   for(let item of this.list163){
+                       var tmpObj = {...item} ;
+                       list201VO.push(tmpObj) ;
+                   }
+                }else{//如果切换到全额清空201的数据
+                    list201VO.splice(0,list201VO.length) ;
+                }
             }
         }
     } 

@@ -3,6 +3,42 @@
         "firstMaintenanceDate":"2016-12-08 00:00",
         "travelStartDate":"2016-12-11" 
     },
+    "tb163List": [
+        {
+            "id": {
+                "tblNo": 1,
+                "lineNo": 1
+            },
+            "recType": 3,
+            "action": 2,
+            "tblId": 163,
+            "carrier": "CA",
+            "serviceType": "F",
+            "subCode": "BD1",
+            "subCodeOccurence": "1",
+            "sequenceNumber": 123,
+            "lastUpdateDate": "2016-08-03",
+            "lastUpdateUser": "CA",
+            "commercialName": "优选座位"
+        },
+        {
+            "id": {
+                "tblNo": 1,
+                "lineNo": 2
+            },
+            "recType": 3,
+            "action": 2,
+            "tblId": 163,
+            "carrier": "CA",
+            "serviceType": "F",
+            "subCode": "BD1",
+            "subCodeOccurence": "1",
+            "sequenceNumber": 123,
+            "lastUpdateDate": "2016-08-03",
+            "lastUpdateUser": "CA",
+            "commercialName": "优选座位2"
+        }
+    ],
     "equipmentList": [
         {
             "code": "747",
@@ -312,11 +348,11 @@
         {
             "id": "291f939545da4cd495297e2fee3f6cCA",
             "carrCode": "CA",
-            "serviceType": "P",
-            "serviceSubCode": "0KT",
-            "commercialName": "KITE SURFBOAR-bg",
-            "attributesGroup": "BG",
-            "attributesSubgroup": "SP",
+            "serviceType": "F",
+            "serviceSubCode": "0B5",
+            "commercialName": "升舱套餐",
+            "attributesGroup": "BDUP",
+            "attributesSubgroup": "BDUP",
             "serviceGroupDescription": "Baggage",
             "subGroupDescription": "Sporting Equipment",
             "subCodeTableNo163": 0

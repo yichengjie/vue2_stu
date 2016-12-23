@@ -1,9 +1,10 @@
 import {isBaggageByServiceType} from '../../common/common.js' ;
+import {queryTable163ListApi} from 'apiPath/s7-edit.js' ;
 
 //改变select的各个option是否可选
 export function changeGlobalOptionStatus(optionsData,checkedItem){
     //改变是否收费
-    let {serviceType,attributesSubgroup} = checkedItem ;
+    let {serviceType,attributesSubgroup,commercialName} = checkedItem ;
     //console.info(checkedItem) ;
     _changeNoChargeNotAvailableOption(optionsData,serviceType) ;
     _changeSpecSevFeeAndOrIndicatorOption(optionsData,serviceType) ;
@@ -12,6 +13,9 @@ export function changeGlobalOptionStatus(optionsData,checkedItem){
     _changeEffectivePeriodTypeOption(optionsData,attributesSubgroup) ;
     //适用于
     _changeSpecifiedServiceFeeAppOption(optionsData,serviceType) ;
+    //tb163List
+    //console.info('checkedItem : ' ,checkedItem) ;
+    
     
 }
 
@@ -181,5 +185,74 @@ function _changeDisableHelper(list,disableValueList){
         }) ;
     }
 }
+
+
+/**
+ * 查询163并填充到otherData的list163中，方便后面折扣切换的时候使用
+ */
+export function fill163ListVO (checkedItem,list163) {
+    //清空163原有的数据
+    list163.splice(0, list163.length) ;
+    //套餐:serviceGroup!=null&&serviceGroup.length>2&&serviceGroup.indexOf('BD')===0
+    let {attributesGroup} = checkedItem  ;
+    if(attributesGroup!=null&&attributesGroup.length>2&&attributesGroup.indexOf('BD')===0){
+        _query163AndFill201(checkedItem,list163) ;
+    }else{
+        _NotQuery163AndFill201(checkedItem,list163) ;
+    }
+}
+
+/**
+ * 套餐时
+ */
+function _query163AndFill201(checkedItem,list201VO){
+    //查新
+    var promise = queryTable163ListApi(checkedItem) ;
+    promise.then((retData) => {
+        var list163 = retData.tb163List ;
+        var tmpList201 = _getList201VOBy163(list163) ;
+        fillList1ToList2(tmpList201,list201VO) ;
+    },function(error){
+        console.info('查询163报错') ;
+    }) ;
+}
+
+/**
+ * 当不是套餐时
+ */
+function _NotQuery163AndFill201(checkedItem,list201VO){
+    var subCode = checkedItem.serviceSubCode ;
+    var commercialName = checkedItem.commercialName ;
+    var obj = _get201VO(subCode,commercialName) ;
+    list201VO.push(obj) ;
+}
+
+/**
+ * 将list1中的数据填充到list2中
+ */
+function fillList1ToList2 (list1,list2){
+    for(let item of list1){
+        list2.push(item) ;
+    }
+}
+
+
+function _getList201VOBy163 (list163){
+    var retList = [] ;
+    for(let item of list163){
+       let {subCode,commercialName} = item ;
+       retList.push(_get201VO(subCode,commercialName))  ;
+    }
+    return retList ;
+}
+
+
+function _get201VO(subCode,commercialName){
+    let discountType = "1" ;
+    let priceNum = "" ;
+    var obj = {subCode,commercialName,discountType,priceNum};
+    return obj ;
+}
+
 
 

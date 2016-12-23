@@ -36,14 +36,15 @@
     import Clickoutside from 'componentsPath/util/clickoutside.js';
     import {escape_html} from '../common/common.js' ;
     let filterNames = ["serviceGroupDescription","subGroupDescription","serviceSubCode","commercialName","serviceType"] ;
-    import {changeGlobalOptionStatus,changeGlobalOptionDefaultValue} from './busi/NewVersionServiceBusi.js' ;
+    import {changeGlobalOptionStatus,changeGlobalOptionDefaultValue,fill163ListVO} from './busi/NewVersionServiceBusi.js' ;
     export default {
         props:{
             value:String,
             //options:Array,
             optionsData:Object,
             formData:Object,
-            serviceData:Object
+            serviceData:Object,
+            list163:Array
         },
         //mixins: [emitter],
         directives: { Clickoutside },
@@ -91,6 +92,7 @@
                 let checkedItem = getCheckedItemById(this.serviceData.serviceChooseList,id) ;
                 //console.info(checkedItem) ;
                 changeGlobalOptionDefaultValue(this.formData,checkedItem) ;
+                fill163ListVO(checkedItem,this.list163) ;
             },
             handleInput(event){
                 //this.$emit('input','') ;

@@ -1,7 +1,8 @@
 <template>
-     <div class="table_layout" style ="width:460px" v-show ="showFlag">
+     <div class="table_layout" :style ="{width: width + 'px' }" v-show ="showFlag">
          <slot></slot>
          <TableFooter 
+             :footer="footer"
              :handleAddTableLine ="handleAddTableLine" 
              :handleDeleteTableLine ="handleDeleteTableLine">
         </TableFooter>
@@ -13,9 +14,17 @@
     //import emi
     export default {
         props:{
+            width:{
+                type:String,
+                default:'460'
+            },
             showFlag:{
                 type:Boolean,
                 default:false
+            },
+            footer:{
+                type:Boolean,
+                default:true
             }
         },
         mixins:[emitter],

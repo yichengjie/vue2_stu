@@ -12,7 +12,7 @@
         <div class="container-fluid main_content" >
            <oc-form id="s7_form" :model ="formData" :rules="rules" ref ="editForm" label-width ="120px" v-show ="!otherData.showSubTableFlag" >
                <NewVersionService :value ="serviceData.recordS5Id" :serviceData="serviceData"
-                    :optionsData="optionsData" :formData="formData"/>
+                    :optionsData="optionsData" :formData="formData" :list163 ="otherData.list163"/>
                <DataSection left ="2.确定费用" right ="描述 | 费用">
                    <ContentLayout title="描述">
                         <oc-form-item1 label="销售生效日期" :required="true" prop ="firstMaintenanceDate">
@@ -115,14 +115,15 @@
                       </oc-form-item1>
                       <oc-form-item0 label="金额"  prop ="list170VOAndlist201VO">
                           <div class="col-sm-6">
-                              <Switch170201Btn>
+                              <Switch170201Btn :otherData="otherData" :formData="formData" :list163 ="otherData.list163">
                                   <ShowHideTable :showHideState ="showHideState" 
-                                    name="list170VOAnd201">
+                                      name="list170VOAnd201">
                                   </ShowHideTable> 
                                   <ReuseTableNo></ReuseTableNo>
                               </Switch170201Btn>
-                              <TableLayout :showFlag="showHideState.list170VOAnd201">
-                                  <Table170 :list = "formData.list170VO"></Table170>
+                              <TableLayout :showFlag="showHideState.list170VOAnd201" :footer="!otherData.discountFlag" width="500">
+                                  <Table170 :list = "formData.list170VO" v-show ="!otherData.discountFlag"></Table170>
+                                  <Table201 :list="formData.list201VO" v-show ="otherData.discountFlag"></Table201>
                               </TableLayout>
                           </div>
                       </oc-form-item0>
@@ -349,6 +350,7 @@ import Switch170201Btn from './Switch170201Btn.vue' ;
 import ReuseTableNo from './ReuseTableNo.vue' ;
 import TableLayout from './TableLayout.vue' ;
 import Table170 from './Table170.vue' ;
+import Table201 from './Table201.vue' ;
 import {formData,serviceData,optionsData,otherData,showHideState} from './busi/jsonData.js' ;
 import {initPageData,handleSaveForm,findRecordS5Id} from './busi/appBusi.js' ;
 import {wrapValidateFn,validateFirstMaintenanceDate,validateLastMaintenanceDate,validateServiceNumber,
@@ -361,7 +363,7 @@ export default {
     components:{
         Navbar,QuerySection,DataSection,ContentLayout,
         NewVersionService,UseDateLimitChangeBtn,ShowHideTable,
-        Switch170201Btn,ReuseTableNo,TableLayout,Table170
+        Switch170201Btn,ReuseTableNo,TableLayout,Table170,Table201
     },
     data(){
         //所有的校验方法
@@ -550,14 +552,13 @@ export default {
         },
         handleResetForm() {
             this.$refs.editForm.resetFields();
-            this.otherData.showSubTableFlag = !this.otherData.showSubTableFlag ;
         }
     },
     mounted(){
        initPageData(this) ;
-       setTimeout(() => {
-           this.showHideState.list170VOAnd201 = true ;
-       },1000) ;
+    //    setTimeout(() => {
+    //        this.showHideState.list170VOAnd201 = true ;
+    //    },1000) ;
     }
 }
 </script>
