@@ -2,7 +2,7 @@
     <table>
         <thead>
             <tr> 
-                <th width="250">名称</th> 
+                <th width="250">服务描述</th> 
                 <th width="130">类型</th>
                 <th width="70">金额</th>
                 <th width="50">单位</th>
