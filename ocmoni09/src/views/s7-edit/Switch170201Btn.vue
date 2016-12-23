@@ -17,7 +17,7 @@
                     return false;
                 }
                 //当需要切换时
-                this.formData.discountFlag = flag;
+                this.formData.discountOrNot = flag;
                 let {list170VO,list201VO} = this.formData;
                 if(flag){//如果切换到折扣,清空170
                    console.info('切换到折扣....'+ this.list163.length) ;
