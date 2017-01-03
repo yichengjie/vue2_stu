@@ -59,7 +59,14 @@ module.exports = {
   },
   devServer: {
      historyApiFallback: true,
-     noInfo: true
+     noInfo: true,
+    //  proxy: {
+    //   '/api': {
+    //     target: 'http://localhost:8080/ocgui',
+    //     pathRewrite: {'^/column' : '/column'},
+    //     changeOrigin: false
+    //   }
+    // }
   },
   devtool: '#eval-source-map',
   plugins: [

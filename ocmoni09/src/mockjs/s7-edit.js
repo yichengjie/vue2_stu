@@ -4,7 +4,12 @@ let jsonData = require('../test/s7-edit.json') ;
 var Mock = require('mockjs') ;
 var initPage4AddUrl = contextPath+'/s7/initPage4Add.action' ;
 var initPage4UpdateUrl = contextPath+'/s7/initPage4Update.action' ;
-var queryList163Url = contextPath+'/s7/query4ClickService.action'
+var queryList163Url = contextPath+'/s7/query4ClickService.action' ;
+
+// var initPage4AddUrl = '/api/s7/initPage4Add.action' ;
+// var initPage4UpdateUrl = '/api/s7/initPage4Update.action' ;
+// var queryList163Url = '/api/s7/query4ClickService.action'
+
 
 Mock.mock(initPage4AddUrl,function(){
     console.info('我拦截到请求地址['+initPage4AddUrl+'],并返回了模板数据...') ;
