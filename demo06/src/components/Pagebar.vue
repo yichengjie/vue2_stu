@@ -18,7 +18,7 @@
         <div class="page-desc" style="padding-top: 0px;padding-bottom:0px">
             <span class="marginRight10">共<span class ="marginRL2">{{pageBar.pageCount}}</span>页</span>
             <span class ="">当前第</span>
-            <input type="text" v-bind:value ="pageBar.curPage" ref= "pageBarInputCurrentPage" 
+            <input type="text" v-bind:value ="pageBar.curPage" ref= "pageBarInputCurrentPage"
                 class ="common_input"  style="width: 30px"   >
             <span class="marginRight5 ">页</span>
             <span>显示
@@ -42,7 +42,7 @@
     export default{
         data (){
             return {
-                randomId:'input-' + Math.random() 
+                randomId:'input-' + Math.random()
             };
         },
         methods:{
@@ -60,7 +60,7 @@
                     this.$refs.pageBarInputCurrentPage.value =  this.pageBar.curPage ;
                 }
             },
-            
+
             changePageSize(event){
                 this.updatePageBar({pageSize:event.target.value}) ;
             },
@@ -85,8 +85,8 @@
             queryDB (toPageNum){
                 if(!this.queryDBFlag){//没有勾选查询全部时，清除排序状态
                     this.clearTableTitleOrderInfo() ;
-                }   
-                let curPage =  toPageNum ;          
+                }
+                let curPage =  toPageNum ;
                 let pageSize = this.pageBar.pageSize ;
                 let orderName =  this.orderTitleName ;
                 let isAsc = this.tableTitleOrder[this.orderTitleName] ;
