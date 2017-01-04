@@ -10,6 +10,7 @@ module.exports = {
   entry: SRC_PATH+'/main.js',
   output: {
     path: DIST_PATH,
+    publicPath: '/dist/',
     filename: '[name].js'
   },
   module: {
